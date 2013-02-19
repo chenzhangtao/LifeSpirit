@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layoutPadding_taskEditApplicationItem">5dp</dimen>
+
+    <dimen name="layoutMargin_taskEditVolumeItem">2dp</dimen>
+    <dimen name="layoutPadding_taskEditCustomName">10dp</dimen>
+
+    <dimen name="textSize_taskEditApplicationItem_name">15sp</dimen>
+    <dimen name="textSize_taskListItem_triggerTime">30sp</dimen>
+    <dimen name="textSize_taskListItem_name">20sp</dimen>
+
+    <dimen name="imageMargin_taskEditApplicationItem_icon">5dp</dimen>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/base_layout_fill_fill_vertical" android:background="@drawable/wallpaper0">
+	<!-- 显示当前时间 -->
+	<LinearLayout style="@style/base_layout_fill_wrap" android:padding="@dimen/base_padding_specialLarge">
+	    <AnalogClock android:id="@+id/digitalClock_index" android:layout_width="100dp" android:layout_height="100dp"/>
+	</LinearLayout>
+	
+	<!-- 任务列表 -->
+	<ListView style="@style/comm_list_weight_padding"/>
+	
+	<!-- 功能 -->
+	<LinearLayout style="@style/base_layout_fill_wrap" android:padding="@dimen/base_padding_specialLarge" android:gravity="center">
+	    <Button android:id="@+id/button_index_addTask" style="@style/base_layout_wrap_wrap" android:background="@drawable/selector_ic_add"/>
+		<Button android:id="@+id/button_index_taskList" style="@style/base_layout_wrap_wrap" android:background="@drawable/ic_list"/>
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="taskItem_name_items">
+	    <item>起床</item>
+	    <item>早饭</item>
+	    <item>早会</item>
+	    <item>上班</item>
+	    <item>午饭</item>
+	    <item>午休</item>
+	    <item>晚会</item>
+	    <item>下班</item>
+	    <item>晚饭</item>
+	    <item>游戏</item>
+	    <item>宵夜</item>
+	    <item>睡觉</item>
+	    <item>周会</item>
+	    <item>开会</item>
+	    <item>约会</item>
+	    <item>打台球</item>
+	    <item>打篮球</item>
+	    <item>打乒乓球</item>
+	    <item>打羽毛球</item>
+	</string-array>
+	
+	<string-array name="longPress_menus">
+        <item>全部选中</item>
+        <item>全部取消</item>
+    </string-array>
+	
+	<string-array name="taskItem_screenDormant_itemNames">
+	    <item>15秒</item>
+	    <item>30秒</item>
+	    <item>1分钟</item>
+	    <item>5分钟</item>
+	    <item>15分钟</item>
+	    <item>30分钟</item>
+	    <item>1个小时</item>
+	</string-array>
+	<string-array name="taskItem_wifi_itemNames">
+	    <item>开启WIFI</item>
+	    <item>关闭WIFI</item>
+	</string-array>
+	<string-array name="taskItem_mobileNetwork_itemNames">
+	    <item>开启2G/3G</item>
+	    <item>关闭2G/3G</item>
+	</string-array>
+	<string-array name="taskItem_bluetooth_itemNames">
+	    <item>开启蓝牙</item>
+	    <item>关闭蓝牙</item>
+	</string-array>
+	<string-array name="taskItem_airplaneMode_itemNames">
+	    <item>开启飞行模式</item>
+	    <item>关闭飞行模式</item>
+	</string-array>
+	<string-array name="taskItem_ringnoteMode_itemNames">
+	    <item>响铃并震动</item>
+	    <item>响铃不震动</item>
+	    <item>不响铃只震动</item>
+	    <item>不响铃不震动</item>
+	</string-array>
+	<string-array name="menu_sort_items">
+		<item>按触发时间升序</item>
+		<item>按触发时间降序</item>
+		<item>按创建时间升序</item>
+		<item>按创建时间降序</item>
+	</string-array>
+</resources>

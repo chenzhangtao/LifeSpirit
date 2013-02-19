@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/base_layout_listItem">
+	<LinearLayout style="@style/base_layout_fill_fill">
+	    <!-- 开关按钮 -->
+	    <ToggleButton android:id="@+id/toggle_taskListItem" style="@style/toggle_taskListItem"/>
+	    
+	    <!-- 中间任务信息区 -->
+	    <LinearLayout style="@style/base_layout_weight_wrap_vertical">
+	        <!-- 第一行 -->
+	        <LinearLayout style="@style/base_layout_fill_wrap" android:gravity="center_vertical">
+				<!-- 任务触发时间 -->
+	         	<TextView android:id="@+id/text_taskListItem_time" style="@style/text_taskListItem_triggerTime"/>
+	         	<!-- 任务名称 -->
+	         	<TextView android:id="@+id/text_taskListItem_name" style="@style/text_taskListItem_name"/>
+	        </LinearLayout>
+	        <!-- 任务重复 -->
+	        <TextView android:id="@+id/text_taskListItem_repeat" style="@style/text_taskListItem_repeat"/>
+	        <!-- 下次执行日期时间 -->
+	        <TextView android:id="@+id/text_taskListItem_nextExecuteTime" style="@style/text_taskListItem_nextExecuteTime"/>
+	        <!-- 任务详情 -->
+	        <TextView android:id="@+id/text_taskListItem_info" style="@style/text_taskListItem_taskInfo"/>
+	    </LinearLayout>
+	</LinearLayout>
+	<RelativeLayout style="@style/base_layout_fill_fill" android:gravity="right">
+	    <!-- 多选操作复选框 -->
+	    <CheckBox style="@style/base_button_listItemChoice" android:layout_alignParentBottom="true" />
+	</RelativeLayout>
+</FrameLayout>

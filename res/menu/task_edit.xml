@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menu_taskEdit_save" 
+        android:title="@string/base_save"
+        android:icon="@drawable/ic_confirm"
+        android:showAsAction="always|withText"
+        />
+    <item android:id="@id/comm_menu_stop" 
+        android:title="@string/base_stop"
+        android:showAsAction="never"
+        />
+    <item android:id="@id/base_menu_settings" 
+        android:title="@string/base_settings"
+        android:icon="@drawable/ic_settings"
+        android:showAsAction="never"
+        />
+    <item android:id="@id/base_menu_exit" 
+        android:title="@string/base_exit"
+        android:showAsAction="never"
+        />
+</menu>

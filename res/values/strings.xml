@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<string name="taskList_button_removeTask">删除计划</string>
+	<string name="taskList_text_selected">选中</string>
+	<string name="taskList_text_task">计划</string>
+	
+	<string name="taskEdit_text_title_addTask">添加计划</string>
+	<string name="taskEdit_text_title_updateTask">修改计划</string>
+	<string name="taskItem_name">名称</string>
+	<string name="taskItem_setName">计划名称</string>
+	<string name="taskItem_name_customTitle">自定义计划名称</string>
+	<string name="taskItem_tiggerTime">时间</string>
+	<string name="taskItem_setTiggerTime">触发时间</string>
+	<string name="taskItem_repeat">重复</string>
+	<string name="taskItem_repeat_triggerDate">触发日期</string>
+	<string name="taskItem_repeat_minute">按分钟重复</string>
+	<string name="taskItem_repeat_hour">按小时重复</string>
+	<string name="taskItem_repeat_day">按天重复</string>
+	<string name="taskItem_repeat_week">按周重复</string>
+	<string name="taskItem_repeat_month">按月重复</string>
+	<string name="taskItem_repeat_everyDay">每天</string>
+	<string name="taskItem_repeat_notRepeat">一律不</string>
+	<string name="taskItem_repeat_meiGei">每隔</string>
+	<string name="taskItem_repeat_executeOne">执行一次</string>
+	<string name="taskItem_repeat_selectRepeatWay">重复方式</string>
+	<string name="taskItem_repeat_text_only">仅在</string>
+	<string name="taskItem_repeat_text_noRepeat">一律不</string>
+	<string name="taskItem_screenBrightness">屏幕亮度</string>
+	<string name="taskItem_screenBrightness_checkBox_autoAdjustment">自动调节</string>
+	<string name="taskItem_screenDormant">屏幕休眠</string>
+	<string name="taskItem_wifi">WIFI</string>
+	<string name="taskItem_mobileNetwork">2G/3G</string>
+	<string name="taskItem_bluetooth">蓝牙</string>
+	<string name="taskItem_airplaneMode">飞行模式</string>
+	<string name="taskItem_sendMessage">发送短信</string>
+	
+	<string name="taskItem_volume">音量</string>
+	<string name="taskItem_volume_media">媒体</string>
+	<string name="taskItem_volume_mediaTitle">媒体音量（音乐、视频、游戏的音量）</string>
+	<string name="taskItem_volume_alarm">闹钟</string>
+	<string name="taskItem_volume_alarmTitle">闹钟音量</string>
+	<string name="taskItem_volume_ringtone">铃声</string>
+	<string name="taskItem_volume_ringtoneTitle">铃声音量</string>
+	<string name="taskItem_volume_notification">通知</string>
+	<string name="taskItem_volume_notificationTitle">通知音量</string>
+	<string name="taskItem_volume_voiceCall">通话</string>
+	<string name="taskItem_volume_voiceCallTitle">通话音量</string>
+	<string name="taskItem_volume_system">系统</string>
+	<string name="taskItem_volume_systemTitle">系统音量（拍照、截屏、按键的音量）</string>
+	
+	<string name="taskItem_ringnoteMode">铃声模式</string>
+	<string name="taskItem_openApplication">打开应用程序</string>
+	<string name="taskItem_openApplication_editTitle">选择应用程序</string>
+	<string name="taskItem_openApplication_readProfressDiaog_title">正在加载应用程序列表</string>
+	<string name="taskItem_alarm">闹钟</string>
+	
+	<string name="hint_contentNotNull">内容不能为空！</string>
+	<string name="hint_mustSelected">您必须选择一个！</string>
+	<string name="hint_addSuccess">恭喜您！计划添加成功！</string>
+	<string name="hint_updateSuccess">恭喜您！计划修改成功！</string>
+	<string name="hint_addError">对不起！计划添加失败，请检查您的手机存储空间是否有足够的内存！</string>
+	<string name="hint_updateError">对不起！计划修改失败，请检查您的手机存储空间是否有足够的内存！</string>
+	<string name="hint_noSlectedTask">请至少选择一个计划！</string>
+	<string name="hint_noOperation">亲，除去重复之外您还必须至少开启一个计划项哦！偷偷告诉你，可以点击右边的复选框来开启计划项哦！</string>
+	<string name="hint_timeConflict">亲，当前计划的时、分与其他计划有冲突哦！请换一下吧！</string>
+	<string name="hint_lessThanCurrnTime">糟糕！由于当前计划没有开启重复，所以计划的时间必须大于当前系统的时间！</string>
+	<string name="hint_taskPastDue">糟糕！当前计划已经过期，请修改其时间再开启！</string>
+	<string name="hint_phoneNumberNull">电话号码不能为空哦！</string>
+	<string name="hint_messageContentNull">短信内容不能为空哦！</string>
+	<string name="hint_notContacts">您必须添加至少一个电话号码！</string>
+	<string name="hint_noEexecuteTask">没有可执行计划，定时计划已经停止！</string>
+	<string name="hint_hasStopped ">定时计划已经停止运行！</string>
+	<string name="hint_deviceNotExist">您的设备没有</string>
+	<string name="hint_notReadingContacts">没有读取到联系人信息！如果您的设备确实有联系人信息，请检查是否您已设置拒绝本应用读取您的联系人信息！</string>
+	<string name="hint_taskNameNull">计划名称不能为空哦！</string>
+	<string name="hint_applicationNoHave">您必须选择一个应用程序哦！</string>
+	<string name="hint_messageNull">您还没有输入您要发送的短信的内容！</string>
+	<string name="hint_contactsNull">您的短信联系人还是空的哦！</string>
+	
+	<string name="messageEdit_title">编辑短信</string>
+	<string name="messageEdit_phoneNumber_hint">请输入号码</string>
+	<string name="messageEdit_add">添加</string>
+	<string name="messageEdit_but_contacts">从联系人中选择</string>
+	<string name="messageEdit_content_hint">请输入短信内容</string>
+	<string name="messageEdit_selectContacts">选择联系人</string>
+	<string name="messageEdit_button_removeContacts">删除联系人</string>
+	<string name="messageEdit_hint_peleaseSelect">请选择联系人！</string>
+	<string name="taskEditCustomName_edit_name_hint">请输入计划名称</string>
+	
+	<string name="setting_title">设置</string>
+	<string name="setting_autoStart">自动启动</string>
+	<string name="setting_autoStart_hint">在开机、添加计划以及计划列表编辑后自动启动后台服务</string>
+	<string name="setting_userInterfaceSwitchingAnimation">开启界面切换动画</string>
+	<string name="setting_userInterfaceSwitchingAnimation_hint">开启自带的界面切换动画</string>
+	<string name="setting_recoverDefult">恢复默认设置</string>
+	<string name="setting_recoverDefult_success">已恢复默认设置！</string>
+	
+    <string name="menu_setting">设置</string>
+	<string name="menu_exit">退出</string>
+	<string name="menu_service_stop">停止定时计划</string>
+	<string name="menu_service_start">启动定时计划</string>
+	<string name="menu_sort">排序</string>
+	<string name="menu_sort_title">选择排序方式</string>
+	
+	<string name="activityTitle_task">添加任务</string>
+	<string name="activityTitle_taskList">任务列表</string>
+</resources>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/layout_custom">
+    <EditText android:id="@+id/edit_taskEditCustomName_name" style="@style/base_layout_fill_wrap" android:maxLength="10" android:hint="@string/taskEditCustomName_edit_name_hint"/>
+</LinearLayout>

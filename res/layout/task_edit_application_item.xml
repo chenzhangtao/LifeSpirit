@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/layout_taskEditApplicationItem">
+    <ImageView android:id="@+id/image_taskEditApplicationItem_icon" style="@style/image_taskEditApplicationItem_icon" android:contentDescription="@string/base_image_contentDescription"/>
+    <LinearLayout style="@style/base_layout_weight_wrap_vertical" android:layout_gravity="center">
+        <TextView android:id="@+id/text_taskEditApplicationItem_name" style="@style/text_taskEditApplicationItem_name"/>
+        <TextView android:id="@+id/text_taskEditApplicationItem_packageName"  style="@style/text_taskEditApplicationItem_packageName"/>
+    </LinearLayout>
+    <RadioButton style="@style/base_button_listItemChoice"/>
+</LinearLayout>

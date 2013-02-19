@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 公共样式 -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 布局 - 正文 -->
+    <style name="comm_layout_body" parent="@style/base_layout_body">
+    	<item name="android:background">@color/comm_body_backg</item>
+    </style>
+    
+    <!-- 布局 - 工具栏 - 向下 -->
+    <style name="comm_layout_toolbar_down" parent="@style/base_layout_toolbar">
+        <item name="android:minHeight">@dimen/comm_layoutMinHeight_toolbar</item>
+       	<item name="android:orientation">vertical</item>
+       	<item name="android:background">@drawable/shape_comm_toolbar_down</item>
+        <item name="android:layoutAnimation">@anim/base_layout_alpha</item>
+        <item name="android:persistentDrawingCache">animation</item>
+    </style>
+    
+    <!-- 布局 - 工具栏 - 向上 -->
+    <style name="comm_layout_toolbar_up" parent="@style/base_layout_toolbar">
+         <item name="android:minHeight">@dimen/comm_layoutMinHeight_toolbar</item>
+       	<item name="android:orientation">vertical</item>
+       	<item name="android:background">@drawable/shape_comm_toolbar_up</item>
+        <item name="android:layoutAnimation">@anim/base_layout_alpha</item>
+        <item name="android:persistentDrawingCache">animation</item>
+    </style>
+	
+	<!-- 列表 -->
+	<style name="comm_list" parent="@style/base_list">
+	    <item name="android:divider">@drawable/comm_list_divider</item>
+	</style>
+    
+	<!-- 列表 - 充满的 -->
+	<style name="comm_list_fill" parent="@style/base_list_fill">
+	    <item name="android:divider">@drawable/comm_list_divider</item>
+	</style>
+    
+	<!-- 列表 - 高度权重1 -->
+	<style name="comm_list_weight" parent="@style/base_list_weight">
+	    <item name="android:divider">@drawable/comm_list_divider</item>
+	</style>
+   
+	<!-- 列表 - 有左右内边距 -->
+	<style name="comm_list_padding" parent="@style/base_list_padding">
+	    <item name="android:divider">@drawable/comm_list_divider</item>
+	</style>
+    
+	<!-- 列表 - 充满的 - 有左右内边距 -->
+	<style name="comm_list_fill_padding" parent="@style/base_list_fill_padding">
+	    <item name="android:divider">@drawable/comm_list_divider</item>
+	</style>
+    
+	<!-- 列表 - 高度权重1 - 有左右内边距 -->
+	<style name="comm_list_weight_padding" parent="@style/base_list_weight_padding">
+	    <item name="android:divider">@drawable/comm_list_divider</item>
+	</style>
+	
+	<!-- 文字 - 列表项 - 标题 -->
+	<style name="comm_text_listItem_title" parent="@style/base_layout_fill_wrap">
+        <item name="android:textColor">@color/base_black</item>
+        <item name="android:textSize">@dimen/comm_textSize_listItem_title</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginBottom">@dimen/comm_textMargin_listItem_title</item>
+	</style>
+	
+	<!-- 文字 - 列表项 - 提示 -->
+	<style name="comm_text_listItem_hint" parent="@style/base_layout_fill_wrap"> 
+        <item name="android:textColor">@color/base_gray</item>
+        <item name="android:textSize">@dimen/comm_textSize_listItem_hint</item>
+        <item name="android:padding">@dimen/comm_textPadding_listItem_hint</item>
+	</style>
+    
+    <!-- 按钮 -->
+    <style name="comm_button">
+        <item name="android:layout_width">@dimen/comm_buttonWidth_titlebar</item>
+        <item name="android:layout_height">fill_parent</item>
+  	    <item name="android:textColor">@color/base_white</item>
+    	<item name="android:background">@drawable/selector_comm_button</item>
+    	<item name="android:padding">@dimen/comm_buttonPadding</item>
+    	<item name="android:layout_margin">@dimen/comm_buttonMargin</item>
+    	<item name="android:scaleType">centerCrop</item>
+    </style>
+	
+	<!-- 按钮 - 复合型按钮 -->
+	<style name="comm_button_compound" parent="@style/base_layout_wrap_wrap">
+        <item name="android:focusable">false</item>
+	</style>
+	
+	<!-- 按钮 - 删除按钮 -->
+	<style name="comm_button_remove" parent="@style/base_layout_fill_fill">
+        <item name="android:textColor">@color/base_white</item>
+    	<item name="android:background">@drawable/selector_comm_button</item>
+        <item name="android:textSize">@dimen/comm_buttonTextSize_remove</item>
+        <item name="android:layout_margin">@dimen/comm_buttonMargin_remove</item>
+	</style>
+</resources>
