@@ -1,9 +1,12 @@
 package me.xiaopan.lifespirit.task;
 
+import android.content.Context;
+
 /**
  * 任务基类
  */
 public abstract class BaseTask {
+	private Context context;
 	private boolean enable;
 	private CreateTime createTime;
 	private NextExecuteTime nextExecuteTime;
@@ -15,7 +18,8 @@ public abstract class BaseTask {
 	 * 创建一个任务
 	 * @param context 上下文
 	 */
-	public BaseTask(){
+	public BaseTask(Context context){
+		setContext(context);
 		setEnable(true);
 		setCreateTime(new CreateTime());
 	}
@@ -33,6 +37,14 @@ public abstract class BaseTask {
 		
 	}
 	
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
 	public boolean isEnable() {
 		return enable;
 	}

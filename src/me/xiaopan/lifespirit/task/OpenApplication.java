@@ -1,100 +1,43 @@
 package me.xiaopan.lifespirit.task;
 
-import me.xiaopan.lifespirit.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 
-
-public class OpenApplication extends TaskItemImpl {
-	/**
-	 * KEY - 打开应用程序
-	 */
-	public static final String KEY = "KEY_OPEN_APPLICATION";
-	/**
-	 * KEY - 应用程序名字
-	 */
-	public static final String KEY_NAME = "KEY_NAME";
-	/**
-	 * 应用程序名字
-	 */
-	private String name;
+/**
+ * 打开应用程序
+ */
+public class OpenApplication extends BaseTask{
+	private String applicationName;
+	private String applicationPackageName;
 	
-	public OpenApplication(Context context, BaseTask task) {
-		super(context, task, context.getString(R.string.taskItem_openApplication));
+	public OpenApplication(Context context) {
+		super(context);
 	}
 	
-	public OpenApplication(Context context, BaseTask task, String applicatinJSON){
-		this(context, task);
-		fromJSON(applicatinJSON);
-	}
-
 	@Override
-	public String getHintText() {
-		return getName() == null ? getString(R.string.base_none):getName();
+	public String getIntro() {
+		return null;
 	}
 
 	@Override
 	public void execute() {
-		if(isChecked()){
-			getContext().startActivity(getContext().getPackageManager().getLaunchIntentForPackage(getContent()));
+		if(isEnable()){
+			getContext().startActivity(getContext().getPackageManager().getLaunchIntentForPackage(applicationPackageName));
 		}
 	}
 
-	@Override
-	public String toJSON() {
-		JSONObject openApplication = new JSONObject();
-		try {
-			openApplication.put(KEY_CHECKED, isChecked());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			openApplication.put(KEY_CONTENT, getContent());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			openApplication.put(KEY_NAME, getName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return openApplication.toString();
+	public String getApplicationName() {
+		return applicationName;
 	}
 
-	@Override
-	public void fromJSON(String json) {
-		if(json != null){
-			try {
-				JSONObject openApplication = new JSONObject(json);
-				try {
-					setChecked(openApplication.getBoolean(KEY_CHECKED));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setContent(openApplication.getString(KEY_CONTENT));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}try {
-					setName(openApplication.getString(KEY_NAME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
 	}
 
-	public String getName() {
-		return name;
+	public String getApplicationPackageName() {
+		return applicationPackageName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setApplicationPackageName(String applicationPackageName) {
+		this.applicationPackageName = applicationPackageName;
 	}
 }

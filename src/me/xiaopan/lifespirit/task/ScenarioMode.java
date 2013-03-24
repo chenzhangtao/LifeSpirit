@@ -30,6 +30,7 @@ public class ScenarioMode extends BaseTask{
 	 * @param context 上下文
 	 */
 	public ScenarioMode(Context context){
+		super(context);
 		setBluetooth(new Bluetooth(context, this));
 		setAirplaneMode(new AirplaneMode(context, this));
 		setMobileNetwork(new MobileNetwork(context, this));

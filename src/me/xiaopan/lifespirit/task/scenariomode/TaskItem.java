@@ -1,5 +1,6 @@
-package me.xiaopan.lifespirit.task;
+package me.xiaopan.lifespirit.task.scenariomode;
 
+import me.xiaopan.lifespirit.task.BaseTask;
 import android.content.Context;
 
 public interface TaskItem{
