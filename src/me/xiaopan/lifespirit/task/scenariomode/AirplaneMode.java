@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class AirplaneMode extends  TaskItemImpl {
+public class AirplaneMode extends  BaseScenarioModeItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */

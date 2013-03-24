@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 import me.xiaopan.lifespirit.task.BaseTask;
 import android.content.Context;
 
-public interface TaskItem{
+public interface BaseScenarioModeItem{
 	/**
 	 * KEY - 表示该任务项是否被选中或者当前任务是否开启
 	 */

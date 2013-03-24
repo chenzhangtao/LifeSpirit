@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class Wifi extends  TaskItemImpl {
+public class Wifi extends  BaseScenarioModeItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */

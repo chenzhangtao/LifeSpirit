@@ -4,7 +4,7 @@ import java.util.List;
 
 import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.scenariomode.TaskItem;
+import me.xiaopan.lifespirit.task.scenariomode.BaseScenarioModeItem;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 public class TaskItemAdapter extends BaseAdapter {
 	private Context context;
-	private List<TaskItem> taskItemList;
+	private List<BaseScenarioModeItem> taskItemList;
 	
-	public TaskItemAdapter(Context context, List<TaskItem> taskItemList){
+	public TaskItemAdapter(Context context, List<BaseScenarioModeItem> taskItemList){
 		this.context = context;
 		this.taskItemList = taskItemList;
 	}
@@ -42,7 +42,7 @@ public class TaskItemAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View view = LayoutInflater.from(context).inflate(R.layout.task_edit_item, null);
-		final TaskItem taskItem = taskItemList.get(position);
+		final BaseScenarioModeItem taskItem = taskItemList.get(position);
 		
 		//主文字
 		final TextView mainText = (TextView) view.findViewById(R.id.text_taskEditItem_name);

@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 import me.xiaopan.lifespirit.task.BaseTask;
 import android.content.Context;
 
-public abstract class TaskItemImpl implements TaskItem {
+public abstract class BaseScenarioModeItemImpl implements BaseScenarioModeItem {
 	private Context context;
 	private BaseTask task;
 	private boolean exist;
@@ -16,7 +16,7 @@ public abstract class TaskItemImpl implements TaskItem {
 	private boolean showInTaskInfo;
 	private boolean needValiChecked;
 	
-	public TaskItemImpl(Context context, BaseTask task, String taskItemName){
+	public BaseScenarioModeItemImpl(Context context, BaseTask task, String taskItemName){
 		setContext(context);
 		setTask(task);
 		setMainText(taskItemName);

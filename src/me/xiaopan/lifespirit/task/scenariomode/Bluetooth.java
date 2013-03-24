@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class Bluetooth extends TaskItemImpl {
+public class Bluetooth extends BaseScenarioModeItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */

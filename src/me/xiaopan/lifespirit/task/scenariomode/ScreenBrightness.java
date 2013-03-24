@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class ScreenBrightness extends  TaskItemImpl {
+public class ScreenBrightness extends  BaseScenarioModeItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */

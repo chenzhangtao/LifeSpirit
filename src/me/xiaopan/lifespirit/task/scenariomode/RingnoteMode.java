@@ -10,7 +10,7 @@ import android.content.Context;
 import android.media.AudioManager;
 
 
-public class RingnoteMode extends TaskItemImpl {
+public class RingnoteMode extends BaseScenarioModeItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */

@@ -29,7 +29,6 @@ public class IndexActivity extends MyBaseActivity {
 		addTaskButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(TaskActivity.class);
 			}
 		});
 

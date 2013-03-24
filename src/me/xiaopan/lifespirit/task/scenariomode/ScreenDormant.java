@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class ScreenDormant extends  TaskItemImpl {
+public class ScreenDormant extends  BaseScenarioModeItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */

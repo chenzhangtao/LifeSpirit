@@ -10,7 +10,7 @@ import android.content.Context;
 import android.media.AudioManager;
 
 
-public class Volume extends TaskItemImpl {
+public class Volume extends BaseScenarioModeItemImpl {
 	public static final String KEY = "KEY_VOLUME";
 	
 	public static final String KEY_MEDIA_VOLUME = "KEY_MEDIA_VOLUME";
