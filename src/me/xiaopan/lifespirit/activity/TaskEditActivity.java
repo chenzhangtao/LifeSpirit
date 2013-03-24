@@ -22,9 +22,9 @@ import me.xiaopan.lifespirit.domain.Application;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit.task.Repeat.RepeatWay;
 import me.xiaopan.lifespirit.task.SendMessage;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskName;
-import me.xiaopan.lifespirit.task.Time;
+import me.xiaopan.lifespirit.task.BaseTime;
 import me.xiaopan.lifespirit.task.TriggerTime;
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
@@ -79,7 +79,7 @@ import android.widget.TimePicker;
 public class TaskEditActivity extends MyBaseActivity {
 	private static final int REQUEST_CODE_MESSAGE_EDIT = 101;
 	private static final String SAVE_CONTENT = "SAVE_CONTENT";
-	private Task task;
+	private BaseTask task;
 	private PullListView taskItemListView;
 	private TaskItemAdapter taskItemAdapter;
 	private AlertDialog alertDialog;
@@ -129,7 +129,7 @@ public class TaskEditActivity extends MyBaseActivity {
 		}
 		
 		//创建默认的任务对象
-		task = new Task(getBaseContext());
+		task = new BaseTask(getBaseContext());
 		
 		//如果保存数据的对象不为null，说明是在后台被销毁又重新创建的，就要从保存实体的对象中取数据
 		if(savedInstanceState != null){
@@ -142,7 +142,7 @@ public class TaskEditActivity extends MyBaseActivity {
 			//如果是修改任务就从Intent中获取要编辑的任务的JSON字符串并解析
 			if(!isAddTask()){
 				try {
-					task.fromJSON(getIntent().getStringExtra(Task.KEY));
+					task.fromJSON(getIntent().getStringExtra(BaseTask.KEY));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -986,7 +986,7 @@ public class TaskEditActivity extends MyBaseActivity {
 		//如果没有开启重复，就判断任务时间是否大于当前时间
 		if(!task.getRepeat().isChecked()){
 			int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-			int contrastResult = Time.contrastTime(
+			int contrastResult = BaseTime.contrastTime(
 				task.getTriggerTime().getYear(), task.getTriggerTime().getMonth(), task.getTriggerTime().getDay(), 
 				task.getTriggerTime().getHour(), task.getTriggerTime().getMinute(), 
 				currentTimesBy24Hour[0], currentTimesBy24Hour[1], 
@@ -1001,7 +1001,7 @@ public class TaskEditActivity extends MyBaseActivity {
 		
 		//如果上一步验证通过，就验证是否与其他任务的时间有冲突
 		if(result){
-			for(Task currTask : getMyApplication().getTaskList()){
+			for(BaseTask currTask : getMyApplication().getTaskList()){
 				if(currTask.getCreateTime() != task.getCreateTime() && currTask.getTriggerTime().getHour() == task.getTriggerTime().getHour() && currTask.getTriggerTime().getMinute() == task.getTriggerTime().getMinute()){
 					result = false;
 					break;
@@ -1098,7 +1098,7 @@ public class TaskEditActivity extends MyBaseActivity {
 							//写入本地
 							task.writer();
 							//将要返回的数据放入Intent
-							getIntent().putExtra(Task.KEY, task.toJSON());
+							getIntent().putExtra(BaseTask.KEY, task.toJSON());
 							//设置返回的结果
 							setResult(RESULT_OK, getIntent());
 							//退出当前activity

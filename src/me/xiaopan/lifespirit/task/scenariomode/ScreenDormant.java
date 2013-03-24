@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -17,12 +17,12 @@ public class ScreenDormant extends  TaskItemImpl {
 	 */
 	public static final String KEY = "KEY_SCREEN_DORMANT";
 	
-	public ScreenDormant(Context context, Task task) {
+	public ScreenDormant(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_screenDormant));
 		setValue(SystemUtils.getScreenDormantTime(getContext()));
 	}
 	
-	public ScreenDormant(Context context, Task task, String screenDormantJSON)  {
+	public ScreenDormant(Context context, BaseTask task, String screenDormantJSON)  {
 		this(context, task);
 		fromJSON(screenDormantJSON);
 	}

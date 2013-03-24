@@ -2,7 +2,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -16,12 +16,12 @@ public class MobileNetwork extends  TaskItemImpl {
 	 */
 	public static final String KEY = "KEY_MOBILE_NETWORK";
 	
-	public MobileNetwork(Context context, Task task) {
+	public MobileNetwork(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_mobileNetwork));
 		setOpen(!NetworkUtils.isMobileNetworkOpen(getContext()));
 	}
 	
-	public MobileNetwork(Context context, Task task, String mobileNetworkJSON){
+	public MobileNetwork(Context context, BaseTask task, String mobileNetworkJSON){
 		this(context, task);
 		fromJSON(mobileNetworkJSON);
 	}

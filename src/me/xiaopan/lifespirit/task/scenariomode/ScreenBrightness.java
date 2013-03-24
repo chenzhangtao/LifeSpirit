@@ -2,7 +2,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -24,13 +24,13 @@ public class ScreenBrightness extends  TaskItemImpl {
 	 */
 	private boolean autoAdjustmen;
 	
-	public ScreenBrightness(Context context, Task task) {
+	public ScreenBrightness(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_screenBrightness));
 		setAutoAdjustmen(SystemUtils.isScreenBrightnessModeAuto(getContext()));
 		setValue(SystemUtils.getScreenBrightness(getContext()));
 	}
 	
-	public ScreenBrightness(Context context, Task task, String screenBrightnessJSON)  {
+	public ScreenBrightness(Context context, BaseTask task, String screenBrightnessJSON)  {
 		this(context, task);
 		fromJSON(screenBrightnessJSON);
 	}

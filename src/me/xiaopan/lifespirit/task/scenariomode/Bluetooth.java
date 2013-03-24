@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -17,7 +17,7 @@ public class Bluetooth extends TaskItemImpl {
 	 */
 	public static final String KEY = "KEY_BLUETOOTH";
 	
-	public Bluetooth(Context context, Task task) {
+	public Bluetooth(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_bluetooth));
 		try {
 			setOpen(!SystemUtils.isBluetoothOpen());
@@ -28,7 +28,7 @@ public class Bluetooth extends TaskItemImpl {
 		}
 	}
 	
-	public Bluetooth(Context context, Task task, String bluetoothJSON){
+	public Bluetooth(Context context, BaseTask task, String bluetoothJSON){
 		this(context, task);
 		fromJSON(bluetoothJSON);
 	}

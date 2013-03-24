@@ -8,7 +8,7 @@ import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.activity.TaskListActivity;
-import me.xiaopan.lifespirit.task.Time;
+import me.xiaopan.lifespirit.task.BaseTime;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -93,7 +93,7 @@ public class ExecuteTaskService extends Service {
 					
 					//比较当前时间和下次要执行的任务的时间
 					int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-					int result = Time.contrastTime(
+					int result = BaseTime.contrastTime(
 						currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4], 
 						getMyApplication().getNextExecuteTask().getNextExecuteTime().getYear(), getMyApplication().getNextExecuteTask().getNextExecuteTime().getMonth(), 
 						getMyApplication().getNextExecuteTask().getNextExecuteTime().getDay(), getMyApplication().getNextExecuteTask().getNextExecuteTime().getHour(), 

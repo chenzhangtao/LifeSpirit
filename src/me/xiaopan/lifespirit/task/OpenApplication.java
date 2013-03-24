@@ -22,11 +22,11 @@ public class OpenApplication extends TaskItemImpl {
 	 */
 	private String name;
 	
-	public OpenApplication(Context context, Task task) {
+	public OpenApplication(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_openApplication));
 	}
 	
-	public OpenApplication(Context context, Task task, String applicatinJSON){
+	public OpenApplication(Context context, BaseTask task, String applicatinJSON){
 		this(context, task);
 		fromJSON(applicatinJSON);
 	}

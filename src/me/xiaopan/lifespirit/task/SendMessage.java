@@ -28,12 +28,12 @@ public class SendMessage extends  TaskItemImpl {
 	 */
 	private List<Contacts> contactsList;
 	
-	public SendMessage(Context context, Task task) {
+	public SendMessage(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_sendMessage));
 		setContactsList(new ArrayList<Contacts>());
 	}
 	
-	public SendMessage(Context context, Task task, String sendMessageJSON)  {
+	public SendMessage(Context context, BaseTask task, String sendMessageJSON)  {
 		this(context, task);
 		fromJSON(sendMessageJSON);
 	}

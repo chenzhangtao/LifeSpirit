@@ -8,7 +8,7 @@ import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.adapter.TaskAdapter;
 import me.xiaopan.lifespirit.enums.TaskSortWay;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.widget.ImageTextButton;
 
 import org.json.JSONException;
@@ -80,7 +80,7 @@ public class TaskListActivity extends MyBaseActivity {
 		//设置列表点击事件监听器
 		taskAdapter.setOnItemClickListener(new OnItemClickListener() { public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Bundle bundle = new Bundle();
-			bundle.putString(Task.KEY, getMyApplication().getTaskList().get(position).toJSON());
+			bundle.putString(BaseTask.KEY, getMyApplication().getTaskList().get(position).toJSON());
 			bundle.putBoolean(KEY_IS_ADD, false);
 			currentEditTaskIndex = position;
 			startActivityForResult(TaskEditActivity.class, TASK_EDIT_REQUEST_CODE, bundle);
@@ -145,13 +145,13 @@ public class TaskListActivity extends MyBaseActivity {
 			//如果是添加任务
 			if(data.getBooleanExtra(KEY_IS_ADD, true)){
 				try {
-					getMyApplication().getTaskList().add(new Task(this, data.getStringExtra(Task.KEY)));
+					getMyApplication().getTaskList().add(new BaseTask(this, data.getStringExtra(BaseTask.KEY)));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}else{
 				try {
-					getMyApplication().getTaskList().set(currentEditTaskIndex, new Task(this, data.getStringExtra(Task.KEY)));
+					getMyApplication().getTaskList().set(currentEditTaskIndex, new BaseTask(this, data.getStringExtra(BaseTask.KEY)));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -181,7 +181,7 @@ public class TaskListActivity extends MyBaseActivity {
 		//如果选中个数大于0就继续执行删除，否则提示没有选中任务
 		if(indexs.length > 0){
 			for(Object object : CollectionUtils.removes(getMyApplication().getTaskList(), indexs)){
-				FileUtils.delete(getFileFromFilesDir(((Task) object).getCreateTime()+".task"));
+				FileUtils.delete(getFileFromFilesDir(((BaseTask) object).getCreateTime()+".task"));
 			}
 			
 			//退出多选模式

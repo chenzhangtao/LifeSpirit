@@ -4,7 +4,7 @@ import android.content.Context;
 
 public abstract class TaskItemImpl implements TaskItem {
 	private Context context;
-	private Task task;
+	private BaseTask task;
 	private boolean exist;
 	private boolean checked;
 	private String mainText;
@@ -15,7 +15,7 @@ public abstract class TaskItemImpl implements TaskItem {
 	private boolean showInTaskInfo;
 	private boolean needValiChecked;
 	
-	public TaskItemImpl(Context context, Task task, String taskItemName){
+	public TaskItemImpl(Context context, BaseTask task, String taskItemName){
 		setContext(context);
 		setTask(task);
 		setMainText(taskItemName);
@@ -36,12 +36,12 @@ public abstract class TaskItemImpl implements TaskItem {
 	}
 	
 	@Override
-	public Task getTask() {
+	public BaseTask getTask() {
 		return task;
 	}
 
 	@Override
-	public void setTask(Task task) {
+	public void setTask(BaseTask task) {
 		this.task = task;
 	}
 

@@ -2,7 +2,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -16,12 +16,12 @@ public class AirplaneMode extends  TaskItemImpl {
 	 */
 	public static final String KEY = "KEY_AIRPLANE_MODE";
 	
-	public AirplaneMode(Context context, Task task) {
+	public AirplaneMode(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_airplaneMode));
 		setOpen(!SystemUtils.isAirplaneModeOpen(getContext()));
 	}
 	
-	public AirplaneMode(Context context, Task task, String airplaneModeJSON){
+	public AirplaneMode(Context context, BaseTask task, String airplaneModeJSON){
 		this(context, task);
 		fromJSON(airplaneModeJSON);
 	}

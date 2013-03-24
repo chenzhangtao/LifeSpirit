@@ -5,7 +5,7 @@ package me.xiaopan.lifespirit.task;
  */
 public abstract class AbstractTask {
 	public String name;
-	public Time createTime;
-	public Time triggerTime;
-	public Time nextTriggerTimr;
+	public BaseTime createTime;
+	public BaseTime triggerTime;
+	public BaseTime nextTriggerTimr;
 }

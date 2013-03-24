@@ -1,7 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -18,7 +18,7 @@ public class RingnoteMode extends TaskItemImpl {
 	public static final String KEY = "KEY_RINGNOTE_MODE";
 	private RingnoteModeEnum ringnoteMode;
 
-	public RingnoteMode(Context context, Task task) {
+	public RingnoteMode(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_ringnoteMode));
 		AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 		int ringnoteMode = audioManager.getRingerMode();
@@ -48,7 +48,7 @@ public class RingnoteMode extends TaskItemImpl {
 		}
 	}
 	
-	public RingnoteMode(Context context, Task task, String ringnoteModeJSON){
+	public RingnoteMode(Context context, BaseTask task, String ringnoteModeJSON){
 		this(context, task);
 		fromJSON(ringnoteModeJSON);
 	}

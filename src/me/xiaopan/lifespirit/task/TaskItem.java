@@ -36,13 +36,13 @@ public interface TaskItem{
 	 * 获取任务
 	 * @return 任务
 	 */
-	public Task getTask();
+	public BaseTask getTask();
 
 	/**
 	 * 设置任务
 	 * @param task 任务
 	 */
-	public void setTask(Task task);
+	public void setTask(BaseTask task);
 	
 	/**
 	 * 判断是否存在当前项

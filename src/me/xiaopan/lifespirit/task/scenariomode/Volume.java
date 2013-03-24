@@ -1,7 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -28,7 +28,7 @@ public class Volume extends TaskItemImpl {
 	private int voiceCallVolme = -5;
 	private int systemVolume = -5;
 	
-	public Volume(Context context, Task task) {
+	public Volume(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_volume));
 		AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 		setMediaVolume(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
@@ -39,7 +39,7 @@ public class Volume extends TaskItemImpl {
 		setSystemVolume(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
 	}
 	
-	public Volume(Context context, Task task, String volumeJSON){
+	public Volume(Context context, BaseTask task, String volumeJSON){
 		this(context, task);
 		fromJSON(volumeJSON);
 	}

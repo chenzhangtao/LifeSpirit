@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
@@ -17,7 +17,7 @@ public class Wifi extends  TaskItemImpl {
 	 */
 	public static final String KEY = "KEY_WIFI";
 	
-	public Wifi(Context context, Task task) {
+	public Wifi(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_wifi));
 		try {
 			setOpen(!NetworkUtils.isWifiOpen(getContext()));
@@ -28,7 +28,7 @@ public class Wifi extends  TaskItemImpl {
 		}
 	}
 	
-	public Wifi(Context context, Task task, String wifiJSON)  {
+	public Wifi(Context context, BaseTask task, String wifiJSON)  {
 		this(context, task);
 		fromJSON(wifiJSON);
 	}

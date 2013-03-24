@@ -13,8 +13,8 @@ import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit.enums.TaskSortWay;
 import me.xiaopan.lifespirit.service.ExecuteTaskService;
-import me.xiaopan.lifespirit.task.Task;
-import me.xiaopan.lifespirit.task.Time;
+import me.xiaopan.lifespirit.task.BaseTask;
+import me.xiaopan.lifespirit.task.BaseTime;
 
 import org.json.JSONException;
 
@@ -32,7 +32,7 @@ public class MyApplication extends Application {
 	/**
 	 * 任务列表
 	 */
-	private List<Task> taskList;
+	private List<BaseTask> taskList;
 	/**
 	 * 下一个要执行的任务的索引
 	 */
@@ -73,7 +73,7 @@ public class MyApplication extends Application {
 						nextExecuteTaskIndex = w;
 					}else{
 						//如果下一个执行的任务的执行时间大于当前任务的执行时间，说明当前任务的执行时间更接近当前时间
-						if(Time.compareTime(getTaskList().get(nextExecuteTaskIndex).getNextExecuteTime(), getTaskList().get(w).getNextExecuteTime()) > 0){
+						if(BaseTime.compareTime(getTaskList().get(nextExecuteTaskIndex).getNextExecuteTime(), getTaskList().get(w).getNextExecuteTime()) > 0){
 							nextExecuteTaskIndex = w;
 						}
 					}
@@ -89,8 +89,8 @@ public class MyApplication extends Application {
 	 * 获取下次执行的任务
 	 * @return 下次执行的任务
 	 */
-	public Task getNextExecuteTask() {
-		Task nextExecuteTask = null;
+	public BaseTask getNextExecuteTask() {
+		BaseTask nextExecuteTask = null;
 		if(getNextExecuteTaskIndex() >= 0 && getNextExecuteTaskIndex() < getTaskList().size()){
 			nextExecuteTask = getTaskList().get(getNextExecuteTaskIndex());
 		}
@@ -101,10 +101,10 @@ public class MyApplication extends Application {
 	 * 对任务列表进行排序
 	 */
 	public void taskSort(){
-		Task[] tasks = getTaskList().toArray(new Task[getTaskList().size()]);
+		BaseTask[] tasks = getTaskList().toArray(new BaseTask[getTaskList().size()]);
 		Arrays.sort(tasks, getTaskComparator());
 		getTaskList().clear();
-		for(Task task : tasks){
+		for(BaseTask task : tasks){
 			getTaskList().add(task);
 		}
 	}
@@ -113,33 +113,33 @@ public class MyApplication extends Application {
 	 * 获取任务对比器
 	 * @return
 	 */
-	private Comparator<Task> getTaskComparator(){
-		Comparator<Task> taskComparator = null;
+	private Comparator<BaseTask> getTaskComparator(){
+		Comparator<BaseTask> taskComparator = null;
 		if(preferencesManager.getTaskSortWay() == TaskSortWay.TIGGER_TIME_ASC){
-			taskComparator = new Comparator<Task>() {
+			taskComparator = new Comparator<BaseTask>() {
 				@Override
-				public int compare(Task lhs, Task rhs) {
-					return Time.compareHourAndMinute(lhs.getTriggerTime(), rhs.getTriggerTime());
+				public int compare(BaseTask lhs, BaseTask rhs) {
+					return BaseTime.compareHourAndMinute(lhs.getTriggerTime(), rhs.getTriggerTime());
 				}
 			};
 		}else if(preferencesManager.getTaskSortWay() == TaskSortWay.TIGGER_TIME_DESC){
-			taskComparator = new Comparator<Task>() {
+			taskComparator = new Comparator<BaseTask>() {
 				@Override
-				public int compare(Task lhs, Task rhs) {
-					return Time.compareHourAndMinute(lhs.getTriggerTime(), rhs.getTriggerTime()) * -1;
+				public int compare(BaseTask lhs, BaseTask rhs) {
+					return BaseTime.compareHourAndMinute(lhs.getTriggerTime(), rhs.getTriggerTime()) * -1;
 				}
 			};
 		}else if(preferencesManager.getTaskSortWay() == TaskSortWay.CREATE_TIME_ASC){
-			taskComparator = new Comparator<Task>() {
+			taskComparator = new Comparator<BaseTask>() {
 				@Override
-				public int compare(Task lhs, Task rhs) {
+				public int compare(BaseTask lhs, BaseTask rhs) {
 					return (int)lhs.getCreateTime() - (int)rhs.getCreateTime();
 				}
 			};
 		}else if(preferencesManager.getTaskSortWay() == TaskSortWay.CREATE_TIME_DESC){
-			taskComparator = new Comparator<Task>() {
+			taskComparator = new Comparator<BaseTask>() {
 				@Override
-				public int compare(Task lhs, Task rhs) {
+				public int compare(BaseTask lhs, BaseTask rhs) {
 					return ((int)lhs.getCreateTime() - (int)rhs.getCreateTime()) * -1;
 				}
 			};
@@ -151,15 +151,15 @@ public class MyApplication extends Application {
 	 * 从本地读取任务列表，并对任务列表进行过期过滤
 	 * @return 任务列表
 	 */
-	private List<Task> readTaskList(){
-		List<Task> taskList = new ArrayList<Task>();
+	private List<BaseTask> readTaskList(){
+		List<BaseTask> taskList = new ArrayList<BaseTask>();
 		FileScanner fs = new FileScanner(getFilesDir());
 		fs.setFileTypeFilterWay(StringUtils.StringCheckUpWayEnum.EQUAL_KEYWORDS);
 		fs.addFileTypeKeyWords("task");
 		//读取文件中的内容，并根据内容创建任务对象
 		for(File file : fs.scan()){
 			try {
-				taskList.add(new Task(this, FileUtils.readString(file)));
+				taskList.add(new BaseTask(this, FileUtils.readString(file)));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -169,7 +169,7 @@ public class MyApplication extends Application {
 		//如果最终的任务列表的长度大于0，就对列表中的任务进行过期验证
 		if(taskList.size() > 0){
 			int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-			Task task = null;
+			BaseTask task = null;
 			for(int w = 0; w < taskList.size(); w++){
 				task = taskList.get(w);
 				//如果已经开启并且已经过期
@@ -206,11 +206,11 @@ public class MyApplication extends Application {
 	}
 	
 	/* ******************************************** GET/SET ***************************************** */
-	public List<Task> getTaskList() {
+	public List<BaseTask> getTaskList() {
 		return taskList;
 	}
 
-	public void setTaskList(List<Task> taskList) {
+	public void setTaskList(List<BaseTask> taskList) {
 		this.taskList = taskList;
 	}
 	

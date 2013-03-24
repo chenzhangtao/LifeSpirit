@@ -7,7 +7,7 @@ import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.androidlibrary.widget.MyBaseAdapter;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.activity.TaskListActivity;
-import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.BaseTask;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +20,10 @@ import android.widget.ToggleButton;
 public class TaskAdapter extends MyBaseAdapter {
 
 	private Context context;
-	private List<Task> taskList;
+	private List<BaseTask> taskList;
 	private TaskListActivity taskListActivity;
 	
-	public TaskAdapter(Context context, TaskListActivity taskListActivity, List<Task> taskList){
+	public TaskAdapter(Context context, TaskListActivity taskListActivity, List<BaseTask> taskList){
 		this.context = context;
 		this.taskListActivity = taskListActivity;
 		this.taskList = taskList;
@@ -57,7 +57,7 @@ public class TaskAdapter extends MyBaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		final Task task = taskList.get(realPosition);
+		final BaseTask task = taskList.get(realPosition);
 
 		//处理开关按钮
 		viewHolder.toggleButton.setOnCheckedChangeListener(null);

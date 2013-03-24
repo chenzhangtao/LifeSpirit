@@ -14,11 +14,11 @@ public class Alarm extends TaskItemImpl {
 	 */
 	public static final String KEY = "KEY_ALARM";
 	
-	public Alarm(Context context, Task task) {
+	public Alarm(Context context, BaseTask task) {
 		super(context, task, context.getString(R.string.taskItem_alarm));
 	}
 	
-	public Alarm(Context context, Task task, String airplaneModeJSON){
+	public Alarm(Context context, BaseTask task, String airplaneModeJSON){
 		this(context, task);
 		fromJSON(airplaneModeJSON);
 	}
