@@ -1,10 +1,7 @@
 package me.xiaopan.lifespirit;
 
 import me.xiaopan.androidlibrary.app.BaseActivity;
-import me.xiaopan.lifespirit.activity.SettingActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public abstract class MyBaseTabActivity extends BaseActivity {
 
@@ -21,7 +18,7 @@ public abstract class MyBaseTabActivity extends BaseActivity {
 
 	@Override
 	protected boolean isUseCustomAnimation() {
-		return getMyApplication().getPreferencesManager().isOnInterfaceSwitchingAnimation();
+		return true;
 	}
 
 	/**
@@ -72,32 +69,5 @@ public abstract class MyBaseTabActivity extends BaseActivity {
 	
 	public MyApplication getMyApplication(){
 		return (MyApplication) getApplication();
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		MenuItem menuItem = menu.findItem(R.id.comm_menu_stop);
-		if(menuItem != null){
-			menuItem.setTitle(getMyApplication().getPreferencesManager().isBackgServiceRunning()?getString(R.string.menu_service_stop):getString(R.string.menu_service_start));
-		}
-		return super.onPrepareOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home: finishActivity(); break;
-			case R.id.comm_menu_stop: 
-				if(getMyApplication().getPreferencesManager().isBackgServiceRunning()){
-					getMyApplication().stopBackgService();
-				}else{
-					getMyApplication().startBackgService();
-				}
-				break;
-			case R.id.comm_menu_settings: startActivity(SettingActivity.class, R.anim.base_slide_to_top_in, R.anim.base_slide_to_top_out); break;
-			case R.id.comm_menu_exit: finishApplication(); break;
-			default: break;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

@@ -4,6 +4,7 @@
 	<!-- 显示当前时间 -->
 	<LinearLayout style="@style/base_layout_fill_wrap" android:padding="@dimen/base_padding_specialLarge">
 	    <AnalogClock android:id="@+id/digitalClock_index" android:layout_width="100dp" android:layout_height="100dp"/>
+	    <TextView style="@style/comm_text" android:text="今天天气晴朗！"/>
 	</LinearLayout>
 	
 	<!-- 任务列表 -->
