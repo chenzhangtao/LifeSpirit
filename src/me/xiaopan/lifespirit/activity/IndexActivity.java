@@ -4,8 +4,12 @@ import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.R;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 
 /**
  * 首页
@@ -29,7 +33,7 @@ public class IndexActivity extends MyBaseActivity {
 		addTaskButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-			}
+			} 
 		});
 
 		taskListButton.setOnClickListener(new OnClickListener() {
