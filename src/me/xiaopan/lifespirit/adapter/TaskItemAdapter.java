@@ -53,7 +53,7 @@ public class TaskItemAdapter extends BaseAdapter {
 		hintText.setText(taskItem.getHintText());
 		
 		//复选框
-		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.base_button_listItemChoice);
+		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.comm_button_listItemChoice);
 		//默认复选框不显示
 		checkBox.setVisibility(View.GONE);
 		

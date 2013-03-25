@@ -107,8 +107,8 @@ public class SettingActivity extends MyBaseActivity {
 					getMyApplication().startBackgService();
 				}
 				break;
-			case R.id.base_menu_settings: startActivity(SettingActivity.class, R.anim.base_slide_to_top_in, R.anim.base_slide_to_top_out); break;
-			case R.id.base_menu_exit: finishApplication(); break;
+			case R.id.comm_menu_settings: startActivity(SettingActivity.class, R.anim.base_slide_to_top_in, R.anim.base_slide_to_top_out); break;
+			case R.id.comm_menu_exit: finishApplication(); break;
 			default: break;
 		}
 		return true;

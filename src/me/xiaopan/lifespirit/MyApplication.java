@@ -1,16 +1,13 @@
 package me.xiaopan.lifespirit;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 import me.xiaopan.lifespirit.enums.TaskSortWay;
-import me.xiaopan.lifespirit.service.ExecuteTaskService;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.BaseTime;
 import android.app.Application;
-import android.content.Intent;
 
 public class MyApplication extends Application {
 	private PreferencesManager preferencesManager;
@@ -26,19 +23,19 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		ApplicationExceptionHandler.getInstance().init(getBaseContext());
-		//初始化配置文件管理器
-		preferencesManager = new PreferencesManager(getBaseContext());
-		//从本地读取任务列表
-		setTaskList(readTaskList());
-		//对任务列表进行排序
-		taskSort();
-		//更新下一个要执行的任务
-		updateNextExecuteTask();
-		//如果当前后台任务的启动方式为自动并且有任务可执行，就启动后台任务
-		if(getPreferencesManager().isAutoStartBackgroundService() && getNextExecuteTask() != null){
-			startBackgService();
-		} 
+//		ApplicationExceptionHandler.getInstance().init(getBaseContext());
+//		//初始化配置文件管理器
+//		preferencesManager = new PreferencesManager(getBaseContext());
+//		//从本地读取任务列表
+//		setTaskList(readTaskList());
+//		//对任务列表进行排序
+//		taskSort();
+//		//更新下一个要执行的任务
+//		updateNextExecuteTask();
+//		//如果当前后台任务的启动方式为自动并且有任务可执行，就启动后台任务
+//		if(getPreferencesManager().isAutoStartBackgroundService() && getNextExecuteTask() != null){
+//			startBackgService();
+//		} 
 	}
 	
 	/* ******************************************** 任务相关  ***************************************** */
@@ -46,28 +43,28 @@ public class MyApplication extends Application {
 	 * 更新下一个要执行的任务
 	 */
 	public void updateNextExecuteTask(){
-		if(getTaskList().size() > 0){
-			//创建下次执行的任务的索引，默认为-5
-			int nextExecuteTaskIndex = -5;
-			//循环比较找出下一个要执行的任务的索引
-			for(int w = 0; w < getTaskList().size(); w++){
-				//如果当前任务已经开启
-				if(getTaskList().get(w).isEnable()){
-					//如果还是默认值，就将当前的任务设为下一个执行的任务
-					if(nextExecuteTaskIndex == -5){
-						nextExecuteTaskIndex = w;
-					}else{
-						//如果下一个执行的任务的执行时间大于当前任务的执行时间，说明当前任务的执行时间更接近当前时间
-						if(BaseTime.compareTime(getTaskList().get(nextExecuteTaskIndex).getNextExecuteTime(), getTaskList().get(w).getNextExecuteTime()) > 0){
-							nextExecuteTaskIndex = w;
-						}
-					}
-				}
-			}
-			setNextExecuteTaskIndex(nextExecuteTaskIndex);
-		}else{
-			setNextExecuteTaskIndex(-5);
-		}
+//		if(getTaskList().size() > 0){
+//			//创建下次执行的任务的索引，默认为-5
+//			int nextExecuteTaskIndex = -5;
+//			//循环比较找出下一个要执行的任务的索引
+//			for(int w = 0; w < getTaskList().size(); w++){
+//				//如果当前任务已经开启
+//				if(getTaskList().get(w).isEnable()){
+//					//如果还是默认值，就将当前的任务设为下一个执行的任务
+//					if(nextExecuteTaskIndex == -5){
+//						nextExecuteTaskIndex = w;
+//					}else{
+//						//如果下一个执行的任务的执行时间大于当前任务的执行时间，说明当前任务的执行时间更接近当前时间
+//						if(BaseTime.compareTime(getTaskList().get(nextExecuteTaskIndex).getNextExecuteTime(), getTaskList().get(w).getNextExecuteTime()) > 0){
+//							nextExecuteTaskIndex = w;
+//						}
+//					}
+//				}
+//			}
+//			setNextExecuteTaskIndex(nextExecuteTaskIndex);
+//		}else{
+//			setNextExecuteTaskIndex(-5);
+//		}
 	}
 	
 	/**
@@ -76,9 +73,9 @@ public class MyApplication extends Application {
 	 */
 	public BaseTask getNextExecuteTask() {
 		BaseTask nextExecuteTask = null;
-		if(getNextExecuteTaskIndex() >= 0 && getNextExecuteTaskIndex() < getTaskList().size()){
-			nextExecuteTask = getTaskList().get(getNextExecuteTaskIndex());
-		}
+//		if(getNextExecuteTaskIndex() >= 0 && getNextExecuteTaskIndex() < getTaskList().size()){
+//			nextExecuteTask = getTaskList().get(getNextExecuteTaskIndex());
+//		}
 		return nextExecuteTask;
 	}
 	
@@ -132,12 +129,12 @@ public class MyApplication extends Application {
 		return taskComparator;
 	}
 	
-	/**
-	 * 从本地读取任务列表，并对任务列表进行过期过滤
-	 * @return 任务列表
-	 */
-	private List<BaseTask> readTaskList(){
-		List<BaseTask> taskList = new ArrayList<BaseTask>();
+//	/**
+//	 * 从本地读取任务列表，并对任务列表进行过期过滤
+//	 * @return 任务列表
+//	 */
+//	private List<BaseTask> readTaskList(){
+//		List<BaseTask> taskList = new ArrayList<BaseTask>();
 //		FileScanner fs = new FileScanner(getFilesDir());
 //		fs.setFileTypeFilterWay(StringUtils.StringCheckUpWayEnum.EQUAL_KEYWORDS);
 //		fs.addFileTypeKeyWords("task");
@@ -170,24 +167,24 @@ public class MyApplication extends Application {
 //				}
 //			}
 //		}
-		return taskList;
-	}
+//		return taskList;
+//	}
 	
 	/* ******************************************** 服务相关  ***************************************** */
 	/**
 	 * 启动后台服务
 	 */
 	public void startBackgService(){
-		preferencesManager.setBackgServiceRunning(true);
-		startService(new Intent(this, ExecuteTaskService.class));
+//		preferencesManager.setBackgServiceRunning(true);
+//		startService(new Intent(this, ExecuteTaskService.class));
 	}
 	
 	/**
 	 * 停止后台服务
 	 */
 	public void stopBackgService(){
-		preferencesManager.setBackgServiceRunning(false);
-		stopService(new Intent(this, ExecuteTaskService.class));
+//		preferencesManager.setBackgServiceRunning(false);
+//		stopService(new Intent(this, ExecuteTaskService.class));
 	}
 	
 	/* ******************************************** GET/SET ***************************************** */

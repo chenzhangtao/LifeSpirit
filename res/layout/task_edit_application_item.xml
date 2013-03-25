@@ -5,5 +5,5 @@
         <TextView android:id="@+id/text_taskEditApplicationItem_name" style="@style/text_taskEditApplicationItem_name"/>
         <TextView android:id="@+id/text_taskEditApplicationItem_packageName"  style="@style/text_taskEditApplicationItem_packageName"/>
     </LinearLayout>
-    <RadioButton style="@style/base_button_listItemChoice"/>
+    <RadioButton style="@style/comm_button_listItemChoice"/>
 </LinearLayout>

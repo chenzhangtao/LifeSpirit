@@ -48,7 +48,7 @@ public class ApplicationAdapter extends MyBaseAdapter {
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.image_taskEditApplicationItem_icon);
 			viewHolder.name = (TextView) convertView.findViewById(R.id.text_taskEditApplicationItem_name);
 			viewHolder.packageName = (TextView) convertView.findViewById(R.id.text_taskEditApplicationItem_packageName);
-			viewHolder.choiceButton = (CompoundButton)  convertView.findViewById(R.id.base_button_listItemChoice);
+			viewHolder.choiceButton = (CompoundButton)  convertView.findViewById(R.id.comm_button_listItemChoice);
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();

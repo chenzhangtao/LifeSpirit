@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/base_layout_listItem">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_listItem">
 	<LinearLayout style="@style/base_layout_weight_wrap_vertical">
 		<TextView android:id="@+id/text_settingItem_title" style="@style/comm_text_listItem_title"/>
 		<TextView android:id="@+id/text_settingItem_hint" style="@style/comm_text_listItem_hint"/>
 	</LinearLayout>
-	<ToggleButton android:id="@+id/toggle_settingItem" style="@style/base_button_listItemChoice"/>
+	<ToggleButton android:id="@+id/toggle_settingItem" style="@style/comm_button_listItemChoice"/>
 </LinearLayout>

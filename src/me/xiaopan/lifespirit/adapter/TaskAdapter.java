@@ -19,11 +19,11 @@ public class TaskAdapter extends MyBaseAdapter {
 
 	private Context context;
 	private List<BaseTask> taskList;
-	private TaskListActivity taskListActivity;
+//	private TaskListActivity taskListActivity;
 	
 	public TaskAdapter(Context context, TaskListActivity taskListActivity, List<BaseTask> taskList){
 		this.context = context;
-		this.taskListActivity = taskListActivity;
+//		this.taskListActivity = taskListActivity;
 		this.taskList = taskList;
 	}
 	
@@ -49,7 +49,7 @@ public class TaskAdapter extends MyBaseAdapter {
 			viewHolder.taskRepeatText = (TextView) convertView.findViewById(R.id.text_taskListItem_repeat);
 			viewHolder.nextExecuteTimeText = (TextView) convertView.findViewById(R.id.text_taskListItem_nextExecuteTime);
 			viewHolder.taskInfoText = (TextView) convertView.findViewById(R.id.text_taskListItem_info);
-			viewHolder.choiceButton = (CompoundButton) convertView.findViewById(R.id.base_button_listItemChoice);
+			viewHolder.choiceButton = (CompoundButton) convertView.findViewById(R.id.comm_button_listItemChoice);
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();

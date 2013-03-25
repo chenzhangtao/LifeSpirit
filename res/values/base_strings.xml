@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 提供基本的常用字符串 -->
+<!-- 常用的字符串 -->
 <resources>
     <!-- 注册、登录表单 -->
     <string name="base_account">账号</string>
     <string name="base_userName">用户名</string>
     <string name="base_password">密码</string>
+    <string name="base_phone">电话</string>
+    <string name="base_phoneNumber">电话号码</string>
     <string name="base_mobilePhone">手机</string>
-    <string name="base_mobilePhoneNumber">手机号码</string>
+    <string name="base_mobileNumber">手机号码</string>
     <string name="base_email">邮箱</string>
     <string name="base_address">地址</string>
     <string name="base_sex">性别</string>
-    <string name="base_verificationCode">验证码</string>
+    <string name="base_verifyCode">验证码</string>
     <string name="base_activateCode">激活码</string>
     <string name="base_inviteCode">邀请码</string>
     <string name="base_login">登录</string>
@@ -74,6 +76,7 @@
 	<string name="base_open">打开</string>
     <string name="base_close">关闭</string>
 	<string name="base_start">启动</string>
+	<string name="base_pause">暂停</string>
 	<string name="base_stop">停止</string>
 	<string name="base_begin">开始</string>
 	<string name="base_end">结束</string>
@@ -113,6 +116,7 @@
     <string name="base_notOpen">不打开</string>
     <string name="base_notClose">不关闭</string>
     <string name="base_notStart">不启动</string>
+	<string name="base_notPause">不暂停</string>
     <string name="base_notStop">不停止</string>
     <string name="base_notBegin">不开始</string>
     <string name="base_notEnd">不结束</string>
@@ -146,6 +150,7 @@
 	<string name="base_opened">已打开</string>
     <string name="base_closed">已关闭</string>
 	<string name="base_started">已启动</string>
+	<string name="base_paused">已暂停</string>
 	<string name="base_stopped">已停止</string>
 	<string name="base_begined">已开始</string>
 	<string name="base_ended">已结束</string>
@@ -173,12 +178,13 @@
 	<string name="base_sorting">正在排序</string>
 	<string name="base_returning">正在返回</string>
 	<string name="base_backing">正在后退</string>
-	<string name="base_continueing">正在继续</string>	
+	<string name="base_continuing">正在继续</string>	
 	<string name="base_opening">正在打开</string>
     <string name="base_closing">正在关闭</string>
 	<string name="base_starting">正在启动</string>
+	<string name="base_pausing">正在暂停</string>
 	<string name="base_stopping">正在停止</string>
-	<string name="base_begining">正在开始</string>
+	<string name="base_beginning">正在开始</string>
 	<string name="base_ending">正在结束</string>
 	<string name="base_finishing">正在完成</string>	
     <string name="base_confirming">正在确定</string>
@@ -211,12 +217,13 @@
 	<string name="base_sortingLater">正在排序，请稍后…</string>
 	<string name="base_returningLater">正在返回，请稍后…</string>
 	<string name="base_backingLater">正在后退，请稍后…</string>
-	<string name="base_continueingLater">正在继续，请稍后…</string>	
+	<string name="base_continuingLater">正在继续，请稍后…</string>	
 	<string name="base_openingLater">正在打开，请稍后…</string>
     <string name="base_closingLater">正在关闭，请稍后…</string>
 	<string name="base_startingLater">正在启动，请稍后…</string>
+	<string name="base_pausingLater">正在暂停，请稍后…</string>
 	<string name="base_stoppingLater">正在停止，请稍后…</string>
-	<string name="base_beginingLater">正在开始，请稍后…</string>
+	<string name="base_beginningLater">正在开始，请稍后…</string>
 	<string name="base_endingLater">正在结束，请稍后…</string>
 	<string name="base_finishingLater">正在完成，请稍后…</string>	
     <string name="base_confirmingLater">正在确定，请稍后…</string>
@@ -250,4 +257,5 @@
 	<string name="base_dian">点</string>
 	<string name="base_none">无</string>	
 	<string name="base_hou">后</string>
+	<string name="base_colon">：</string>
 </resources>

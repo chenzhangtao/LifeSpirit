@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_body">
 	<!-- 内容 -->   
-    <LinearLayout style="@style/base_layout_body_content">
+    <LinearLayout style="@style/comm_layout_body_content">
         <!-- 手动输入号码工具栏 -->
         <LinearLayout style="@style/comm_layout_toolbar_down">
 		    <LinearLayout style="@style/base_layout_fill_weight">
@@ -20,8 +20,8 @@
 			
 		    <!-- 上下阴影 -->
 			<RelativeLayout style="@style/base_layout_fill_fill">
-				<TextView style="@style/base_shadow_down" android:layout_alignParentTop="true"/>
-				<TextView style="@style/base_shadow_up" android:layout_alignParentBottom="true"/>
+				<TextView style="@style/base_layout_shadow_down" android:layout_alignParentTop="true"/>
+				<TextView style="@style/base_layout_shadow_up" android:layout_alignParentBottom="true"/>
 			</RelativeLayout>
 		</FrameLayout>
 		

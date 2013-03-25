@@ -50,7 +50,7 @@ public class TaskListActivity extends MyBaseActivity {
 	/**
 	 * 当前编辑的任务的索引
 	 */
-	private int currentEditTaskIndex = -5;
+//	private int currentEditTaskIndex = -5;
 
 	@Override
 	public void onInitLayout(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class TaskListActivity extends MyBaseActivity {
 			Bundle bundle = new Bundle();
 			//bundle.putString(BaseTask.KEY, getMyApplication().getTaskList().get(position).toJSON());
 			bundle.putBoolean(KEY_IS_ADD, false);
-			currentEditTaskIndex = position;
+//			currentEditTaskIndex = position;
 			startActivityForResult(TaskEditActivity.class, TASK_EDIT_REQUEST_CODE, bundle);
 		}});
 		

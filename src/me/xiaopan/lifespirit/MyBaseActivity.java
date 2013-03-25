@@ -44,12 +44,12 @@ public abstract class MyBaseActivity extends BaseActivity {
 
 	@Override
 	protected int onGetLoadingHintViewId() {
-		return R.id.base_layout_loadingHint;
+		return R.id.comm_layout_loadingHint;
 	}
 
 	@Override
 	protected int onGetListEmptyHintViewId() {
-		return R.id.base_layout_listEmptyHint;
+		return R.id.comm_layout_listEmptyHint;
 	}
 
 	@Override
@@ -94,8 +94,8 @@ public abstract class MyBaseActivity extends BaseActivity {
 					getMyApplication().startBackgService();
 				}
 				break;
-			case R.id.base_menu_settings: startActivity(SettingActivity.class, R.anim.base_slide_to_top_in, R.anim.base_slide_to_top_out); break;
-			case R.id.base_menu_exit: finishApplication(); break;
+			case R.id.comm_menu_settings: startActivity(SettingActivity.class, R.anim.base_slide_to_top_in, R.anim.base_slide_to_top_out); break;
+			case R.id.comm_menu_exit: finishApplication(); break;
 			default: break;
 		}
 		return super.onOptionsItemSelected(item);

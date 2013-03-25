@@ -64,7 +64,7 @@ public class ContactsAdapter extends MyBaseAdapter {
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.text_messageContactsItem_name);
 			viewHolder.number = (TextView) convertView.findViewById(R.id.text_messageContactsItem_phoneNumber);
-			viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.base_button_listItemChoice);
+			viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.comm_button_listItemChoice);
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
