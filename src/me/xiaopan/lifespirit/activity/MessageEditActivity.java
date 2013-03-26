@@ -5,7 +5,7 @@ import java.util.List;
 
 import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.androidlibrary.util.AnimationUtils;
-import me.xiaopan.androidlibrary.util.ViewUtils;
+import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.androidlibrary.widget.MyBaseAdapter.ChoiceModeListener;
 import me.xiaopan.androidlibrary.widget.MyBaseAdapter.ChoiceWay;
 import me.xiaopan.androidlibrary.widget.PullListView;
@@ -271,11 +271,11 @@ public class MessageEditActivity extends MyBaseActivity {
 									sendMessage.getContactsList().add(contactsList.get(in));
 								}
 								//关闭对话框
-								ViewUtils.setDialogClickClose(alertDialog, true);
+								DialogUtils.setDialogClickClose(alertDialog, true);
 								//刷新消息对象的联系人列表
 								contactsAdapter.notifyDataSetChanged();
 							}else{
-								ViewUtils.setDialogClickClose(alertDialog, false);
+								DialogUtils.setDialogClickClose(alertDialog, false);
 								toastS(R.string.messageEdit_hint_peleaseSelect);
 							}
 						}
@@ -299,7 +299,7 @@ public class MessageEditActivity extends MyBaseActivity {
 							//改变全选状态
 							checkAll = !checkAll;
 							//不关闭对话框
-							ViewUtils.setDialogClickClose(alertDialog, false);
+							DialogUtils.setDialogClickClose(alertDialog, false);
 						}
 					});
 					
@@ -308,7 +308,7 @@ public class MessageEditActivity extends MyBaseActivity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							//关闭对话框
-							ViewUtils.setDialogClickClose(alertDialog, true);
+							DialogUtils.setDialogClickClose(alertDialog, true);
 						}
 					});
 					

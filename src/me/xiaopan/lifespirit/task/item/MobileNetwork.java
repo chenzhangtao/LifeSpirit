@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task.item;
 
-import me.xiaopan.androidlibrary.util.SystemUtils;
+import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.task.TaskItemImpl;
@@ -18,7 +18,7 @@ public class MobileNetwork extends  TaskItemImpl {
 	
 	public MobileNetwork(Context context, Task task) {
 		super(context, task, context.getString(R.string.taskItem_mobileNetwork));
-		setOpen(!SystemUtils.isMobileNetworkOpen(getContext()));
+		setOpen(!NetworkUtils.isMobileNetworkOpen(getContext()));
 	}
 	
 	public MobileNetwork(Context context, Task task, String mobileNetworkJSON){
@@ -29,7 +29,7 @@ public class MobileNetwork extends  TaskItemImpl {
 	@Override
 	public void execute() {
 		if(isChecked()){
-			SystemUtils.setMobileNetwork(getContext(), isOpen());
+			NetworkUtils.setMobileNetwork(getContext(), isOpen());
 		}
 	}
 

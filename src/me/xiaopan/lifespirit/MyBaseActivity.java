@@ -57,6 +57,11 @@ public abstract class MyBaseActivity extends BaseActivity {
 	}
 
 	@Override
+	public String getHostServerAddress(){
+		return "";
+	}
+
+	@Override
 	protected void onNetworkNotAvailable() {
 	}
 

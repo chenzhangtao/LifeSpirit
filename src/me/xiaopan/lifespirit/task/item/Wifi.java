@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task.item;
 
-import me.xiaopan.androidlibrary.util.SystemUtils;
+import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.task.Task;
@@ -20,7 +20,7 @@ public class Wifi extends  TaskItemImpl {
 	public Wifi(Context context, Task task) {
 		super(context, task, context.getString(R.string.taskItem_wifi));
 		try {
-			setOpen(!SystemUtils.isWifiOpen(getContext()));
+			setOpen(!NetworkUtils.isWifiOpen(getContext()));
 		} catch (DeviceNotFoundException e) {
 			e.printStackTrace();
 			setExist(false);
@@ -37,7 +37,7 @@ public class Wifi extends  TaskItemImpl {
 	public void execute() {
 		if(isChecked()){
 			try {
-				SystemUtils.setWifi(getContext(), isOpen());
+				NetworkUtils.setWifi(getContext(), isOpen());
 			} catch (DeviceNotFoundException e) {
 				e.printStackTrace();
 				setExist(false);

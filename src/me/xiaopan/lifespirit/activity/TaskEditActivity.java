@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils;
-import me.xiaopan.androidlibrary.util.ViewUtils;
 import me.xiaopan.androidlibrary.widget.MyBaseAdapter;
 import me.xiaopan.androidlibrary.widget.MyBaseAdapter.ChoiceModeListener;
 import me.xiaopan.androidlibrary.widget.PullListView;
@@ -224,7 +224,7 @@ public class TaskEditActivity extends MyBaseActivity {
 		builder.setNegativeButton(R.string.base_cancel, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ViewUtils.setDialogClickClose(alertDialog, true);
+				DialogUtils.setDialogClickClose(alertDialog, true);
 			}
 		});
 		
@@ -233,11 +233,11 @@ public class TaskEditActivity extends MyBaseActivity {
 			String name = taskNameEdit.getEditableText().toString();
 			if("".equals(name)){
 				toastL(R.string.hint_taskNameNull);
-				ViewUtils.setDialogClickClose(alertDialog, false);
+				DialogUtils.setDialogClickClose(alertDialog, false);
 			}else{
 				taskName.setContent(name);
 				taskItemAdapter.notifyDataSetChanged();
-				ViewUtils.setDialogClickClose(alertDialog, true);
+				DialogUtils.setDialogClickClose(alertDialog, true);
 			}
 		}});
 		
@@ -359,7 +359,7 @@ public class TaskEditActivity extends MyBaseActivity {
 		builder.setView(view);
 		//设置取消按钮点击事件监听器
 		builder.setNegativeButton(R.string.base_cancel, new OnClickListener() { public void onClick(DialogInterface dialog, int which) {
-			ViewUtils.setDialogClickClose(alertDialog, true);
+			DialogUtils.setDialogClickClose(alertDialog, true);
 		}});
 		//设置确定按钮点击事件监听器
 		builder.setPositiveButton(R.string.base_confirm, new OnClickListener() { public void onClick(DialogInterface dialog, int which) {
@@ -368,14 +368,14 @@ public class TaskEditActivity extends MyBaseActivity {
 			//如果为空，提示不能为空并不关闭对话框
 			if("".equals(value)){
 				toastL(R.string.hint_contentNotNull);
-				ViewUtils.setDialogClickClose(alertDialog, false);
+				DialogUtils.setDialogClickClose(alertDialog, false);
 			}else{
 				//设置重复的值
 				repeat.setValues(new int[]{Integer.valueOf(value)});
 				//设置重复方式
 				repeat.setRepeatWay(repeatWay);
 				//关闭对话框
-				ViewUtils.setDialogClickClose(alertDialog, true);
+				DialogUtils.setDialogClickClose(alertDialog, true);
 				//刷新列表
 				taskItemAdapter.notifyDataSetChanged();
 			}
@@ -422,7 +422,7 @@ public class TaskEditActivity extends MyBaseActivity {
 		
 		//设置取消按钮
 		builder.setNegativeButton(R.string.base_cancel, new OnClickListener() { public void onClick(DialogInterface dialog, int which) {
-			ViewUtils.setDialogClickClose(alertDialog, true);
+			DialogUtils.setDialogClickClose(alertDialog, true);
 		}});
 		
 		//设置确定按钮
@@ -445,11 +445,11 @@ public class TaskEditActivity extends MyBaseActivity {
 				}
 				repeat.setValues(integerList.toArray(new Integer[integerList.size()]));
 				repeat.setRepeatWay(repeatWay);
-				ViewUtils.setDialogClickClose(alertDialog, true);
+				DialogUtils.setDialogClickClose(alertDialog, true);
 				taskItemAdapter.notifyDataSetChanged();
 			}else{
 				toastL(R.string.hint_mustSelected);
-				ViewUtils.setDialogClickClose(alertDialog, false);
+				DialogUtils.setDialogClickClose(alertDialog, false);
 			}
 		}});
 		
