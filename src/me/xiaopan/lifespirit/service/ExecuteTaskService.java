@@ -8,7 +8,7 @@ import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.activity.TaskListActivity;
-import me.xiaopan.lifespirit.task.Time;
+import me.xiaopan.lifespirit.other.Time;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;

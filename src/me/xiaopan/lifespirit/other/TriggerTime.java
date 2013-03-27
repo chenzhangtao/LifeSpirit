@@ -1,6 +1,7 @@
-package me.xiaopan.lifespirit.task;
+package me.xiaopan.lifespirit.other;
 
 import me.xiaopan.lifespirit.R;
+import me.xiaopan.lifespirit.task.Task;
 import android.content.Context;
 
 

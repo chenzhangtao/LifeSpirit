@@ -1,4 +1,4 @@
-package me.xiaopan.lifespirit.widget;
+package me.xiaopan.lifespirit.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
