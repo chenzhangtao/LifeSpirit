@@ -1,9 +1,9 @@
-package me.xiaopan.lifespirit.task.scenariomode;
+package me.xiaopan.lifespirit.task.item;
 
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.other.TaskItemImpl;
 import me.xiaopan.lifespirit.task.Task;
+import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
 import org.json.JSONObject;

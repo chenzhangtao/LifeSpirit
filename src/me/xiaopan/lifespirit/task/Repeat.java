@@ -1,7 +1,6 @@
-package me.xiaopan.lifespirit.other;
+package me.xiaopan.lifespirit.task;
 
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
 
 import org.json.JSONArray;
 import org.json.JSONException;

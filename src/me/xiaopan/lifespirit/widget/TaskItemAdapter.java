@@ -1,10 +1,10 @@
-package me.xiaopan.lifespirit.adapter;
+package me.xiaopan.lifespirit.widget;
 
 import java.util.List;
 
 import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.other.TaskItem;
+import me.xiaopan.lifespirit.task.TaskItem;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -6,10 +6,10 @@ import me.xiaopan.javalibrary.util.CollectionUtils;
 import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.adapter.TaskAdapter;
 import me.xiaopan.lifespirit.enums.TaskSortWay;
 import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.widget.ImageTextButton;
+import me.xiaopan.lifespirit.widget.TaskAdapter;
 
 import org.json.JSONException;
 

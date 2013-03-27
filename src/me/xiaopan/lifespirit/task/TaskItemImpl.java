@@ -1,6 +1,5 @@
-package me.xiaopan.lifespirit.other;
+package me.xiaopan.lifespirit.task;
 
-import me.xiaopan.lifespirit.task.Task;
 import android.content.Context;
 
 public abstract class TaskItemImpl implements TaskItem {
