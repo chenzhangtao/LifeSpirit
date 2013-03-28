@@ -5,7 +5,7 @@
     android:versionName="2.0">
 
     <!-- 声明本程序运行的最低版本为14，最佳版本为17 -->
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="17"/>
+    <uses-sdk android:minSdkVersion="1" android:targetSdkVersion="17"/>
     
     <!-- 用到的权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
