@@ -1,9 +1,7 @@
-package me.xiaopan.lifespirit.task.item;
+package me.xiaopan.lifespirit.task;
 
 import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
-import me.xiaopan.lifespirit.task.Time;
 import android.content.Context;
 
 public class NextExecuteTime extends Time {

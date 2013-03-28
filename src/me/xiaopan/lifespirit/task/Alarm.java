@@ -1,8 +1,6 @@
-package me.xiaopan.lifespirit.task.item;
+package me.xiaopan.lifespirit.task;
 
 import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.Task;
-import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONException;
 import org.json.JSONObject;

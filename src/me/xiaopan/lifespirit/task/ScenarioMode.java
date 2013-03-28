@@ -1,4 +1,4 @@
-package me.xiaopan.lifespirit.task.item;
+package me.xiaopan.lifespirit.task;
 
 /**
  * 情景模式

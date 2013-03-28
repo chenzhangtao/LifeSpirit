@@ -1,12 +1,10 @@
-package me.xiaopan.lifespirit.task.item;
+package me.xiaopan.lifespirit.task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.domain.Contacts;
-import me.xiaopan.lifespirit.task.Task;
-import me.xiaopan.lifespirit.task.TaskItemImpl;
 
 import org.json.JSONArray;
 import org.json.JSONException;

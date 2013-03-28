@@ -1,6 +1,6 @@
-package me.xiaopan.lifespirit.task.item;
+package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.androidlibrary.util.NetworkUtils;
+import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit.R;
 import me.xiaopan.lifespirit.task.Task;
@@ -11,16 +11,16 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class Wifi extends  TaskItemImpl {
+public class Bluetooth extends TaskItemImpl {
 	/**
 	 * KEY - 表示当前任务项
 	 */
-	public static final String KEY = "KEY_WIFI";
+	public static final String KEY = "KEY_BLUETOOTH";
 	
-	public Wifi(Context context, Task task) {
-		super(context, task, context.getString(R.string.taskItem_wifi));
+	public Bluetooth(Context context, Task task) {
+		super(context, task, context.getString(R.string.taskItem_bluetooth));
 		try {
-			setOpen(!NetworkUtils.isWifiOpen(getContext()));
+			setOpen(!SystemUtils.isBluetoothOpen());
 		} catch (DeviceNotFoundException e) {
 			e.printStackTrace();
 			setExist(false);
@@ -28,16 +28,16 @@ public class Wifi extends  TaskItemImpl {
 		}
 	}
 	
-	public Wifi(Context context, Task task, String wifiJSON)  {
+	public Bluetooth(Context context, Task task, String bluetoothJSON){
 		this(context, task);
-		fromJSON(wifiJSON);
+		fromJSON(bluetoothJSON);
 	}
 
 	@Override
 	public void execute() {
 		if(isChecked()){
 			try {
-				NetworkUtils.setWifi(getContext(), isOpen());
+				SystemUtils.setBluetooth(isOpen());
 			} catch (DeviceNotFoundException e) {
 				e.printStackTrace();
 				setExist(false);
@@ -53,32 +53,32 @@ public class Wifi extends  TaskItemImpl {
 	
 	@Override
 	public String toJSON(){
-		JSONObject wifi = new JSONObject();
+		JSONObject bluetooth = new JSONObject();
 		try {
-			wifi.put(KEY_CHECKED, isChecked());
+			bluetooth.put(KEY_CHECKED, isChecked());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		try {
-			wifi.put(KEY_OPEN, isOpen());
+			bluetooth.put(KEY_OPEN, isOpen());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return wifi.toString();
+		return bluetooth.toString();
 	}
 	
 	@Override
-	public void fromJSON(String wifiJSON)  {
-		if(wifiJSON != null){
+	public void fromJSON(String bluetoothJSON){
+		if(bluetoothJSON != null){
 			try {
-				JSONObject wifi = new JSONObject(wifiJSON);
+				JSONObject bluetooth = new JSONObject(bluetoothJSON);
 				try {
-					setChecked(wifi.getBoolean(KEY_CHECKED));
+					setChecked(bluetooth.getBoolean(KEY_CHECKED));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 				try {
-					setOpen(wifi.getBoolean(KEY_OPEN));
+					setOpen(bluetooth.getBoolean(KEY_OPEN));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

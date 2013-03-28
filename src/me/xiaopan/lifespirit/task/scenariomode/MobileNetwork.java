@@ -1,4 +1,4 @@
-package me.xiaopan.lifespirit.task.item;
+package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.lifespirit.R;
