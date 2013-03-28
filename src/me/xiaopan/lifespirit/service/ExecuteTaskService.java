@@ -93,10 +93,10 @@ public class ExecuteTaskService extends Service {
 					
 					//比较当前时间和下次要执行的任务的时间
 					int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-					int result = BaseTime.contrastTime(
+					int result = BaseTime.compareTime(
 						currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4], 
 						getMyApplication().getNextExecuteTask().getNextExecuteTime().getYear(), getMyApplication().getNextExecuteTask().getNextExecuteTime().getMonth(), 
-						getMyApplication().getNextExecuteTask().getNextExecuteTime().getDay(), getMyApplication().getNextExecuteTask().getNextExecuteTime().getHour(), 
+						getMyApplication().getNextExecuteTask().getNextExecuteTime().getDayOfMonth(), getMyApplication().getNextExecuteTask().getNextExecuteTime().getHour(), 
 						getMyApplication().getNextExecuteTask().getNextExecuteTime().getMinute()
 					);
 					
@@ -170,8 +170,8 @@ public class ExecuteTaskService extends Service {
 		//设置要显示的信息
 		notifications.setLatestEventInfo(
 			this, 
-			getMyApplication().getNextExecuteTask().getNextExecuteTime().getRemainingTime() + getMyApplication().getNextExecuteTask().getTaskName().getShowInTaskInfoText(), 
-			getMyApplication().getNextExecuteTask().getTaskInfo() , 
+			getMyApplication().getNextExecuteTask().getName(), 
+			getMyApplication().getNextExecuteTask().getIntro() , 
 			PendingIntent.getActivity(this, 0, intent, 0)
 		);
 		//将通知设为前台通知，同时与该服务绑定，使该服务不会被系统回收

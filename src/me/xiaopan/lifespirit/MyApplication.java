@@ -1,32 +1,17 @@
 package me.xiaopan.lifespirit;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import me.xiaopan.javalibrary.io.FileScanner;
-import me.xiaopan.javalibrary.util.DateTimeUtils;
-import me.xiaopan.javalibrary.util.FileUtils;
-import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit.enums.TaskSortWay;
 import me.xiaopan.lifespirit.service.ExecuteTaskService;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.BaseTime;
-
-import org.json.JSONException;
-
 import android.app.Application;
 import android.content.Intent;
 
-/**
- * 
- * @version 1.0 
- * @author panpf
- * @date May 28, 2012
- */
 public class MyApplication extends Application {
 	private PreferencesManager preferencesManager;
 	/**
@@ -67,7 +52,7 @@ public class MyApplication extends Application {
 			//循环比较找出下一个要执行的任务的索引
 			for(int w = 0; w < getTaskList().size(); w++){
 				//如果当前任务已经开启
-				if(getTaskList().get(w).isOpen()){
+				if(getTaskList().get(w).isEnable()){
 					//如果还是默认值，就将当前的任务设为下一个执行的任务
 					if(nextExecuteTaskIndex == -5){
 						nextExecuteTaskIndex = w;
@@ -133,14 +118,14 @@ public class MyApplication extends Application {
 			taskComparator = new Comparator<BaseTask>() {
 				@Override
 				public int compare(BaseTask lhs, BaseTask rhs) {
-					return (int)lhs.getCreateTime() - (int)rhs.getCreateTime();
+					return (int) (lhs.getCreateTime().getMilliseconds() - rhs.getCreateTime().getMilliseconds());
 				}
 			};
 		}else if(preferencesManager.getTaskSortWay() == TaskSortWay.CREATE_TIME_DESC){
 			taskComparator = new Comparator<BaseTask>() {
 				@Override
 				public int compare(BaseTask lhs, BaseTask rhs) {
-					return ((int)lhs.getCreateTime() - (int)rhs.getCreateTime()) * -1;
+					return (int) (lhs.getCreateTime().getMilliseconds() - rhs.getCreateTime().getMilliseconds()) * -1;
 				}
 			};
 		}
@@ -153,38 +138,38 @@ public class MyApplication extends Application {
 	 */
 	private List<BaseTask> readTaskList(){
 		List<BaseTask> taskList = new ArrayList<BaseTask>();
-		FileScanner fs = new FileScanner(getFilesDir());
-		fs.setFileTypeFilterWay(StringUtils.StringCheckUpWayEnum.EQUAL_KEYWORDS);
-		fs.addFileTypeKeyWords("task");
-		//读取文件中的内容，并根据内容创建任务对象
-		for(File file : fs.scan()){
-			try {
-				taskList.add(new BaseTask(this, FileUtils.readString(file)));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		//如果最终的任务列表的长度大于0，就对列表中的任务进行过期验证
-		if(taskList.size() > 0){
-			int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-			BaseTask task = null;
-			for(int w = 0; w < taskList.size(); w++){
-				task = taskList.get(w);
-				//如果已经开启并且已经过期
-				if(task.isOpen() && task.isPastDue(currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4])){
-					//关闭任务
-					task.setOpen(false);
-					//写入本地
-					try {
-						task.writer();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
+//		FileScanner fs = new FileScanner(getFilesDir());
+//		fs.setFileTypeFilterWay(StringUtils.StringCheckUpWayEnum.EQUAL_KEYWORDS);
+//		fs.addFileTypeKeyWords("task");
+//		//读取文件中的内容，并根据内容创建任务对象
+//		for(File file : fs.scan()){
+//			try {
+//				taskList.add(new BaseTask(this, FileUtils.readString(file)));
+//			} catch (JSONException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		//如果最终的任务列表的长度大于0，就对列表中的任务进行过期验证
+//		if(taskList.size() > 0){
+//			int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
+//			BaseTask task = null;
+//			for(int w = 0; w < taskList.size(); w++){
+//				task = taskList.get(w);
+//				//如果已经开启并且已经过期
+//				if(task.isOpen() && task.isPastDue(currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4])){
+//					//关闭任务
+//					task.setOpen(false);
+//					//写入本地
+//					try {
+//						task.writer();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//		}
 		return taskList;
 	}
 	

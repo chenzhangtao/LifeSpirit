@@ -10,9 +10,6 @@ import me.xiaopan.lifespirit.adapter.TaskAdapter;
 import me.xiaopan.lifespirit.enums.TaskSortWay;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.widget.ImageTextButton;
-
-import org.json.JSONException;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -80,7 +77,7 @@ public class TaskListActivity extends MyBaseActivity {
 		//设置列表点击事件监听器
 		taskAdapter.setOnItemClickListener(new OnItemClickListener() { public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Bundle bundle = new Bundle();
-			bundle.putString(BaseTask.KEY, getMyApplication().getTaskList().get(position).toJSON());
+			//bundle.putString(BaseTask.KEY, getMyApplication().getTaskList().get(position).toJSON());
 			bundle.putBoolean(KEY_IS_ADD, false);
 			currentEditTaskIndex = position;
 			startActivityForResult(TaskEditActivity.class, TASK_EDIT_REQUEST_CODE, bundle);
@@ -144,17 +141,17 @@ public class TaskListActivity extends MyBaseActivity {
 		if(requestCode == TASK_EDIT_REQUEST_CODE && resultCode == RESULT_OK && data != null){
 			//如果是添加任务
 			if(data.getBooleanExtra(KEY_IS_ADD, true)){
-				try {
-					getMyApplication().getTaskList().add(new BaseTask(this, data.getStringExtra(BaseTask.KEY)));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					getMyApplication().getTaskList().add(new BaseTask(this, data.getStringExtra(BaseTask.KEY)));
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
 			}else{
-				try {
-					getMyApplication().getTaskList().set(currentEditTaskIndex, new BaseTask(this, data.getStringExtra(BaseTask.KEY)));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					getMyApplication().getTaskList().set(currentEditTaskIndex, new BaseTask(this, data.getStringExtra(BaseTask.KEY)));
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
 			}
 			
 			//对任务列表进行排序
