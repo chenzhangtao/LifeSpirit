@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit" style="@style/comm_layout_body">
+	<ScrollView style="@style/base_layout_fill_fill">
+		<LinearLayout style="@style/comm_layout_body_content">
+			<TimePicker style="@style/base_layout_fill_wrap" android:id="@+id/timePicker_scenaireMode"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/base_layout_fill_wrap" android:background="@drawable/selector_option_item_top" custom:title="名称"/>
+		</LinearLayout>
+	</ScrollView>
+    
+	<include layout="@layout/comm_shadow_down"/>
+</FrameLayout>

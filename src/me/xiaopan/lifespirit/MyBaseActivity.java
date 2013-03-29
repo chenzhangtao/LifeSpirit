@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit;
 
 import me.xiaopan.androidlibrary.app.BaseActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 public abstract class MyBaseActivity extends BaseActivity {
 
@@ -69,5 +70,14 @@ public abstract class MyBaseActivity extends BaseActivity {
 	
 	public MyApplication getMyApplication(){
 		return (MyApplication) getApplication();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home: finishActivity(); break;
+			default: break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
