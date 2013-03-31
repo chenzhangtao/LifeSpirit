@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit" style="@style/comm_layout_body">
 	<ScrollView style="@style/base_layout_fill_fill">
-		<LinearLayout style="@style/comm_layout_body_content">
+		<LinearLayout style="@style/comm_layout_body_content" android:paddingTop="@dimen/base_padding_specialLarge" android:paddingBottom="@dimen/base_padding_specialLarge">
 			<TimePicker style="@style/base_layout_fill_wrap" android:id="@+id/timePicker_scenaireMode"/>
-			<me.xiaopan.lifespirit.widget.Preference style="@style/base_layout_fill_wrap" android:background="@drawable/selector_option_item_top" custom:title="名称"/>
+			
+			<me.xiaopan.lifespirit.widget.Preference custom:title="名称" custom:intro="" style="@style/option_item_header"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="时间" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="重复" custom:intro="" style="@style/option_item_footer"/>
+		
+			<include layout="@layout/comm_space"/>
+			<include layout="@layout/comm_space"/>
+			
+			<me.xiaopan.lifespirit.widget.Preference custom:title="蓝牙" custom:intro="" style="@style/option_item_header"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="WIFI" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="2G/3G" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="飞行模式" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="音量" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="手机铃声" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="短信铃声" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="通知铃声" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="铃声模式" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="屏幕亮度" custom:intro="" style="@style/option_item_center"/>
+			<me.xiaopan.lifespirit.widget.Preference custom:title="屏幕休眠" custom:intro="" style="@style/option_item_footer"/>
 		</LinearLayout>
 	</ScrollView>
     

@@ -5,4 +5,25 @@
 
     <style name="AppTheme" parent="AppBaseTheme">
     </style>
+    
+    <style name="option_item_complete">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingRight">25dp</item>
+        <item name="android:background">@drawable/selector_option_item_complete</item>
+        <item name="android:clickable">true</item>
+    </style>
+    
+    <style name="option_item_header" parent="@style/option_item_complete">
+        <item name="android:background">@drawable/selector_option_item_header</item>
+    </style>
+    
+    <style name="option_item_center" parent="@style/option_item_complete">
+        <item name="android:background">@drawable/selector_option_item_center</item>
+    </style>
+    
+    <style name="option_item_footer" parent="@style/option_item_complete">
+        <item name="android:background">@drawable/selector_option_item_footer</item>
+    </style>
 </resources>
