@@ -1,9 +1,11 @@
 package me.xiaopan.lifespirit.activity;
 
-import android.os.Bundle;
-import android.widget.TimePicker;
+import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.R;
+import me.xiaopan.lifespirit.util.ViewUtils;
+import android.os.Bundle;
+import android.widget.TimePicker;
 
 /**
  * 情景模式界面
@@ -26,5 +28,6 @@ public class ScenarioModeActivity extends MyBaseActivity {
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
 		timePicker.setIs24HourView(true);
+		ViewUtils.setTimePickerTextColor(timePicker, Colors.BLACK);
 	}
 }

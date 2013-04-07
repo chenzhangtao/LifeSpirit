@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-    </style>
-
-    <style name="AppTheme" parent="AppBaseTheme">
-    </style>
-    
     <style name="option_item_complete">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">50dp</item>
