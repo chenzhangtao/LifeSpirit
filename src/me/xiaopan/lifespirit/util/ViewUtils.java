@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.util;
 
 import me.xiaopan.javalibrary.util.ClassUtils;
 import android.graphics.Paint;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -30,5 +31,11 @@ public class ViewUtils {
 			textView.setTextColor(color);
 		}
 		return setNumberPickerTextColor(ClassUtils.getObjectByFieldName(timePicker, "mHourSpinner", NumberPicker.class), color) && setNumberPickerTextColor(ClassUtils.getObjectByFieldName(timePicker, "mMinuteSpinner", NumberPicker.class), color);
+	}
+	
+	public static boolean setDatePickerTextColor(DatePicker datePicker, int color){
+		return setNumberPickerTextColor(ClassUtils.getObjectByFieldName(datePicker, "mYearSpinner", NumberPicker.class), color) && 
+				setNumberPickerTextColor(ClassUtils.getObjectByFieldName(datePicker, "mMonthSpinner", NumberPicker.class), color) && 
+				setNumberPickerTextColor(ClassUtils.getObjectByFieldName(datePicker, "mDaySpinner", NumberPicker.class), color);
 	}
 }

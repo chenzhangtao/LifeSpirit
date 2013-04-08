@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit2" style="@style/base_layout_fill_wrap_vertical">
+	<TimePicker style="@style/base_layout_fill_wrap" android:id="@id/comm_preference_timePicker" android:layout_height="@dimen/comm_timePicker_height"/>
+	<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_header" custom:title="@string/comm_preference_name" android:id="@id/comm_preference_name"/>
+	<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_footer"  custom:title="@string/comm_preference_repeat" android:id="@id/comm_preference_repeat"/>
+</LinearLayout>

@@ -34,5 +34,6 @@
             </intent-filter>
         </activity>
         <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/scenarioMode_title"/>
+        <activity android:name="me.xiaopan.lifespirit.activity.RepeatActivity" android:label="@string/repeat_title"/>
     </application>
 </manifest>

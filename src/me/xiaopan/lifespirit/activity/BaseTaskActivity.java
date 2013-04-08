@@ -9,7 +9,6 @@ import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.BaseTask;
-import me.xiaopan.lifespirit.task.Repeat.RepeatWay;
 import me.xiaopan.lifespirit.util.ViewUtils;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
@@ -37,9 +36,9 @@ public class BaseTaskActivity extends MyBaseActivity {
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
-		timePicker = (TimePicker) findViewById(R.id.timePicker_scenaireMode);
-		namePreference = (Preference) findViewById(R.id.preference_scenarioMode_name);
-		repeatPreference = (Preference) findViewById(R.id.preference_scenarioMode_repeat);
+		timePicker = (TimePicker) findViewById(R.id.comm_preference_timePicker);
+		namePreference = (Preference) findViewById(R.id.comm_preference_name);
+		repeatPreference = (Preference) findViewById(R.id.comm_preference_repeat);
 	}
 
 	@Override
@@ -105,22 +104,23 @@ public class BaseTaskActivity extends MyBaseActivity {
 		repeatPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(BaseTaskActivity.this);
-				builder.setSingleChoiceItems(R.array.repeats, baseTask.getRepeat().getRepeatWay().getIndex(), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						switch(which){
-							case 0 : baseTask.getRepeat().setRepeatWay(RepeatWay.ONLY_ONE_TIME); break;
-							case 1 : baseTask.getRepeat().setRepeatWay(RepeatWay.EVERYDAY); break;
-							case 2 : baseTask.getRepeat().setRepeatWay(RepeatWay.STATUTORY_WORKING_DAYS); break;
-							case 3 : baseTask.getRepeat().setRepeatWay(RepeatWay.LEGAL_AND_OFF_DAY); break;
-							case 4 : baseTask.getRepeat().setRepeatWay(RepeatWay.CUSTOM); break;
-						}
-						repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro());
-						tempAlertDialog.dismiss();
-					}
-				});
-				builderAlertDialog(builder.create(), null).show();
+//				AlertDialog.Builder builder = new AlertDialog.Builder(BaseTaskActivity.this);
+//				builder.setSingleChoiceItems(R.array.repeats, baseTask.getRepeat().getRepeatWay().getIndex(), new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						switch(which){
+//							case 0 : baseTask.getRepeat().setRepeatWay(RepeatWay.ONLY_ONE_TIME); break;
+//							case 1 : baseTask.getRepeat().setRepeatWay(RepeatWay.EVERYDAY); break;
+//							case 2 : baseTask.getRepeat().setRepeatWay(RepeatWay.STATUTORY_WORKING_DAYS); break;
+//							case 3 : baseTask.getRepeat().setRepeatWay(RepeatWay.LEGAL_AND_OFF_DAY); break;
+//							case 4 : baseTask.getRepeat().setRepeatWay(RepeatWay.CUSTOM); break;
+//						}
+//						repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro());
+//						tempAlertDialog.dismiss();
+//					}
+//				});
+//				builderAlertDialog(builder.create(), null).show();
+				startActivity(RepeatActivity.class);
 			}
 		});
 	}

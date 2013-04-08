@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit2" style="@style/comm_layout_body">
+	<ScrollView style="@style/base_layout_fill_fill">
+		<LinearLayout style="@style/comm_layout_body_content" android:paddingBottom="@dimen/base_padding_specialLarge">
+			<DatePicker style="@style/base_layout_fill_wrap" android:id="@+id/datePicker_repeat" android:layout_height="@dimen/comm_timePicker_height" android:calendarViewShown="false"/>
+			
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_complete" custom:title="只执行一次" android:id="@+id/preference_repeat_onlyOneTime"/>
+		
+			<include layout="@layout/comm_space"/>
+			<include layout="@layout/comm_space"/>
+			
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_header" custom:title="每隔多少分钟" android:id="@+id/preference_repeat_everyOtherMinute"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="每隔多少小时" android:id="@+id/preference_repeat_everyOtherHour"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="每隔多少天" android:id="@+id/preference_repeat_everyOtherDay"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="每隔多少周" android:id="@+id/preference_repeat_everyOtherWeek"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="每隔多少月" android:id="@+id/preference_repeat_everyOtherMonth"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_footer" custom:title="每隔多少年" android:id="@+id/preference_repeat_everyOtherYear"/>
+		
+			<include layout="@layout/comm_space"/>
+			<include layout="@layout/comm_space"/>
+			
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_header" custom:title="@string/repeat_statutoryWorkingDays" android:id="@+id/preference_repeat_statutoryWorkingDays"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_footer" custom:title="@string/repeat_legalAndOffDay" android:id="@+id/preference_repeat_legalAndOffDay"/>
+		
+			<include layout="@layout/comm_space"/>
+			<include layout="@layout/comm_space"/>
+			
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_header" custom:title="按分钟" android:id="@+id/preference_repeat_accordingMinute"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="按小时" android:id="@+id/preference_repeat_accordingHour"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="按周" android:id="@+id/preference_repeat_accordingDay"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="按天" android:id="@+id/preference_repeat_accordingWeek"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_center" custom:title="按月" android:id="@+id/preference_repeat_accordingMonth"/>
+			<me.xiaopan.lifespirit.widget.Preference style="@style/option_item_footer" custom:title="按年" android:id="@+id/preference_repeat_accordingYear"/>
+		</LinearLayout>
+	</ScrollView>
+    
+	<include layout="@layout/comm_shadow_down"/>
+</FrameLayout>

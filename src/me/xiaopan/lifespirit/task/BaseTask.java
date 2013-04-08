@@ -25,7 +25,7 @@ public abstract class BaseTask {
 		setTriggerTime(new TriggerTime());
 		setNextExecuteTime(new NextExecuteTime());
 		setName(new Name(getContext()));
-		setRepeat(new Repeat(getContext()));
+		setRepeat(new Repeat(getContext(), getTriggerTime()));
 	}
 	
 	/**

@@ -27,4 +27,8 @@
     <item type="id" name="comm_menu_exit"/>
     <item type="id" name="comm_menu_exception"/>
     <item type="id" name="comm_menu_stop"/>
+    
+    <item type="id" name="comm_preference_timePicker"/>
+    <item type="id" name="comm_preference_name"/>
+    <item type="id" name="comm_preference_repeat"/>
 </resources>

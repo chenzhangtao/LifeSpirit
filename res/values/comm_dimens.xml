@@ -9,4 +9,6 @@
     
     <dimen name="comm_edit_minWidth">100dp</dimen><!-- 编辑器 - 正文 - 最小宽度 -->
     <dimen name="comm_edit_minHeight">60dp</dimen><!-- 编辑器 - 正文 - 最小高度 -->
+    
+    <dimen name="comm_timePicker_height">170dp</dimen>
 </resources>

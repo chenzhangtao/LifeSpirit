@@ -106,6 +106,24 @@
 	<string name="activityTitle_taskList">任务列表</string>
 	
 	<string name="scenarioMode_title">情景模式</string>
+	<string name="scenarioMode_preference_bluetooth">蓝牙</string>
+	<string name="scenarioMode_preference_wifi">WIFI</string>
+	<string name="scenarioMode_preference_mobileNetwork">2G/3G</string>
+	<string name="scenarioMode_preference_airplanceMode">飞行模式</string>
+	<string name="scenarioMode_preference_volume">音量</string>
+	<string name="scenarioMode_preference_phoneRingtone">电话铃声</string>
+	<string name="scenarioMode_preference_smsRingtone">短信铃声</string>
+	<string name="scenarioMode_preference_notificationRingtone">通知铃声</string>
+	<string name="scenarioMode_preference_ringtoneMode">铃声模式</string>
+	<string name="scenarioMode_preference_brightness">屏幕亮度</string>
+	<string name="scenarioMode_preference_dormant">屏幕休眠</string>
 	
 	<string name="dialogTitle_selectRepeatWay">请选择重复方式</string>
+	
+	
+	<string name="repeat_title">重复</string>
+	<string name="repeat_onlyOneTime">只在%s执行一次</string>
+	<string name="repeat_everyDay">每天</string>
+	<string name="repeat_statutoryWorkingDays">法定工作日（智能跳过节假日）</string>
+	<string name="repeat_legalAndOffDay">法定休息日（周末和法定节假日）</string>
 </resources>

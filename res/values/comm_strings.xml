@@ -107,4 +107,7 @@
     <string name="comm_firstLoad">首次加载</string>
     <string name="comm_pullDownRefersh">下拉刷新</string>
     <string name="comm_firstRefersh">首次刷新</string>
+    
+    <string name="comm_preference_name">名称</string>
+    <string name="comm_preference_repeat">重复</string>
 </resources>

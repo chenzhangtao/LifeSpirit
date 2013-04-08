@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
+import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
 /**
@@ -7,21 +8,23 @@ import android.content.Context;
  */
 public class Repeat extends TaskOption{
 	private RepeatWay repeatWay = RepeatWay.ONLY_ONE_TIME;
+	private TriggerTime triggerTime;
 	
-	public Repeat(Context context) {
+	public Repeat(Context context, TriggerTime triggerTime) {
 		super(context);
+		this.triggerTime = triggerTime;
 	}
 
 	@Override
 	public String onGetIntro() {
 		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
-			return "只执行一次";
+			return getContext().getString(R.string.repeat_onlyOneTime, (triggerTime.getYear()+getContext().getString(R.string.base_year)+triggerTime.getMonth()+getContext().getString(R.string.base_month)+triggerTime.getDayOfMonth()+getContext().getString(R.string.base_day)));
 		}else if(repeatWay == RepeatWay.EVERYDAY){
-			return "每天";
+			return getContext().getString(R.string.repeat_everyDay);
 		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
-			return "法定工作日（智能跳过节假日）";
+			return getContext().getString(R.string.repeat_statutoryWorkingDays);
 		}else if(repeatWay == RepeatWay.LEGAL_AND_OFF_DAY){
-			return "法定休息日（周末和法定节假日）";
+			return getContext().getString(R.string.repeat_legalAndOffDay);
 		}else if(repeatWay == RepeatWay.CUSTOM){
 			return "自定义";
 		}else{
