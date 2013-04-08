@@ -1,12 +1,11 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
 /**
  * 电话铃声
  */
-public class PhoneRingtone extends TaskOption{
+public class PhoneRingtone extends ScenarioOption{
 
 	public PhoneRingtone(Context context) {
 		super(context);

@@ -3,13 +3,12 @@ package me.xiaopan.lifespirit.task.scenariomode;
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit2.R;
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
 /**
  * WIFI
  */
-public class WIFI extends  TaskOption {
+public class WIFI extends ScenarioOption {
 	private boolean open;
 	
 	public WIFI(Context context) {

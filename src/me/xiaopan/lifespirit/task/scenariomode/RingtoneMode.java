@@ -1,14 +1,13 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.lifespirit2.R;
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 import android.media.AudioManager;
 
 /**
  * 铃声模式
  */
-public class RingtoneMode extends TaskOption {
+public class RingtoneMode extends ScenarioOption {
 	private RingnoteModeEnum ringnoteMode;
 
 	public RingtoneMode(Context context) {

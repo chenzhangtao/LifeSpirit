@@ -12,11 +12,6 @@ public class Repeat extends TaskOption{
 	}
 
 	@Override
-	public void onExecute() {
-		
-	}
-
-	@Override
 	public String onGetIntro() {
 		return null;
 	}

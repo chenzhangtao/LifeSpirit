@@ -2,13 +2,12 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.lifespirit2.R;
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
 /**
  * 飞行模式
  */
-public class AirplaneMode extends  TaskOption {
+public class AirplaneMode extends ScenarioOption {
 	private boolean open;
 	
 	public AirplaneMode(Context context) {

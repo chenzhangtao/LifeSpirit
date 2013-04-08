@@ -1,14 +1,13 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.lifespirit2.R;
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 import android.media.AudioManager;
 
 /**
  * 音量
  */
-public class Volume extends TaskOption {
+public class Volume extends ScenarioOption {
 	private int mediaVolume = -5;
 	private int alarmVolume = -5;
 	private int ringtoneVolume = -5;

@@ -2,13 +2,12 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.lifespirit2.R;
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
 /**
  * 亮度
  */
-public class Brightness extends  TaskOption {
+public class Brightness extends ScenarioOption {
 	private int brightness;//亮度
 	private boolean autoAdjustmen;//自动调节
 	

@@ -2,13 +2,12 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.lifespirit2.R;
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
 /**
  * 移动网络
  */
-public class MobileNetwork extends  TaskOption {
+public class MobileNetwork extends ScenarioOption {
 	private boolean open;
 	
 	public MobileNetwork(Context context) {
