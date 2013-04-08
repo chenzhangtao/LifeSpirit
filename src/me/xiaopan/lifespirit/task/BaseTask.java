@@ -11,8 +11,8 @@ public abstract class BaseTask {
 	private CreateTime createTime;
 	private NextExecuteTime nextExecuteTime;
 	private TriggerTime triggerTime;
+	private Name name;
 	private Repeat repeat;
-	private String name;
 	
 	/**
 	 * 创建一个任务
@@ -22,6 +22,10 @@ public abstract class BaseTask {
 		setContext(context);
 		setEnable(true);
 		setCreateTime(new CreateTime());
+		setTriggerTime(new TriggerTime());
+		setNextExecuteTime(new NextExecuteTime());
+		setName(new Name(getContext()));
+		setRepeat(new Repeat(getContext()));
 	}
 	
 	/**
@@ -33,9 +37,7 @@ public abstract class BaseTask {
 	/**
 	 * 执行
 	 */
-	public void execute(){
-		
-	}
+	public abstract void execute();
 	
 	public Context getContext() {
 		return context;
@@ -85,11 +87,11 @@ public abstract class BaseTask {
 		this.repeat = repeat;
 	}
 
-	public String getName() {
+	public Name getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 }

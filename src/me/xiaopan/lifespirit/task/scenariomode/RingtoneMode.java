@@ -1,24 +1,18 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.BaseTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import me.xiaopan.lifespirit2.R;
+import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 import android.media.AudioManager;
 
-
-public class RingnoteMode extends BaseScenarioModeItemImpl {
-	/**
-	 * KEY - 表示当前任务项
-	 */
-	public static final String KEY = "KEY_RINGNOTE_MODE";
+/**
+ * 铃声模式
+ */
+public class RingtoneMode extends TaskOption {
 	private RingnoteModeEnum ringnoteMode;
 
-	public RingnoteMode(Context context, BaseTask task) {
-		super(context, task, context.getString(R.string.taskItem_ringnoteMode));
+	public RingtoneMode(Context context) {
+		super(context);
 		AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 		int ringnoteMode = audioManager.getRingerMode();
 		int vibrateMode = audioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);
@@ -46,20 +40,10 @@ public class RingnoteMode extends BaseScenarioModeItemImpl {
 				break;
 		}
 	}
-	
-	public RingnoteMode(Context context, BaseTask task, String ringnoteModeJSON){
-		this(context, task);
-		fromJSON(ringnoteModeJSON);
-	}
 
 	@Override
-	public String getHintText() {
-		return getContext().getResources().getStringArray(R.array.taskItem_ringnoteMode_itemNames)[getRingnoteMode().getIndex()];
-	}
-
-	@Override
-	public void execute() {
-		if(isChecked()){
+	public void onExecute() {
+		if(isEnable()){
 			AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 			if(getRingnoteMode() == RingnoteModeEnum.RINGDOWN_AND_VRIBATE){
 				audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
@@ -82,40 +66,8 @@ public class RingnoteMode extends BaseScenarioModeItemImpl {
 	}
 
 	@Override
-	public String toJSON() {
-		JSONObject silent = new JSONObject();
-		try {
-			silent.put(KEY_CHECKED, isChecked());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			silent.put(KEY_CONTENT, getRingnoteMode().name());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return silent.toString();
-	}
-
-	@Override
-	public void fromJSON(String json) {
-		if(json != null){
-			try {
-				JSONObject ringnoteMode = new JSONObject(json);
-				try {
-					setChecked(ringnoteMode.getBoolean(KEY_CHECKED));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setRingnoteMode(RingnoteModeEnum.valueOf(ringnoteMode.getString(KEY_CONTENT)));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
+	public String onGetIntro() {
+		return getContext().getResources().getStringArray(R.array.taskItem_ringnoteMode_itemNames)[getRingnoteMode().getIndex()];
 	}
 
 	public RingnoteModeEnum getRingnoteMode() {

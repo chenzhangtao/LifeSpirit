@@ -1,7 +1,7 @@
 package me.xiaopan.lifespirit.activity;
 
 import me.xiaopan.lifespirit.MyBaseActivity;
-import me.xiaopan.lifespirit.R;
+import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;

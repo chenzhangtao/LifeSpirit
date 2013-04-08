@@ -1,76 +1,38 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
-import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.BaseTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import me.xiaopan.lifespirit2.R;
+import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
-public class AirplaneMode extends  BaseScenarioModeItemImpl {
-	/**
-	 * KEY - 表示当前任务项
-	 */
-	public static final String KEY = "KEY_AIRPLANE_MODE";
+/**
+ * 飞行模式
+ */
+public class AirplaneMode extends  TaskOption {
+	private boolean open;
 	
-	public AirplaneMode(Context context, BaseTask task) {
-		super(context, task, context.getString(R.string.taskItem_airplaneMode));
+	public AirplaneMode(Context context) {
+		super(context);
 		setOpen(!SystemUtils.isAirplaneModeOpen(getContext()));
 	}
 	
-	public AirplaneMode(Context context, BaseTask task, String airplaneModeJSON){
-		this(context, task);
-		fromJSON(airplaneModeJSON);
-	}
-
 	@Override
-	public void execute() {
-		if (isChecked()) {
+	public void onExecute() {
+		if (isEnable()) {
 			SystemUtils.setAirplaneMode(getContext(), isOpen());
 		}
 	}
 
 	@Override
-	public String getHintText() {
-		return isOpen()? getString(R.string.base_open) : getString(R.string.base_close);
+	public String onGetIntro() {
+		return isOpen()?getContext().getResources().getString(R.string.base_open):getContext().getResources().getString(R.string.base_close);
 	}
 	
-	@Override
-	public String toJSON(){
-		JSONObject airplaneMode = new JSONObject();
-		try {
-			airplaneMode.put(KEY_CHECKED, isChecked());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			airplaneMode.put(KEY_OPEN, isOpen());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return airplaneMode.toString();
+	public boolean isOpen() {
+		return open;
 	}
-	
-	@Override
-	public void fromJSON(String airplaneModeJSON){
-		if(airplaneModeJSON != null){
-			try {
-				JSONObject airplaneMode = new JSONObject(airplaneModeJSON);
-				try {
-					setChecked(airplaneMode.getBoolean(KEY_CHECKED));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setOpen(airplaneMode.getBoolean(KEY_OPEN));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
+
+	public void setOpen(boolean open) {
+		this.open = open;
 	}
 }

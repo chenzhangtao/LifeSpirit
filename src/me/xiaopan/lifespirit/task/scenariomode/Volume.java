@@ -1,25 +1,14 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.lifespirit.R;
-import me.xiaopan.lifespirit.task.BaseTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import me.xiaopan.lifespirit2.R;
+import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 import android.media.AudioManager;
 
-
-public class Volume extends BaseScenarioModeItemImpl {
-	public static final String KEY = "KEY_VOLUME";
-	
-	public static final String KEY_MEDIA_VOLUME = "KEY_MEDIA_VOLUME";
-	public static final String KEY_ALARM_VOLUME = "KEY_ALARM_VOLUME";
-	public static final String KEY_RINGTONE_VOLUME = "KEY_RINGTONE_VOLUME";
-	public static final String KEY_NOTIFICATION_VOLME = "KEY_NOTIFICATION_VOLME";
-	public static final String KEY_VOICE_CALL_VOLME = "KEY_VOICE_CALL_VOLME";
-	public static final String KEY_SYSTEM_VOLUME = "KEY_SYSTEM_VOLUME";
-	
+/**
+ * 音量
+ */
+public class Volume extends TaskOption {
 	private int mediaVolume = -5;
 	private int alarmVolume = -5;
 	private int ringtoneVolume = -5;
@@ -27,8 +16,8 @@ public class Volume extends BaseScenarioModeItemImpl {
 	private int voiceCallVolme = -5;
 	private int systemVolume = -5;
 	
-	public Volume(Context context, BaseTask task) {
-		super(context, task, context.getString(R.string.taskItem_volume));
+	public Volume(Context context) {
+		super(context);
 		AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 		setMediaVolume(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 		setAlarmVolume(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
@@ -37,26 +26,10 @@ public class Volume extends BaseScenarioModeItemImpl {
 		setVoiceCallVolme(audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL));
 		setSystemVolume(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
 	}
-	
-	public Volume(Context context, BaseTask task, String volumeJSON){
-		this(context, task);
-		fromJSON(volumeJSON);
-	}
 
 	@Override
-	public String getHintText() {
-		String result = getString(R.string.taskItem_volume_media)+getMediaVolume()+", ";
-		result += getString(R.string.taskItem_volume_alarm)+getAlarmVolume()+", ";
-		result += getString(R.string.taskItem_volume_ringtone)+getRingtoneVolume()+", ";
-		result += getString(R.string.taskItem_volume_notification)+getNotificationVolme()+", ";
-		result += getString(R.string.taskItem_volume_voiceCall)+getVoiceCallVolme()+", ";
-		result += getString(R.string.taskItem_volume_system)+getSystemVolume();
-		return result;
-	}
-
-	@Override
-	public void execute() {
-		if(isChecked()){
+	public void onExecute() {
+		if(isEnable()){
 			AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 			audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, getMediaVolume(), 0);
 			audioManager.setStreamVolume(AudioManager.STREAM_ALARM, getAlarmVolume(), 0);
@@ -68,90 +41,14 @@ public class Volume extends BaseScenarioModeItemImpl {
 	}
 
 	@Override
-	public String toJSON() {
-		JSONObject volume = new JSONObject();
-		try {
-			volume.put(KEY_CHECKED, isChecked());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			volume.put(KEY_MEDIA_VOLUME, getMediaVolume());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			volume.put(KEY_ALARM_VOLUME, getAlarmVolume());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			volume.put(KEY_RINGTONE_VOLUME, getRingtoneVolume());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			volume.put(KEY_NOTIFICATION_VOLME, getNotificationVolme());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			volume.put(KEY_VOICE_CALL_VOLME, getVoiceCallVolme());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			volume.put(KEY_SYSTEM_VOLUME, getSystemVolume());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return volume.toString();
-	}
-
-	@Override
-	public void fromJSON(String volumeJSON) {
-		if(volumeJSON != null){
-			try {
-				JSONObject volume = new JSONObject(volumeJSON);
-				try {
-					setChecked(volume.getBoolean(KEY_CHECKED));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setMediaVolume(volume.getInt(KEY_MEDIA_VOLUME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setAlarmVolume(volume.getInt(KEY_ALARM_VOLUME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setRingtoneVolume(volume.getInt(KEY_RINGTONE_VOLUME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setNotificationVolme(volume.getInt(KEY_NOTIFICATION_VOLME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setVoiceCallVolme(volume.getInt(KEY_VOICE_CALL_VOLME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				try {
-					setSystemVolume(volume.getInt(KEY_SYSTEM_VOLUME));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
+	public String onGetIntro() {
+		String result = getContext().getResources().getString(R.string.taskItem_volume_media)+getMediaVolume()+", ";
+		result += getContext().getResources().getString(R.string.taskItem_volume_alarm)+getAlarmVolume()+", ";
+		result += getContext().getResources().getString(R.string.taskItem_volume_ringtone)+getRingtoneVolume()+", ";
+		result += getContext().getResources().getString(R.string.taskItem_volume_notification)+getNotificationVolme()+", ";
+		result += getContext().getResources().getString(R.string.taskItem_volume_voiceCall)+getVoiceCallVolme()+", ";
+		result += getContext().getResources().getString(R.string.taskItem_volume_system)+getSystemVolume();
+		return result;
 	}
 
 	public int getMediaVolume() {

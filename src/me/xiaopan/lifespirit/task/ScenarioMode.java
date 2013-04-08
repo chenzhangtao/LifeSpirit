@@ -3,11 +3,14 @@ package me.xiaopan.lifespirit.task;
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
 import me.xiaopan.lifespirit.task.scenariomode.MobileNetwork;
-import me.xiaopan.lifespirit.task.scenariomode.RingnoteMode;
-import me.xiaopan.lifespirit.task.scenariomode.ScreenBrightness;
-import me.xiaopan.lifespirit.task.scenariomode.ScreenDormant;
+import me.xiaopan.lifespirit.task.scenariomode.NotificationRingtone;
+import me.xiaopan.lifespirit.task.scenariomode.PhoneRingtone;
+import me.xiaopan.lifespirit.task.scenariomode.RingtoneMode;
+import me.xiaopan.lifespirit.task.scenariomode.Brightness;
+import me.xiaopan.lifespirit.task.scenariomode.Dormant;
+import me.xiaopan.lifespirit.task.scenariomode.SmsRingtone;
 import me.xiaopan.lifespirit.task.scenariomode.Volume;
-import me.xiaopan.lifespirit.task.scenariomode.Wifi;
+import me.xiaopan.lifespirit.task.scenariomode.WIFI;
 import android.content.Context;
 
 /**
@@ -19,11 +22,14 @@ public class ScenarioMode extends BaseTask{
 	private Bluetooth bluetooth;
 	private AirplaneMode airplaneMode;
 	private MobileNetwork mobileNetwork;
-	private ScreenBrightness screenBrightness;
-	private ScreenDormant screenDormant;
-	private Wifi wifi;
+	private Brightness brightness;
+	private Dormant dormant;
+	private WIFI wifi;
 	private Volume volume;
-	private RingnoteMode ringnoteMode;
+	private RingtoneMode ringtoneMode;
+	private PhoneRingtone phoneRingtone;
+	private SmsRingtone smsRingtone;
+	private NotificationRingtone notificationRingtone;
 	
 	/**
 	 * 创建一个任务
@@ -31,14 +37,17 @@ public class ScenarioMode extends BaseTask{
 	 */
 	public ScenarioMode(Context context){
 		super(context);
-		setBluetooth(new Bluetooth(context, this));
-		setAirplaneMode(new AirplaneMode(context, this));
-		setMobileNetwork(new MobileNetwork(context, this));
-		setScreenBrightness(new ScreenBrightness(context, this));
-		setScreenDormant(new ScreenDormant(context, this));
-		setWifi(new Wifi(context, this));
-		setVolume(new Volume(context, this));
-		setRingnoteMode(new RingnoteMode(context, this));
+		setBluetooth(new Bluetooth(context));
+		setAirplaneMode(new AirplaneMode(context));
+		setMobileNetwork(new MobileNetwork(context));
+		setBrightness(new Brightness(context));
+		setDormant(new Dormant(context));
+		setWifi(new WIFI(context));
+		setVolume(new Volume(context));
+		setRingtoneMode(new RingtoneMode(context));
+		setPhoneRingtone(new PhoneRingtone(getContext()));
+		setSmsRingtone(new SmsRingtone(getContext()));
+		setNotificationRingtone(new NotificationRingtone(getContext()));
 	}
 	
 	/**
@@ -56,15 +65,14 @@ public class ScenarioMode extends BaseTask{
 	@Override
 	public void execute(){
 		if(isEnable()){
-			getBluetooth().execute();
-			getMobileNetwork().execute();
-			getWifi().execute();
-			getScreenBrightness().execute();
-			getScreenDormant().execute();
-			getVolume().execute();
-			getRingnoteMode().execute();
-			getAirplaneMode().execute();
-			super.execute();
+			getBluetooth().onExecute();
+			getMobileNetwork().onExecute();
+			getWifi().onExecute();
+			getBrightness().onExecute();
+			getDormant().onExecute();
+			getVolume().onExecute();
+			getRingtoneMode().onExecute();
+			getAirplaneMode().onExecute();
 		}
 	}
 
@@ -92,27 +100,27 @@ public class ScenarioMode extends BaseTask{
 		this.mobileNetwork = mobileNetwork;
 	}
 
-	public ScreenBrightness getScreenBrightness() {
-		return screenBrightness;
+	public Brightness getBrightness() {
+		return brightness;
 	}
 
-	public void setScreenBrightness(ScreenBrightness screenBrightness) {
-		this.screenBrightness = screenBrightness;
+	public void setBrightness(Brightness brightness) {
+		this.brightness = brightness;
 	}
 
-	public ScreenDormant getScreenDormant() {
-		return screenDormant;
+	public Dormant getDormant() {
+		return dormant;
 	}
 
-	public void setScreenDormant(ScreenDormant screenDormant) {
-		this.screenDormant = screenDormant;
+	public void setDormant(Dormant dormant) {
+		this.dormant = dormant;
 	}
 
-	public Wifi getWifi() {
+	public WIFI getWifi() {
 		return wifi;
 	}
 
-	public void setWifi(Wifi wifi) {
+	public void setWifi(WIFI wifi) {
 		this.wifi = wifi;
 	}
 
@@ -124,11 +132,35 @@ public class ScenarioMode extends BaseTask{
 		this.volume = volume;
 	}
 
-	public RingnoteMode getRingnoteMode() {
-		return ringnoteMode;
+	public RingtoneMode getRingtoneMode() {
+		return ringtoneMode;
 	}
 
-	public void setRingnoteMode(RingnoteMode ringnoteMode) {
-		this.ringnoteMode = ringnoteMode;
+	public void setRingtoneMode(RingtoneMode ringtoneMode) {
+		this.ringtoneMode = ringtoneMode;
+	}
+
+	public PhoneRingtone getPhoneRingtone() {
+		return phoneRingtone;
+	}
+
+	public void setPhoneRingtone(PhoneRingtone phoneRingtone) {
+		this.phoneRingtone = phoneRingtone;
+	}
+
+	public SmsRingtone getSmsRingtone() {
+		return smsRingtone;
+	}
+
+	public void setSmsRingtone(SmsRingtone smsRingtone) {
+		this.smsRingtone = smsRingtone;
+	}
+
+	public NotificationRingtone getNotificationRingtone() {
+		return notificationRingtone;
+	}
+
+	public void setNotificationRingtone(NotificationRingtone notificationRingtone) {
+		this.notificationRingtone = notificationRingtone;
 	}
 }

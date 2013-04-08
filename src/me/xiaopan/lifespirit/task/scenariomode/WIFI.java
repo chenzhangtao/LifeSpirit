@@ -1,21 +1,21 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.androidlibrary.util.SystemUtils;
+import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit2.R;
 import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
 
 /**
- * 蓝牙
+ * WIFI
  */
-public class Bluetooth extends TaskOption {
+public class WIFI extends  TaskOption {
 	private boolean open;
 	
-	public Bluetooth(Context context) {
+	public WIFI(Context context) {
 		super(context);
 		try {
-			setOpen(!SystemUtils.isBluetoothOpen());
+			setOpen(!NetworkUtils.isWifiOpen(getContext()));
 		} catch (DeviceNotFoundException e) {
 			e.printStackTrace();
 			setSupport(false);
@@ -27,7 +27,7 @@ public class Bluetooth extends TaskOption {
 	public void onExecute() {
 		if(isEnable()){
 			try {
-				SystemUtils.setBluetooth(isOpen());
+				NetworkUtils.setWifi(getContext(), isOpen());
 			} catch (DeviceNotFoundException e) {
 				e.printStackTrace();
 				setSupport(false);
