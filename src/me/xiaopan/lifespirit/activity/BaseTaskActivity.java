@@ -9,6 +9,7 @@ import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.BaseTask;
+import me.xiaopan.lifespirit.task.repeat.Repeat;
 import me.xiaopan.lifespirit.util.ViewUtils;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
@@ -16,6 +17,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +30,7 @@ import android.widget.TimePicker.OnTimeChangedListener;
  * 情景模式界面
  */
 public class BaseTaskActivity extends MyBaseActivity {
+	private static final int REQUEST_CODE_REPEAT = 101;
 	private TimePicker timePicker;
 	protected BaseTask baseTask;
 	private Preference namePreference;
@@ -104,25 +107,9 @@ public class BaseTaskActivity extends MyBaseActivity {
 		repeatPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				AlertDialog.Builder builder = new AlertDialog.Builder(BaseTaskActivity.this);
-//				builder.setSingleChoiceItems(R.array.repeats, baseTask.getRepeat().getRepeatWay().getIndex(), new DialogInterface.OnClickListener() {
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						switch(which){
-//							case 0 : baseTask.getRepeat().setRepeatWay(RepeatWay.ONLY_ONE_TIME); break;
-//							case 1 : baseTask.getRepeat().setRepeatWay(RepeatWay.EVERYDAY); break;
-//							case 2 : baseTask.getRepeat().setRepeatWay(RepeatWay.STATUTORY_WORKING_DAYS); break;
-//							case 3 : baseTask.getRepeat().setRepeatWay(RepeatWay.LEGAL_AND_OFF_DAY); break;
-//							case 4 : baseTask.getRepeat().setRepeatWay(RepeatWay.CUSTOM); break;
-//						}
-//						repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro());
-//						tempAlertDialog.dismiss();
-//					}
-//				});
-//				builderAlertDialog(builder.create(), null).show();
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(RepeatActivity.PARAM_OPTIONAL_REPEAT, baseTask.getRepeat());
-				startActivity(RepeatActivity.class, bundle);
+				startActivityForResult(RepeatActivity.class, REQUEST_CODE_REPEAT, bundle);
 			}
 		});
 	}
@@ -136,6 +123,20 @@ public class BaseTaskActivity extends MyBaseActivity {
 		repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == RESULT_OK){
+			switch (requestCode) {
+				case REQUEST_CODE_REPEAT:
+					baseTask.setRepeat((Repeat) data.getSerializableExtra(RepeatActivity.RETURN_OPTIONAL_REPEAT));
+					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
+					break;
+				default: break;
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
 	/**
 	 * 设置自定义任务名称
 	 */

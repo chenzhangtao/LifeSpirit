@@ -22,14 +22,6 @@
 	    <item>打羽毛球</item>
 	</string-array>
 	
-	<string-array name="repeats">
-	    <item>只执行一次</item>
-	    <item>每天</item>
-	    <item>法定工作日</item>
-	    <item>法定休息日</item>
-	    <item>自定义</item>
-	</string-array>
-	
 	<string-array name="longPress_menus">
         <item>全部选中</item>
         <item>全部取消</item>
