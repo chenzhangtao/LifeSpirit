@@ -5,19 +5,19 @@
         <item name="android:layout_height">55dp</item>
         <item name="android:paddingLeft">30dp</item>
         <item name="android:paddingRight">25dp</item>
-        <item name="android:background">@drawable/selector_option_item_complete</item>
+        <item name="android:background">@drawable/selector_preference_complete</item>
         <item name="android:clickable">true</item>
     </style>
     
     <style name="option_item_header" parent="@style/option_item_complete">
-        <item name="android:background">@drawable/selector_option_item_header</item>
+        <item name="android:background">@drawable/selector_preference_header</item>
     </style>
     
     <style name="option_item_center" parent="@style/option_item_complete">
-        <item name="android:background">@drawable/selector_option_item_center</item>
+        <item name="android:background">@drawable/selector_preference_center</item>
     </style>
     
     <style name="option_item_footer" parent="@style/option_item_complete">
-        <item name="android:background">@drawable/selector_option_item_footer</item>
+        <item name="android:background">@drawable/selector_preference_footer</item>
     </style>
 </resources>

@@ -10,7 +10,7 @@ public abstract class MyBaseActivity extends BaseActivity {
 	@Override
 	protected void onPreInit(Bundle savedInstanceState) {
 		if(!isRemoveTitleBar() && getActionBar() != null){
-			getActionBar().setBackgroundDrawable(getDrawable(R.drawable.shape_comm_titlebar));
+			getActionBar().setBackgroundDrawable(getDrawable(R.drawable.shape_titlebar));
 			if(isEnableBackHome()){
 				getActionBar().setDisplayHomeAsUpEnabled(true);
 			}
