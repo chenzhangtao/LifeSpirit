@@ -4,17 +4,17 @@ import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
 /**
- * 每隔多少年重复一次
+ * 法定休息日执行
  */
-public class EveryOtherYearRepeat extends EveryOtherRepeat{
+public class LegalAndOffDayRepeat extends Repeat{
 	private static final long serialVersionUID = 1L;
 	
-	public EveryOtherYearRepeat(){
-		super(RepeatWay.EVERY_OTHER_YEAR);
+	public LegalAndOffDayRepeat(){
+		super(RepeatWay.LEGAL_AND_OFF_DAY);
 	}
 
 	@Override
 	public String onGetIntro(Context context) {
-		return context.getString(R.string.repeat_everyOtherYear, getSpace());
+		return context.getString(R.string.repeat_legalAndOffDay);
 	}
 }

@@ -123,15 +123,11 @@
 	
 	<string name="repeat_title">重复</string>
 	<string name="repeat_onlyOneTime">只在%s执行一次</string>
-	<string name="repeat_everyDay">每天</string>
+	<string name="repeat_statutoryWorkingDays">法定工作日（智能跳过节假日）</string>
+	<string name="repeat_legalAndOffDay">法定休息日（周末和法定节假日）</string>
 	<string name="repeat_everyOtherMinute">每隔%s分钟执行一次</string>
 	<string name="repeat_everyOtherHour">每隔%s小时执行一次</string>
 	<string name="repeat_everyOtherDay">每隔%s天执行一次</string>
-	<string name="repeat_everyOtherWeek">每隔%s周执行一次</string>
-	<string name="repeat_everyOtherMonth">每隔%s个月执行一次</string>
-	<string name="repeat_everyOtherYear">每隔%s年执行一次</string>
-	<string name="repeat_statutoryWorkingDays">法定工作日（智能跳过节假日）</string>
-	<string name="repeat_legalAndOffDay">法定休息日（周末和法定节假日）</string>
 	<string name="repeat_spaceInputHint">请输入间隔时间</string>
 	<string name="repeat_spaceInputErrorHint">不能为空并且不能为0哦！</string>
 </resources>

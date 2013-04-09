@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -138,6 +139,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		final EditText nameEdit = new EditText(getBaseContext());
 		nameEdit.setHint(R.string.taskEditCustomName_edit_name_hint);
 		nameEdit.setText(baseTask.getName().getName());
+		nameEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 		LinearLayout linearLayout = me.xiaopan.androidlibrary.util.ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		linearLayout.setPadding(30, 50, 30, 50);
 		linearLayout.addView(nameEdit, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));

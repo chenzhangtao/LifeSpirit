@@ -1,7 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import android.content.Context;
 import me.xiaopan.lifespirit.task.TaskOption;
+import android.content.Context;
 
 /**
  * 情景模式选项

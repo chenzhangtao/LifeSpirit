@@ -61,6 +61,14 @@ public abstract class Repeat implements Serializable{
 		 */
 		ONLY_ONE_TIME,
 		/**
+		 * 法定工作日
+		 */
+		STATUTORY_WORKING_DAYS,
+		/**
+		 * 法定休息日
+		 */
+		LEGAL_AND_OFF_DAY,
+		/**
 		 * 每隔多少分钟执行一次
 		 */
 		EVERY_OTHER_MINUTE,
@@ -71,26 +79,6 @@ public abstract class Repeat implements Serializable{
 		/**
 		 * 每隔多少天执行一次
 		 */
-		EVERY_OTHER_DAY,
-		/**
-		 * 每隔多少周执行一次
-		 */
-		EVERY_OTHER_WEEK,
-		/**
-		 * 每隔多少月执行一次
-		 */
-		EVERY_OTHER_MONTH,
-		/**
-		 * 每隔多少年执行一次
-		 */
-		EVERY_OTHER_YEAR,
-		/**
-		 * 法定工作日
-		 */
-		STATUTORY_WORKING_DAYS,
-		/**
-		 * 法定休息日
-		 */
-		LEGAL_AND_OFF_DAY,
+		EVERY_OTHER_DAY;
 	}
 }
