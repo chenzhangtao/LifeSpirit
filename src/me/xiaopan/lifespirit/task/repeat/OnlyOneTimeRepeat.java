@@ -15,6 +15,6 @@ public class OnlyOneTimeRepeat extends Repeat{
 
 	@Override
 	public String onGetIntro(Context context) {
-		return context.getString(R.string.repeat_onlyOneTime, (getYear()+context.getString(R.string.base_year)+(getMonth()+1)+context.getString(R.string.base_month)+getDayOfMonth()+context.getString(R.string.base_day)));
+		return context.getString(R.string.repeat_onlyOneTime, (getTriggerTime().getYear()+context.getString(R.string.base_year)+(getTriggerTime().getMonth()+1)+context.getString(R.string.base_month)+getTriggerTime().getDayOfMonth()+context.getString(R.string.base_day)));
 	}
 }

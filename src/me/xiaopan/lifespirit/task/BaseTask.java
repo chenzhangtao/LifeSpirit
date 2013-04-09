@@ -11,8 +11,6 @@ import android.content.Context;
 public abstract class BaseTask {
 	private boolean enable;
 	private CreateTime createTime;
-	private NextExecuteTime nextExecuteTime;
-	private TriggerTime triggerTime;
 	private Name name;
 	private Repeat repeat;
 	
@@ -22,8 +20,6 @@ public abstract class BaseTask {
 	public BaseTask(){
 		setEnable(true);
 		setCreateTime(new CreateTime());
-		setTriggerTime(new TriggerTime());
-		setNextExecuteTime(new NextExecuteTime());
 		setName(new Name());
 		setRepeat(new OnlyOneTimeRepeat());
 	}
@@ -55,22 +51,6 @@ public abstract class BaseTask {
 
 	public void setCreateTime(CreateTime createTime) {
 		this.createTime = createTime;
-	}
-
-	public NextExecuteTime getNextExecuteTime() {
-		return nextExecuteTime;
-	}
-
-	public void setNextExecuteTime(NextExecuteTime nextExecuteTime) {
-		this.nextExecuteTime = nextExecuteTime;
-	}
-
-	public TriggerTime getTriggerTime() {
-		return triggerTime;
-	}
-
-	public void setTriggerTime(TriggerTime triggerTime) {
-		this.triggerTime = triggerTime;
 	}
 
 	public Repeat getRepeat() {

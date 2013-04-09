@@ -1,8 +1,5 @@
 package me.xiaopan.lifespirit.activity;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.androidlibrary.util.Colors;
@@ -47,18 +44,12 @@ public class BaseTaskActivity extends MyBaseActivity {
 	@Override
 	protected void onInitListener(Bundle savedInstanceState) {
 		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
-			Calendar calendar;
-			
 			@Override
 			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
 				if(baseTask != null){
-					if(calendar == null){
-						calendar = new GregorianCalendar();
-					}
-					calendar.setTimeInMillis(System.currentTimeMillis());
-					calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-					calendar.set(Calendar.MINUTE, minute);
-					baseTask.getTriggerTime().setTimeInMillis(calendar.getTimeInMillis());
+					baseTask.getRepeat().getTriggerTime().setHourOfDay(hourOfDay);
+					baseTask.getRepeat().getTriggerTime().setMinute(minute);
+					baseTask.getRepeat().getTriggerTime().update();
 				}
 			}
 		});
@@ -130,7 +121,7 @@ public class BaseTaskActivity extends MyBaseActivity {
 				case REQUEST_CODE_REPEAT:
 					baseTask.setRepeat((Repeat) data.getSerializableExtra(RepeatActivity.RETURN_OPTIONAL_REPEAT));
 					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
-					break;
+					break; 
 				default: break;
 			}
 		}
