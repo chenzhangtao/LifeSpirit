@@ -1,19 +1,18 @@
 package me.xiaopan.lifespirit.activity;
 
-import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.repeat.Repeat;
+import me.xiaopan.lifespirit.util.TemporaryRegister;
+import me.xiaopan.lifespirit.util.Utils;
 import me.xiaopan.lifespirit.util.ViewUtils;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +25,7 @@ import android.widget.TimePicker.OnTimeChangedListener;
 /**
  * 情景模式界面
  */
-public class BaseTaskActivity extends MyBaseActivity {
+public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegister{
 	private static final int REQUEST_CODE_REPEAT = 101;
 	private TimePicker timePicker;
 	protected BaseTask baseTask;
@@ -155,47 +154,22 @@ public class BaseTaskActivity extends MyBaseActivity {
 		//设置确定按钮
 		builder.setPositiveButton(R.string.base_confirm, new DialogInterface.OnClickListener() { public void onClick(DialogInterface dialog, int which) {
 			String name = nameEdit.getEditableText().toString();
-			if("".equals(name)){
-				toastL(R.string.hint_taskNameNull);
-				AnimationUtils.shake(nameEdit);
-				DialogUtils.setDialogClickClose(tempAlertDialog, false);
-			}else{
+			if(!"".equals(name)){
 				baseTask.getName().setName(name);
 				namePreference.setSubtitle(baseTask.getName().getName());
 				DialogUtils.setDialogClickClose(tempAlertDialog, true);
+			}else{
+				toastL(R.string.hint_taskNameNull);
+				AnimationUtils.shake(nameEdit);
+				DialogUtils.setDialogClickClose(tempAlertDialog, false);
 			}
 		}});
 
-		builderAlertDialog(builder.create(), nameEdit).show();
+		Utils.builderAlertDialog(getBaseContext(), builder.create(), this, nameEdit).show();
 	}
 	
-	/**
-	 * 绑定对话框，给对话框添加显示、取消、销毁事件
-	 * @param newAlertDialog
-	 * @return
-	 */
-	private AlertDialog builderAlertDialog(final AlertDialog newAlertDialog, final EditText editText){
-		newAlertDialog.setOnShowListener(new OnShowListener() {
-			@Override
-			public void onShow(DialogInterface dialog) {
-				tempAlertDialog = newAlertDialog;
-				if(editText != null){
-					AndroidUtils.openSoftKeyboard(getBaseContext(), editText);
-				}
-			}
-		});
-		newAlertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				tempAlertDialog = null;
-			}
-		});
-		newAlertDialog.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				tempAlertDialog = null;
-			}
-		});
-		return newAlertDialog;
+	@Override
+	public void onRegister(AlertDialog alertDialog) {
+		tempAlertDialog = alertDialog;
 	}
 }

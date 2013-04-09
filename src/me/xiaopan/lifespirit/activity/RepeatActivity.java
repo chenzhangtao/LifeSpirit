@@ -2,27 +2,38 @@ package me.xiaopan.lifespirit.activity;
 
 import java.io.Serializable;
 
+import me.xiaopan.androidlibrary.util.AndroidUtils;
+import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.androidlibrary.util.Colors;
+import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherDayRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherHourRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherMinuteRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherMonthRepeat;
+import me.xiaopan.lifespirit.task.repeat.EveryOtherRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherWeekRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherYearRepeat;
 import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
 import me.xiaopan.lifespirit.task.repeat.Repeat;
 import me.xiaopan.lifespirit.task.repeat.Repeat.RepeatWay;
+import me.xiaopan.lifespirit.util.TemporaryRegister;
+import me.xiaopan.lifespirit.util.Utils;
 import me.xiaopan.lifespirit.util.ViewUtils;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.DatePicker.OnDateChangedListener;
 
-public class RepeatActivity extends MyBaseActivity implements OnDateChangedListener{
+public class RepeatActivity extends MyBaseActivity implements OnDateChangedListener, TemporaryRegister{
 	public static final String PARAM_OPTIONAL_REPEAT = "PARAM_OPTIONAL_REPEAT";
 	public static final String RETURN_OPTIONAL_REPEAT = "RETURN_OPTIONAL_REPEAT";
 	private DatePicker datePicker;
@@ -40,6 +51,7 @@ public class RepeatActivity extends MyBaseActivity implements OnDateChangedListe
 	private EveryOtherWeekRepeat everyOtherWeekRepeat;
 	private EveryOtherMonthRepeat everyOtherMonthRepeat;
 	private EveryOtherYearRepeat everyOtherYearRepeat;
+	private AlertDialog tempAlertDialog;
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
@@ -70,10 +82,24 @@ public class RepeatActivity extends MyBaseActivity implements OnDateChangedListe
 			}
 		});
 		
+		everyOtherMinutePreference.setOnNextButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSpace(everyOtherMinutePreference, everyOtherMinuteRepeat);
+			}
+		});
+		
 		everyOtherHourPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				returnResult(everyOtherHourRepeat);
+			}
+		});
+		
+		everyOtherHourPreference.setOnNextButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSpace(everyOtherHourPreference, everyOtherHourRepeat);
 			}
 		});
 		
@@ -84,10 +110,24 @@ public class RepeatActivity extends MyBaseActivity implements OnDateChangedListe
 			}
 		});
 		
+		everyOtherDayPreference.setOnNextButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSpace(everyOtherDayPreference, everyOtherDayRepeat);
+			}
+		});
+		
 		everyOtherWeekPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				returnResult(everyOtherWeekRepeat);
+			}
+		});
+		
+		everyOtherWeekPreference.setOnNextButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSpace(everyOtherWeekPreference, everyOtherWeekRepeat);
 			}
 		});
 		
@@ -98,10 +138,24 @@ public class RepeatActivity extends MyBaseActivity implements OnDateChangedListe
 			}
 		});
 		
+		everyOtherMonthPreference.setOnNextButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSpace(everyOtherMonthPreference, everyOtherMonthRepeat);
+			}
+		});
+		
 		everyOtherYearPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				returnResult(everyOtherYearRepeat);
+			}
+		});
+		
+		everyOtherYearPreference.setOnNextButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setSpace(everyOtherYearPreference, everyOtherYearRepeat);
 			}
 		});
 	}
@@ -172,5 +226,53 @@ public class RepeatActivity extends MyBaseActivity implements OnDateChangedListe
 		getIntent().putExtras(bundle);
 		setResult(RESULT_OK, getIntent());
 		finishActivity();
+	}
+	
+	/**
+	 * 设置间隔
+	 */
+	private void setSpace(final Preference preference, final EveryOtherRepeat everyOtherRepeat){
+		//创建对话框并设置标题
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		//设置要显示的视图并初始化编辑框的默认值
+		final EditText spaceEdit = new EditText(getBaseContext());
+		spaceEdit.setHint(R.string.repeat_spaceInputHint);
+		spaceEdit.setText(""+everyOtherRepeat.getSpace());
+		spaceEdit.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+		LinearLayout linearLayout = me.xiaopan.androidlibrary.util.ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		linearLayout.setPadding(30, 50, 30, 50);
+		linearLayout.addView(spaceEdit, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+		builder.setView(linearLayout);
+
+		//设置取消按钮
+		builder.setNegativeButton(R.string.base_cancel, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				DialogUtils.setDialogClickClose(tempAlertDialog, true);
+			}
+		});
+
+		//设置确定按钮
+		builder.setPositiveButton(R.string.base_confirm, new DialogInterface.OnClickListener() { public void onClick(DialogInterface dialog, int which) {
+			String name = spaceEdit.getEditableText().toString().trim();
+			if(!"".equals(name) && !"0".equals(name)){
+				everyOtherRepeat.setSpace(Integer.valueOf(name));
+				preference.setTitle(everyOtherRepeat.onGetIntro(getBaseContext()));
+				DialogUtils.setDialogClickClose(tempAlertDialog, true);
+			}else{
+				toastL(R.string.repeat_spaceInputErrorHint);
+				AnimationUtils.shake(spaceEdit);
+				AndroidUtils.openSoftKeyboard(getBaseContext(), spaceEdit);
+				DialogUtils.setDialogClickClose(tempAlertDialog, false);
+			}
+		}});
+
+		Utils.builderAlertDialog(getBaseContext(), builder.create(), this, spaceEdit).show();
+	}
+
+	@Override
+	public void onRegister(AlertDialog alertDialog) {
+		tempAlertDialog = alertDialog;
 	}
 }

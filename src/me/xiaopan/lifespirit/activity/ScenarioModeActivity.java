@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.task.TaskOption;
-import me.xiaopan.lifespirit.task.scenariomode.ScenarioOption;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
@@ -92,9 +91,6 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 				preference = entry.getKey();
 				taskOption = entry.getValue();
 				preference.setSubtitle(taskOption.onGetIntro(getBaseContext()));
-				if(taskOption instanceof ScenarioOption){
-					preference.setEnablePreference(((ScenarioOption) taskOption).isEnable());
-				}
 			}
 		}
 	}

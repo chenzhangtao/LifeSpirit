@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.widget;
 
+import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -10,21 +11,24 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Preference extends LinearLayout {
+public class Preference extends LinearLayout implements View.OnClickListener{
+	private static final int TYPE_NONE = 1;
+	private static final int TYPE_NEXT = 2;
+	private static final int TYPE_ENABLE = 3;
 	private TextView titleText;
 	private TextView space;
 	private TextView subtitleText;
-	private CheckBox enableCheckBox;
-	private ImageView arrowImage;
-	private boolean enablePreference;
+	private OnClickListener onNextButtonClickListener;
 	
 	public Preference(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setGravity(Gravity.CENTER_VERTICAL);
+		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.Preference);
 		
 		LinearLayout linearLayout = new LinearLayout(getContext());
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -36,6 +40,7 @@ public class Preference extends LinearLayout {
 		titleText.setTextColor(getContext().getResources().getColor(R.color.base_black));
 		titleText.setSingleLine();
 		titleText.setEllipsize(TruncateAt.MARQUEE);
+		titleText.setText(typedArray.getString(R.styleable.Preference_title));
 		linearLayout.addView(titleText);
 		
 		//间隔
@@ -48,26 +53,32 @@ public class Preference extends LinearLayout {
 		subtitleText.setTextColor(getContext().getResources().getColor(R.color.base_gray_dark));
 		subtitleText.setSingleLine();
 		subtitleText.setEllipsize(TruncateAt.END);
+		subtitleText.setText(typedArray.getString(R.styleable.Preference_intro));
+		referesh();
 		linearLayout.addView(subtitleText);
 		
 		addView(linearLayout, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.FILL_PARENT, 1));
 		
-		//激活复选框
-		enableCheckBox = new CheckBox(getContext());
-		addView(enableCheckBox);
+		switch(typedArray.getInt(R.styleable.Preference_type, TYPE_NONE)){
+			case TYPE_ENABLE : 
+				addView(new CheckBox(getContext()));
+				break;
+			case TYPE_NEXT : 
+				ImageButton nextImageButton = new ImageButton(getContext());
+				nextImageButton.setBackgroundColor(Colors.TRANSPARENT);
+				nextImageButton.setImageResource(R.drawable.selector_btn_preference_next);
+				nextImageButton.setOnClickListener(this);
+				addView(nextImageButton, new LinearLayout.LayoutParams(50, LinearLayout.LayoutParams.WRAP_CONTENT));
+				break;
+			default : 
+				//箭头
+				ImageView arrowImage = new ImageView(getContext());
+				arrowImage.setImageResource(R.drawable.ic_arrow_right);
+				addView(arrowImage);
+				break;
+		}
 		
-		//箭头
-		arrowImage = new ImageView(getContext());
-		arrowImage.setImageResource(R.drawable.ic_arrow_right);
-		addView(arrowImage);
-		
-		//初始化数据
-		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.Preference);
-		setTitle(typedArray.getString(R.styleable.Preference_title));
-		setSubtitle(typedArray.getString(R.styleable.Preference_intro));
 		typedArray.recycle();
-		
-		invalidate();
 	}
 	
 	public void setTitle(String title){
@@ -76,13 +87,10 @@ public class Preference extends LinearLayout {
 	
 	public void setSubtitle(String intro){
 		subtitleText.setText(intro);
-		invalidate();
+		referesh();
 	}
 	
-	@Override
-	public void invalidate() {
-		super.invalidate();
-		
+	private void referesh(){
 		//刷新副标题
 		if(StringUtils.isNotNullAndEmpty((String) subtitleText.getText())){
 			subtitleText.setVisibility(View.VISIBLE);
@@ -91,23 +99,21 @@ public class Preference extends LinearLayout {
 			subtitleText.setVisibility(View.GONE);
 			space.setVisibility(View.GONE);
 		}
-		
-		//刷新复选框
-		if(isEnablePreference()){
-			enableCheckBox.setVisibility(View.VISIBLE);
-			arrowImage.setVisibility(View.GONE);
-		}else{
-			enableCheckBox.setVisibility(View.GONE);
-			arrowImage.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(getOnNextButtonClickListener() != null){
+			getOnNextButtonClickListener().onClick(v);
 		}
 	}
 
-	public boolean isEnablePreference() {
-		return enablePreference;
+	public OnClickListener getOnNextButtonClickListener() {
+		return onNextButtonClickListener;
 	}
 
-	public void setEnablePreference(boolean enablePreference) {
-		this.enablePreference = enablePreference;
-		invalidate();
+	public void setOnNextButtonClickListener(
+			OnClickListener onNextButtonClickListener) {
+		this.onNextButtonClickListener = onNextButtonClickListener;
 	}
 }

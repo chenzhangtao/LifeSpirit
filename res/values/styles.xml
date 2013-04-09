@@ -4,7 +4,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">55dp</item>
         <item name="android:paddingLeft">30dp</item>
-        <item name="android:paddingRight">25dp</item>
+        <item name="android:paddingRight">30dp</item>
         <item name="android:background">@drawable/selector_preference_complete</item>
         <item name="android:clickable">true</item>
     </style>
