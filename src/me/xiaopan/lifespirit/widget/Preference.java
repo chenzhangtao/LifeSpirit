@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,14 +53,13 @@ public class Preference extends LinearLayout implements View.OnClickListener{
 		subtitleText.setSingleLine();
 		subtitleText.setEllipsize(TruncateAt.END);
 		subtitleText.setText(typedArray.getString(R.styleable.Preference_intro));
-		referesh();
 		linearLayout.addView(subtitleText);
 		
 		addView(linearLayout, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.FILL_PARENT, 1));
 		
 		switch(typedArray.getInt(R.styleable.Preference_type, TYPE_NONE)){
 			case TYPE_ENABLE : 
-				addView(new CheckBox(getContext()));
+				addView(new SlidingButton2(getContext()));
 				break;
 			case TYPE_NEXT : 
 				ImageButton nextImageButton = new ImageButton(getContext());

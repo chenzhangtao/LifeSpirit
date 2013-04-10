@@ -38,9 +38,9 @@ public class SlidingButton extends View implements OnTouchListener {
     }
 
     private void init() {
-//        mOnBg = BitmapFactory.decodeResource(getResources(), R.drawable.slip_bg_on);
-//        mOffBg = BitmapFactory.decodeResource(getResources(), R.drawable.slip_bg_off);
-//        mSlipBg = BitmapFactory.decodeResource(getResources(), R.drawable.slip_btn);
+//        mOnBg = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_on_disable);
+//        mOffBg = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_off_disable);
+//        mSlipBg = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_frame);
         mBtnOn = new Rect(0, 0, mSlipBg.getWidth(), mSlipBg.getHeight());
         mBtnOff = new Rect(mOffBg.getWidth() - mSlipBg.getWidth(), 0, mOffBg.getWidth(), mSlipBg.getHeight());
         setOnTouchListener(this);
@@ -124,4 +124,41 @@ public class SlidingButton extends View implements OnTouchListener {
     public interface OnChangedListener {
         abstract void OnChanged(boolean CheckState);
     }
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		//计算宽度
+		int realWidthSize = 0;
+		int widthMode = MeasureSpec.getMode(widthMeasureSpec);//解析宽度参考类型
+		int widthSize = MeasureSpec.getSize(widthMeasureSpec);//解析宽度尺寸
+		switch (widthMode) {
+			case MeasureSpec.AT_MOST://如果widthSize是当前视图可使用的最大宽度
+				realWidthSize = mSlipBg.getWidth();
+				break;
+			case MeasureSpec.EXACTLY://如果widthSize是当前视图可使用的绝对宽度
+				realWidthSize = widthSize;
+				break;
+			case MeasureSpec.UNSPECIFIED://如果widthSize对当前视图宽度的计算没有任何参考意义
+				realWidthSize = mSlipBg.getWidth();
+				break;
+		}
+		
+		//计算高度
+		int realHeightSize = 0;
+		int heightMode = MeasureSpec.getMode(heightMeasureSpec);//解析参考类型
+		int heightSize = MeasureSpec.getSize(heightMeasureSpec);//解析高度尺寸
+		switch (heightMode) {
+			case MeasureSpec.AT_MOST://如果heightSize是当前视图可使用的最大高度
+				realHeightSize = mSlipBg.getHeight();
+				break;
+			case MeasureSpec.EXACTLY://如果heightSize是当前视图可使用的绝对高度
+				realHeightSize = heightSize;
+				break;
+			case MeasureSpec.UNSPECIFIED://如果heightSize对当前视图高度的计算没有任何参考意义
+				realHeightSize = mSlipBg.getHeight();
+				break;
+		}
+		
+		setMeasuredDimension(realWidthSize, realHeightSize);
+	}
 }

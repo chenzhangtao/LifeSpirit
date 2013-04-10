@@ -50,6 +50,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 					baseTask.getRepeat().getTriggerTime().setHourOfDay(hourOfDay);
 					baseTask.getRepeat().getTriggerTime().setMinute(minute);
 					baseTask.getRepeat().getTriggerTime().update();
+					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
 				}
 			}
 		});
