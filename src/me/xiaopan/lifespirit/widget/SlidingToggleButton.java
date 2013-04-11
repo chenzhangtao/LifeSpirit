@@ -17,8 +17,11 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Scroller;
 
+/**
+ * 滑动开关按钮
+ */
 @SuppressLint("DrawAllocation")
-public class SlidingButton2 extends View implements OnGestureListener, OnDoubleTapListener{
+public class SlidingToggleButton extends View implements OnGestureListener, OnDoubleTapListener{
 	private static final int DURATION = 300;
 	private static final int MIN_ROLLING_DISTANCE = 30;//滚动最小生效距离
 	private GestureDetector gestureDetector;//手势识别器
@@ -39,7 +42,7 @@ public class SlidingButton2 extends View implements OnGestureListener, OnDoubleT
 	private boolean needHandle;//当在一组时件中发生了滚动操作时，在弹起或者取消的时候就需要根据滚动的距离来切换状态或者回滚
 	private boolean down;
 
-	public SlidingButton2(Context context) {
+	public SlidingToggleButton(Context context) {
 		super(context);
 		gestureDetector = new GestureDetector(getContext(), this);
 		gestureDetector.setOnDoubleTapListener(this);

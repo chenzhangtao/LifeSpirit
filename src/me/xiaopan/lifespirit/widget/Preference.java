@@ -59,7 +59,7 @@ public class Preference extends LinearLayout implements View.OnClickListener{
 		
 		switch(typedArray.getInt(R.styleable.Preference_type, TYPE_NONE)){
 			case TYPE_ENABLE : 
-				addView(new SlidingButton2(getContext()));
+				addView(new SlidingToggleButton(getContext()));
 				break;
 			case TYPE_NEXT : 
 				ImageButton nextImageButton = new ImageButton(getContext());
