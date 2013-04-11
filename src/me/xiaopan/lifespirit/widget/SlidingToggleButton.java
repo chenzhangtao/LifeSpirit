@@ -26,11 +26,13 @@ public class SlidingToggleButton extends View implements OnGestureListener, OnDo
 	private static final int MIN_ROLLING_DISTANCE = 30;//滚动最小生效距离
 	private GestureDetector gestureDetector;//手势识别器
 	private Scroller scroller;//滚动器
-	private Bitmap backgroundBitmap;//背景图片
+	private Bitmap backgroundNormalBitmap;//正常状态时的背景图片
+	private Bitmap backgroundDisableBitmap;//禁用状态时的背景图片
 	private Bitmap backgroundMaskBitmap;//北京遮罩图片
 	private Bitmap frameBitmap;//框架图片
-	private Bitmap sliderNormalBitmap;//滑块图片
-	private Bitmap sliderPressedBitmap;//滑块按下时的图片图片
+	private Bitmap sliderNormalBitmap;//正常状态时的滑块图片
+	private Bitmap sliderPressedBitmap;//按下状态时的滑块图片
+	private Bitmap sliderDisableBitmap;//禁用状态时的滑块图片
 	private Bitmap sliderMaskBitmap;//滑块遮罩图片
 	private Paint paint;//颜料
 	private PorterDuffXfermode porterDuffXfermode;//遮罩类型
@@ -41,16 +43,20 @@ public class SlidingToggleButton extends View implements OnGestureListener, OnDo
 	private int scrollDistanceCount;//滚动距离计数器
 	private boolean needHandle;//当在一组时件中发生了滚动操作时，在弹起或者取消的时候就需要根据滚动的距离来切换状态或者回滚
 	private boolean down;
+	private boolean isEnabled;
 
 	public SlidingToggleButton(Context context) {
 		super(context);
+//		setEnabled(false);
 		gestureDetector = new GestureDetector(getContext(), this);
 		gestureDetector.setOnDoubleTapListener(this);
-		backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_background);
+		backgroundNormalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_background_normal);
+		backgroundDisableBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_background_disable);
 		backgroundMaskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_mask_background);
 		frameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_frame);
 		sliderNormalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_slilder_normal);
 		sliderPressedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_slilder_pressed);
+		sliderDisableBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_slilder_disable);
 		sliderMaskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_mask_slider);
 		paint = new Paint();
 		paint.setFilterBitmap(false);
@@ -60,11 +66,13 @@ public class SlidingToggleButton extends View implements OnGestureListener, OnDo
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
+		isEnabled = isEnabled();
+		
 		//创建一个新的全透明图层，大小同当前视图的大小一样
         canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.FULL_COLOR_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG);
         
         //绘制背景层
-        canvas.drawBitmap(backgroundBitmap, left, 0, paint);
+        canvas.drawBitmap(isEnabled?backgroundNormalBitmap:backgroundDisableBitmap, left, 0, paint);
         paint.setXfermode(porterDuffXfermode);
         canvas.drawBitmap(backgroundMaskBitmap, 0, 0, paint);
         paint.setXfermode(null);
@@ -72,8 +80,12 @@ public class SlidingToggleButton extends View implements OnGestureListener, OnDo
         //绘制框架层
         canvas.drawBitmap(frameBitmap, 0, 0, paint);
 
-        //绘制按钮层
-        canvas.drawBitmap(down?sliderPressedBitmap:sliderNormalBitmap, left, 0, paint);
+        //绘制滑块层
+        if(isEnabled){
+        	canvas.drawBitmap(down?sliderPressedBitmap:sliderNormalBitmap, left, 0, paint);
+        }else{
+        	canvas.drawBitmap(sliderDisableBitmap, left, 0, paint);
+        }
         paint.setXfermode(porterDuffXfermode);
         canvas.drawBitmap(sliderMaskBitmap, 0, 0, paint);
         paint.setXfermode(null);
@@ -120,7 +132,7 @@ public class SlidingToggleButton extends View implements OnGestureListener, OnDo
 		
 		setMeasuredDimension(realWidthSize, realHeightSize);
 		
-		onLeft = -1 * (backgroundBitmap.getWidth() - getWidth());
+		onLeft = -1 * (backgroundNormalBitmap.getWidth() - getWidth());
 	}
 	
 	@Override
@@ -133,22 +145,24 @@ public class SlidingToggleButton extends View implements OnGestureListener, OnDo
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		gestureDetector.onTouchEvent(event);
-		//如果允许处理,并且当前事件使弹起或者取消
-		if(event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP){
-			if(down){
-				down = false;
-				invalidate();
-			}
-			
-			if(needHandle){
-				//如果本次滚动的距离超过的最小生效距离，就切换状态，否则就回滚
-				if(Math.abs(scrollDistanceCount) >= MIN_ROLLING_DISTANCE){
-					setState(scrollDistanceCount > 0, left);
-				}else{
-					setState(isOn(), left);
+		if(isEnabled()){
+			gestureDetector.onTouchEvent(event);
+			//如果允许处理,并且当前事件使弹起或者取消
+			if(event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP){
+				if(down){
+					down = false;
+					invalidate();
 				}
-				needHandle = false;
+				
+				if(needHandle){
+					//如果本次滚动的距离超过的最小生效距离，就切换状态，否则就回滚
+					if(Math.abs(scrollDistanceCount) >= MIN_ROLLING_DISTANCE){
+						setState(scrollDistanceCount > 0, left);
+					}else{
+						setState(isOn(), left);
+					}
+					needHandle = false;
+				}
 			}
 		}
 		return true;
