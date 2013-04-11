@@ -21,30 +21,37 @@ import android.widget.Scroller;
 public class SlidingButton2 extends View implements OnGestureListener, OnDoubleTapListener{
 	private static final int DURATION = 300;
 	private static final int MIN_ROLLING_DISTANCE = 30;//滚动最小生效距离
-	private GestureDetector gestureDetector;
-	private Bitmap maskBitmap;
-	private Bitmap frameBitmap;
-	private Bitmap backgroundBitmap;
-	private Bitmap sliderBitmap;
-	private Paint paint;
-	private boolean on;
-	private int left;
-	private int onLeft;
-	private int offLeft;
-	private Scroller scroller;
-	private int scrollDistanceCount;
+	private GestureDetector gestureDetector;//手势识别器
+	private Scroller scroller;//滚动器
+	private Bitmap backgroundBitmap;//背景图片
+	private Bitmap backgroundMaskBitmap;//北京遮罩图片
+	private Bitmap frameBitmap;//框架图片
+	private Bitmap sliderNormalBitmap;//滑块图片
+	private Bitmap sliderPressedBitmap;//滑块按下时的图片图片
+	private Bitmap sliderMaskBitmap;//滑块遮罩图片
+	private Paint paint;//颜料
+	private PorterDuffXfermode porterDuffXfermode;//遮罩类型
+	private boolean on;//状态，true：开启；false：关闭
+	private int left;//背景图以及滑块图的X坐标
+	private int onLeft;//当状态为开启时背景图以及滑块图的X坐标
+	private int offLeft;//当状态为关闭时背景图以及滑块图的X坐标
+	private int scrollDistanceCount;//滚动距离计数器
 	private boolean needHandle;//当在一组时件中发生了滚动操作时，在弹起或者取消的时候就需要根据滚动的距离来切换状态或者回滚
+	private boolean down;
 
 	public SlidingButton2(Context context) {
 		super(context);
 		gestureDetector = new GestureDetector(getContext(), this);
 		gestureDetector.setOnDoubleTapListener(this);
-		maskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_mask);
-		frameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_frame);
 		backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_background);
-		sliderBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_slilder_normal);
+		backgroundMaskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_mask_background);
+		frameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_frame);
+		sliderNormalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_slilder_normal);
+		sliderPressedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_slilder_pressed);
+		sliderMaskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_sliding_mask_slider);
 		paint = new Paint();
 		paint.setFilterBitmap(false);
+		porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
 		scroller = new Scroller(getContext(), new AccelerateDecelerateInterpolator());
 	}
 	
@@ -55,17 +62,17 @@ public class SlidingButton2 extends View implements OnGestureListener, OnDoubleT
         
         //绘制背景层
         canvas.drawBitmap(backgroundBitmap, left, 0, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        canvas.drawBitmap(maskBitmap, 0, 0, paint);
+        paint.setXfermode(porterDuffXfermode);
+        canvas.drawBitmap(backgroundMaskBitmap, 0, 0, paint);
         paint.setXfermode(null);
         
         //绘制框架层
         canvas.drawBitmap(frameBitmap, 0, 0, paint);
 
         //绘制按钮层
-        canvas.drawBitmap(sliderBitmap, left, 0, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        canvas.drawBitmap(maskBitmap, 0, 0, paint);
+        canvas.drawBitmap(down?sliderPressedBitmap:sliderNormalBitmap, left, 0, paint);
+        paint.setXfermode(porterDuffXfermode);
+        canvas.drawBitmap(sliderMaskBitmap, 0, 0, paint);
         paint.setXfermode(null);
         
         //合并图层
@@ -125,14 +132,21 @@ public class SlidingButton2 extends View implements OnGestureListener, OnDoubleT
 	public boolean onTouchEvent(MotionEvent event) {
 		gestureDetector.onTouchEvent(event);
 		//如果允许处理,并且当前事件使弹起或者取消
-		if(needHandle && (event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP)){
-			//如果本次滚动的距离超过的最小生效距离，就切换状态，否则就回滚
-			if(Math.abs(scrollDistanceCount) >= MIN_ROLLING_DISTANCE){
-				setState(scrollDistanceCount > 0, left);
-			}else{
-				setState(isOn(), left);
+		if(event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP){
+			if(down){
+				down = false;
+				invalidate();
 			}
-			needHandle = false;
+			
+			if(needHandle){
+				//如果本次滚动的距离超过的最小生效距离，就切换状态，否则就回滚
+				if(Math.abs(scrollDistanceCount) >= MIN_ROLLING_DISTANCE){
+					setState(scrollDistanceCount > 0, left);
+				}else{
+					setState(isOn(), left);
+				}
+				needHandle = false;
+			}
 		}
 		return true;
 	}
@@ -141,6 +155,8 @@ public class SlidingButton2 extends View implements OnGestureListener, OnDoubleT
 	public boolean onDown(MotionEvent e) {
 		scrollDistanceCount = 0;
 		needHandle = false;
+		down = true;
+		invalidate();
 		return true;
 	}
 
