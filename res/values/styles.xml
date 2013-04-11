@@ -9,15 +9,15 @@
         <item name="android:clickable">true</item>
     </style>
     
-    <style name="option_item_header" parent="@style/option_item_complete">
+    <style name="preference_header" parent="@style/option_item_complete">
         <item name="android:background">@drawable/selector_preference_header</item>
     </style>
     
-    <style name="option_item_center" parent="@style/option_item_complete">
+    <style name="preference_center" parent="@style/option_item_complete">
         <item name="android:background">@drawable/selector_preference_center</item>
     </style>
     
-    <style name="option_item_footer" parent="@style/option_item_complete">
+    <style name="preference_footer" parent="@style/option_item_complete">
         <item name="android:background">@drawable/selector_preference_footer</item>
     </style>
 </resources>
