@@ -1,11 +1,13 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import java.io.Serializable;
+
 import android.content.Context;
 
 /**
  * 通知铃声
  */
-public class NotificationRingtone extends ScenarioOption{
+public class NotificationRingtone extends BaseScenarioOption implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	public NotificationRingtone() {

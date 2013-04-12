@@ -3,12 +3,10 @@ package me.xiaopan.lifespirit.task.repeat;
 /**
  * 每隔多长时间重复一次
  */
-public abstract class EveryOtherRepeat extends BaseRepeat{
-	private static final long serialVersionUID = 1L;
+public abstract class BaseEveryOtherRepeat extends BaseRepeat{
 	private int space;//间隔
 	
-	public EveryOtherRepeat(RepeatWay repeatWay){
-		super(repeatWay);
+	public BaseEveryOtherRepeat(){
 		setSpace(1);
 	}
 

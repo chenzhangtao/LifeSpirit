@@ -6,15 +6,9 @@ import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherDayRepeat;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherHourRepeat;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherMinuteRepeat;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherRepeat;
-import me.xiaopan.lifespirit.task.repeat.LegalAndOffDayRepeat;
-import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
-import me.xiaopan.lifespirit.task.repeat.BaseRepeat;
-import me.xiaopan.lifespirit.task.repeat.BaseRepeat.RepeatWay;
-import me.xiaopan.lifespirit.task.repeat.StatutoryWorkingDaysRepeat;
+import me.xiaopan.lifespirit.task.Repeat;
+import me.xiaopan.lifespirit.task.Repeat.RepeatWay;
+import me.xiaopan.lifespirit.task.repeat.BaseEveryOtherRepeat;
 import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
 import me.xiaopan.lifespirit.widget.Preference;
@@ -35,18 +29,13 @@ import android.widget.LinearLayout;
 public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	public static final String PARAM_OPTIONAL_REPEAT = "PARAM_OPTIONAL_REPEAT";
 	public static final String RETURN_OPTIONAL_REPEAT = "RETURN_OPTIONAL_REPEAT";
+	private Repeat repeat;
 	private Preference onlyOneTimePreference;
 	private Preference statutoryWorkingDaysPreference;
 	private Preference legalAndOffDayPreference;
 	private Preference everyOtherMinutePreference;
 	private Preference everyOtherHourPreference;
 	private Preference everyOtherDayPreference;
-	private OnlyOneTimeRepeat onlyOneTimeRepeat;
-	private StatutoryWorkingDaysRepeat statutoryWorkingDaysRepeat;
-	private LegalAndOffDayRepeat legalAndOffDayRepeat;
-	private EveryOtherMinuteRepeat everyOtherMinuteRepeat;
-	private EveryOtherHourRepeat everyOtherHourRepeat;
-	private EveryOtherDayRepeat everyOtherDayRepeat;
 	private AlertDialog tempAlertDialog;
 	
 	private boolean needSave;
@@ -67,7 +56,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 		onlyOneTimePreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				returnResult(onlyOneTimeRepeat);
+				returnResult(RepeatWay.ONLY_ONE_TIME);
 			}
 		});
 		
@@ -78,14 +67,14 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 						if(needSave){
-							onlyOneTimeRepeat.getTriggerTime().setYear(year);
-							onlyOneTimeRepeat.getTriggerTime().setMonth(monthOfYear);
-							onlyOneTimeRepeat.getTriggerTime().setDayOfMonth(dayOfMonth);
-							onlyOneTimeRepeat.getTriggerTime().update();
-							onlyOneTimePreference.setTitle(onlyOneTimeRepeat.onGetIntro(getBaseContext()));
+							repeat.getTriggerTime().setYear(year);
+							repeat.getTriggerTime().setMonth(monthOfYear);
+							repeat.getTriggerTime().setDayOfMonth(dayOfMonth);
+							repeat.getTriggerTime().update();
+							onlyOneTimePreference.setTitle(repeat.getOnlyOneTimeRepeat().onGetIntro(getBaseContext(), repeat));
 						}
 					}
-				}, onlyOneTimeRepeat.getTriggerTime().getYear(), onlyOneTimeRepeat.getTriggerTime().getMonth(), onlyOneTimeRepeat.getTriggerTime().getDayOfMonth());
+				}, repeat.getTriggerTime().getYear(), repeat.getTriggerTime().getMonth(), repeat.getTriggerTime().getDayOfMonth());
 				datePickerDialog.setButton(getString(R.string.base_confirm), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -100,56 +89,56 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 		statutoryWorkingDaysPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				returnResult(statutoryWorkingDaysRepeat);
+				returnResult(RepeatWay.STATUTORY_WORKING_DAYS);
 			}
 		});
 		
 		legalAndOffDayPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				returnResult(legalAndOffDayRepeat);
+				returnResult(RepeatWay.LEGAL_AND_OFF_DAY);
 			}
 		});
 		
 		everyOtherMinutePreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				returnResult(everyOtherMinuteRepeat);
+				returnResult(RepeatWay.EVERY_OTHER_MINUTE);
 			}
 		});
 		
 		everyOtherMinutePreference.setOnNextButtonClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setSpace(everyOtherMinutePreference, everyOtherMinuteRepeat);
+				setSpace(everyOtherMinutePreference, repeat.getEveryOtherMinuteRepeat());
 			}
 		});
 		
 		everyOtherHourPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				returnResult(everyOtherHourRepeat);
+				returnResult(RepeatWay.EVERY_OTHER_HOUR);
 			}
 		});
 		
 		everyOtherHourPreference.setOnNextButtonClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setSpace(everyOtherHourPreference, everyOtherHourRepeat);
+				setSpace(everyOtherHourPreference, repeat.getEveryOtherHourRepeat());
 			}
 		});
 		
 		everyOtherDayPreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				returnResult(everyOtherDayRepeat);
+				returnResult(RepeatWay.EVERY_OTHER_DAY);
 			}
 		});
 		
 		everyOtherDayPreference.setOnNextButtonClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setSpace(everyOtherDayPreference, everyOtherDayRepeat);
+				setSpace(everyOtherDayPreference, repeat.getEveryOtherDayRepeat());
 			}
 		});
 	}
@@ -157,47 +146,35 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
 		Serializable serializable = getIntent().getSerializableExtra(PARAM_OPTIONAL_REPEAT);
-		BaseRepeat repeat = (serializable != null && serializable instanceof BaseRepeat)?(BaseRepeat) serializable:new OnlyOneTimeRepeat();
-		initRepeat(repeat);
+		initRepeat(repeat = (serializable != null && serializable instanceof Repeat)?(Repeat) serializable:new Repeat());
 	}
 	
-	private void initRepeat(BaseRepeat repeat){
-		onlyOneTimeRepeat = new OnlyOneTimeRepeat();
-		statutoryWorkingDaysRepeat = new StatutoryWorkingDaysRepeat();
-		legalAndOffDayRepeat = new LegalAndOffDayRepeat();
-		everyOtherMinuteRepeat = new EveryOtherMinuteRepeat();
-		everyOtherHourRepeat = new EveryOtherHourRepeat();
-		everyOtherDayRepeat = new EveryOtherDayRepeat();
-		
-		if(repeat.geRepeatWay() == RepeatWay.ONLY_ONE_TIME){
-			onlyOneTimeRepeat = (OnlyOneTimeRepeat) repeat;
+	private void initRepeat(Repeat repeat){
+		//设置选中项
+		if(repeat.getRepeatWay() == RepeatWay.ONLY_ONE_TIME){
 			onlyOneTimePreference.setSelected(true);
-		}else if(repeat.geRepeatWay() == RepeatWay.STATUTORY_WORKING_DAYS){
-			statutoryWorkingDaysRepeat = (StatutoryWorkingDaysRepeat) repeat;
+		}else if(repeat.getRepeatWay() == RepeatWay.STATUTORY_WORKING_DAYS){
 			statutoryWorkingDaysPreference.setSelected(true);
-		}else if(repeat.geRepeatWay() == RepeatWay.LEGAL_AND_OFF_DAY){
-			legalAndOffDayRepeat = (LegalAndOffDayRepeat) repeat;
+		}else if(repeat.getRepeatWay() == RepeatWay.LEGAL_AND_OFF_DAY){
 			legalAndOffDayPreference.setSelected(true);
-		}else if(repeat.geRepeatWay() == RepeatWay.EVERY_OTHER_MINUTE){
-			everyOtherMinuteRepeat = (EveryOtherMinuteRepeat) repeat;
+		}else if(repeat.getRepeatWay() == RepeatWay.EVERY_OTHER_MINUTE){
 			everyOtherMinutePreference.setSelected(true);
-		}else if(repeat.geRepeatWay() == RepeatWay.EVERY_OTHER_HOUR){
-			everyOtherHourRepeat = (EveryOtherHourRepeat) repeat;
+		}else if(repeat.getRepeatWay() == RepeatWay.EVERY_OTHER_HOUR){
 			everyOtherHourPreference.setSelected(true);
-		}else if(repeat.geRepeatWay() == RepeatWay.EVERY_OTHER_DAY){
-			everyOtherDayRepeat = (EveryOtherDayRepeat) repeat;
+		}else if(repeat.getRepeatWay() == RepeatWay.EVERY_OTHER_DAY){
 			everyOtherDayPreference.setSelected(true);
 		}
 		
-		onlyOneTimePreference.setTitle(onlyOneTimeRepeat.onGetIntro(getBaseContext()));
-		statutoryWorkingDaysPreference.setTitle(statutoryWorkingDaysRepeat.onGetIntro(getBaseContext()));
-		legalAndOffDayPreference.setTitle(legalAndOffDayRepeat.onGetIntro(getBaseContext()));
-		everyOtherMinutePreference.setTitle(everyOtherMinuteRepeat.onGetIntro(getBaseContext()));
-		everyOtherHourPreference.setTitle(everyOtherHourRepeat.onGetIntro(getBaseContext()));
-		everyOtherDayPreference.setTitle(everyOtherDayRepeat.onGetIntro(getBaseContext()));
+		onlyOneTimePreference.setTitle(repeat.getOnlyOneTimeRepeat().onGetIntro(getBaseContext(), repeat));
+		statutoryWorkingDaysPreference.setTitle(repeat.getStatutoryWorkingDaysRepeat().onGetIntro(getBaseContext(), repeat));
+		legalAndOffDayPreference.setTitle(repeat.getLegalAndOffDayRepeat().onGetIntro(getBaseContext(), repeat));
+		everyOtherMinutePreference.setTitle(repeat.getEveryOtherMinuteRepeat().onGetIntro(getBaseContext(), repeat));
+		everyOtherHourPreference.setTitle(repeat.getEveryOtherHourRepeat().onGetIntro(getBaseContext(), repeat));
+		everyOtherDayPreference.setTitle(repeat.getEveryOtherDayRepeat().onGetIntro(getBaseContext(), repeat));
 	}
 	
-	private void returnResult(BaseRepeat repeat){
+	private void returnResult(RepeatWay repeatWay){
+		repeat.setRepeatWay(repeatWay);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(RETURN_OPTIONAL_REPEAT, repeat);
 		getIntent().putExtras(bundle);
@@ -208,7 +185,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	/**
 	 * 设置间隔
 	 */
-	private void setSpace(final Preference preference, final EveryOtherRepeat everyOtherRepeat){
+	private void setSpace(final Preference preference, final BaseEveryOtherRepeat everyOtherRepeat){
 		//创建对话框并设置标题
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -228,7 +205,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 			String name = spaceEdit.getEditableText().toString().trim();
 			if(!"".equals(name) && !"0".equals(name)){
 				everyOtherRepeat.setSpace(Integer.valueOf(name));
-				preference.setTitle(everyOtherRepeat.onGetIntro(getBaseContext()));
+				preference.setTitle(everyOtherRepeat.onGetIntro(getBaseContext(), repeat));
 				DialogUtils.setDialogClickClose(tempAlertDialog, true);
 			}else{
 				toastL(R.string.repeat_spaceInputErrorHint);

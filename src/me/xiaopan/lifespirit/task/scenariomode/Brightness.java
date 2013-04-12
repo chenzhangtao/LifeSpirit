@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import java.io.Serializable;
+
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -7,7 +9,7 @@ import android.content.Context;
 /**
  * 亮度
  */
-public class Brightness extends ScenarioOption {
+public class Brightness extends BaseScenarioOption implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int brightness;//亮度
 	private boolean autoAdjustmen;//自动调节

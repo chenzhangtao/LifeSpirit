@@ -5,7 +5,7 @@ import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.BaseTask;
-import me.xiaopan.lifespirit.task.repeat.BaseRepeat;
+import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
 import me.xiaopan.lifespirit.util.ViewUtils;
@@ -121,9 +121,9 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		if(resultCode == RESULT_OK){
 			switch (requestCode) {
 				case REQUEST_CODE_REPEAT:
-					baseTask.setRepeat((BaseRepeat) data.getSerializableExtra(RepeatActivity.RETURN_OPTIONAL_REPEAT));
+					baseTask.setRepeat((Repeat) data.getSerializableExtra(RepeatActivity.RETURN_OPTIONAL_REPEAT));
 					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
-					break; 
+					break;
 				default: break;
 			}
 		}

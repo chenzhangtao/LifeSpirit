@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import java.io.Serializable;
+
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.lifespirit2.R;
@@ -8,7 +10,7 @@ import android.content.Context;
 /**
  * 休眠
  */
-public class Dormant extends ScenarioOption {
+public class Dormant extends BaseScenarioOption implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int dormantTimeInMillis;
 	

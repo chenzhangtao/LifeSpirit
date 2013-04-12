@@ -1,8 +1,10 @@
 package me.xiaopan.lifespirit.task;
 
+import java.io.Serializable;
+
 import android.content.Context;
 
-public class Name extends TaskOption{
+public class Name extends BaseTaskOption implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 

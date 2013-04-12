@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import java.io.Serializable;
+
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 import android.media.AudioManager;
@@ -7,7 +9,7 @@ import android.media.AudioManager;
 /**
  * 音量
  */
-public class Volume extends ScenarioOption {
+public class Volume extends BaseScenarioOption implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int mediaVolume = -5;
 	private int alarmVolume = -5;

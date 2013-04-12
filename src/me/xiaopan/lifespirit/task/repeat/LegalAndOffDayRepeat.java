@@ -1,20 +1,19 @@
 package me.xiaopan.lifespirit.task.repeat;
 
+import java.io.Serializable;
+
+import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
 /**
  * 法定休息日执行
  */
-public class LegalAndOffDayRepeat extends BaseRepeat{
+public class LegalAndOffDayRepeat extends BaseRepeat implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	public LegalAndOffDayRepeat(){
-		super(RepeatWay.LEGAL_AND_OFF_DAY);
-	}
-
 	@Override
-	public String onGetIntro(Context context) {
+	public String onGetIntro(Context context, Repeat repeat) {
 		return context.getString(R.string.repeat_legalAndOffDay);
 	}
 }

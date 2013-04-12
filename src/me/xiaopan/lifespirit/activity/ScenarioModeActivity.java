@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 
 import me.xiaopan.androidlibrary.util.Logger;
 import me.xiaopan.lifespirit.task.ScenarioMode;
-import me.xiaopan.lifespirit.task.TaskOption;
+import me.xiaopan.lifespirit.task.BaseTaskOption;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
@@ -91,19 +91,19 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 	}
 	
 	private class Contact{
-		private Map<Preference, TaskOption> map;
+		private Map<Preference, BaseTaskOption> map;
 		public Contact(int size){
-			map = new HashMap<Preference, TaskOption>(size);
+			map = new HashMap<Preference, BaseTaskOption>(size);
 		}
 		
-		public void put(Preference preference, TaskOption scenarioModeOption){
+		public void put(Preference preference, BaseTaskOption scenarioModeOption){
 			map.put(preference, scenarioModeOption);
 		}
 		
 		public void invalidate(){
 			Preference preference;
-			TaskOption taskOption;
-			for(Entry<Preference, TaskOption> entry : map.entrySet()){
+			BaseTaskOption taskOption;
+			for(Entry<Preference, BaseTaskOption> entry : map.entrySet()){
 				preference = entry.getKey();
 				taskOption = entry.getValue();
 				preference.setSubtitle(taskOption.onGetIntro(getBaseContext()));

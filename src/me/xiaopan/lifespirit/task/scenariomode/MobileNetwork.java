@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import java.io.Serializable;
+
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -7,7 +9,7 @@ import android.content.Context;
 /**
  * 移动网络
  */
-public class MobileNetwork extends ScenarioOption {
+public class MobileNetwork extends BaseScenarioOption implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean open;
 	

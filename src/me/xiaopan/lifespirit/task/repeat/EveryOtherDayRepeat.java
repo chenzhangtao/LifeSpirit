@@ -1,20 +1,19 @@
 package me.xiaopan.lifespirit.task.repeat;
 
+import java.io.Serializable;
+
+import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
 /**
  * 每隔多少天重复一次
  */
-public class EveryOtherDayRepeat extends EveryOtherRepeat{
+public class EveryOtherDayRepeat extends BaseEveryOtherRepeat implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	public EveryOtherDayRepeat(){
-		super(RepeatWay.EVERY_OTHER_DAY);
-	}
-
 	@Override
-	public String onGetIntro(Context context) {
+	public String onGetIntro(Context context, Repeat repeat) {
 		return context.getString(R.string.repeat_everyOtherDay, getSpace());
 	}
 }

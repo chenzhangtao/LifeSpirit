@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task;
 
+import java.io.Serializable;
+
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
 import me.xiaopan.lifespirit.task.scenariomode.Brightness;
@@ -16,7 +18,8 @@ import android.content.Context;
 /**
  * 情景模式
  */
-public class ScenarioMode extends BaseTask{
+public class ScenarioMode extends BaseTask implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Bluetooth bluetooth;
 	private AirplaneMode airplaneMode;
 	private MobileNetwork mobileNetwork;

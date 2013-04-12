@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import java.io.Serializable;
+
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 import android.media.AudioManager;
@@ -7,7 +9,7 @@ import android.media.AudioManager;
 /**
  * 铃声模式
  */
-public class RingtoneMode extends ScenarioOption {
+public class RingtoneMode extends BaseScenarioOption implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private RingnoteModeEnum ringnoteMode;
 
