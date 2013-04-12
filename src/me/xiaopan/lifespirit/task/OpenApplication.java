@@ -37,4 +37,14 @@ public class OpenApplication extends BaseTask{
 	public void setApplicationPackageName(String applicationPackageName) {
 		this.applicationPackageName = applicationPackageName;
 	}
+
+	@Override
+	public boolean saveToLocal(Context context) {
+		return false;
+	}
+
+	@Override
+	public BaseTask[] readTasks(Context context) {
+		return null;
+	}
 }

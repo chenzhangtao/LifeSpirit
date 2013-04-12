@@ -53,4 +53,14 @@ public class SendMessage extends BaseTask{
 	public void setMessageContent(String messageContent) {
 		this.messageContent = messageContent;
 	}
+
+	@Override
+	public boolean saveToLocal(Context context) {
+		return false;
+	}
+
+	@Override
+	public BaseTask[] readTasks(Context context) {
+		return null;
+	}
 }

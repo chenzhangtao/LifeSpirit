@@ -1,5 +1,8 @@
 package me.xiaopan.lifespirit.task;
 
+import java.io.File;
+
+import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
 import me.xiaopan.lifespirit.task.scenariomode.Brightness;
@@ -13,11 +16,14 @@ import me.xiaopan.lifespirit.task.scenariomode.Volume;
 import me.xiaopan.lifespirit.task.scenariomode.WIFI;
 import android.content.Context;
 
+import com.google.gson.Gson;
+
 /**
  * 情景模式
  */
 public class ScenarioMode extends BaseTask{
 	private static final long serialVersionUID = 1L;
+	private static final String TYPE = "SCENARIO_MODE";
 	private Bluetooth bluetooth;
 	private AirplaneMode airplaneMode;
 	private MobileNetwork mobileNetwork;
@@ -153,5 +159,39 @@ public class ScenarioMode extends BaseTask{
 
 	public void setNotificationRingtone(NotificationRingtone notificationRingtone) {
 		this.notificationRingtone = notificationRingtone;
+	}
+
+	@Override
+	public boolean saveToLocal(Context context) {
+		boolean saveSuccess = true;
+		try {
+			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TYPE+File.separator+getCreateTime().getTimeInMillis()+"."+TYPE);
+			if(!newSaveFile.exists()){
+				//先确保父目录的存在，如果不存在就创建
+				File parentFile= newSaveFile.getParentFile();
+				if(!parentFile.exists() && !parentFile.mkdirs()){
+					saveSuccess = false;
+				}
+				
+				//创建文件，如果创建失败了就直接结束
+				if(saveSuccess && !newSaveFile.createNewFile()){
+					saveSuccess = false;
+				}
+			}
+
+			//写到文件里去
+			if(saveSuccess){
+				FileUtils.writeString(newSaveFile, new Gson().toJson(this), false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			saveSuccess = false;
+		}
+		return saveSuccess;
+	}
+
+	@Override
+	public BaseTask[] readTasks(Context context) {
+		return null;
 	}
 }

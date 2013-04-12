@@ -26,6 +26,20 @@ public abstract class BaseTask implements Serializable{
 	}
 	
 	/**
+	 * 将当前任务保存到本地
+	 * @param context 上下文
+	 * @return true：保存成功；false：保存失败
+	 */
+	public abstract boolean saveToLocal(Context context);
+	
+	/**
+	 * 读取所有的任务
+	 * @param context 上下文
+	 * @return
+	 */
+	public abstract BaseTask[] readTasks(Context context);
+	
+	/**
 	 * 获取简介
 	 * @param context 上下文
 	 * @return 信息

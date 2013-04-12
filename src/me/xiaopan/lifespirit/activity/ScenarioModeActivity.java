@@ -4,11 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.gson.Gson;
-
-import me.xiaopan.androidlibrary.util.Logger;
-import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.task.BaseTaskOption;
+import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
@@ -115,7 +112,11 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		boolean result = true;
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
-				Logger.w(new Gson().toJson(scenarioMode));
+				if(scenarioMode.saveToLocal(getBaseContext())){
+					toastL("保存成功！");
+				}else{
+					toastL("保存失败！");
+				}
 				break;
 			default: result = super.onOptionsItemSelected(item); break;
 		}

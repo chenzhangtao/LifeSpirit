@@ -8,7 +8,7 @@ import android.content.Context;
  */
 public abstract class BaseScenarioOption extends BaseTaskOption{
 	private static final long serialVersionUID = 1L;
-	private boolean enable = true;//是否启用此选项
+	private boolean enable;//是否启用此选项
 	private boolean support = true;//是否支持此功能
 	
 	/**
