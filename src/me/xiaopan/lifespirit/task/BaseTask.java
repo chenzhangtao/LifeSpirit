@@ -1,12 +1,15 @@
 package me.xiaopan.lifespirit.task;
 
+import java.io.Serializable;
+
 import android.content.Context;
 
 
 /**
  * 任务基类
  */
-public abstract class BaseTask {
+public abstract class BaseTask implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private boolean enable;
 	private CreateTime createTime;
 	private Name name;

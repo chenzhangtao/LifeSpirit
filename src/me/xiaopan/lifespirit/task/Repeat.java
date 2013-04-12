@@ -1,7 +1,5 @@
 package me.xiaopan.lifespirit.task;
 
-import java.io.Serializable;
-
 import me.xiaopan.lifespirit.task.repeat.EveryOtherDayRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherHourRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherMinuteRepeat;
@@ -10,7 +8,10 @@ import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
 import me.xiaopan.lifespirit.task.repeat.StatutoryWorkingDaysRepeat;
 import android.content.Context;
 
-public class Repeat implements Serializable{
+/**
+ * 重复
+ */
+public class Repeat extends BaseTaskOption{
 	private static final long serialVersionUID = 1L;
 	private RepeatWay repeatWay;
 	private TriggerTime triggerTime;
@@ -39,6 +40,7 @@ public class Repeat implements Serializable{
 	 * @param context 上下文
 	 * @return 信息
 	 */
+	@Override
 	public String onGetIntro(Context context){
 		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
 			return onlyOneTimeRepeat.onGetIntro(context, this);

@@ -1,7 +1,5 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import java.io.Serializable;
-
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -9,7 +7,7 @@ import android.content.Context;
 /**
  * 飞行模式
  */
-public class AirplaneMode extends BaseScenarioOption implements Serializable{
+public class AirplaneMode extends BaseScenarioOption{
 	private static final long serialVersionUID = 1L;
 	private boolean open;
 	

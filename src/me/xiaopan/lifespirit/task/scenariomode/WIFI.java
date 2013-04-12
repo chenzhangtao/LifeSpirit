@@ -1,7 +1,5 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import java.io.Serializable;
-
 import me.xiaopan.androidlibrary.util.NetworkUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit2.R;
@@ -10,7 +8,7 @@ import android.content.Context;
 /**
  * WIFI
  */
-public class WIFI extends BaseScenarioOption implements Serializable {
+public class WIFI extends BaseScenarioOption {
 	private static final long serialVersionUID = 1L;
 	private boolean open;
 	

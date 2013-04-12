@@ -1,7 +1,5 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import java.io.Serializable;
-
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
 import me.xiaopan.lifespirit2.R;
@@ -10,7 +8,7 @@ import android.content.Context;
 /**
  * 蓝牙
  */
-public class Bluetooth extends BaseScenarioOption implements Serializable {
+public class Bluetooth extends BaseScenarioOption {
 	private static final long serialVersionUID = 1L;
 	private boolean open;
 	

@@ -1,11 +1,15 @@
 package me.xiaopan.lifespirit.task;
 
+import java.io.Serializable;
+
 import android.content.Context;
 
 /**
  * 任务选项
  */
-public abstract class BaseTaskOption{
+public abstract class BaseTaskOption implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 获取简介信息
 	 * @param context 

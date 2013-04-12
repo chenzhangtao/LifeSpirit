@@ -109,8 +109,10 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		timePicker.setIs24HourView(true);
 		ViewUtils.setTimePickerTextColor(timePicker, Colors.BLACK);
+		timePicker.setIs24HourView(true);
+		timePicker.setCurrentHour(baseTask.getRepeat().getTriggerTime().getHourOfDay());
+		timePicker.setCurrentMinute(baseTask.getRepeat().getTriggerTime().getMinute());
 		
 		namePreference.setSubtitle(baseTask.getName().onGetIntro(getBaseContext()));
 		repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
