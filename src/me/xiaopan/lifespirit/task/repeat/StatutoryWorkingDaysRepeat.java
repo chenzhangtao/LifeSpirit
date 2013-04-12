@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * 法定工作日执行
  */
-public class StatutoryWorkingDaysRepeat extends Repeat{
+public class StatutoryWorkingDaysRepeat extends BaseRepeat{
 	private static final long serialVersionUID = 1L;
 	
 	public StatutoryWorkingDaysRepeat(){

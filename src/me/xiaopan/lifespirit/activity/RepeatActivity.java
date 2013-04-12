@@ -12,8 +12,8 @@ import me.xiaopan.lifespirit.task.repeat.EveryOtherMinuteRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherRepeat;
 import me.xiaopan.lifespirit.task.repeat.LegalAndOffDayRepeat;
 import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
-import me.xiaopan.lifespirit.task.repeat.Repeat;
-import me.xiaopan.lifespirit.task.repeat.Repeat.RepeatWay;
+import me.xiaopan.lifespirit.task.repeat.BaseRepeat;
+import me.xiaopan.lifespirit.task.repeat.BaseRepeat.RepeatWay;
 import me.xiaopan.lifespirit.task.repeat.StatutoryWorkingDaysRepeat;
 import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
@@ -157,11 +157,11 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
 		Serializable serializable = getIntent().getSerializableExtra(PARAM_OPTIONAL_REPEAT);
-		Repeat repeat = (serializable != null && serializable instanceof Repeat)?(Repeat) serializable:new OnlyOneTimeRepeat();
+		BaseRepeat repeat = (serializable != null && serializable instanceof BaseRepeat)?(BaseRepeat) serializable:new OnlyOneTimeRepeat();
 		initRepeat(repeat);
 	}
 	
-	private void initRepeat(Repeat repeat){
+	private void initRepeat(BaseRepeat repeat){
 		onlyOneTimeRepeat = new OnlyOneTimeRepeat();
 		statutoryWorkingDaysRepeat = new StatutoryWorkingDaysRepeat();
 		legalAndOffDayRepeat = new LegalAndOffDayRepeat();
@@ -197,7 +197,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 		everyOtherDayPreference.setTitle(everyOtherDayRepeat.onGetIntro(getBaseContext()));
 	}
 	
-	private void returnResult(Repeat repeat){
+	private void returnResult(BaseRepeat repeat){
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(RETURN_OPTIONAL_REPEAT, repeat);
 		getIntent().putExtras(bundle);

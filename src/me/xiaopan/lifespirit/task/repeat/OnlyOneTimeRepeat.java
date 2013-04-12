@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * 只执行一次
  */
-public class OnlyOneTimeRepeat extends Repeat{
+public class OnlyOneTimeRepeat extends BaseRepeat{
 	private static final long serialVersionUID = 1L;
 	
 	public OnlyOneTimeRepeat(){

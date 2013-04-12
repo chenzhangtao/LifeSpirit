@@ -15,8 +15,6 @@ import android.content.Context;
 
 /**
  * 情景模式
- * @author xiaopan
- *
  */
 public class ScenarioMode extends BaseTask{
 	private Bluetooth bluetooth;

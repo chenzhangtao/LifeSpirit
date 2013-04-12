@@ -9,13 +9,13 @@ import android.content.Context;
 /**
  * 重复
  */
-public abstract class Repeat implements Serializable{
+public abstract class BaseRepeat implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private RepeatWay repeatWay;
 	private NextExecuteTime nextExecuteTime;
 	private TriggerTime triggerTime;
 	
-	public Repeat(RepeatWay repeatWay){
+	public BaseRepeat(RepeatWay repeatWay){
 		this.repeatWay = repeatWay;
 		setTriggerTime(new TriggerTime());
 		setNextExecuteTime(new NextExecuteTime());

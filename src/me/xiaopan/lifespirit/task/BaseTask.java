@@ -1,7 +1,7 @@
 package me.xiaopan.lifespirit.task;
 
 import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
-import me.xiaopan.lifespirit.task.repeat.Repeat;
+import me.xiaopan.lifespirit.task.repeat.BaseRepeat;
 import android.content.Context;
 
 
@@ -12,7 +12,7 @@ public abstract class BaseTask {
 	private boolean enable;
 	private CreateTime createTime;
 	private Name name;
-	private Repeat repeat;
+	private BaseRepeat repeat;
 	
 	/**
 	 * 创建一个任务
@@ -53,11 +53,11 @@ public abstract class BaseTask {
 		this.createTime = createTime;
 	}
 
-	public Repeat getRepeat() {
+	public BaseRepeat getRepeat() {
 		return repeat;
 	}
 
-	public void setRepeat(Repeat repeat) {
+	public void setRepeat(BaseRepeat repeat) {
 		this.repeat = repeat;
 	}
 

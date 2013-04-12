@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * 法定休息日执行
  */
-public class LegalAndOffDayRepeat extends Repeat{
+public class LegalAndOffDayRepeat extends BaseRepeat{
 	private static final long serialVersionUID = 1L;
 	
 	public LegalAndOffDayRepeat(){
