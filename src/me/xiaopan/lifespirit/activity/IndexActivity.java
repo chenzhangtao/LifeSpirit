@@ -35,6 +35,7 @@ public class IndexActivity extends MyBaseActivity {
 		taskListButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				startActivity(TaskListActivity.class);
 			}
 		});
 	}

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 公共颜色 -->
 <resources>
+    <!-- 主题颜色 - 深天蓝色 -->
+    <color name="comm_theme">#FF0e79c8</color>
+    
     <!-- 正文背景颜色 - 白色-->
-    <color name="comm_body_backg">#FFFFFFFF</color>
+    <color name="comm_body">#FFFFFFFF</color>
 </resources>

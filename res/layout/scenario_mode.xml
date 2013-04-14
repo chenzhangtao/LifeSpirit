@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit2" style="@style/comm_layout_body">
 	<ScrollView style="@style/base_layout_fill_fill">
 		<LinearLayout style="@style/comm_layout_body_content" android:paddingBottom="@dimen/base_padding_specialLarge" android:layoutAnimation="@anim/base_layout_alpha">
-			<include layout="@layout/comm_header"/>
+			<include layout="@layout/comm_task_header"/>
 		
 			<include layout="@layout/comm_space"/>
 			<include layout="@layout/comm_space"/>
@@ -28,6 +28,6 @@
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_footer" custom:title="@string/scenarioMode_preference_dormant" android:id="@+id/preference_scenarioMode_dormant" custom:type="toggle"/>
 		</LinearLayout>
 	</ScrollView>
-    
+	
 	<include layout="@layout/comm_shadow_down"/>
 </FrameLayout>

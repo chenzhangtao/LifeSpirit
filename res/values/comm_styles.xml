@@ -5,7 +5,7 @@
     <!-- 布局 - 正文 -->
     <style name="comm_layout_body" parent="@style/base_layout_fill_fill_vertical">
         <item name="android:id">@id/comm_layout_body</item>
-        <item name="android:background">@color/comm_body_backg</item>
+        <item name="android:background">@color/comm_body</item>
     </style>
     
     <!-- 布局 - 正文 - 内容 -->
@@ -63,7 +63,7 @@
         <item name="android:layout_gravity">center</item>
 	    <item name="android:gravity">center</item> 
 	    <item name="android:clickable">true</item>
-         <item name="android:background">@color/comm_body_backg</item>
+         <item name="android:background">@color/comm_body</item>
          <item name="android:visibility">gone</item>
     </style>
     

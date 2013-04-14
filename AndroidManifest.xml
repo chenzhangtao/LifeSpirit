@@ -28,14 +28,13 @@
     <!-- 应用程序整体相关配置 -->
     <application android:name="me.xiaopan.lifespirit.MyApplication" android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name">
         <activity android:name="me.xiaopan.lifespirit.activity.IndexActivity" android:label="@string/app_name">
-            
-        </activity>
-        <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/scenarioMode_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="me.xiaopan.lifespirit.activity.TaskListActivity" android:label="@string/taskList_title"/>
+        <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/scenarioMode_title"/>
         <activity android:name="me.xiaopan.lifespirit.activity.RepeatActivity" android:label="@string/repeat_title"/>
     </application>
 </manifest>

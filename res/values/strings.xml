@@ -130,4 +130,7 @@
 	<string name="repeat_everyOtherDay">每隔%s天执行一次</string>
 	<string name="repeat_spaceInputHint">请输入间隔时间</string>
 	<string name="repeat_spaceInputErrorHint">不能为空并且不能为0哦！</string>
+
+	<string name="taskList_title">任务列表</string>
+	<string name="alarmClock_title">闹钟</string>
 </resources>
