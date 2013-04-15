@@ -9,8 +9,6 @@ import android.widget.Button;
 
 /**
  * 首页
- * @author xiaopan
- *
  */
 public class IndexActivity extends MyBaseActivity {
 	private Button addTaskButton;

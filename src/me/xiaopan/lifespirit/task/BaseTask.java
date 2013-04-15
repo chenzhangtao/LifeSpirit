@@ -1,14 +1,20 @@
 package me.xiaopan.lifespirit.task;
 
+import java.io.File;
 import java.io.Serializable;
 
+import me.xiaopan.javalibrary.util.FileUtils;
 import android.content.Context;
 
+import com.google.gson.Gson;
 
 /**
  * 任务基类
  */
 public abstract class BaseTask implements Serializable{
+	public static final String TASK_DIR = "TASK";
+	public static final String STATE_ENABLE = "ENABLE";
+	public static final String STATE_DISABLE = "DISABLE";
 	private static final long serialVersionUID = 1L;
 	private boolean enable;
 	private CreateTime createTime;
@@ -30,14 +36,41 @@ public abstract class BaseTask implements Serializable{
 	 * @param context 上下文
 	 * @return true：保存成功；false：保存失败
 	 */
-	public abstract boolean saveToLocal(Context context);
-	
-	/**
-	 * 读取所有的任务
-	 * @param context 上下文
-	 * @return
-	 */
-	public abstract BaseTask[] readTasks(Context context);
+	public boolean saveToLocal(Context context){
+		boolean saveSuccess = true;
+		
+		//先删除旧文件
+		File oldSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+onGetType()+"_"+(enable?STATE_DISABLE:STATE_ENABLE));
+		if(oldSaveFile.exists()){
+			oldSaveFile.delete();
+		}
+		
+		//再创建新文件
+		try {
+			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+onGetType()+"_"+(enable?STATE_ENABLE:STATE_DISABLE));
+			if(!newSaveFile.exists()){
+				//先确保父目录的存在，如果不存在就创建
+				File parentFile= newSaveFile.getParentFile();
+				if(!parentFile.exists() && !parentFile.mkdirs()){
+					saveSuccess = false;
+				}
+				
+				//创建文件，如果创建失败了就直接结束
+				if(saveSuccess && !newSaveFile.createNewFile()){
+					saveSuccess = false;
+				}
+			}
+
+			//写到文件里去
+			if(saveSuccess){
+				FileUtils.writeString(newSaveFile, new Gson().toJson(this), false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			saveSuccess = false;
+		}
+		return saveSuccess;
+	}
 	
 	/**
 	 * 获取简介
@@ -51,6 +84,12 @@ public abstract class BaseTask implements Serializable{
 	 * @param context 上下文
 	 */
 	public abstract void onExecute(Context context);
+	
+	/**
+	 * 获取类型
+	 * @return
+	 */
+	public abstract String onGetType();
 	
 	public boolean isEnable() {
 		return enable;

@@ -1,8 +1,12 @@
 package me.xiaopan.lifespirit.task;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
+import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
 import me.xiaopan.lifespirit.task.scenariomode.Brightness;
@@ -23,7 +27,7 @@ import com.google.gson.Gson;
  */
 public class ScenarioMode extends BaseTask{
 	private static final long serialVersionUID = 1L;
-	private static final String TYPE = "SCENARIO_MODE";
+	public static final String TYPE = "SCENARIO_MODE";
 	private Bluetooth bluetooth;
 	private AirplaneMode airplaneMode;
 	private MobileNetwork mobileNetwork;
@@ -57,6 +61,32 @@ public class ScenarioMode extends BaseTask{
 	@Override
 	public String onGetIntro(Context context){
 		return "";
+	}
+
+	public static List<ScenarioMode> readScenarioModes(Context context) {
+		FileScanner fileScanner = new FileScanner(new File(context.getFilesDir().getPath()+File.separator+TASK_DIR));
+		fileScanner.setFileTypeFilterWay(StringCheckUpWayEnum.CONTAIN_KEYWORDS);
+		fileScanner.addFileTypeKeyWords(ScenarioMode.TYPE);
+		List<File> files = fileScanner.scan();
+		if(files != null && files.size() > 0){
+			List<ScenarioMode> scenarioModes = new ArrayList<ScenarioMode>(files.size());
+			Gson gson = new Gson();
+			for(File file : files){
+				try {
+					scenarioModes.add(gson.fromJson(FileUtils.readString(file), ScenarioMode.class));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return scenarioModes;
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public String onGetType() {
+		return TYPE;
 	}
 	
 	@Override
@@ -159,39 +189,5 @@ public class ScenarioMode extends BaseTask{
 
 	public void setNotificationRingtone(NotificationRingtone notificationRingtone) {
 		this.notificationRingtone = notificationRingtone;
-	}
-
-	@Override
-	public boolean saveToLocal(Context context) {
-		boolean saveSuccess = true;
-		try {
-			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TYPE+File.separator+getCreateTime().getTimeInMillis()+"."+TYPE);
-			if(!newSaveFile.exists()){
-				//先确保父目录的存在，如果不存在就创建
-				File parentFile= newSaveFile.getParentFile();
-				if(!parentFile.exists() && !parentFile.mkdirs()){
-					saveSuccess = false;
-				}
-				
-				//创建文件，如果创建失败了就直接结束
-				if(saveSuccess && !newSaveFile.createNewFile()){
-					saveSuccess = false;
-				}
-			}
-
-			//写到文件里去
-			if(saveSuccess){
-				FileUtils.writeString(newSaveFile, new Gson().toJson(this), false);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			saveSuccess = false;
-		}
-		return saveSuccess;
-	}
-
-	@Override
-	public BaseTask[] readTasks(Context context) {
-		return null;
 	}
 }

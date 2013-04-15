@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_listItem">
-    
-
+	<LinearLayout style="@style/base_layout_weight_wrap_vertical">
+	    <TextView style="@style/comm_text_match" android:id="@+id/text_scenairoModeItem_triggerTime"/>
+	    <TextView style="@style/comm_text_match" android:id="@+id/text_scenairoModeItem_repeat"/>
+	    <TextView style="@style/comm_text_match" android:id="@+id/text_scenairoModeItem_timeRemaining"/>
+	</LinearLayout>
+	
+	<me.xiaopan.lifespirit.widget.SlidingToggleButton style="@style/base_layout_wrap_wrap" android:id="@+id/slidingToggle_scenairoModeItem"/>
 </LinearLayout>

@@ -25,6 +25,20 @@ public class SendMessage extends BaseTask{
 	}
 
 	@Override
+	public boolean saveToLocal(Context context) {
+		return false;
+	}
+
+	public List<SendMessage> readSendMessages(Context context) {
+		return null;
+	}
+
+	@Override
+	public String onGetType() {
+		return null;
+	}
+
+	@Override
 	public void onExecute(Context context) {
 		if(isEnable()){
 			SmsManager smsManager = SmsManager.getDefault();
@@ -52,15 +66,5 @@ public class SendMessage extends BaseTask{
 
 	public void setMessageContent(String messageContent) {
 		this.messageContent = messageContent;
-	}
-
-	@Override
-	public boolean saveToLocal(Context context) {
-		return false;
-	}
-
-	@Override
-	public BaseTask[] readTasks(Context context) {
-		return null;
 	}
 }

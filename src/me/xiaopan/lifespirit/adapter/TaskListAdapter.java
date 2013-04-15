@@ -3,7 +3,6 @@ package me.xiaopan.lifespirit.adapter;
 import java.util.List;
 
 import me.xiaopan.lifespirit.fragment.BaseFragment;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

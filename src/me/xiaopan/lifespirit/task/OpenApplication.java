@@ -1,5 +1,7 @@
 package me.xiaopan.lifespirit.task;
 
+import java.util.List;
+
 import android.content.Context;
 
 /**
@@ -12,6 +14,20 @@ public class OpenApplication extends BaseTask{
 	
 	@Override
 	public String onGetIntro(Context context) {
+		return null;
+	}
+
+	@Override
+	public boolean saveToLocal(Context context) {
+		return false;
+	}
+
+	public List<OpenApplication> readOpenApplications(Context context) {
+		return null;
+	}
+
+	@Override
+	public String onGetType() {
 		return null;
 	}
 
@@ -36,15 +52,5 @@ public class OpenApplication extends BaseTask{
 
 	public void setApplicationPackageName(String applicationPackageName) {
 		this.applicationPackageName = applicationPackageName;
-	}
-
-	@Override
-	public boolean saveToLocal(Context context) {
-		return false;
-	}
-
-	@Override
-	public BaseTask[] readTasks(Context context) {
-		return null;
 	}
 }

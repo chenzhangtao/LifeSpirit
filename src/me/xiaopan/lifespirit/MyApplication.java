@@ -7,19 +7,19 @@ import me.xiaopan.lifespirit.task.BaseTask;
 import android.app.Application;
 
 public class MyApplication extends Application {
-	private List<BaseTask> taskList;
+	private List<BaseTask> runningTaskList;//运行中的任务列表
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		taskList = new ArrayList<BaseTask>();
+		runningTaskList = new ArrayList<BaseTask>();
 	}
-	
-	public List<BaseTask> getTaskList() {
-		return taskList;
+
+	public List<BaseTask> getRunningTaskList() {
+		return runningTaskList;
 	}
-	
-	public void setTaskList(List<BaseTask> taskList) {
-		this.taskList = taskList;
+
+	public void setRunningTaskList(List<BaseTask> runningTaskList) {
+		this.runningTaskList = runningTaskList;
 	}
 }
