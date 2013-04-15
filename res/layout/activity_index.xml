@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 首页 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/base_layout_fill_fill_vertical" android:background="@drawable/wallpaper2">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/base_layout_match_match_vertical" android:background="@drawable/wallpaper2">
 	<!-- 显示当前时间 -->
-	<LinearLayout style="@style/base_layout_fill_wrap" android:padding="@dimen/base_padding_specialLarge">
+	<LinearLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge">
 	    <AnalogClock android:id="@+id/digitalClock_index" android:layout_width="100dp" android:layout_height="100dp"/>
 	    <TextView style="@style/comm_text" android:text="今天天气晴朗！"/>
 	</LinearLayout>
@@ -11,7 +11,7 @@
 	<ListView style="@style/comm_list_weight_padding"/>
 	
 	<!-- 功能 -->
-	<RelativeLayout style="@style/base_layout_fill_wrap" android:padding="@dimen/base_padding_specialLarge">
+	<RelativeLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge">
 	    <Button android:id="@+id/button_index_addTask" style="@style/base_layout_wrap_wrap" android:background="@drawable/selector_ic_add" android:layout_alignParentLeft="true"/>
 		<Button android:id="@+id/button_index_taskList" style="@style/base_layout_wrap_wrap" android:background="@drawable/ic_list" android:layout_alignParentRight="true"/>
 	</RelativeLayout>

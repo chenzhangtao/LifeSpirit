@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit2" style="@style/comm_layout_body">
-	<ScrollView style="@style/base_layout_fill_fill">
+	<ScrollView style="@style/base_layout_match_match">
 		<LinearLayout style="@style/comm_layout_body_content_topPadding">
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_header" android:id="@+id/preference_repeat_onlyOneTime" custom:type="next"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_center" custom:title="@string/repeat_statutoryWorkingDays" android:id="@+id/preference_repeat_statutoryWorkingDays"/>
