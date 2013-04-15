@@ -31,7 +31,7 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
-		setContentView(R.layout.scenario_mode);
+		setContentView(R.layout.activity_scenario_mode);
 		super.onInitLayout(savedInstanceState);
 		
 		bluetoothPreference = (Preference) findViewById(R.id.preference_scenarioMode_bluetooth);

@@ -18,7 +18,7 @@ public class IndexActivity extends MyBaseActivity {
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
-		setContentView(R.layout.index);
+		setContentView(R.layout.activity_index);
 		addTaskButton = (Button) findViewById(R.id.button_index_addTask);
 		taskListButton = (Button) findViewById(R.id.button_index_taskList);
 	}

@@ -2,18 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res/me.xiaopan.lifespirit2" style="@style/comm_layout_body">
 	<ScrollView style="@style/base_layout_fill_fill">
 		<LinearLayout style="@style/comm_layout_body_content" android:paddingBottom="@dimen/base_padding_specialLarge" android:layoutAnimation="@anim/base_layout_alpha">
-			<include layout="@layout/comm_task_header"/>
+			<include layout="@layout/include_task_header"/>
 		
-			<include layout="@layout/comm_space"/>
-			<include layout="@layout/comm_space"/>
+			<include layout="@layout/include_space"/>
+			<include layout="@layout/include_space"/>
 			
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_header" custom:title="@string/scenarioMode_preference_bluetooth" android:id="@+id/preference_scenarioMode_bluetooth" custom:type="toggle"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_center" custom:title="@string/scenarioMode_preference_wifi" android:id="@+id/preference_scenarioMode_wifi" custom:type="toggle"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_center" custom:title="@string/scenarioMode_preference_mobileNetwork" android:id="@+id/preference_scenarioMode_mobileNetwork" custom:type="toggle"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_footer" custom:title="@string/scenarioMode_preference_airplanceMode" android:id="@+id/preference_scenarioMode_airplanceMode" custom:type="toggle"/>
 		
-			<include layout="@layout/comm_space"/>
-			<include layout="@layout/comm_space"/>
+			<include layout="@layout/include_space"/>
+			<include layout="@layout/include_space"/>
 			
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_header" custom:title="@string/scenarioMode_preference_volume" android:id="@+id/preference_scenarioMode_volume" custom:type="toggle"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_center" custom:title="@string/scenarioMode_preference_phoneRingtone" android:id="@+id/preference_scenarioMode_phoneRingtone" custom:type="toggle"/>
@@ -21,13 +21,13 @@
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_center" custom:title="@string/scenarioMode_preference_notificationRingtone" android:id="@+id/preference_scenarioMode_notificationRingtone" custom:type="toggle"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_footer" custom:title="@string/scenarioMode_preference_ringtoneMode" android:id="@+id/preference_scenarioMode_ringtoneMode" custom:type="toggle"/>
 		
-			<include layout="@layout/comm_space"/>
-			<include layout="@layout/comm_space"/>
+			<include layout="@layout/include_space"/>
+			<include layout="@layout/include_space"/>
 
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_header" custom:title="@string/scenarioMode_preference_brightness" android:id="@+id/preference_scenarioMode_brightness" custom:type="toggle"/>
 			<me.xiaopan.lifespirit.widget.Preference style="@style/preference_footer" custom:title="@string/scenarioMode_preference_dormant" android:id="@+id/preference_scenarioMode_dormant" custom:type="toggle"/>
 		</LinearLayout>
 	</ScrollView>
 	
-	<include layout="@layout/comm_shadow_down"/>
+	<include layout="@layout/include_shadow_down"/>
 </FrameLayout>

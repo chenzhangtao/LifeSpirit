@@ -21,7 +21,7 @@ public class TaskListActivity extends MyBaseFragmentActivity {
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
-		setContentView(R.layout.task_list);
+		setContentView(R.layout.activity_task_list);
 		viewPager = (ViewPager) findViewById(R.id.viewPager_taskList);
 		pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip_taskList);
 	}

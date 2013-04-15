@@ -42,7 +42,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
-		setContentView(R.layout.repeat);
+		setContentView(R.layout.activity_repeat);
 		onlyOneTimePreference = (Preference) findViewById(R.id.preference_repeat_onlyOneTime);
 		statutoryWorkingDaysPreference = (Preference) findViewById(R.id.preference_repeat_statutoryWorkingDays);
 		legalAndOffDayPreference = (Preference) findViewById(R.id.preference_repeat_legalAndOffDay);

@@ -3,5 +3,5 @@
     <android.support.v4.view.ViewPager style="@style/base_layout_fill_fill" android:id="@+id/viewPager_taskList">
         <android.support.v4.view.PagerTabStrip style="@style/base_layout_fill_wrap" android:id="@+id/pagerTabStrip_taskList"/>
     </android.support.v4.view.ViewPager>
-	<include layout="@layout/comm_shadow_down"/>
+	<include layout="@layout/include_shadow_down"/>
 </FrameLayout>
