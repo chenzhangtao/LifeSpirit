@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">生活精灵</string>
 	
 	<string name="taskList_button_removeTask">删除计划</string>
 	<string name="taskList_text_selected">选中</string>
