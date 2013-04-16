@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.activity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
  * 情景模式界面
  */
 public class ScenarioModeActivity extends BaseTaskActivity {
+	public static final String PARAM_OPTIONAL_SCENARIO_MODE = "PARAM_OPTIONAL_SCENARIO_MODE";
 	private ScenarioMode scenarioMode;
 	private Preference bluetoothPreference;
 	private Preference wifiPreference;
@@ -28,6 +30,7 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 	private Preference brightnessPreference;
 	private Preference dormantPreference;
 	private Contact contact;
+	private boolean add;
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
@@ -54,7 +57,12 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		scenarioMode = new ScenarioMode(getBaseContext());
+		Serializable serializable = getIntent().getSerializableExtra(PARAM_OPTIONAL_SCENARIO_MODE);
+		if(add = !(serializable != null && serializable instanceof ScenarioMode)){
+			scenarioMode = new ScenarioMode(getBaseContext());
+		}else{
+			scenarioMode = (ScenarioMode) serializable;
+		}
 		baseTask = scenarioMode;
 		super.onInitData(savedInstanceState);
 
@@ -113,9 +121,22 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
 				if(scenarioMode.saveToLocal(getBaseContext())){
-					toastL("保存成功！");
+					Bundle bundle = new Bundle();
+					bundle.putSerializable(IndexActivity.RETURN_OPTIONAL, scenarioMode);
+					getIntent().putExtras(bundle);
+					if(add){
+						toastL("新建情景模式成功！");
+					}else{
+						toastL("修改情景模式成功！");
+					}
+					setResult(RESULT_OK, getIntent());
+					finishActivity();
 				}else{
-					toastL("保存失败！");
+					if(add){
+						toastL("新建情景模式失败！");
+					}else{
+						toastL("修改情景模式失败！");
+					}
 				}
 				break;
 			default: result = super.onOptionsItemSelected(item); break;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.xiaopan.lifespirit.MyBaseFragmentActivity;
-import me.xiaopan.lifespirit.adapter.TaskListAdapter;
+import me.xiaopan.lifespirit.adapter.FragmentAdapter;
 import me.xiaopan.lifespirit.fragment.AlarmClockListFragment;
 import me.xiaopan.lifespirit.fragment.ScenairoModeListFragment;
 import me.xiaopan.lifespirit2.R;
@@ -17,7 +17,7 @@ public class TaskListActivity extends MyBaseFragmentActivity {
 	private ViewPager viewPager;
 	private PagerTabStrip pagerTabStrip;
 	private List<Fragment> fragmentList;
-	private TaskListAdapter taskListAdapter;
+	private FragmentAdapter taskListAdapter;
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class TaskListActivity extends MyBaseFragmentActivity {
 		fragmentList = new ArrayList<Fragment>(1);
 		fragmentList.add(new ScenairoModeListFragment(getString(R.string.scenarioMode_title)));
 		fragmentList.add(new AlarmClockListFragment(getString(R.string.alarmClock_title)));
-		taskListAdapter = new TaskListAdapter(getSupportFragmentManager(), fragmentList);
+		taskListAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
 		viewPager.setAdapter(taskListAdapter);
 	}
 }

@@ -17,9 +17,7 @@ public class OnlyOneTimeRepeat extends BaseRepeat{
 				(
 						repeat.getTriggerTime().getYear()+context.getString(R.string.base_year)+
 						(repeat.getTriggerTime().getMonth()+1)+context.getString(R.string.base_month)+
-						repeat.getTriggerTime().getDayOfMonth()+context.getString(R.string.base_day) +
-						repeat.getTriggerTime().getHourOfDay()+context.getString(R.string.base_dian) +
-						repeat.getTriggerTime().getMinute()+context.getString(R.string.base_minute)
+						repeat.getTriggerTime().getDayOfMonth()+context.getString(R.string.base_day)
 				)
 		);
 	}

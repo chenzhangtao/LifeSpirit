@@ -7,10 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class TaskListAdapter extends FragmentPagerAdapter{
+public class FragmentAdapter extends FragmentPagerAdapter{
 	private List<Fragment> fragmentList;
 	
-	public TaskListAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+	public FragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
 		super(fm);
 		this.fragmentList = fragmentList;
 	}

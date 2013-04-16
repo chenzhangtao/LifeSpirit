@@ -1,6 +1,5 @@
 package me.xiaopan.lifespirit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.xiaopan.lifespirit.task.BaseTask;
@@ -12,7 +11,7 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		runningTaskList = new ArrayList<BaseTask>();
+		runningTaskList = BaseTask.readEnableTasks(getBaseContext());
 	}
 
 	public List<BaseTask> getRunningTaskList() {

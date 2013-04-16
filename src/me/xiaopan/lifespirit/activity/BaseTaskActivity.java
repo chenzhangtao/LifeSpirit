@@ -44,18 +44,6 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 
 	@Override
 	protected void onInitListener(Bundle savedInstanceState) {
-		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
-			@Override
-			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-				if(baseTask != null){
-					baseTask.getRepeat().getTriggerTime().setHourOfDay(hourOfDay);
-					baseTask.getRepeat().getTriggerTime().setMinute(minute);
-					baseTask.getRepeat().getTriggerTime().update();
-					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
-				}
-			}
-		});
-		
 		namePreference.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -116,6 +104,18 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		
 		namePreference.setSubtitle(baseTask.getName().onGetIntro(getBaseContext()));
 		repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
+		
+		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
+			@Override
+			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+				if(baseTask != null){
+					baseTask.getRepeat().getTriggerTime().setHourOfDay(hourOfDay);
+					baseTask.getRepeat().getTriggerTime().setMinute(minute);
+					baseTask.getRepeat().getTriggerTime().update();
+					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
+				}
+			}
+		});
 	}
 	
 	@Override
