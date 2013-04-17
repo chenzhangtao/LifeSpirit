@@ -31,7 +31,6 @@ import com.google.gson.Gson;
  */
 public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegister{
 	private static final int REQUEST_CODE_REPEAT = 101;
-	public static final String RETURN_OPTIONAL_REPEAT = "RETURN_OPTIONAL_REPEAT";
 	private TimePicker timePicker;
 	protected BaseTask baseTask;
 	private Preference namePreference;
@@ -126,7 +125,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		if(resultCode == RESULT_OK){
 			switch (requestCode) {
 				case REQUEST_CODE_REPEAT:
-					baseTask.setRepeat(new Gson().fromJson(data.getStringExtra(RETURN_OPTIONAL_REPEAT), Repeat.class));
+					baseTask.setRepeat(new Gson().fromJson(data.getStringExtra(RepeatActivity.RETURN_REQUIRED_STRING_REPEAT), Repeat.class));
 					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
 					break;
 				default: break;

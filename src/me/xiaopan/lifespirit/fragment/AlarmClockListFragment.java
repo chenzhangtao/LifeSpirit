@@ -2,12 +2,11 @@ package me.xiaopan.lifespirit.fragment;
 
 import me.xiaopan.androidlibrary.widget.ReboundListView;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AlarmClockListFragment extends Fragment implements BaseFragment{
+public class AlarmClockListFragment extends BaseFragment{
 
 	private String pagerTitle;
 	

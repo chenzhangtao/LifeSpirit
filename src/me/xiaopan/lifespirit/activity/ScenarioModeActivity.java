@@ -18,6 +18,7 @@ import com.google.gson.Gson;
  */
 public class ScenarioModeActivity extends BaseTaskActivity {
 	public static final String PARAM_OPTIONAL_STRING_SCENARIO_MODE = "PARAM_OPTIONAL_SCENARIO_MODE";
+	public static final String RETURN_REQUIRED_STRING_SCENARIO_MODE = "RETURN_REQUIRED_STRING_SCENARIO_MODE";
 	private ScenarioMode scenarioMode;
 	private Preference bluetoothPreference;
 	private Preference wifiPreference;
@@ -122,7 +123,8 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
 				if(scenarioMode.saveToLocal(getBaseContext())){
-					getIntent().putExtra(IndexActivity.RETURN_OPTIONAL_STRING, new Gson().toJson(scenarioMode));
+					getMyApplication().updateTask(scenarioMode);
+					getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
 					setResult(RESULT_OK, getIntent());
 					if(add){
 						toastL("新建情景模式成功！");

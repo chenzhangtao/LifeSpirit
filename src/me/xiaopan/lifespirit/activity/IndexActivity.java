@@ -22,7 +22,6 @@ import com.google.gson.Gson;
 public class IndexActivity extends MyBaseActivity {
 	private static final int REQUEST_CODE_UPDATE_SCENARIO_MODE = 101;
 	private static final int REQUEST_CODE_ADD_SCENARIO_MODE = 102;
-	public static final String RETURN_OPTIONAL_STRING = "RETURN_OPTIONAL_STRING";
 	private Button addTaskButton;
 	private Button taskListButton;
 	private ListView list;
@@ -71,6 +70,12 @@ public class IndexActivity extends MyBaseActivity {
 	protected void onInitData(Bundle savedInstanceState) {
 		list.setAdapter(taskAdapter = new TaskAdapter(getBaseContext(), getMyApplication().getRunningTaskList()));
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		taskAdapter.notifyDataSetChanged();
+	}
 
 	@Override
 	protected boolean isRemoveTitleBar() {
@@ -82,11 +87,11 @@ public class IndexActivity extends MyBaseActivity {
 		if(resultCode == RESULT_OK){
 			switch(requestCode){
 				case REQUEST_CODE_ADD_SCENARIO_MODE : 
-					getMyApplication().getRunningTaskList().add(new Gson().fromJson(data.getStringExtra(RETURN_OPTIONAL_STRING), ScenarioMode.class));
+					getMyApplication().getRunningTaskList().add(new Gson().fromJson(data.getStringExtra(ScenarioModeActivity.RETURN_REQUIRED_STRING_SCENARIO_MODE), ScenarioMode.class));
 					taskAdapter.notifyDataSetChanged();
 					break;
 				case REQUEST_CODE_UPDATE_SCENARIO_MODE : 
-					getMyApplication().getRunningTaskList().set(updateTaskPosition, new Gson().fromJson(data.getStringExtra(RETURN_OPTIONAL_STRING), ScenarioMode.class));
+					getMyApplication().getRunningTaskList().set(updateTaskPosition, new Gson().fromJson(data.getStringExtra(ScenarioModeActivity.RETURN_REQUIRED_STRING_SCENARIO_MODE), ScenarioMode.class));
 					taskAdapter.notifyDataSetChanged();
 					break;
 			}

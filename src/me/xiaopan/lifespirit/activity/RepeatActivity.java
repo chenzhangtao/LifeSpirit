@@ -27,7 +27,8 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 
 public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
-	public static final String PARAM_OPTIONAL_STRING_REPEAT = "PARAM_OPTIONAL_REPEAT";
+	public static final String PARAM_OPTIONAL_STRING_REPEAT = "PARAM_OPTIONAL_STRING_REPEAT";
+	public static final String RETURN_REQUIRED_STRING_REPEAT = "RETURN_REQUIRED_STRING_REPEAT";
 	private Repeat repeat;
 	private Preference onlyOneTimePreference;
 	private Preference statutoryWorkingDaysPreference;
@@ -174,7 +175,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	
 	private void returnResult(RepeatWay repeatWay){
 		repeat.setRepeatWay(repeatWay);
-		getIntent().putExtra(BaseTaskActivity.RETURN_OPTIONAL_REPEAT, new Gson().toJson(repeat));
+		getIntent().putExtra(RETURN_REQUIRED_STRING_REPEAT, new Gson().toJson(repeat));
 		setResult(RESULT_OK, getIntent());
 		finishActivity();
 	}
