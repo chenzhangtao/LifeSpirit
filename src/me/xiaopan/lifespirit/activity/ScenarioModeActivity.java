@@ -1,6 +1,5 @@
 package me.xiaopan.lifespirit.activity;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,11 +11,13 @@ import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
 /**
  * 情景模式界面
  */
 public class ScenarioModeActivity extends BaseTaskActivity {
-	public static final String PARAM_OPTIONAL_SCENARIO_MODE = "PARAM_OPTIONAL_SCENARIO_MODE";
+	public static final String PARAM_OPTIONAL_STRING_SCENARIO_MODE = "PARAM_OPTIONAL_SCENARIO_MODE";
 	private ScenarioMode scenarioMode;
 	private Preference bluetoothPreference;
 	private Preference wifiPreference;
@@ -57,11 +58,11 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		Serializable serializable = getIntent().getSerializableExtra(PARAM_OPTIONAL_SCENARIO_MODE);
-		if(add = !(serializable != null && serializable instanceof ScenarioMode)){
+		String scenairoModeJson = getIntent().getStringExtra(PARAM_OPTIONAL_STRING_SCENARIO_MODE);
+		if(add = scenairoModeJson == null){
 			scenarioMode = new ScenarioMode(getBaseContext());
 		}else{
-			scenarioMode = (ScenarioMode) serializable;
+			scenarioMode = new Gson().fromJson(scenairoModeJson, ScenarioMode.class);
 		}
 		baseTask = scenarioMode;
 		super.onInitData(savedInstanceState);
@@ -121,15 +122,13 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
 				if(scenarioMode.saveToLocal(getBaseContext())){
-					Bundle bundle = new Bundle();
-					bundle.putSerializable(IndexActivity.RETURN_OPTIONAL, scenarioMode);
-					getIntent().putExtras(bundle);
+					getIntent().putExtra(IndexActivity.RETURN_OPTIONAL_STRING, new Gson().toJson(scenarioMode));
+					setResult(RESULT_OK, getIntent());
 					if(add){
 						toastL("新建情景模式成功！");
 					}else{
 						toastL("修改情景模式成功！");
 					}
-					setResult(RESULT_OK, getIntent());
 					finishActivity();
 				}else{
 					if(add){

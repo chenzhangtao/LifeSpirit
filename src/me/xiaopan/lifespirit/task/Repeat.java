@@ -12,7 +12,6 @@ import android.content.Context;
  * 重复
  */
 public class Repeat extends BaseTaskOption{
-	private static final long serialVersionUID = 1L;
 	private RepeatWay repeatWay;
 	private TriggerTime triggerTime;
 	private NextExecuteTime nextExecuteTime;

@@ -8,8 +8,6 @@ import android.content.Context;
  * 每隔多少分钟重复一次
  */
 public class EveryOtherMinuteRepeat extends BaseEveryOtherRepeat{
-	private static final long serialVersionUID = 1L;
-
 	@Override
 	public String onGetIntro(Context context, Repeat repeat) {
 		return context.getString(R.string.repeat_everyOtherMinute, getSpace());

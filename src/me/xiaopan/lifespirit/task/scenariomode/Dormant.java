@@ -9,7 +9,6 @@ import android.content.Context;
  * 休眠
  */
 public class Dormant extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private int dormantTimeInMillis;
 	
 	public Dormant(Context context) {

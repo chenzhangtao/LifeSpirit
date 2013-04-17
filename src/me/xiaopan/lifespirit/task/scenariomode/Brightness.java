@@ -8,7 +8,6 @@ import android.content.Context;
  * 亮度
  */
 public class Brightness extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private int brightness;//亮度
 	private boolean autoAdjustmen;//自动调节
 	

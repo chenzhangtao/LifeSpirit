@@ -8,7 +8,6 @@ import android.media.AudioManager;
  * 铃声模式
  */
 public class RingtoneMode extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private RingnoteModeEnum ringnoteMode;
 
 	public RingtoneMode(Context context) {

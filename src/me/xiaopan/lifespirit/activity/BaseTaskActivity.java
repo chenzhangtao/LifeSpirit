@@ -24,11 +24,14 @@ import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
+import com.google.gson.Gson;
+
 /**
  * 情景模式界面
  */
 public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegister{
 	private static final int REQUEST_CODE_REPEAT = 101;
+	public static final String RETURN_OPTIONAL_REPEAT = "RETURN_OPTIONAL_REPEAT";
 	private TimePicker timePicker;
 	protected BaseTask baseTask;
 	private Preference namePreference;
@@ -89,7 +92,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 			@Override
 			public void onClick(View v) {
 				Bundle bundle = new Bundle();
-				bundle.putSerializable(RepeatActivity.PARAM_OPTIONAL_REPEAT, baseTask.getRepeat());
+				bundle.putString(RepeatActivity.PARAM_OPTIONAL_STRING_REPEAT, new Gson().toJson(baseTask.getRepeat()));
 				startActivityForResult(RepeatActivity.class, REQUEST_CODE_REPEAT, bundle);
 			}
 		});
@@ -123,7 +126,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		if(resultCode == RESULT_OK){
 			switch (requestCode) {
 				case REQUEST_CODE_REPEAT:
-					baseTask.setRepeat((Repeat) data.getSerializableExtra(RepeatActivity.RETURN_OPTIONAL_REPEAT));
+					baseTask.setRepeat(new Gson().fromJson(data.getStringExtra(RETURN_OPTIONAL_REPEAT), Repeat.class));
 					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
 					break;
 				default: break;

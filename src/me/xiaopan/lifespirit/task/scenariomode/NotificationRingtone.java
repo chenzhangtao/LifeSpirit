@@ -6,7 +6,6 @@ import android.content.Context;
  * 通知铃声
  */
 public class NotificationRingtone extends BaseScenarioOption{
-	private static final long serialVersionUID = 1L;
 
 	public NotificationRingtone() {
 	}

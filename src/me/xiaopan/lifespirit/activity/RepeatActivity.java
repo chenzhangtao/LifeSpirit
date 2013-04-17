@@ -1,7 +1,5 @@
 package me.xiaopan.lifespirit.activity;
 
-import java.io.Serializable;
-
 import me.xiaopan.androidlibrary.util.AndroidUtils;
 import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.androidlibrary.util.DialogUtils;
@@ -26,9 +24,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+
 public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
-	public static final String PARAM_OPTIONAL_REPEAT = "PARAM_OPTIONAL_REPEAT";
-	public static final String RETURN_OPTIONAL_REPEAT = "RETURN_OPTIONAL_REPEAT";
+	public static final String PARAM_OPTIONAL_STRING_REPEAT = "PARAM_OPTIONAL_REPEAT";
 	private Repeat repeat;
 	private Preference onlyOneTimePreference;
 	private Preference statutoryWorkingDaysPreference;
@@ -145,8 +144,8 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		Serializable serializable = getIntent().getSerializableExtra(PARAM_OPTIONAL_REPEAT);
-		initRepeat(repeat = (serializable != null && serializable instanceof Repeat)?(Repeat) serializable:new Repeat());
+		String repeatJson = getIntent().getStringExtra(PARAM_OPTIONAL_STRING_REPEAT);
+		initRepeat(repeat = (repeatJson != null)?new Gson().fromJson(repeatJson, Repeat.class):new Repeat());
 	}
 	
 	private void initRepeat(Repeat repeat){
@@ -175,9 +174,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	
 	private void returnResult(RepeatWay repeatWay){
 		repeat.setRepeatWay(repeatWay);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable(RETURN_OPTIONAL_REPEAT, repeat);
-		getIntent().putExtras(bundle);
+		getIntent().putExtra(BaseTaskActivity.RETURN_OPTIONAL_REPEAT, new Gson().toJson(repeat));
 		setResult(RESULT_OK, getIntent());
 		finishActivity();
 	}

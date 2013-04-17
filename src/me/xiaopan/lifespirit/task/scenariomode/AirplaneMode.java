@@ -8,7 +8,6 @@ import android.content.Context;
  * 飞行模式
  */
 public class AirplaneMode extends BaseScenarioOption{
-	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public AirplaneMode(Context context) {

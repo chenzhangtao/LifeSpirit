@@ -14,13 +14,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 /**
  * 首页
  */
 public class IndexActivity extends MyBaseActivity {
-	private static final int REQUEST_CODE_UPDATE = 101;
-	private static final int REQUEST_CODE_ADD = 102;
-	public static final String RETURN_OPTIONAL = "RETURN_OPTIONAL";
+	private static final int REQUEST_CODE_UPDATE_SCENARIO_MODE = 101;
+	private static final int REQUEST_CODE_ADD_SCENARIO_MODE = 102;
+	public static final String RETURN_OPTIONAL_STRING = "RETURN_OPTIONAL_STRING";
 	private Button addTaskButton;
 	private Button taskListButton;
 	private ListView list;
@@ -40,7 +42,7 @@ public class IndexActivity extends MyBaseActivity {
 		addTaskButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivityForResult(ScenarioModeActivity.class, REQUEST_CODE_ADD);
+				startActivityForResult(ScenarioModeActivity.class, REQUEST_CODE_ADD_SCENARIO_MODE);
 			} 
 		});
 
@@ -58,8 +60,8 @@ public class IndexActivity extends MyBaseActivity {
 				BaseTask task = getMyApplication().getRunningTaskList().get(updateTaskPosition);
 				if(task instanceof ScenarioMode){
 					Bundle bundle = new Bundle();
-					bundle.putSerializable(ScenarioModeActivity.PARAM_OPTIONAL_SCENARIO_MODE, task);
-					startActivityForResult(ScenarioModeActivity.class, REQUEST_CODE_UPDATE, bundle);
+					bundle.putString(ScenarioModeActivity.PARAM_OPTIONAL_STRING_SCENARIO_MODE, new Gson().toJson(task));
+					startActivityForResult(ScenarioModeActivity.class, REQUEST_CODE_UPDATE_SCENARIO_MODE, bundle);
 				}
 			}
 		});
@@ -79,12 +81,12 @@ public class IndexActivity extends MyBaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK){
 			switch(requestCode){
-				case REQUEST_CODE_ADD : 
-					getMyApplication().getRunningTaskList().add((BaseTask) data.getSerializableExtra(RETURN_OPTIONAL));
+				case REQUEST_CODE_ADD_SCENARIO_MODE : 
+					getMyApplication().getRunningTaskList().add(new Gson().fromJson(data.getStringExtra(RETURN_OPTIONAL_STRING), ScenarioMode.class));
 					taskAdapter.notifyDataSetChanged();
 					break;
-				case REQUEST_CODE_UPDATE : 
-					getMyApplication().getRunningTaskList().set(updateTaskPosition, (BaseTask) data.getSerializableExtra(RETURN_OPTIONAL));
+				case REQUEST_CODE_UPDATE_SCENARIO_MODE : 
+					getMyApplication().getRunningTaskList().set(updateTaskPosition, new Gson().fromJson(data.getStringExtra(RETURN_OPTIONAL_STRING), ScenarioMode.class));
 					taskAdapter.notifyDataSetChanged();
 					break;
 			}

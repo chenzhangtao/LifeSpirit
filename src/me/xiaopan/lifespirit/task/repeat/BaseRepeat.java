@@ -1,16 +1,12 @@
 package me.xiaopan.lifespirit.task.repeat;
 
-import java.io.Serializable;
-
 import me.xiaopan.lifespirit.task.Repeat;
 import android.content.Context;
 
 /**
  * 重复
  */
-public abstract class BaseRepeat implements Serializable{
-	private static final long serialVersionUID = 1L;
-
+public abstract class BaseRepeat{
 	/**
 	 * 获取简介
 	 * @param context 上下文

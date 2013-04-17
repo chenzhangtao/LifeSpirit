@@ -9,7 +9,6 @@ import android.content.Context;
  * 蓝牙
  */
 public class Bluetooth extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public Bluetooth() {

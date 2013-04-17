@@ -6,7 +6,6 @@ import android.content.Context;
  * 名称
  */
 public class Name extends BaseTaskOption{
-	private static final long serialVersionUID = 1L;
 	private String name;
 
 	@Override

@@ -8,7 +8,6 @@ import android.content.Context;
  * 移动网络
  */
 public class MobileNetwork extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public MobileNetwork(Context context) {

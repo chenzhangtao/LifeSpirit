@@ -8,7 +8,6 @@ import android.content.Context;
  * 打开应用程序
  */
 public class OpenApplication extends BaseTask{
-	private static final long serialVersionUID = 1L;
 	private String applicationName;
 	private String applicationPackageName;
 	

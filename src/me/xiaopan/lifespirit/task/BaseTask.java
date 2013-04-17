@@ -1,7 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +14,10 @@ import com.google.gson.Gson;
 /**
  * 任务基类
  */
-public abstract class BaseTask implements Serializable{
+public abstract class BaseTask{
 	public static final String TASK_DIR = "TASK";
 	public static final String STATE_ENABLE = "ENABLE";
 	public static final String STATE_DISABLE = "DISABLE";
-	private static final long serialVersionUID = 1L;
 	private boolean enable;
 	private CreateTime createTime;
 	private Name name;

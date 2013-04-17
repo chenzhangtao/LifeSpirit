@@ -6,8 +6,6 @@ import android.content.Context;
  * 电话铃声
  */
 public class PhoneRingtone extends BaseScenarioOption{
-	private static final long serialVersionUID = 1L;
-
 	public PhoneRingtone() {
 	}
 

@@ -9,7 +9,6 @@ import android.content.Context;
  * WIFI
  */
 public class WIFI extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public WIFI(Context context) {

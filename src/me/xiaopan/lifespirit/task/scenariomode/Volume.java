@@ -8,7 +8,6 @@ import android.media.AudioManager;
  * 音量
  */
 public class Volume extends BaseScenarioOption {
-	private static final long serialVersionUID = 1L;
 	private int mediaVolume = -5;
 	private int alarmVolume = -5;
 	private int ringtoneVolume = -5;
