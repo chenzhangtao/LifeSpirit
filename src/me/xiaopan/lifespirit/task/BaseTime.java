@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
+import me.xiaopan.javalibrary.util.IntegerUtils;
 import me.xiaopan.javalibrary.util.Time;
 
 public abstract class BaseTime extends Time{
@@ -9,5 +10,9 @@ public abstract class BaseTime extends Time{
 	
 	public BaseTime() {
 		super();
+	}
+	
+	public String getTimeString(){
+		return IntegerUtils.fillZero(getHourOfDay(), 2)+":"+IntegerUtils.fillZero(getMinute(), 2);
 	}
 }

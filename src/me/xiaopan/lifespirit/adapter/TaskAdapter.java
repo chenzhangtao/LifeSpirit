@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.adapter;
 
 import java.util.List;
 
+import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -45,6 +46,7 @@ public class TaskAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			convertView = layoutInflater.inflate(R.layout.list_item_task, null);
 			viewHolder.triggerTimeText = (TextView) convertView.findViewById(R.id.text_taskItem_triggerTime);
+			viewHolder.nameText = (TextView) convertView.findViewById(R.id.text_taskItem_name);
 			viewHolder.repeatText = (TextView) convertView.findViewById(R.id.text_taskItem_repeat);
 			viewHolder.timeRemainingText = (TextView) convertView.findViewById(R.id.text_taskItem_timeRemaining);
 			convertView.setTag(viewHolder);
@@ -53,7 +55,8 @@ public class TaskAdapter extends BaseAdapter {
 		}
 		
 		task = taskList.get(position);
-		viewHolder.triggerTimeText.setText(task.getRepeat().getTriggerTime().getHourOfDay()+":"+task.getRepeat().getTriggerTime().getMinute());
+		viewHolder.triggerTimeText.setText(task.getRepeat().getTriggerTime().getTimeString());
+		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(task.getName().getName())?(" - "+task.getName().getName()):"");
 		viewHolder.repeatText.setText(task.getRepeat().onGetIntro(context));
 		viewHolder.timeRemainingText.setText(null);
 		
@@ -62,6 +65,7 @@ public class TaskAdapter extends BaseAdapter {
 	
 	private class ViewHolder{
 		private TextView triggerTimeText;
+		private TextView nameText;
 		private TextView repeatText;
 		private TextView timeRemainingText;
 	}

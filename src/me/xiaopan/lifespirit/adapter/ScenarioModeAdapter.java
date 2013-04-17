@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.adapter;
 
 import java.util.List;
 
+import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.widget.SlidingToggleButton;
 import me.xiaopan.lifespirit2.R;
@@ -46,6 +47,7 @@ public class ScenarioModeAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			convertView = layoutInflater.inflate(R.layout.list_item_scenairo_mode, null);
 			viewHolder.triggerTimeText = (TextView) convertView.findViewById(R.id.text_scenairoModeItem_triggerTime);
+			viewHolder.nameText = (TextView) convertView.findViewById(R.id.text_scenairoModeItem_name);
 			viewHolder.repeatText = (TextView) convertView.findViewById(R.id.text_scenairoModeItem_repeat);
 			viewHolder.timeRemainingText = (TextView) convertView.findViewById(R.id.text_scenairoModeItem_timeRemaining);
 			viewHolder.slidingToggleButton = (SlidingToggleButton) convertView.findViewById(R.id.slidingToggle_scenairoModeItem);
@@ -55,7 +57,8 @@ public class ScenarioModeAdapter extends BaseAdapter {
 		}
 		
 		scenarioMode = scenarioModeList.get(position);
-		viewHolder.triggerTimeText.setText(scenarioMode.getRepeat().getTriggerTime().getHourOfDay()+":"+scenarioMode.getRepeat().getTriggerTime().getMinute());
+		viewHolder.triggerTimeText.setText(scenarioMode.getRepeat().getTriggerTime().getTimeString());
+		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(scenarioMode.getName().getName())?(" - "+scenarioMode.getName().getName()):"");
 		viewHolder.repeatText.setText(scenarioMode.getRepeat().onGetIntro(context));
 		viewHolder.timeRemainingText.setText(null);
 		viewHolder.slidingToggleButton.setChecked(scenarioMode.isEnable());
@@ -65,6 +68,7 @@ public class ScenarioModeAdapter extends BaseAdapter {
 	
 	private class ViewHolder{
 		private TextView triggerTimeText;
+		private TextView nameText;
 		private TextView repeatText;
 		private TextView timeRemainingText;
 		private SlidingToggleButton slidingToggleButton;

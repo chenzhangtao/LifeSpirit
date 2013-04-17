@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_listItem">
 	<LinearLayout style="@style/base_layout_weight_wrap_vertical">
-	    <TextView style="@style/comm_text_match" android:id="@+id/text_scenairoModeItem_triggerTime"/>
-	    <TextView style="@style/comm_text_match" android:id="@+id/text_scenairoModeItem_repeat"/>
-	    <TextView style="@style/comm_text_match" android:id="@+id/text_scenairoModeItem_timeRemaining"/>
+		<LinearLayout style="@style/base_layout_match_wrap">
+		    <TextView 
+		        style="@style/comm_text" 
+		        android:id="@+id/text_scenairoModeItem_triggerTime" 
+		        android:textSize="@dimen/base_textSize_specialLarge" 
+		        android:textStyle="bold"/>
+		    <TextView 
+		        style="@style/comm_text" 
+		        android:id="@+id/text_scenairoModeItem_name"
+		        android:textColor="@color/base_gray"
+		        />
+	    </LinearLayout>
+	    <TextView 
+	        style="@style/comm_text_match" 
+	        android:id="@+id/text_scenairoModeItem_repeat"
+	        android:textColor="@color/base_gray"/>
+	    <TextView 
+	        style="@style/comm_text_match" 
+	        android:id="@+id/text_scenairoModeItem_timeRemaining"
+	        android:textColor="@color/base_gray"/>
 	</LinearLayout>
 	
 	<me.xiaopan.lifespirit.widget.SlidingToggleButton style="@style/base_layout_wrap_wrap" android:id="@+id/slidingToggle_scenairoModeItem"/>
