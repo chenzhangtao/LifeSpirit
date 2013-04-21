@@ -196,13 +196,13 @@ public class Preference extends LinearLayout{
 				case TYPE_NONE : 
 					//箭头
 					arrowImage = new ImageView(getContext());
-					arrowImage.setImageResource(R.drawable.ic_arrow_right);
+					arrowImage.setImageResource(R.drawable.icon_arrow_right);
 					addView(arrowImage);
 					break;
 				case TYPE_NEXT : 
 					nextImageButton = new ImageButton(getContext());
 					nextImageButton.setBackgroundColor(Colors.TRANSPARENT);
-					nextImageButton.setImageResource(R.drawable.selector_btn_preference_next);
+					nextImageButton.setImageResource(R.drawable.selector_button_preference_next);
 					nextImageButton.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {

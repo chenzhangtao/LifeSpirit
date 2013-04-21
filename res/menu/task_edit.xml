@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_task_save" 
         android:title="@string/base_save"
-        android:icon="@drawable/ic_confirm"
+        android:icon="@drawable/icon_confirm"
         android:showAsAction="always|withText"
         />
     <item android:id="@id/comm_menu_settings" 
         android:title="@string/base_settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/icon_settings"
         android:showAsAction="never"
         />
 </menu>

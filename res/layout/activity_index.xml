@@ -12,7 +12,7 @@
 	
 	<!-- 功能 -->
 	<RelativeLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge">
-	    <Button android:id="@+id/button_index_addTask" style="@style/base_layout_wrap_wrap" android:background="@drawable/selector_ic_add" android:layout_alignParentLeft="true"/>
-		<Button android:id="@+id/button_index_taskList" style="@style/base_layout_wrap_wrap" android:background="@drawable/ic_list" android:layout_alignParentRight="true"/>
+	    <Button android:id="@+id/button_index_addTask" style="@style/base_layout_wrap_wrap" android:background="@drawable/selector_button_add" android:layout_alignParentLeft="true"/>
+		<Button android:id="@+id/button_index_taskList" style="@style/base_layout_wrap_wrap" android:background="@drawable/icon_list" android:layout_alignParentRight="true"/>
 	</RelativeLayout>
 </LinearLayout>

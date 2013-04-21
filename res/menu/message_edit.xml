@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_messageEdit_contacts" 
         android:title="@string/messageEdit_but_contacts"
-        android:icon="@drawable/ic_contacts"
+        android:icon="@drawable/icon_contacts"
         android:showAsAction="always|withText"
         />
     <item android:id="@id/comm_menu_stop" 
@@ -11,7 +11,7 @@
         />
     <item android:id="@id/comm_menu_settings" 
         android:title="@string/base_settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/icon_settings"
         android:showAsAction="never"
         />
     <item android:id="@id/comm_menu_exit" 

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_taskList_add" 
         android:title="@string/base_add"
-        android:icon="@drawable/ic_add"
+        android:icon="@drawable/icon_add"
         android:showAsAction="always|withText"
         />
     <item android:id="@+id/menu_taskList_refresh" 
         android:title="@string/base_refresh"
-        android:icon="@drawable/ic_refresh"
+        android:icon="@drawable/icon_refresh"
         android:showAsAction="always|withText"
         />
     <item android:id="@+id/menu_taskList_sort" 
         android:title="@string/base_sort"
-        android:icon="@drawable/ic_sort"
+        android:icon="@drawable/icon_sort"
         android:showAsAction="ifRoom|withText"
         />
     <item android:id="@id/comm_menu_stop" 
@@ -21,7 +21,7 @@
         />
     <item android:id="@id/comm_menu_settings" 
         android:title="@string/base_settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/icon_settings"
         android:showAsAction="never"
         />
     <item android:id="@id/comm_menu_exit" 
