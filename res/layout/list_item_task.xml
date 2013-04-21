@@ -4,7 +4,7 @@
 	    <TextView 
 	        style="@style/comm_text" 
 	        android:id="@+id/text_taskItem_triggerTime" 
-	        android:textSize="@dimen/base_textSize_specialLarge" 
+	        android:textSize="26sp" 
 	        android:textStyle="bold"/>
 	    <TextView 
 	        style="@style/comm_text" 

@@ -5,7 +5,6 @@ import me.xiaopan.lifespirit.adapter.TaskAdapter;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit2.R;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -80,21 +79,5 @@ public class IndexActivity extends MyBaseActivity {
 	@Override
 	protected boolean isRemoveTitleBar() {
 		return true;
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(resultCode == RESULT_OK){
-			switch(requestCode){
-				case REQUEST_CODE_ADD_SCENARIO_MODE : 
-					getMyApplication().getRunningTaskList().add(new Gson().fromJson(data.getStringExtra(ScenarioModeActivity.RETURN_REQUIRED_STRING_SCENARIO_MODE), ScenarioMode.class));
-					taskAdapter.notifyDataSetChanged();
-					break;
-				case REQUEST_CODE_UPDATE_SCENARIO_MODE : 
-					getMyApplication().getRunningTaskList().set(updateTaskPosition, new Gson().fromJson(data.getStringExtra(ScenarioModeActivity.RETURN_REQUIRED_STRING_SCENARIO_MODE), ScenarioMode.class));
-					taskAdapter.notifyDataSetChanged();
-					break;
-			}
-		}
 	}
 }

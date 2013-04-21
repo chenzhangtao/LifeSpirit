@@ -116,7 +116,7 @@ public abstract class BaseTask{
 			}
 			return tasks;
 		}else{
-			return null;
+			return new ArrayList<BaseTask>(0);
 		}
 	}
 	

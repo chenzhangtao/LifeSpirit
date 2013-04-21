@@ -134,4 +134,6 @@
 
 	<string name="taskList_title">任务列表</string>
 	<string name="alarmClock_title">闹钟</string>
+	
+	<string name="listItem_name">| %s</string>
 </resources>

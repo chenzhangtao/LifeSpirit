@@ -22,7 +22,7 @@ public class MyApplication extends Application {
 		this.runningTaskList = runningTaskList;
 	}
 	
-	public void updateTask(BaseTask task){
+	public void updateRunningTaskList(BaseTask task){
 		int location = findTask(task);
 		//如果当前运行任务列表中存在此任务
 		if(location != -1){

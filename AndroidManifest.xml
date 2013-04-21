@@ -36,5 +36,6 @@
         <activity android:name="me.xiaopan.lifespirit.activity.TaskListActivity" android:label="@string/taskList_title"/>
         <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/scenarioMode_title"/>
         <activity android:name="me.xiaopan.lifespirit.activity.RepeatActivity" android:label="@string/repeat_title"/>
+        <service android:name="me.xiaopan.lifespirit.service.TaskService"/>
     </application>
 </manifest>
