@@ -123,7 +123,7 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
 				if(scenarioMode.saveToLocal(getBaseContext())){
-					getMyApplication().updateRunningTaskList(scenarioMode);
+					getMyApplication().getRunningTaskManager().updateTask(scenarioMode);
 					getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
 					setResult(RESULT_OK, getIntent());
 					if(add){

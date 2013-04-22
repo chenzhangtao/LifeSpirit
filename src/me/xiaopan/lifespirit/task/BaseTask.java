@@ -1,12 +1,8 @@
 package me.xiaopan.lifespirit.task;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
-import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
 import android.content.Context;
 
 import com.google.gson.Gson;
@@ -93,33 +89,6 @@ public abstract class BaseTask{
 	 */
 	public abstract String onGetType();
 
-	public static List<BaseTask> readEnableTasks(Context context) {
-		FileScanner fileScanner = new FileScanner(new File(context.getFilesDir().getPath()+File.separator+TASK_DIR));
-		fileScanner.setFileTypeFilterWay(StringCheckUpWayEnum.ENDS_WITH_KEYWORDS);
-		fileScanner.addFileTypeKeyWords(STATE_ENABLE);
-		List<File> files = fileScanner.scan();
-		if(files != null && files.size() > 0){
-			List<BaseTask> tasks = new ArrayList<BaseTask>(files.size());
-			Gson gson = new Gson();
-			String string = null;
-			String fileName = null;
-			for(File file : files){
-				try {
-					string = FileUtils.readString(file);
-					fileName = file.getName();
-					if(fileName.contains(ScenarioMode.TYPE)){
-						tasks.add(gson.fromJson(string, ScenarioMode.class));
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			return tasks;
-		}else{
-			return new ArrayList<BaseTask>(0);
-		}
-	}
-	
 	public boolean isEnable() {
 		return enable;
 	}

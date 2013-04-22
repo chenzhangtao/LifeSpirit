@@ -55,7 +55,7 @@ public class IndexActivity extends MyBaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				updateTaskPosition = position - list.getHeaderViewsCount();
-				BaseTask task = getMyApplication().getRunningTaskList().get(updateTaskPosition);
+				BaseTask task = getMyApplication().getRunningTaskManager().getRunningTaskList().get(updateTaskPosition);
 				if(task instanceof ScenarioMode){
 					Bundle bundle = new Bundle();
 					bundle.putString(ScenarioModeActivity.PARAM_OPTIONAL_STRING_SCENARIO_MODE, new Gson().toJson(task));
@@ -67,7 +67,7 @@ public class IndexActivity extends MyBaseActivity {
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		list.setAdapter(taskAdapter = new TaskAdapter(getBaseContext(), getMyApplication().getRunningTaskList()));
+		list.setAdapter(taskAdapter = new TaskAdapter(getBaseContext(), getMyApplication().getRunningTaskManager().getRunningTaskList()));
 	}
 	
 	@Override
