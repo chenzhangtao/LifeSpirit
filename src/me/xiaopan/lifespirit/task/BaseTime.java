@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task;
 import me.xiaopan.javalibrary.util.IntegerUtils;
 import me.xiaopan.javalibrary.util.Time;
 
-public abstract class BaseTime extends Time{
+public class BaseTime extends Time{
 	public BaseTime(long milliseconds) {
 		super(milliseconds);
 	}

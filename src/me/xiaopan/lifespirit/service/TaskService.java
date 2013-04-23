@@ -1,11 +1,5 @@
 package me.xiaopan.lifespirit.service;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import me.xiaopan.androidlibrary.util.BroadcastUtils;
-import me.xiaopan.javalibrary.util.DateTimeUtils;
-import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.TaskListActivity;
 import me.xiaopan.lifespirit2.R;
@@ -14,7 +8,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
@@ -35,74 +28,74 @@ public class TaskService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		//设置Applicaiton对象
-		myApplication = (MyApplication) getApplication();
-		//如果有可执行任务
-		if(myApplication.getNextExecuteTask() != null){
-			//获取报警管理器
-			alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-			//根据当前时间创建日历对象
-			GregorianCalendar  calendar = new GregorianCalendar();
-			//将时间向后推一分钟
-			calendar.add(Calendar.MINUTE, 1);
-			calendar.set(Calendar.SECOND, 0);
-			//实例化启动服务的Intent
-			setStartServiceIntent(PendingIntent.getService(ExecuteTaskService.this, 0, new Intent(ExecuteTaskService.this, ExecuteTaskService.class), 0));
-			//将启动服务的Intent添加到报警管理器中
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);
-			//设置后台服务的状态为正在运行
-			myApplication.getPreferencesManager().setBackgServiceRunning(true);
-		}else{
-			//停止服务
-			stopSevice();
-			//设置后台服务的状态为停止
-			myApplication.getPreferencesManager().setBackgServiceRunning(false);
-		}
+//		//设置Applicaiton对象
+//		myApplication = (MyApplication) getApplication();
+//		//如果有可执行任务
+//		if(myApplication.getNextExecuteTask() != null){
+//			//获取报警管理器
+//			alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//			//根据当前时间创建日历对象
+//			GregorianCalendar  calendar = new GregorianCalendar();
+//			//将时间向后推一分钟
+//			calendar.add(Calendar.MINUTE, 1);
+//			calendar.set(Calendar.SECOND, 0);
+//			//实例化启动服务的Intent
+//			setStartServiceIntent(PendingIntent.getService(ExecuteTaskService.this, 0, new Intent(ExecuteTaskService.this, ExecuteTaskService.class), 0));
+//			//将启动服务的Intent添加到报警管理器中
+//			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);
+//			//设置后台服务的状态为正在运行
+//			myApplication.getPreferencesManager().setBackgServiceRunning(true);
+//		}else{
+//			//停止服务
+//			stopSevice();
+//			//设置后台服务的状态为停止
+//			myApplication.getPreferencesManager().setBackgServiceRunning(false);
+//		}
 	}
 
 	@Override
 	public void onStart(Intent intent, int startId) {
-		//如果有可执行任务
-		if(myApplication.getNextExecuteTask() != null){
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					//发送正在运行通知
-					sendRunningNotification();
-
-					//比较当前时间和下次要执行的任务的时间
-					int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-					int result = Time.contrastTime(
-						currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4], 
-						myApplication.getNextExecuteTask().getNextExecuteTime().getYear(), myApplication.getNextExecuteTask().getNextExecuteTime().getMonth(), 
-						myApplication.getNextExecuteTask().getNextExecuteTime().getDay(), myApplication.getNextExecuteTask().getNextExecuteTime().getHour(), 
-						myApplication.getNextExecuteTask().getNextExecuteTime().getMinute()
-					);
-
-					//如果当前时间大于或等于执行时间
-					if(result >= 0){
-						//执行任务
-						myApplication.getNextExecuteTask().execute();
-						//更新下次执行的任务
-						myApplication.updateNextExecuteTask();
-						//如果依然有可执行任务
-						if(myApplication.getNextExecuteTask() != null){
-							//发送正在运行通知
-							sendRunningNotification();
-						}else{
-							//停止服务
-							stopSevice();
-						}
-					}
-
-					//向任务列表界面发送刷新广播
-					BroadcastUtils.sendBroadcast(getBaseContext(), TaskListActivity.BROADCAST_FILETER_ACTION_TASKLISTACTIVITY);
-				}
-			}).start();
-		}else{
-			//停止服务
-			stopSevice();
-		}
+//		//如果有可执行任务
+//		if(myApplication.getNextExecuteTask() != null){
+//			new Thread(new Runnable() {
+//				@Override
+//				public void run() {
+//					//发送正在运行通知
+//					sendRunningNotification();
+//
+//					//比较当前时间和下次要执行的任务的时间
+//					int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
+//					int result = Time.contrastTime(
+//						currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4], 
+//						myApplication.getNextExecuteTask().getNextExecuteTime().getYear(), myApplication.getNextExecuteTask().getNextExecuteTime().getMonth(), 
+//						myApplication.getNextExecuteTask().getNextExecuteTime().getDay(), myApplication.getNextExecuteTask().getNextExecuteTime().getHour(), 
+//						myApplication.getNextExecuteTask().getNextExecuteTime().getMinute()
+//					);
+//
+//					//如果当前时间大于或等于执行时间
+//					if(result >= 0){
+//						//执行任务
+//						myApplication.getNextExecuteTask().execute();
+//						//更新下次执行的任务
+//						myApplication.updateNextExecuteTask();
+//						//如果依然有可执行任务
+//						if(myApplication.getNextExecuteTask() != null){
+//							//发送正在运行通知
+//							sendRunningNotification();
+//						}else{
+//							//停止服务
+//							stopSevice();
+//						}
+//					}
+//
+//					//向任务列表界面发送刷新广播
+//					BroadcastUtils.sendBroadcast(getBaseContext(), TaskListActivity.BROADCAST_FILETER_ACTION_TASKLISTACTIVITY);
+//				}
+//			}).start();
+//		}else{
+//			//停止服务
+//			stopSevice();
+//		}
 	}
 
 	@Override
@@ -118,7 +111,7 @@ public class TaskService extends Service {
 		sendStopNotificatiion();
 
 		//将服务的状态标记为已经停止
-		myApplication.getPreferencesManager().setBackgServiceRunning(false);
+//		myApplication.getPreferencesManager().setBackgServiceRunning(false);
 	}
 
 	/**
@@ -134,27 +127,27 @@ public class TaskService extends Service {
 	 * 发送运行中通知
 	 */
 	private void sendRunningNotification(){
-		//初始化要启动程序的Intent
-		Intent intent = new Intent(Intent.ACTION_MAIN);
-		//添加种类为要运行程序
-		intent.addCategory(Intent.CATEGORY_LAUNCHER);
-		//设置要运行的应用程序的包名以及主Activity
-		intent.setComponent(new ComponentName(this.getPackageName(), this.getPackageName() + ".activity.TaskListActivity" ));
-		//关键的一步，设置启动模式为如果有需要的话就重新创建
-		intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-		//初始化要发送的通知
-		Notification notifications = new Notification(R.drawable.ic_launcher, getString(R.string.app_name), System.currentTimeMillis());
-		//将通知标记为不可清除
-		notifications.flags = Notification.FLAG_NO_CLEAR;
-		//设置要显示的信息
-		notifications.setLatestEventInfo(
-			this, 
-			myApplication.getNextExecuteTask().getNextExecuteTime().getRemainingTime() + myApplication.getNextExecuteTask().getTaskName().getShowInTaskInfoText(), 
-			myApplication.getNextExecuteTask().getTaskInfo() , 
-			PendingIntent.getActivity(this, 0, intent, 0)
-		);
-		//将通知设为前台通知，同时与该服务绑定，使该服务不会被系统回收
-		startForeground(notificationId, notifications);
+//		//初始化要启动程序的Intent
+//		Intent intent = new Intent(Intent.ACTION_MAIN);
+//		//添加种类为要运行程序
+//		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+//		//设置要运行的应用程序的包名以及主Activity
+//		intent.setComponent(new ComponentName(this.getPackageName(), this.getPackageName() + ".activity.TaskListActivity" ));
+//		//关键的一步，设置启动模式为如果有需要的话就重新创建
+//		intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+//		//初始化要发送的通知
+//		Notification notifications = new Notification(R.drawable.ic_launcher, getString(R.string.app_name), System.currentTimeMillis());
+//		//将通知标记为不可清除
+//		notifications.flags = Notification.FLAG_NO_CLEAR;
+//		//设置要显示的信息
+//		notifications.setLatestEventInfo(
+//			this, 
+//			myApplication.getNextExecuteTask().getNextExecuteTime().getRemainingTime() + myApplication.getNextExecuteTask().getTaskName().getShowInTaskInfoText(), 
+//			myApplication.getNextExecuteTask().getTaskInfo() , 
+//			PendingIntent.getActivity(this, 0, intent, 0)
+//		);
+//		//将通知设为前台通知，同时与该服务绑定，使该服务不会被系统回收
+//		startForeground(notificationId, notifications);
 	}
 
 	/**

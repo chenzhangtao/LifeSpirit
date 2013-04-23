@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task.repeat;
 
+import me.xiaopan.lifespirit.task.BaseTime;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -7,7 +8,7 @@ import android.content.Context;
 /**
  * 只执行一次
  */
-public class OnlyOneTimeRepeat extends BaseRepeat{
+public class OnlyOneTimeRepeat extends BaseRepeatWay{
 	@Override
 	public String onGetIntro(Context context, Repeat repeat) {
 		return context.getString(
@@ -18,5 +19,15 @@ public class OnlyOneTimeRepeat extends BaseRepeat{
 						repeat.getTriggerTime().getDayOfMonth()+context.getString(R.string.base_day)
 				)
 		);
+	}
+
+	@Override
+	public BaseTime onGetNextExecuteTime(Repeat repeat) {
+		return null;
+	}
+
+	@Override
+	public boolean isExecute(Repeat repeat) {
+		return false;
 	}
 }

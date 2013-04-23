@@ -12,9 +12,10 @@ import android.content.Context;
  * 重复
  */
 public class Repeat extends BaseTaskOption{
+	private BaseTime triggerTime;
+	private BaseTime nextExecuteTime;
+	private BaseTime lastExecuteTime;
 	private RepeatWay repeatWay;
-	private TriggerTime triggerTime;
-	private NextExecuteTime nextExecuteTime;
 	private OnlyOneTimeRepeat onlyOneTimeRepeat;
 	private StatutoryWorkingDaysRepeat statutoryWorkingDaysRepeat;
 	private LegalAndOffDayRepeat legalAndOffDayRepeat;
@@ -23,15 +24,14 @@ public class Repeat extends BaseTaskOption{
 	private EveryOtherDayRepeat everyOtherDayRepeat;
 	
 	public Repeat(){
-		setRepeatWay(RepeatWay.ONLY_ONE_TIME);
-		setTriggerTime(new TriggerTime());
-		setNextExecuteTime(new NextExecuteTime());
+		setTriggerTime(new BaseTime());
 		setOnlyOneTimeRepeat(new OnlyOneTimeRepeat());
 		setStatutoryWorkingDaysRepeat(new StatutoryWorkingDaysRepeat());
 		setLegalAndOffDayRepeat(new LegalAndOffDayRepeat());
 		setEveryOtherMinuteRepeat(new EveryOtherMinuteRepeat());
 		setEveryOtherHourRepeat(new EveryOtherHourRepeat());
 		setEveryOtherDayRepeat(new EveryOtherDayRepeat());
+		setRepeatWay(RepeatWay.ONLY_ONE_TIME);
 	}
 	
 	/**
@@ -57,6 +57,29 @@ public class Repeat extends BaseTaskOption{
 			return null;
 		}
 	}
+	
+	/**
+	 * 更新下次执行时间
+	 * @return true：更新成功；false：更新失败，任务已经终止
+	 */
+	public boolean updateNextExecuteTime(){
+		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
+			setNextExecuteTime(onlyOneTimeRepeat.onGetNextExecuteTime(this));
+		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
+			setNextExecuteTime(statutoryWorkingDaysRepeat.onGetNextExecuteTime(this));
+		}else if(repeatWay == RepeatWay.LEGAL_AND_OFF_DAY){
+			setNextExecuteTime(legalAndOffDayRepeat.onGetNextExecuteTime(this));
+		}else if(repeatWay == RepeatWay.EVERY_OTHER_DAY){
+			setNextExecuteTime(everyOtherDayRepeat.onGetNextExecuteTime(this));
+		}else if(repeatWay == RepeatWay.EVERY_OTHER_HOUR){
+			setNextExecuteTime(everyOtherHourRepeat.onGetNextExecuteTime(this));
+		}else if(repeatWay == RepeatWay.EVERY_OTHER_MINUTE){
+			setNextExecuteTime(everyOtherMinuteRepeat.onGetNextExecuteTime(this));
+		}else{
+			setNextExecuteTime(null);
+		}
+		return getNextExecuteTime() != null;
+	}
 
 	public RepeatWay getRepeatWay() {
 		return repeatWay;
@@ -66,19 +89,27 @@ public class Repeat extends BaseTaskOption{
 		this.repeatWay = repeatWay;
 	}
 
-	public NextExecuteTime getNextExecuteTime() {
+	public BaseTime getNextExecuteTime() {
 		return nextExecuteTime;
 	}
 
-	public void setNextExecuteTime(NextExecuteTime nextExecuteTime) {
+	public void setNextExecuteTime(BaseTime nextExecuteTime) {
 		this.nextExecuteTime = nextExecuteTime;
 	}
 
-	public TriggerTime getTriggerTime() {
+	public BaseTime getLastExecuteTime() {
+		return lastExecuteTime;
+	}
+
+	public void setLastExecuteTime(BaseTime lastExecuteTime) {
+		this.lastExecuteTime = lastExecuteTime;
+	}
+
+	public BaseTime getTriggerTime() {
 		return triggerTime;
 	}
 
-	public void setTriggerTime(TriggerTime triggerTime) {
+	public void setTriggerTime(BaseTime triggerTime) {
 		this.triggerTime = triggerTime;
 	}
 	

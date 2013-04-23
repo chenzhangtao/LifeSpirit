@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import me.xiaopan.lifespirit.task.BaseTaskOption;
+import me.xiaopan.lifespirit.task.BaseTime;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
@@ -122,15 +123,22 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		boolean result = true;
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
+				/* 如果是新添加的任务，就设置其创建时间以及上次执行时间 */
+				if(add){
+					scenarioMode.setCreateTime(new BaseTime());
+					scenarioMode.getRepeat().setLastExecuteTime(scenarioMode.getCreateTime());
+				}
+				
+				/* 将任务保存到本地 */
 				if(scenarioMode.saveToLocal(getBaseContext())){
-					getMyApplication().getRunningTaskManager().updateTask(scenarioMode);
-					getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
-					setResult(RESULT_OK, getIntent());
 					if(add){
 						toastL("新建情景模式成功！");
 					}else{
 						toastL("修改情景模式成功！");
 					}
+					getMyApplication().getRunningTaskManager().updateTask(scenarioMode);
+					getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
+					setResult(RESULT_OK, getIntent());
 					finishActivity();
 				}else{
 					if(add){

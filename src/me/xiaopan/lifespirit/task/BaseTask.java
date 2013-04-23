@@ -15,7 +15,7 @@ public abstract class BaseTask{
 	public static final String STATE_ENABLE = "ENABLE";
 	public static final String STATE_DISABLE = "DISABLE";
 	private boolean enable;
-	private CreateTime createTime;
+	private BaseTime createTime;
 	private Name name;
 	private Repeat repeat;
 	
@@ -24,7 +24,6 @@ public abstract class BaseTask{
 	 */
 	public BaseTask(){
 		setEnable(true);
-		setCreateTime(new CreateTime());
 		setName(new Name());
 		setRepeat(new Repeat());
 	}
@@ -88,6 +87,14 @@ public abstract class BaseTask{
 	 * @return
 	 */
 	public abstract String onGetType();
+	
+	/**
+	 * 更新下次执行时间
+	 * @return true：更新成功；false：更新失败，任务已经终止
+	 */
+	public boolean updateNextExecuteTime(){
+		return getRepeat().updateNextExecuteTime();
+	}
 
 	public boolean isEnable() {
 		return enable;
@@ -97,11 +104,11 @@ public abstract class BaseTask{
 		this.enable = enable;
 	}
 
-	public CreateTime getCreateTime() {
+	public BaseTime getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(CreateTime createTime) {
+	public void setCreateTime(BaseTime createTime) {
 		this.createTime = createTime;
 	}
 
