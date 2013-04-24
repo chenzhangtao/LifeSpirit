@@ -58,7 +58,7 @@ public class ScenarioMode extends BaseTask{
 	}
 	
 	@Override
-	public String onGetIntro(Context context){
+	public String getIntro(Context context){
 		return "";
 	}
 
@@ -84,12 +84,12 @@ public class ScenarioMode extends BaseTask{
 	}
 
 	@Override
-	public String onGetType() {
+	public String getType() {
 		return TYPE;
 	}
 	
 	@Override
-	public void onExecute(Context context){
+	public void execute(Context context){
 		if(isEnable()){
 			getBluetooth().onExecute(context);
 			getMobileNetwork().onExecute(context);
@@ -100,6 +100,16 @@ public class ScenarioMode extends BaseTask{
 			getRingtoneMode().onExecute(context);
 			getAirplaneMode().onExecute(context);
 		}
+	}
+
+	@Override
+	public boolean isExecute(BaseTime currentTime) {
+		return false;
+	}
+
+	@Override
+	public boolean isRemind() {
+		return false;
 	}
 
 	public Bluetooth getBluetooth() {

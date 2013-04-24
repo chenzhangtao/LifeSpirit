@@ -37,14 +37,14 @@ public abstract class BaseTask{
 		boolean saveSuccess = true;
 		
 		//先删除旧文件
-		File oldSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+onGetType()+"_"+(enable?STATE_DISABLE:STATE_ENABLE));
+		File oldSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+getType()+"_"+(enable?STATE_DISABLE:STATE_ENABLE));
 		if(oldSaveFile.exists()){
 			oldSaveFile.delete();
 		}
 		
 		//再创建新文件
 		try {
-			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+onGetType()+"_"+(enable?STATE_ENABLE:STATE_DISABLE));
+			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+getType()+"_"+(enable?STATE_ENABLE:STATE_DISABLE));
 			if(!newSaveFile.exists()){
 				//先确保父目录的存在，如果不存在就创建
 				File parentFile= newSaveFile.getParentFile();
@@ -74,19 +74,32 @@ public abstract class BaseTask{
 	 * @param context 上下文
 	 * @return 信息
 	 */
-	public abstract String onGetIntro(Context context);
+	public abstract String getIntro(Context context);
 	
 	/**
 	 * 执行
 	 * @param context 上下文
 	 */
-	public abstract void onExecute(Context context);
+	public abstract void execute(Context context);
 	
 	/**
 	 * 获取类型
 	 * @return
 	 */
-	public abstract String onGetType();
+	public abstract String getType();
+	
+	/**
+	 * 判断是否执行
+	 * @param currentTime 当前时间
+	 * @return
+	 */
+	public abstract boolean isExecute(BaseTime currentTime);
+	
+	/**
+	 * 是否提醒
+	 * @return
+	 */
+	public abstract boolean isRemind();
 	
 	/**
 	 * 更新下次执行时间

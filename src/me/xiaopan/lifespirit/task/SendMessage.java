@@ -19,7 +19,7 @@ public class SendMessage extends BaseTask{
 	}
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return null;
 	}
 
@@ -33,12 +33,12 @@ public class SendMessage extends BaseTask{
 	}
 
 	@Override
-	public String onGetType() {
+	public String getType() {
 		return null;
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void execute(Context context) {
 		if(isEnable()){
 			SmsManager smsManager = SmsManager.getDefault();
 			List<String> contentList = smsManager.divideMessage(messageContent);
@@ -49,6 +49,16 @@ public class SendMessage extends BaseTask{
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isExecute(BaseTime currentTime) {
+		return false;
+	}
+
+	@Override
+	public boolean isRemind() {
+		return false;
 	}
 
 	public List<Contacts> getContactsList() {

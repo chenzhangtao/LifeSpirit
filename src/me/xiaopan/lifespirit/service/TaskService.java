@@ -1,7 +1,14 @@
 package me.xiaopan.lifespirit.service;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import me.xiaopan.androidlibrary.util.BroadcastUtils;
 import me.xiaopan.lifespirit.MyApplication;
+import me.xiaopan.lifespirit.activity.IndexActivity;
 import me.xiaopan.lifespirit.activity.TaskListActivity;
+import me.xiaopan.lifespirit.task.BaseTask;
+import me.xiaopan.lifespirit.task.BaseTime;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -13,12 +20,12 @@ import android.content.Intent;
 import android.os.IBinder;
 
 public class TaskService extends Service {
-	private static final int notificationId = 1001;//通知ID
+	private static final int NOTIFICATION_ID = 1001;//通知ID
 	private static final int STOP_TYPE_NOT_EXECUTE_TESK = -5;//任务停止类型 - 由于没有可执行任务而停止
 	private MyApplication myApplication;//MyApplication对象
-	private int stopType = 0;//服务停止类型，根据不同的类型提示不同的内容。0：正常停止；1：由于没有可执行任务而停止
 	private PendingIntent startServiceIntent; //启动Service的Intent
 	private AlarmManager alarmManager;//报警管理器
+	private int stopType = 0;//服务停止类型，根据不同的类型提示不同的内容。0：正常停止；1：由于没有可执行任务而停止
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -28,74 +35,56 @@ public class TaskService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-//		//设置Applicaiton对象
-//		myApplication = (MyApplication) getApplication();
-//		//如果有可执行任务
-//		if(myApplication.getNextExecuteTask() != null){
-//			//获取报警管理器
-//			alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//			//根据当前时间创建日历对象
-//			GregorianCalendar  calendar = new GregorianCalendar();
-//			//将时间向后推一分钟
-//			calendar.add(Calendar.MINUTE, 1);
-//			calendar.set(Calendar.SECOND, 0);
-//			//实例化启动服务的Intent
-//			setStartServiceIntent(PendingIntent.getService(ExecuteTaskService.this, 0, new Intent(ExecuteTaskService.this, ExecuteTaskService.class), 0));
-//			//将启动服务的Intent添加到报警管理器中
-//			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);
-//			//设置后台服务的状态为正在运行
-//			myApplication.getPreferencesManager().setBackgServiceRunning(true);
-//		}else{
-//			//停止服务
-//			stopSevice();
-//			//设置后台服务的状态为停止
-//			myApplication.getPreferencesManager().setBackgServiceRunning(false);
-//		}
+		myApplication = (MyApplication) getApplication();
+		
+		//如果有可执行任务就继续否则就停止
+		if(!myApplication.getRunningTaskManager().isEmpty()){
+			startServiceIntent = PendingIntent.getService(getBaseContext(), 0, new Intent(getBaseContext(), TaskService.class), 0);//实例化启动服务的Intent
+			
+			/* 获取闹钟管理器并设置从下一分钟开始每隔一分钟启动一次服务 */
+			alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+			Calendar  calendar = new GregorianCalendar();
+			calendar.add(Calendar.MINUTE, 1);
+			calendar.set(Calendar.SECOND, 0);//将时间向后推一分钟
+			calendar.set(Calendar.MILLISECOND, 0);
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
+		}else{
+			//停止服务
+			stopSevice();
+		}
 	}
 
 	@Override
 	public void onStart(Intent intent, int startId) {
-//		//如果有可执行任务
-//		if(myApplication.getNextExecuteTask() != null){
-//			new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//					//发送正在运行通知
-//					sendRunningNotification();
-//
-//					//比较当前时间和下次要执行的任务的时间
-//					int[] currentTimesBy24Hour = DateTimeUtils.getCurrentTimesBy24Hour();
-//					int result = Time.contrastTime(
-//						currentTimesBy24Hour[0], currentTimesBy24Hour[1], currentTimesBy24Hour[2], currentTimesBy24Hour[3], currentTimesBy24Hour[4], 
-//						myApplication.getNextExecuteTask().getNextExecuteTime().getYear(), myApplication.getNextExecuteTask().getNextExecuteTime().getMonth(), 
-//						myApplication.getNextExecuteTask().getNextExecuteTime().getDay(), myApplication.getNextExecuteTask().getNextExecuteTime().getHour(), 
-//						myApplication.getNextExecuteTask().getNextExecuteTime().getMinute()
-//					);
-//
-//					//如果当前时间大于或等于执行时间
-//					if(result >= 0){
-//						//执行任务
-//						myApplication.getNextExecuteTask().execute();
-//						//更新下次执行的任务
-//						myApplication.updateNextExecuteTask();
-//						//如果依然有可执行任务
-//						if(myApplication.getNextExecuteTask() != null){
-//							//发送正在运行通知
-//							sendRunningNotification();
-//						}else{
-//							//停止服务
-//							stopSevice();
-//						}
-//					}
-//
-//					//向任务列表界面发送刷新广播
-//					BroadcastUtils.sendBroadcast(getBaseContext(), TaskListActivity.BROADCAST_FILETER_ACTION_TASKLISTACTIVITY);
-//				}
-//			}).start();
-//		}else{
-//			//停止服务
-//			stopSevice();
-//		}
+		//如果有可执行任务就继续否则就停止服务
+		if(!myApplication.getRunningTaskManager().isEmpty()){
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					/* 遍历所有正在运行的任务，该执行的执行该提醒的提醒 */
+					BaseTime currentTime = new BaseTime();
+					for(BaseTask task : myApplication.getRunningTaskManager().getRunningTaskList()){
+						if(task.isExecute(currentTime)){//如果需要执行
+							task.execute(getBaseContext());
+						}else if(task.isRemind()){//如果需要提醒
+							
+						}
+					}
+					
+					BroadcastUtils.sendBroadcast(getBaseContext(), IndexActivity.ACTION_BROADCAST_REFRESH);//向运行中任务列表界面发送刷新广播
+					
+					/* 如果依然有可执行任务，就发送运行中通知否则就停止服务 */
+					if(!myApplication.getRunningTaskManager().isEmpty()){
+						sendRunningNotification();
+					}else{
+						stopSevice();
+					}
+				}
+			}).start();
+		}else{
+			//停止服务
+			stopSevice();
+		}
 	}
 
 	@Override
@@ -109,9 +98,6 @@ public class TaskService extends Service {
 
 		//发送停止通知
 		sendStopNotificatiion();
-
-		//将服务的状态标记为已经停止
-//		myApplication.getPreferencesManager().setBackgServiceRunning(false);
 	}
 
 	/**
@@ -162,6 +148,6 @@ public class TaskService extends Service {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification notification = new Notification(R.drawable.icon_launcher, getString(R.string.app_name), System.currentTimeMillis());
 		notification.setLatestEventInfo(this, getString(R.string.app_name), notificationShowHintText, PendingIntent.getActivity(this, 0, new Intent(this, TaskListActivity.class), 0));
-		notificationManager.notify(notificationId, notification);
+		notificationManager.notify(NOTIFICATION_ID, notification);
 	}
 }

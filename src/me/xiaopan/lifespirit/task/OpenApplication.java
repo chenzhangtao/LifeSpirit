@@ -12,7 +12,7 @@ public class OpenApplication extends BaseTask{
 	private String applicationPackageName;
 	
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return null;
 	}
 
@@ -26,15 +26,25 @@ public class OpenApplication extends BaseTask{
 	}
 
 	@Override
-	public String onGetType() {
+	public String getType() {
 		return null;
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void execute(Context context) {
 		if(isEnable()){
 			context.startActivity(context.getPackageManager().getLaunchIntentForPackage(applicationPackageName));
 		}
+	}
+
+	@Override
+	public boolean isExecute(BaseTime currentTime) {
+		return false;
+	}
+
+	@Override
+	public boolean isRemind() {
+		return false;
 	}
 
 	public String getApplicationName() {

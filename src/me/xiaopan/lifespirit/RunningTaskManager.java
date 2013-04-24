@@ -90,4 +90,8 @@ public class RunningTaskManager {
 		}
 		return position;
 	}
+	
+	public boolean isEmpty(){
+		return runningTaskList == null || runningTaskList.size() == 0;
+	}
 }

@@ -19,6 +19,7 @@ import com.google.gson.Gson;
  * 首页
  */
 public class IndexActivity extends MyBaseActivity {
+	public static final String ACTION_BROADCAST_REFRESH = "ACTION_BROADCAST_REFRESH";
 	private static final int REQUEST_CODE_UPDATE_SCENARIO_MODE = 101;
 	private static final int REQUEST_CODE_ADD_SCENARIO_MODE = 102;
 	private Button addTaskButton;
