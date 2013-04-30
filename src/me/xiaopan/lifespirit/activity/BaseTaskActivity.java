@@ -104,8 +104,8 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		timePicker.setCurrentHour(baseTask.getRepeat().getTriggerTime().getHourOfDay());
 		timePicker.setCurrentMinute(baseTask.getRepeat().getTriggerTime().getMinute());
 		
-		namePreference.setSubtitle(baseTask.getName().onGetIntro(getBaseContext()));
-		repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
+		namePreference.setSubtitle(baseTask.getName().getIntro(getBaseContext()));
+		repeatPreference.setSubtitle(baseTask.getRepeat().getIntro(getBaseContext()));
 		
 		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
 			@Override
@@ -114,7 +114,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 					baseTask.getRepeat().getTriggerTime().setHourOfDay(hourOfDay);
 					baseTask.getRepeat().getTriggerTime().setMinute(minute);
 					baseTask.getRepeat().getTriggerTime().update();
-					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
+					repeatPreference.setSubtitle(baseTask.getRepeat().getIntro(getBaseContext()));
 				}
 			}
 		});
@@ -126,7 +126,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 			switch (requestCode) {
 				case REQUEST_CODE_REPEAT:
 					baseTask.setRepeat(new Gson().fromJson(data.getStringExtra(RepeatActivity.RETURN_REQUIRED_STRING_REPEAT), Repeat.class));
-					repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
+					repeatPreference.setSubtitle(baseTask.getRepeat().getIntro(getBaseContext()));
 					break;
 				default: break;
 			}

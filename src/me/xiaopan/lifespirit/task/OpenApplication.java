@@ -2,7 +2,6 @@ package me.xiaopan.lifespirit.task;
 
 import java.util.List;
 
-import me.xiaopan.javalibrary.util.Time;
 import android.content.Context;
 
 /**
@@ -36,16 +35,6 @@ public class OpenApplication extends BaseTask{
 		if(isEnable()){
 			context.startActivity(context.getPackageManager().getLaunchIntentForPackage(applicationPackageName));
 		}
-	}
-
-	@Override
-	public boolean isExecute(Time currentTime) {
-		return false;
-	}
-
-	@Override
-	public boolean isRemind() {
-		return false;
 	}
 
 	public String getApplicationName() {

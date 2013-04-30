@@ -10,17 +10,17 @@ import android.content.Context;
  */
 public class EveryOtherHourRepeat extends BaseEveryOtherRepeat{
 	@Override
-	public String onGetIntro(Context context, Repeat repeat) {
+	public String getIntro(Context context, Repeat repeat) {
 		return context.getString(R.string.repeat_everyOtherHour, getSpace());
 	}
 
 	@Override
-	public Time onGetNextExecuteTime(Repeat repeat) {
+	public Time getNextExecuteTime(Repeat repeat) {
 		return null;
 	}
 
 	@Override
-	public boolean isExecute(Repeat repeat) {
+	public boolean isExecute(Repeat repeat, Time currentTime) {
 		return false;
 	}
 }

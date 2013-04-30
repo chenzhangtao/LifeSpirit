@@ -41,19 +41,19 @@ public class Repeat extends BaseTaskOption{
 	 * @return 信息
 	 */
 	@Override
-	public String onGetIntro(Context context){
+	public String getIntro(Context context){
 		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
-			return onlyOneTimeRepeat.onGetIntro(context, this);
+			return onlyOneTimeRepeat.getIntro(context, this);
 		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
-			return statutoryWorkingDaysRepeat.onGetIntro(context, this);
+			return statutoryWorkingDaysRepeat.getIntro(context, this);
 		}else if(repeatWay == RepeatWay.LEGAL_AND_OFF_DAY){
-			return legalAndOffDayRepeat.onGetIntro(context, this);
+			return legalAndOffDayRepeat.getIntro(context, this);
 		}else if(repeatWay == RepeatWay.EVERY_OTHER_DAY){
-			return everyOtherDayRepeat.onGetIntro(context, this);
+			return everyOtherDayRepeat.getIntro(context, this);
 		}else if(repeatWay == RepeatWay.EVERY_OTHER_HOUR){
-			return everyOtherHourRepeat.onGetIntro(context, this);
+			return everyOtherHourRepeat.getIntro(context, this);
 		}else if(repeatWay == RepeatWay.EVERY_OTHER_MINUTE){
-			return everyOtherMinuteRepeat.onGetIntro(context, this);
+			return everyOtherMinuteRepeat.getIntro(context, this);
 		}else{
 			return null;
 		}
@@ -65,21 +65,44 @@ public class Repeat extends BaseTaskOption{
 	 */
 	public boolean updateNextExecuteTime(){
 		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
-			setNextExecuteTime(onlyOneTimeRepeat.onGetNextExecuteTime(this));
+			setNextExecuteTime(onlyOneTimeRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
-			setNextExecuteTime(statutoryWorkingDaysRepeat.onGetNextExecuteTime(this));
+			setNextExecuteTime(statutoryWorkingDaysRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.LEGAL_AND_OFF_DAY){
-			setNextExecuteTime(legalAndOffDayRepeat.onGetNextExecuteTime(this));
+			setNextExecuteTime(legalAndOffDayRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.EVERY_OTHER_DAY){
-			setNextExecuteTime(everyOtherDayRepeat.onGetNextExecuteTime(this));
+			setNextExecuteTime(everyOtherDayRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.EVERY_OTHER_HOUR){
-			setNextExecuteTime(everyOtherHourRepeat.onGetNextExecuteTime(this));
+			setNextExecuteTime(everyOtherHourRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.EVERY_OTHER_MINUTE){
-			setNextExecuteTime(everyOtherMinuteRepeat.onGetNextExecuteTime(this));
+			setNextExecuteTime(everyOtherMinuteRepeat.getNextExecuteTime(this));
 		}else{
 			setNextExecuteTime(null);
 		}
 		return getNextExecuteTime() != null;
+	}
+	
+	/**
+	 * 判断是否执行
+	 * @param currentTime 当前时间
+	 * @return
+	 */
+	public boolean isExecute(Time currentTime){
+		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
+			return onlyOneTimeRepeat.isExecute(this, currentTime);
+		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
+			return statutoryWorkingDaysRepeat.isExecute(this, currentTime);
+		}else if(repeatWay == RepeatWay.LEGAL_AND_OFF_DAY){
+			return legalAndOffDayRepeat.isExecute(this, currentTime);
+		}else if(repeatWay == RepeatWay.EVERY_OTHER_DAY){
+			return everyOtherDayRepeat.isExecute(this, currentTime);
+		}else if(repeatWay == RepeatWay.EVERY_OTHER_HOUR){
+			return everyOtherHourRepeat.isExecute(this, currentTime);
+		}else if(repeatWay == RepeatWay.EVERY_OTHER_MINUTE){
+			return everyOtherMinuteRepeat.isExecute(this, currentTime);
+		}else{
+			return false;
+		}
 	}
 
 	public RepeatWay getRepeatWay() {

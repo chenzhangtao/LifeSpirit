@@ -16,7 +16,7 @@ public class SmsRingtone extends BaseScenarioOption{
 	}
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return null;
 	}
 }

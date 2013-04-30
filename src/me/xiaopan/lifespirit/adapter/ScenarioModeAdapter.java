@@ -59,7 +59,7 @@ public class ScenarioModeAdapter extends BaseAdapter {
 		scenarioMode = scenarioModeList.get(position);
 		viewHolder.triggerTimeText.setText(scenarioMode.getRepeat().getTriggerTime().getTimeString());
 		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(scenarioMode.getName().getName())?(" - "+scenarioMode.getName().getName()):"");
-		viewHolder.repeatText.setText(scenarioMode.getRepeat().onGetIntro(context));
+		viewHolder.repeatText.setText(scenarioMode.getRepeat().getIntro(context));
 		viewHolder.timeRemainingText.setText(null);
 		viewHolder.slidingToggleButton.setChecked(scenarioMode.isEnable());
 		

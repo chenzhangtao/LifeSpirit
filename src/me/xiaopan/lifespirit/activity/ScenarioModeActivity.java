@@ -113,7 +113,7 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 			for(Entry<Preference, BaseTaskOption> entry : map.entrySet()){
 				preference = entry.getKey();
 				taskOption = entry.getValue();
-				preference.setSubtitle(taskOption.onGetIntro(getBaseContext()));
+				preference.setSubtitle(taskOption.getIntro(getBaseContext()));
 			}
 		}
 	}

@@ -9,7 +9,7 @@ public class Name extends BaseTaskOption{
 	private String name;
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return name;
 	}
 

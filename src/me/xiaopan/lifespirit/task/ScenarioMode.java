@@ -7,7 +7,6 @@ import java.util.List;
 import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
-import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
 import me.xiaopan.lifespirit.task.scenariomode.Brightness;
@@ -101,16 +100,6 @@ public class ScenarioMode extends BaseTask{
 			getRingtoneMode().onExecute(context);
 			getAirplaneMode().onExecute(context);
 		}
-	}
-
-	@Override
-	public boolean isExecute(Time currentTime) {
-		return false;
-	}
-
-	@Override
-	public boolean isRemind() {
-		return false;
 	}
 
 	public Bluetooth getBluetooth() {

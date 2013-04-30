@@ -94,13 +94,17 @@ public abstract class BaseTask{
 	 * @param currentTime 当前时间
 	 * @return
 	 */
-	public abstract boolean isExecute(Time currentTime);
+	public boolean isExecute(Time currentTime){
+		return repeat.isExecute(currentTime);
+	}
 	
 	/**
 	 * 是否提醒
 	 * @return
 	 */
-	public abstract boolean isRemind();
+	public boolean isRemind(){
+		return false;
+	}
 	
 	/**
 	 * 更新下次执行时间

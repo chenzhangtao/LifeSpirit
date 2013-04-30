@@ -71,7 +71,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 							repeat.getTriggerTime().setMonth(monthOfYear);
 							repeat.getTriggerTime().setDayOfMonth(dayOfMonth);
 							repeat.getTriggerTime().update();
-							onlyOneTimePreference.setTitle(repeat.getOnlyOneTimeRepeat().onGetIntro(getBaseContext(), repeat));
+							onlyOneTimePreference.setTitle(repeat.getOnlyOneTimeRepeat().getIntro(getBaseContext(), repeat));
 						}
 					}
 				}, repeat.getTriggerTime().getYear(), repeat.getTriggerTime().getMonth(), repeat.getTriggerTime().getDayOfMonth());
@@ -165,12 +165,12 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 			everyOtherDayPreference.setSelected(true);
 		}
 		
-		onlyOneTimePreference.setTitle(repeat.getOnlyOneTimeRepeat().onGetIntro(getBaseContext(), repeat));
-		statutoryWorkingDaysPreference.setTitle(repeat.getStatutoryWorkingDaysRepeat().onGetIntro(getBaseContext(), repeat));
-		legalAndOffDayPreference.setTitle(repeat.getLegalAndOffDayRepeat().onGetIntro(getBaseContext(), repeat));
-		everyOtherMinutePreference.setTitle(repeat.getEveryOtherMinuteRepeat().onGetIntro(getBaseContext(), repeat));
-		everyOtherHourPreference.setTitle(repeat.getEveryOtherHourRepeat().onGetIntro(getBaseContext(), repeat));
-		everyOtherDayPreference.setTitle(repeat.getEveryOtherDayRepeat().onGetIntro(getBaseContext(), repeat));
+		onlyOneTimePreference.setTitle(repeat.getOnlyOneTimeRepeat().getIntro(getBaseContext(), repeat));
+		statutoryWorkingDaysPreference.setTitle(repeat.getStatutoryWorkingDaysRepeat().getIntro(getBaseContext(), repeat));
+		legalAndOffDayPreference.setTitle(repeat.getLegalAndOffDayRepeat().getIntro(getBaseContext(), repeat));
+		everyOtherMinutePreference.setTitle(repeat.getEveryOtherMinuteRepeat().getIntro(getBaseContext(), repeat));
+		everyOtherHourPreference.setTitle(repeat.getEveryOtherHourRepeat().getIntro(getBaseContext(), repeat));
+		everyOtherDayPreference.setTitle(repeat.getEveryOtherDayRepeat().getIntro(getBaseContext(), repeat));
 	}
 	
 	private void returnResult(RepeatWay repeatWay){
@@ -203,7 +203,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 			String name = spaceEdit.getEditableText().toString().trim();
 			if(!"".equals(name) && !"0".equals(name)){
 				everyOtherRepeat.setSpace(Integer.valueOf(name));
-				preference.setTitle(everyOtherRepeat.onGetIntro(getBaseContext(), repeat));
+				preference.setTitle(everyOtherRepeat.getIntro(getBaseContext(), repeat));
 				DialogUtils.setDialogClickClose(tempAlertDialog, true);
 			}else{
 				toastL(R.string.repeat_spaceInputErrorHint);

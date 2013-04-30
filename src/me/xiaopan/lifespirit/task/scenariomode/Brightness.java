@@ -29,7 +29,7 @@ public class Brightness extends BaseScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return isAutoAdjustmen()?context.getString(R.string.base_automatic):(""+getBrightness());
 	}
 

@@ -39,7 +39,7 @@ public class Volume extends BaseScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		String result = context.getString(R.string.taskItem_volume_media)+getMediaVolume()+", ";
 		result += context.getString(R.string.taskItem_volume_alarm)+getAlarmVolume()+", ";
 		result += context.getString(R.string.taskItem_volume_ringtone)+getRingtoneVolume()+", ";

@@ -64,7 +64,7 @@ public class RingtoneMode extends BaseScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return context.getResources().getStringArray(R.array.taskItem_ringnoteMode_itemNames)[getRingnoteMode().getIndex()];
 	}
 

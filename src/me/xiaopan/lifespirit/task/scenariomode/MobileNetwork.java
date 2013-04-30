@@ -22,7 +22,7 @@ public class MobileNetwork extends BaseScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro(Context context) {
+	public String getIntro(Context context) {
 		return isOpen()?context.getString(R.string.base_open):context.getString(R.string.base_close);
 	}
 	

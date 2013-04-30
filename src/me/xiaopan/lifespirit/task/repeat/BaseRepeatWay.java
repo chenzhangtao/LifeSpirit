@@ -14,19 +14,20 @@ public abstract class BaseRepeatWay{
 	 * @param repeat 重复对象
 	 * @return 信息
 	 */
-	public abstract String onGetIntro(Context context, Repeat repeat);
+	public abstract String getIntro(Context context, Repeat repeat);
 	
 	/**
 	 * 获取下次执行时间
 	 * @param repeat
 	 * @return
 	 */
-	public abstract Time onGetNextExecuteTime(Repeat repeat);
+	public abstract Time getNextExecuteTime(Repeat repeat);
 	
 	/**
 	 * 判断是否需要执行
 	 * @param repeat
+	 * @param currentTime 当前时间
 	 * @return
 	 */
-	public abstract boolean isExecute(Repeat repeat);
+	public abstract boolean isExecute(Repeat repeat, Time currentTime);
 }

@@ -11,5 +11,5 @@ public abstract class BaseTaskOption{
 	 * @param context 
 	 * @return 简介信息，用于显示在情景模式编辑页面
 	 */
-	public abstract String onGetIntro(Context context);
+	public abstract String getIntro(Context context);
 }

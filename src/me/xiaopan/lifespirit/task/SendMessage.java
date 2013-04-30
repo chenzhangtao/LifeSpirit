@@ -3,7 +3,6 @@ package me.xiaopan.lifespirit.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.domain.Contacts;
 import android.content.Context;
 import android.telephony.SmsManager;
@@ -50,16 +49,6 @@ public class SendMessage extends BaseTask{
 				}
 			}
 		}
-	}
-
-	@Override
-	public boolean isExecute(Time currentTime) {
-		return false;
-	}
-
-	@Override
-	public boolean isRemind() {
-		return false;
 	}
 
 	public List<Contacts> getContactsList() {
