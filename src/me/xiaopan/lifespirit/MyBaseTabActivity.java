@@ -55,11 +55,6 @@ public abstract class MyBaseTabActivity extends BaseActivity {
 	}
 
 	@Override
-	public String getHostServerAddress(){
-		return "";
-	}
-
-	@Override
 	protected void onNetworkNotAvailable() {
 	}
 

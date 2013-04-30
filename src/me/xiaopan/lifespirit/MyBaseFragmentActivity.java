@@ -55,11 +55,6 @@ public abstract class MyBaseFragmentActivity extends BaseFragmentActivity {
 	}
 
 	@Override
-	public String getHostServerAddress(){
-		return "";
-	}
-
-	@Override
 	protected void onNetworkNotAvailable() {
 	}
 
