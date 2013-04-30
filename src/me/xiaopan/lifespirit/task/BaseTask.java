@@ -3,6 +3,7 @@ package me.xiaopan.lifespirit.task;
 import java.io.File;
 
 import me.xiaopan.javalibrary.util.FileUtils;
+import me.xiaopan.javalibrary.util.Time;
 import android.content.Context;
 
 import com.google.gson.Gson;
@@ -15,7 +16,7 @@ public abstract class BaseTask{
 	public static final String STATE_ENABLE = "ENABLE";
 	public static final String STATE_DISABLE = "DISABLE";
 	private boolean enable;
-	private BaseTime createTime;
+	private Time createTime;
 	private Name name;
 	private Repeat repeat;
 	
@@ -93,7 +94,7 @@ public abstract class BaseTask{
 	 * @param currentTime 当前时间
 	 * @return
 	 */
-	public abstract boolean isExecute(BaseTime currentTime);
+	public abstract boolean isExecute(Time currentTime);
 	
 	/**
 	 * 是否提醒
@@ -117,11 +118,11 @@ public abstract class BaseTask{
 		this.enable = enable;
 	}
 
-	public BaseTime getCreateTime() {
+	public Time getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(BaseTime createTime) {
+	public void setCreateTime(Time createTime) {
 		this.createTime = createTime;
 	}
 

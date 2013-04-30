@@ -3,12 +3,15 @@ package me.xiaopan.lifespirit.task;
 import me.xiaopan.javalibrary.util.IntegerUtils;
 import me.xiaopan.javalibrary.util.Time;
 
-public class BaseTime extends Time{
-	public BaseTime(long milliseconds) {
+/**
+ * 触发时间
+ */
+public class TriggerTime extends Time{
+	public TriggerTime(long milliseconds) {
 		super(milliseconds);
 	}
 	
-	public BaseTime() {
+	public TriggerTime() {
 		super();
 	}
 	

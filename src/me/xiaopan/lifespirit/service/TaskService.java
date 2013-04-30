@@ -4,11 +4,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import me.xiaopan.androidlibrary.util.BroadcastUtils;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.IndexActivity;
 import me.xiaopan.lifespirit.activity.TaskListActivity;
 import me.xiaopan.lifespirit.task.BaseTask;
-import me.xiaopan.lifespirit.task.BaseTime;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -62,7 +62,7 @@ public class TaskService extends Service {
 				@Override
 				public void run() {
 					/* 遍历所有正在运行的任务，该执行的执行该提醒的提醒 */
-					BaseTime currentTime = new BaseTime();
+					Time currentTime = new Time();
 					for(BaseTask task : myApplication.getRunningTaskManager().getRunningTaskList()){
 						if(task.isExecute(currentTime)){//如果需要执行
 							task.execute(getBaseContext());

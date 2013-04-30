@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task.repeat;
 
-import me.xiaopan.lifespirit.task.BaseTime;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.Repeat;
 import android.content.Context;
 
@@ -21,7 +21,7 @@ public abstract class BaseRepeatWay{
 	 * @param repeat
 	 * @return
 	 */
-	public abstract BaseTime onGetNextExecuteTime(Repeat repeat);
+	public abstract Time onGetNextExecuteTime(Repeat repeat);
 	
 	/**
 	 * 判断是否需要执行

@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherDayRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherHourRepeat;
 import me.xiaopan.lifespirit.task.repeat.EveryOtherMinuteRepeat;
@@ -12,9 +13,9 @@ import android.content.Context;
  * 重复
  */
 public class Repeat extends BaseTaskOption{
-	private BaseTime triggerTime;
-	private BaseTime nextExecuteTime;
-	private BaseTime lastExecuteTime;
+	private TriggerTime triggerTime;
+	private Time nextExecuteTime;
+	private Time lastExecuteTime;
 	private RepeatWay repeatWay;
 	private OnlyOneTimeRepeat onlyOneTimeRepeat;
 	private StatutoryWorkingDaysRepeat statutoryWorkingDaysRepeat;
@@ -24,7 +25,7 @@ public class Repeat extends BaseTaskOption{
 	private EveryOtherDayRepeat everyOtherDayRepeat;
 	
 	public Repeat(){
-		setTriggerTime(new BaseTime());
+		setTriggerTime(new TriggerTime());
 		setOnlyOneTimeRepeat(new OnlyOneTimeRepeat());
 		setStatutoryWorkingDaysRepeat(new StatutoryWorkingDaysRepeat());
 		setLegalAndOffDayRepeat(new LegalAndOffDayRepeat());
@@ -89,27 +90,27 @@ public class Repeat extends BaseTaskOption{
 		this.repeatWay = repeatWay;
 	}
 
-	public BaseTime getNextExecuteTime() {
+	public Time getNextExecuteTime() {
 		return nextExecuteTime;
 	}
 
-	public void setNextExecuteTime(BaseTime nextExecuteTime) {
+	public void setNextExecuteTime(Time nextExecuteTime) {
 		this.nextExecuteTime = nextExecuteTime;
 	}
 
-	public BaseTime getLastExecuteTime() {
+	public Time getLastExecuteTime() {
 		return lastExecuteTime;
 	}
 
-	public void setLastExecuteTime(BaseTime lastExecuteTime) {
+	public void setLastExecuteTime(Time lastExecuteTime) {
 		this.lastExecuteTime = lastExecuteTime;
 	}
 
-	public BaseTime getTriggerTime() {
+	public TriggerTime getTriggerTime() {
 		return triggerTime;
 	}
 
-	public void setTriggerTime(BaseTime triggerTime) {
+	public void setTriggerTime(TriggerTime triggerTime) {
 		this.triggerTime = triggerTime;
 	}
 	

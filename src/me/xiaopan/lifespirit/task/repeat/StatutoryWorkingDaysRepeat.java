@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task.repeat;
 
-import me.xiaopan.lifespirit.task.BaseTime;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -15,7 +15,7 @@ public class StatutoryWorkingDaysRepeat extends BaseRepeatWay{
 	}
 
 	@Override
-	public BaseTime onGetNextExecuteTime(Repeat repeat) {
+	public Time onGetNextExecuteTime(Repeat repeat) {
 		return null;
 	}
 

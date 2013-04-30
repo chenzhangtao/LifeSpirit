@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.task;
 
 import java.util.List;
 
+import me.xiaopan.javalibrary.util.Time;
 import android.content.Context;
 
 /**
@@ -38,7 +39,7 @@ public class OpenApplication extends BaseTask{
 	}
 
 	@Override
-	public boolean isExecute(BaseTime currentTime) {
+	public boolean isExecute(Time currentTime) {
 		return false;
 	}
 
