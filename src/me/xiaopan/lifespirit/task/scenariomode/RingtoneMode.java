@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 import android.media.AudioManager;
@@ -40,7 +41,7 @@ public class RingtoneMode extends BaseScenarioOption {
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void onExecute(Context context, Time currentTime) {
 		if(isEnable()){
 			AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 			if(getRingnoteMode() == RingnoteModeEnum.RINGDOWN_AND_VRIBATE){

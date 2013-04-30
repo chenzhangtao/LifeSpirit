@@ -80,8 +80,14 @@ public abstract class BaseTask{
 	/**
 	 * 执行
 	 * @param context 上下文
+	 * @param currentTime 当前时间
 	 */
-	public abstract void execute(Context context);
+	public void execute(Context context, Time currentTime){
+		name.onExecute(context, currentTime);
+		repeat.onExecute(context, currentTime);
+		setEnable(repeat.updateNextExecuteTime());
+		saveToLocal(context);
+	}
 	
 	/**
 	 * 获取类型

@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit.task.ScenarioMode;
+import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit.widget.SlidingToggleButton;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -57,7 +58,7 @@ public class ScenarioModeAdapter extends BaseAdapter {
 		}
 		
 		scenarioMode = scenarioModeList.get(position);
-		viewHolder.triggerTimeText.setText(scenarioMode.getRepeat().getTriggerTime().getTimeString());
+		viewHolder.triggerTimeText.setText(TimeUtils.getTimeString(scenarioMode.getRepeat().getTriggerTime()));
 		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(scenarioMode.getName().getName())?(" - "+scenarioMode.getName().getName()):"");
 		viewHolder.repeatText.setText(scenarioMode.getRepeat().getIntro(context));
 		viewHolder.timeRemainingText.setText(null);

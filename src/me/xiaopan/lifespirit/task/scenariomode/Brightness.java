@@ -1,6 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
@@ -17,7 +18,7 @@ public class Brightness extends BaseScenarioOption {
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void onExecute(Context context, Time currentTime) {
 		if(isEnable()){
 			//先设置模式
 			SystemUtils.setScreenBrightnessMode(context, isAutoAdjustmen());

@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
+import me.xiaopan.javalibrary.util.Time;
 import android.content.Context;
 
 /**
@@ -11,6 +12,10 @@ public class Name extends BaseTaskOption{
 	@Override
 	public String getIntro(Context context) {
 		return name;
+	}
+
+	@Override
+	public void onExecute(Context context, Time currentTime) {
 	}
 
 	public String getName() {

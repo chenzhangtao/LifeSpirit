@@ -4,8 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.xiaopan.androidlibrary.util.AndroidUtils;
+import me.xiaopan.androidlibrary.util.Logger;
 import me.xiaopan.javalibrary.io.FileScanner;
+import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.javalibrary.util.FileUtils;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
@@ -89,16 +93,19 @@ public class ScenarioMode extends BaseTask{
 	}
 	
 	@Override
-	public void execute(Context context){
+	public void execute(Context context, Time currentTime){
 		if(isEnable()){
-			getBluetooth().onExecute(context);
-			getMobileNetwork().onExecute(context);
-			getWifi().onExecute(context);
-			getBrightness().onExecute(context);
-			getDormant().onExecute(context);
-			getVolume().onExecute(context);
-			getRingtoneMode().onExecute(context);
-			getAirplaneMode().onExecute(context);
+//			getBluetooth().onExecute(context);
+//			getMobileNetwork().onExecute(context);
+//			getWifi().onExecute(context);
+//			getBrightness().onExecute(context);
+//			getDormant().onExecute(context);
+//			getVolume().onExecute(context);
+//			getRingtoneMode().onExecute(context);
+//			getAirplaneMode().onExecute(context);
+			AndroidUtils.toastL(context, "执行了，时间："+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			Logger.w("执行了，时间："+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			super.execute(context, currentTime);
 		}
 	}
 

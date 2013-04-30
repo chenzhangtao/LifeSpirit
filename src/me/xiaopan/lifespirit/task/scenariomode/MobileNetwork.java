@@ -1,6 +1,7 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.NetworkUtils;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
@@ -15,7 +16,7 @@ public class MobileNetwork extends BaseScenarioOption {
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void onExecute(Context context, Time currentTime) {
 		if(isEnable()){
 			NetworkUtils.setMobileNetwork(context, isOpen());
 		}

@@ -7,10 +7,12 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import android.content.Context;
+import android.content.Intent;
 
 import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
+import me.xiaopan.lifespirit.service.TaskService;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 
@@ -18,9 +20,12 @@ import me.xiaopan.lifespirit.task.ScenarioMode;
  * 任务管理器
  */
 public class RunningTaskManager {
+	private Context context;
 	private List<BaseTask> runningTaskList;//运行中的任务列表
 	
 	public RunningTaskManager(Context context){
+		this.context = context;
+		
 		//读取所有状态为开启的任务
 		FileScanner fileScanner = new FileScanner(new File(context.getFilesDir().getPath()+File.separator+BaseTask.TASK_DIR));
 		fileScanner.setFileTypeFilterWay(StringCheckUpWayEnum.ENDS_WITH_KEYWORDS);
@@ -47,8 +52,13 @@ public class RunningTaskManager {
 		}else{
 			runningTaskList = new ArrayList<BaseTask>(0);
 		}
+		onUpdateRunningTaskList();
 	}
 
+	/**
+	 * 获取运行中的任务列表
+	 * @return
+	 */
 	public List<BaseTask> getRunningTaskList() {
 		return runningTaskList;
 	}
@@ -73,6 +83,7 @@ public class RunningTaskManager {
 				runningTaskList.add(task);
 			}
 		}
+		onUpdateRunningTaskList();
 	}
 	
 	/**
@@ -91,7 +102,19 @@ public class RunningTaskManager {
 		return position;
 	}
 	
+	/**
+	 * 是否是空的
+	 * @return
+	 */
 	public boolean isEmpty(){
 		return runningTaskList == null || runningTaskList.size() == 0;
+	}
+	
+	public void onUpdateRunningTaskList(){
+		if(isEmpty()){
+			context.stopService(new Intent(context, TaskService.class));
+		}else{
+			context.startService(new Intent(context, TaskService.class));
+		}
 	}
 }

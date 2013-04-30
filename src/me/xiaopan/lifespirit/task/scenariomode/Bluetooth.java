@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.task.scenariomode;
 
 import me.xiaopan.androidlibrary.util.SystemUtils;
 import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
@@ -22,7 +23,7 @@ public class Bluetooth extends BaseScenarioOption {
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void onExecute(Context context, Time currentTime) {
 		if(isEnable()){
 			try {
 				SystemUtils.setBluetooth(isOpen());

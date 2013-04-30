@@ -1,7 +1,7 @@
 package me.xiaopan.lifespirit.activity;
 
 import me.xiaopan.lifespirit.MyBaseActivity;
-import me.xiaopan.lifespirit.adapter.TaskAdapter;
+import me.xiaopan.lifespirit.adapter.TaskIndexAdapter;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit2.R;
@@ -25,7 +25,7 @@ public class IndexActivity extends MyBaseActivity {
 	private Button addTaskButton;
 	private Button taskListButton;
 	private ListView list;
-	private TaskAdapter taskAdapter;
+	private TaskIndexAdapter taskAdapter;
 	private int updateTaskPosition;
 	
 	@Override
@@ -68,7 +68,7 @@ public class IndexActivity extends MyBaseActivity {
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		list.setAdapter(taskAdapter = new TaskAdapter(getBaseContext(), getMyApplication().getRunningTaskManager().getRunningTaskList()));
+		list.setAdapter(taskAdapter = new TaskIndexAdapter(getBaseContext(), getMyApplication().getRunningTaskManager().getRunningTaskList()));
 	}
 	
 	@Override

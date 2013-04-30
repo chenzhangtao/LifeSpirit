@@ -13,7 +13,7 @@ import android.content.Context;
  * 重复
  */
 public class Repeat extends BaseTaskOption{
-	private TriggerTime triggerTime;
+	private Time triggerTime;
 	private Time nextExecuteTime;
 	private Time lastExecuteTime;
 	private RepeatWay repeatWay;
@@ -25,7 +25,7 @@ public class Repeat extends BaseTaskOption{
 	private EveryOtherDayRepeat everyOtherDayRepeat;
 	
 	public Repeat(){
-		setTriggerTime(new TriggerTime());
+		setTriggerTime(new Time());
 		setOnlyOneTimeRepeat(new OnlyOneTimeRepeat());
 		setStatutoryWorkingDaysRepeat(new StatutoryWorkingDaysRepeat());
 		setLegalAndOffDayRepeat(new LegalAndOffDayRepeat());
@@ -105,6 +105,11 @@ public class Repeat extends BaseTaskOption{
 		}
 	}
 
+	@Override
+	public void onExecute(Context context, Time currentTime) {
+		lastExecuteTime = currentTime;
+	}
+
 	public RepeatWay getRepeatWay() {
 		return repeatWay;
 	}
@@ -129,11 +134,11 @@ public class Repeat extends BaseTaskOption{
 		this.lastExecuteTime = lastExecuteTime;
 	}
 
-	public TriggerTime getTriggerTime() {
+	public Time getTriggerTime() {
 		return triggerTime;
 	}
 
-	public void setTriggerTime(TriggerTime triggerTime) {
+	public void setTriggerTime(Time triggerTime) {
 		this.triggerTime = triggerTime;
 	}
 	

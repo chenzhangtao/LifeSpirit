@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import me.xiaopan.javalibrary.util.Time;
 import android.content.Context;
 
 /**
@@ -11,7 +12,7 @@ public class SmsRingtone extends BaseScenarioOption{
 	}
 
 	@Override
-	public void onExecute(Context context) {
+	public void onExecute(Context context, Time currentTime) {
 		
 	}
 

@@ -21,6 +21,6 @@ public class EveryOtherMinuteRepeat extends BaseEveryOtherRepeat{
 
 	@Override
 	public boolean isExecute(Repeat repeat, Time currentTime) {
-		return false;
+		return ((repeat.getLastExecuteTime().getMinute() + 3) % 60) == currentTime.getMinute();
 	}
 }

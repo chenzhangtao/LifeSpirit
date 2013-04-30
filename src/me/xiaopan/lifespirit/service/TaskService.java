@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import me.xiaopan.androidlibrary.util.BroadcastUtils;
+import me.xiaopan.androidlibrary.util.Logger;
+import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.IndexActivity;
@@ -19,7 +21,8 @@ import android.content.Intent;
 import android.os.IBinder;
 
 public class TaskService extends Service {
-	private static final int NOTIFICATION_ID = 1001;//通知ID
+	private static final String LOG_TAG = "TaskService";
+	private static final int NOTIFICATION_ID = 1002;//通知ID
 	private static final int STOP_TYPE_NOT_EXECUTE_TESK = -5;//任务停止类型 - 由于没有可执行任务而停止
 	private MyApplication myApplication;//MyApplication对象
 	private PendingIntent startServiceIntent; //启动Service的Intent
@@ -38,16 +41,20 @@ public class TaskService extends Service {
 		
 		//如果有可执行任务就继续否则就停止
 		if(!myApplication.getRunningTaskManager().isEmpty()){
-			startServiceIntent = PendingIntent.getService(getBaseContext(), 0, new Intent(getBaseContext(), TaskService.class), 0);//实例化启动服务的Intent
+			Logger.i(LOG_TAG, "创建 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), TaskService.class), 0);//实例化启动服务的Intent
 			
 			/* 获取闹钟管理器并设置从下一分钟开始每隔一分钟启动一次服务 */
 			alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 			Calendar  calendar = new GregorianCalendar();
-			calendar.add(Calendar.MINUTE, 1);
-			calendar.set(Calendar.SECOND, 0);//将时间向后推一分钟
+			calendar.add(Calendar.MINUTE, 1);//将时间向后推一分钟
+			calendar.set(Calendar.SECOND, 0);
 			calendar.set(Calendar.MILLISECOND, 0);
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
+			Logger.i(LOG_TAG, new Time(calendar.getTimeInMillis()).toStringBy24Hour());
+//			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
+			alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
 		}else{
+			Logger.i(LOG_TAG, "创建 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务
 			stopSevice();
 		}
@@ -55,8 +62,14 @@ public class TaskService extends Service {
 
 	@Override
 	public void onStart(Intent intent, int startId) {
+		
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
 		//如果有可执行任务就继续否则就停止服务
 		if(!myApplication.getRunningTaskManager().isEmpty()){
+			Logger.i(LOG_TAG, "启动 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -64,7 +77,7 @@ public class TaskService extends Service {
 					Time currentTime = new Time();
 					for(BaseTask task : myApplication.getRunningTaskManager().getRunningTaskList()){
 						if(task.isExecute(currentTime)){//如果需要执行
-							task.execute(getBaseContext());
+							task.execute(getBaseContext(), currentTime);
 						}else if(task.isRemind()){//如果需要提醒
 							
 						}
@@ -81,13 +94,16 @@ public class TaskService extends Service {
 				}
 			}).start();
 		}else{
+			Logger.i(LOG_TAG, "启动 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务
 			stopSevice();
 		}
+		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
 	public void onDestroy() {
+		Logger.i(LOG_TAG, "销毁 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 		super.onDestroy();
 
 		//从报警管理器中移除启动服务的Intent
@@ -128,7 +144,7 @@ public class TaskService extends Service {
 		notifications.setLatestEventInfo(
 			this, 
 //			myApplication.getNextExecuteTask().getNextExecuteTime().getRemainingTime() + myApplication.getNextExecuteTask().getTaskName().getShowInTaskInfoText(), 
-			"生活精灵正在运行…", 
+			"生活精灵正在运行", 
 //			myApplication.getNextExecuteTask().getTaskInfo() , 
 			"",
 			PendingIntent.getActivity(this, 0, intent, 0)

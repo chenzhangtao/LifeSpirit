@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class TaskAdapter extends BaseAdapter {
+public class TaskIndexAdapter extends BaseAdapter {
 	private Context context;
 	private List<BaseTask> taskList;
 	private LayoutInflater layoutInflater;
 	private BaseTask task;
 	
-	public TaskAdapter(Context context, List<BaseTask> taskList){
+	public TaskIndexAdapter(Context context, List<BaseTask> taskList){
 		this.context = context;
 		layoutInflater = LayoutInflater.from(context);
 		this.taskList = taskList;
@@ -45,11 +45,11 @@ public class TaskAdapter extends BaseAdapter {
 		ViewHolder viewHolder = null;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
-			convertView = layoutInflater.inflate(R.layout.list_item_task, null);
-			viewHolder.triggerTimeText = (TextView) convertView.findViewById(R.id.text_taskItem_triggerTime);
-			viewHolder.nameText = (TextView) convertView.findViewById(R.id.text_taskItem_name);
-			viewHolder.repeatText = (TextView) convertView.findViewById(R.id.text_taskItem_repeat);
-			viewHolder.timeRemainingText = (TextView) convertView.findViewById(R.id.text_taskItem_timeRemaining);
+			convertView = layoutInflater.inflate(R.layout.list_item_task_index, null);
+			viewHolder.triggerTimeText = (TextView) convertView.findViewById(R.id.text_taskIndexItem_triggerTime);
+			viewHolder.nameText = (TextView) convertView.findViewById(R.id.text_taskIndexItem_name);
+			viewHolder.repeatText = (TextView) convertView.findViewById(R.id.text_taskIndexItem_repeat);
+			viewHolder.timeRemainingText = (TextView) convertView.findViewById(R.id.text_taskIndexItem_timeRemaining);
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();

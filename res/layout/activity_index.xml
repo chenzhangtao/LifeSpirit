@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 首页 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_body">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_body" android:background="@drawable/wallpaper0">
 	<!-- 显示当前时间 -->
-	<LinearLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge">
-	    <AnalogClock android:id="@+id/digitalClock_index" android:layout_width="100dp" android:layout_height="100dp"/>
+	<LinearLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge" android:gravity="right">
+	    <DigitalClock 
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/base_white"
+	        android:textSize="30sp"
+	        android:textStyle="bold"
+	        />
 	</LinearLayout>
 	
 	<!-- 任务列表 -->

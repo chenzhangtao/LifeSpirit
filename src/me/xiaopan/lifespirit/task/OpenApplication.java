@@ -2,6 +2,8 @@ package me.xiaopan.lifespirit.task;
 
 import java.util.List;
 
+import me.xiaopan.javalibrary.util.Time;
+
 import android.content.Context;
 
 /**
@@ -31,9 +33,10 @@ public class OpenApplication extends BaseTask{
 	}
 
 	@Override
-	public void execute(Context context) {
+	public void execute(Context context, Time currentTime) {
 		if(isEnable()){
 			context.startActivity(context.getPackageManager().getLaunchIntentForPackage(applicationPackageName));
+			super.execute(context, currentTime);
 		}
 	}
 

@@ -3,6 +3,7 @@ package me.xiaopan.lifespirit.task;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.domain.Contacts;
 import android.content.Context;
 import android.telephony.SmsManager;
@@ -38,7 +39,7 @@ public class SendMessage extends BaseTask{
 	}
 
 	@Override
-	public void execute(Context context) {
+	public void execute(Context context, Time currentTime) {
 		if(isEnable()){
 			SmsManager smsManager = SmsManager.getDefault();
 			List<String> contentList = smsManager.divideMessage(messageContent);
@@ -48,6 +49,7 @@ public class SendMessage extends BaseTask{
 					smsManager.sendTextMessage(number, null, content, null, null);
 				}
 			}
+			super.execute(context, currentTime);
 		}
 	}
 

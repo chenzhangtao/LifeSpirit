@@ -28,6 +28,12 @@ public class OnlyOneTimeRepeat extends BaseRepeatWay{
 
 	@Override
 	public boolean isExecute(Repeat repeat, Time currentTime) {
-		return false;
+		return 
+				repeat.getTriggerTime().getYear() == currentTime.getYear() && 
+				repeat.getTriggerTime().getMonth() == currentTime.getMonth() && 
+				repeat.getTriggerTime().getDayOfMonth() == currentTime.getDayOfMonth() && 
+				repeat.getTriggerTime().getHourOfDay() == currentTime.getHourOfDay() && 
+				repeat.getTriggerTime().getMinute() == currentTime.getMinute()
+				;
 	}
 }

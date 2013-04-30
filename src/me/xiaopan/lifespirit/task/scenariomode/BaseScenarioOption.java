@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.BaseTaskOption;
 import android.content.Context;
 
@@ -14,7 +15,7 @@ public abstract class BaseScenarioOption extends BaseTaskOption{
 	 * 执行
 	 * @param context 上下文
 	 */
-	public abstract void onExecute(Context context);
+	public abstract void onExecute(Context context, Time currentTime);
 	
 	/**
 	 * 是否启用此选项
