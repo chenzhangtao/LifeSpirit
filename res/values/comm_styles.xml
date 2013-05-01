@@ -72,7 +72,7 @@
 	<!-- 列表 -->
 	<style name="comm_list" parent="@style/base_layout_match_wrap">
 	    <item name="android:id">@android:id/list</item>
-	    <item name="android:divider">@color/base_black</item>
+	    <item name="android:divider">@color/base_white</item>
 	    <item name="android:dividerHeight">1dp</item>
 	    <item name="android:cacheColorHint">@color/base_transparent</item>
 	    <item name="android:fastScrollEnabled">true</item>

@@ -16,7 +16,7 @@
 	<ListView style="@style/comm_list_weight" />
 	
 	<!-- 功能 -->
-	<RelativeLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge">
+	<RelativeLayout style="@style/base_layout_match_wrap" android:padding="@dimen/base_padding_specialLarge" android:gravity="center_vertical">
 	    <Button android:id="@+id/button_index_addTask" style="@style/base_layout_wrap_wrap" android:background="@drawable/selector_button_add" android:layout_alignParentLeft="true"/>
 		<Button android:id="@+id/button_index_taskList" style="@style/base_layout_wrap_wrap" android:background="@drawable/icon_list" android:layout_alignParentRight="true"/>
 	</RelativeLayout>
