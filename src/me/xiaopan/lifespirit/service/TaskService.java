@@ -1,8 +1,5 @@
 package me.xiaopan.lifespirit.service;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import me.xiaopan.androidlibrary.util.BroadcastUtils;
 import me.xiaopan.androidlibrary.util.Logger;
 import me.xiaopan.javalibrary.util.DateTimeUtils;
@@ -17,7 +14,6 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -43,15 +39,8 @@ public class TaskService extends Service {
 		//如果有可执行任务就继续否则就停止
 		if(!myApplication.getRunningTaskManager().isEmpty()){
 			Logger.i(LOG_TAG, "创建 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
-			startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), TaskService.class), 0);//实例化启动服务的Intent
-			
-			/* 获取闹钟管理器并设置从下一分钟开始每隔一分钟启动一次服务 */
-			alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-			Calendar  calendar = new GregorianCalendar();
-			calendar.add(Calendar.MINUTE, 1);//将时间向后推一分钟
-			calendar.set(Calendar.SECOND, 0);
-			calendar.set(Calendar.MILLISECOND, 0);
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
+			//设置从下一分钟开始每隔一分钟启动一次服务
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, TimeUtils.getNextMinuteTimeInMillis(), 60*1000, startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), TaskService.class), 0));//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
 		}else{
 			Logger.i(LOG_TAG, "创建 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务

@@ -31,7 +31,7 @@ import com.google.gson.Gson;
  */
 public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegister{
 	private static final int REQUEST_CODE_REPEAT = 101;
-	private TimePicker timePicker;
+	protected TimePicker timePicker;
 	protected BaseTask baseTask;
 	private Preference namePreference;
 	private Preference repeatPreference;

@@ -1,12 +1,12 @@
 package me.xiaopan.lifespirit.activity;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
+import me.xiaopan.androidlibrary.util.Logger;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.adapter.TaskIndexAdapter;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
+import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
 import android.view.View;
@@ -80,11 +80,7 @@ public class IndexActivity extends MyBaseActivity {
 	protected void onResume() {
 		super.onResume();
 		taskAdapter.notifyDataSetChanged();
-		Calendar  calendar = new GregorianCalendar();
-		calendar.add(Calendar.MINUTE, 1);//将时间向后推一分钟
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		getMessageHanlder().postAtTime(refreshRunnable, calendar.getTimeInMillis());
+		getMessageHanlder().postDelayed(refreshRunnable,TimeUtils.getCurrentMinuteRemainingSecond() * 1000);
 	}
 
 	@Override
@@ -101,6 +97,7 @@ public class IndexActivity extends MyBaseActivity {
 	private class RefreshRunnable implements Runnable{
 		@Override
 		public void run() {
+			Logger.i("刷新");
 			taskAdapter.notifyDataSetChanged();
 			getMessageHanlder().postDelayed(refreshRunnable, 60*1000);
 		}

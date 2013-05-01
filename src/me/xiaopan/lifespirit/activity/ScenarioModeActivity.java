@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.BaseTaskOption;
 import me.xiaopan.lifespirit.task.ScenarioMode;
+import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
@@ -123,29 +125,34 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		boolean result = true;
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
-				/* 更新创建时间、上次执行时间以及下次执行时间 */
-				if(add){
-					scenarioMode.setCreateTime(new Time());
-				}
-				scenarioMode.getRepeat().updateNextExecuteTime();
-				
-				/* 将任务保存到本地 */
-				if(scenarioMode.saveToLocal(getBaseContext())){
+				if(TimeUtils.compare(scenarioMode.getRepeat().getTriggerTime(), new Time()) > 0){
+					/* 更新创建时间、上次执行时间以及下次执行时间 */
 					if(add){
-						toastL("新建情景模式成功！");
-					}else{
-						toastL("修改情景模式成功！");
+						scenarioMode.setCreateTime(new Time());
 					}
-					getMyApplication().getRunningTaskManager().updateTask(scenarioMode);
-					getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
-					setResult(RESULT_OK, getIntent());
-					finishActivity();
+					scenarioMode.getRepeat().updateNextExecuteTime();
+					
+					/* 将任务保存到本地 */
+					if(scenarioMode.saveToLocal(getBaseContext())){
+						if(add){
+							toastL("新建情景模式成功！");
+						}else{
+							toastL("修改情景模式成功！");
+						}
+						getMyApplication().getRunningTaskManager().updateTask(scenarioMode);
+						getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
+						setResult(RESULT_OK, getIntent());
+						finishActivity();
+					}else{
+						if(add){
+							toastL("新建情景模式失败！");
+						}else{
+							toastL("修改情景模式失败！");
+						}
+					}
 				}else{
-					if(add){
-						toastL("新建情景模式失败！");
-					}else{
-						toastL("修改情景模式失败！");
-					}
+					toastL("由于当前任务是一次性任务，所以触发时间必须大于当前时间！");
+					AnimationUtils.shake(timePicker);
 				}
 				break;
 			default: result = super.onOptionsItemSelected(item); break;

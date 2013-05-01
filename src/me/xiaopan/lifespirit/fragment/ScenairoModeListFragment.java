@@ -2,6 +2,8 @@ package me.xiaopan.lifespirit.fragment;
 
 import java.util.List;
 
+import me.xiaopan.androidlibrary.util.AndroidUtils;
+import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.ScenarioModeActivity;
 import me.xiaopan.lifespirit.adapter.ScenarioModeAdapter;
@@ -85,9 +87,14 @@ public class ScenairoModeListFragment extends BaseFragment implements ScenarioMo
 	@Override
 	public void onCheckedChanage(int position, boolean isChecked) {
 		ScenarioMode scenarioMode = scenarioModeList.get(position);
-		scenarioMode.setEnable(isChecked);
-		scenarioMode.saveToLocal(getActivity());
-		scenarioModeAdapter.notifyDataSetChanged();
-		((MyApplication) getActivity().getApplication()).getRunningTaskManager().updateTask(scenarioMode);
+		if(!scenarioMode.getRepeat().isExpiry(new Time())){
+			scenarioMode.setEnable(isChecked);
+			scenarioMode.saveToLocal(getActivity());
+			scenarioModeAdapter.notifyDataSetChanged();
+			((MyApplication) getActivity().getApplication()).getRunningTaskManager().updateTask(scenarioMode);
+		}else{
+			AndroidUtils.toastL(getActivity(), "当前任务已经过期，请先修改其触发时间再开启！");
+			scenarioModeAdapter.notifyDataSetChanged();
+		}
 	}
 }
