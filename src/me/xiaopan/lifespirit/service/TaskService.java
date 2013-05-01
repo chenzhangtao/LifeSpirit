@@ -10,6 +10,7 @@ import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.IndexActivity;
 import me.xiaopan.lifespirit.task.BaseTask;
+import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -74,13 +75,17 @@ public class TaskService extends Service {
 					/* 遍历所有正在运行的任务，该执行的执行该提醒的提醒 */
 					Time currentTime = new Time();
 					for(BaseTask task : myApplication.getRunningTaskManager().getRunningTaskList()){
-						if(task.isExecute(currentTime)){//如果需要执行
+						if(task.getRepeat().isExecute(currentTime)){//如果需要执行
+							Logger.w(LOG_TAG, "启动 - 执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 							task.execute(getBaseContext(), currentTime);
 							if(!task.isEnable()){
 								myApplication.getRunningTaskManager().getRunningTaskList().remove(task);
 							}
 						}else if(task.isRemind()){//如果需要提醒
+							Logger.w(LOG_TAG, "启动 - 提醒 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 							
+						}else{
+							Logger.w(LOG_TAG, "启动 - 不执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 						}
 					}
 					

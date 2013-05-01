@@ -64,7 +64,10 @@ public class Repeat extends BaseTaskOption{
 	 * 更新下次执行时间
 	 * @return true：更新成功；false：更新失败，任务已经终止
 	 */
-	private boolean updateNextExecuteTime(){
+	public boolean updateNextExecuteTime(){
+		if(lastExecuteTime == null){
+			lastExecuteTime = new Time();
+		}
 		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
 			setNextExecuteTime(onlyOneTimeRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
@@ -109,12 +112,7 @@ public class Repeat extends BaseTaskOption{
 	 * @return
 	 */
 	public boolean isExecute(Time currentTime){
-		//如果已经过期了就直接返货false，否则就比较下次执行时间和当前时间看是否相等
-		if(isExpiry(currentTime)){
-			return false;
-		}else{
-			return TimeUtils.compare(nextExecuteTime, currentTime) == 0;
-		}
+		return nextExecuteTime != null && TimeUtils.compare(nextExecuteTime, currentTime) == 0;		//如果正好到了触发点
 	}
 
 	@Override

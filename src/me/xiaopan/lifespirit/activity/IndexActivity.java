@@ -1,5 +1,8 @@
 package me.xiaopan.lifespirit.activity;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.adapter.TaskIndexAdapter;
 import me.xiaopan.lifespirit.task.BaseTask;
@@ -27,6 +30,7 @@ public class IndexActivity extends MyBaseActivity {
 	private ListView list;
 	private TaskIndexAdapter taskAdapter;
 	private int updateTaskPosition;
+	private RefreshRunnable refreshRunnable;
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
@@ -69,16 +73,36 @@ public class IndexActivity extends MyBaseActivity {
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
 		list.setAdapter(taskAdapter = new TaskIndexAdapter(getBaseContext(), getMyApplication().getRunningTaskManager().getRunningTaskList()));
+		refreshRunnable = new RefreshRunnable();
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		taskAdapter.notifyDataSetChanged();
+		Calendar  calendar = new GregorianCalendar();
+		calendar.add(Calendar.MINUTE, 1);//将时间向后推一分钟
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		getMessageHanlder().postAtTime(refreshRunnable, calendar.getTimeInMillis());
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getMessageHanlder().removeCallbacks(refreshRunnable);
 	}
 
 	@Override
 	protected boolean isRemoveTitleBar() {
 		return true;
+	}
+	
+	private class RefreshRunnable implements Runnable{
+		@Override
+		public void run() {
+			taskAdapter.notifyDataSetChanged();
+			getMessageHanlder().postDelayed(refreshRunnable, 60*1000);
+		}
 	}
 }

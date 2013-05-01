@@ -96,15 +96,6 @@ public abstract class BaseTask{
 	public abstract String getType();
 	
 	/**
-	 * 判断是否执行
-	 * @param currentTime 当前时间
-	 * @return
-	 */
-	public boolean isExecute(Time currentTime){
-		return repeat.isExecute(currentTime);
-	}
-	
-	/**
 	 * 是否提醒
 	 * @return
 	 */

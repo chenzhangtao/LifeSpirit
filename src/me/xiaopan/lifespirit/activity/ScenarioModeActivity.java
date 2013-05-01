@@ -123,11 +123,11 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 		boolean result = true;
 		switch (item.getItemId()) {
 			case R.id.menu_task_save:
-				/* 如果是新添加的任务，就设置其创建时间以及上次执行时间 */
+				/* 更新创建时间、上次执行时间以及下次执行时间 */
 				if(add){
 					scenarioMode.setCreateTime(new Time());
-					scenarioMode.getRepeat().setLastExecuteTime(scenarioMode.getCreateTime());
 				}
+				scenarioMode.getRepeat().updateNextExecuteTime();
 				
 				/* 将任务保存到本地 */
 				if(scenarioMode.saveToLocal(getBaseContext())){

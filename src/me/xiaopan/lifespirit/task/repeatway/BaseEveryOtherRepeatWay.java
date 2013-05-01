@@ -28,7 +28,12 @@ public abstract class BaseEveryOtherRepeatWay extends RepeatWayInterface{
 	@Override
 	public Time getNextExecuteTime(Repeat repeat) {
 		Time currentTime = new Time();
-		Calendar calendar = new GregorianCalendar(repeat.getLastExecuteTime().getYear(), repeat.getLastExecuteTime().getMonth(), repeat.getLastExecuteTime().getDayOfMonth(), repeat.getLastExecuteTime().getHourOfDay(), repeat.getLastExecuteTime().getMinute(), repeat.getLastExecuteTime().getSecond());
+		Calendar calendar = null;
+		if(repeat.getLastExecuteTime() != null){
+			calendar = new GregorianCalendar(repeat.getLastExecuteTime().getYear(), repeat.getLastExecuteTime().getMonth(), repeat.getLastExecuteTime().getDayOfMonth(), repeat.getLastExecuteTime().getHourOfDay(), repeat.getLastExecuteTime().getMinute(), repeat.getLastExecuteTime().getSecond());
+		}else{
+			calendar = new GregorianCalendar();
+		}
 		calendar.add(getUpdateField(), getSpace());
 		Time nextExecuteTime = new Time(calendar.getTimeInMillis());
 		

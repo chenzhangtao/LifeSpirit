@@ -1,5 +1,6 @@
 package me.xiaopan.lifespirit.util;
 
+import me.xiaopan.androidlibrary.util.Logger;
 import me.xiaopan.javalibrary.util.IntegerUtils;
 import me.xiaopan.javalibrary.util.Time;
 
@@ -20,6 +21,7 @@ public class TimeUtils {
 	 * @return
 	 */
 	public static final int compare(Time time1, Time time2){
+		Logger.w("time1:"+time1.toStringBy24Hour()+" time2:"+time2.toStringBy24Hour());
 		if(time1.getYear() != time2.getYear()){
 			return time1.getYear() - time2.getYear();
 		}else if(time1.getMonth() != time2.getMonth()){

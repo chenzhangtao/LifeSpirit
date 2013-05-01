@@ -127,6 +127,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 				case REQUEST_CODE_REPEAT:
 					baseTask.setRepeat(new Gson().fromJson(data.getStringExtra(RepeatActivity.RETURN_REQUIRED_STRING_REPEAT), Repeat.class));
 					repeatPreference.setSubtitle(baseTask.getRepeat().getIntro(getBaseContext()));
+					baseTask.getRepeat().setLastExecuteTime(null);
 					break;
 				default: break;
 			}
