@@ -4,17 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-
-import android.content.Context;
-import android.content.Intent;
-
 import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
 import me.xiaopan.lifespirit.service.TaskService;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
+import android.content.Context;
+import android.content.Intent;
+
+import com.google.gson.Gson;
 
 /**
  * 任务管理器
@@ -52,7 +51,9 @@ public class RunningTaskManager {
 		}else{
 			runningTaskList = new ArrayList<BaseTask>(0);
 		}
-		onUpdateRunningTaskList();
+		if(!isEmpty()){
+			context.startService(new Intent(context, TaskService.class));
+		}
 	}
 
 	/**

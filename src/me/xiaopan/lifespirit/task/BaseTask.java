@@ -85,7 +85,7 @@ public abstract class BaseTask{
 	public void execute(Context context, Time currentTime){
 		name.onExecute(context, currentTime);
 		repeat.onExecute(context, currentTime);
-		setEnable(repeat.updateNextExecuteTime());
+		setEnable(!repeat.isExpiry(currentTime));
 		saveToLocal(context);
 	}
 	
@@ -112,14 +112,6 @@ public abstract class BaseTask{
 		return false;
 	}
 	
-	/**
-	 * 更新下次执行时间
-	 * @return true：更新成功；false：更新失败，任务已经终止
-	 */
-	public boolean updateNextExecuteTime(){
-		return getRepeat().updateNextExecuteTime();
-	}
-
 	public boolean isEnable() {
 		return enable;
 	}

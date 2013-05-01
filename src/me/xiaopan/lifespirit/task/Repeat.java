@@ -1,12 +1,13 @@
 package me.xiaopan.lifespirit.task;
 
 import me.xiaopan.javalibrary.util.Time;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherDayRepeat;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherHourRepeat;
-import me.xiaopan.lifespirit.task.repeat.EveryOtherMinuteRepeat;
-import me.xiaopan.lifespirit.task.repeat.LegalAndOffDayRepeat;
-import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
-import me.xiaopan.lifespirit.task.repeat.StatutoryWorkingDaysRepeat;
+import me.xiaopan.lifespirit.task.repeatway.EveryOtherDayRepeatWay;
+import me.xiaopan.lifespirit.task.repeatway.EveryOtherHourRepeatWay;
+import me.xiaopan.lifespirit.task.repeatway.EveryOtherMinuteRepeatWay;
+import me.xiaopan.lifespirit.task.repeatway.LegalAndOffDayRepeatWay;
+import me.xiaopan.lifespirit.task.repeatway.OnlyOneTimeRepeatWay;
+import me.xiaopan.lifespirit.task.repeatway.StatutoryWorkingDaysRepeatWay;
+import me.xiaopan.lifespirit.util.TimeUtils;
 import android.content.Context;
 
 /**
@@ -17,21 +18,21 @@ public class Repeat extends BaseTaskOption{
 	private Time nextExecuteTime;
 	private Time lastExecuteTime;
 	private RepeatWay repeatWay;
-	private OnlyOneTimeRepeat onlyOneTimeRepeat;
-	private StatutoryWorkingDaysRepeat statutoryWorkingDaysRepeat;
-	private LegalAndOffDayRepeat legalAndOffDayRepeat;
-	private EveryOtherMinuteRepeat everyOtherMinuteRepeat;
-	private EveryOtherHourRepeat everyOtherHourRepeat;
-	private EveryOtherDayRepeat everyOtherDayRepeat;
+	private OnlyOneTimeRepeatWay onlyOneTimeRepeat;
+	private StatutoryWorkingDaysRepeatWay statutoryWorkingDaysRepeat;
+	private LegalAndOffDayRepeatWay legalAndOffDayRepeat;
+	private EveryOtherMinuteRepeatWay everyOtherMinuteRepeat;
+	private EveryOtherHourRepeatWay everyOtherHourRepeat;
+	private EveryOtherDayRepeatWay everyOtherDayRepeat;
 	
 	public Repeat(){
 		setTriggerTime(new Time());
-		setOnlyOneTimeRepeat(new OnlyOneTimeRepeat());
-		setStatutoryWorkingDaysRepeat(new StatutoryWorkingDaysRepeat());
-		setLegalAndOffDayRepeat(new LegalAndOffDayRepeat());
-		setEveryOtherMinuteRepeat(new EveryOtherMinuteRepeat());
-		setEveryOtherHourRepeat(new EveryOtherHourRepeat());
-		setEveryOtherDayRepeat(new EveryOtherDayRepeat());
+		setOnlyOneTimeRepeat(new OnlyOneTimeRepeatWay());
+		setStatutoryWorkingDaysRepeat(new StatutoryWorkingDaysRepeatWay());
+		setLegalAndOffDayRepeat(new LegalAndOffDayRepeatWay());
+		setEveryOtherMinuteRepeat(new EveryOtherMinuteRepeatWay());
+		setEveryOtherHourRepeat(new EveryOtherHourRepeatWay());
+		setEveryOtherDayRepeat(new EveryOtherDayRepeatWay());
 		setRepeatWay(RepeatWay.ONLY_ONE_TIME);
 	}
 	
@@ -63,7 +64,7 @@ public class Repeat extends BaseTaskOption{
 	 * 更新下次执行时间
 	 * @return true：更新成功；false：更新失败，任务已经终止
 	 */
-	public boolean updateNextExecuteTime(){
+	private boolean updateNextExecuteTime(){
 		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
 			setNextExecuteTime(onlyOneTimeRepeat.getNextExecuteTime(this));
 		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
@@ -83,31 +84,43 @@ public class Repeat extends BaseTaskOption{
 	}
 	
 	/**
+	 * 判断是否过过期
+	 * @param currentTime 当前时间
+	 * @return
+	 */
+	public boolean isExpiry(Time currentTime){
+		//如果下次执行时间为null或者已经过期，就尝试再次更新下次执行时间
+		if(nextExecuteTime == null || TimeUtils.compare(nextExecuteTime, currentTime) < 0){
+			updateNextExecuteTime();
+		}
+		
+		//如果下次执行时间不为null，并且下次执行时间大于当前时间说明尚未过期，反之就是已经过期了
+		if(nextExecuteTime != null && TimeUtils.compare(nextExecuteTime, currentTime) > 0){
+			return false;
+		}else{
+			nextExecuteTime = null;
+			return true;
+		}
+	}
+	
+	/**
 	 * 判断是否执行
 	 * @param currentTime 当前时间
 	 * @return
 	 */
 	public boolean isExecute(Time currentTime){
-		if(repeatWay == RepeatWay.ONLY_ONE_TIME){
-			return onlyOneTimeRepeat.isExecute(this, currentTime);
-		}else if(repeatWay == RepeatWay.STATUTORY_WORKING_DAYS){
-			return statutoryWorkingDaysRepeat.isExecute(this, currentTime);
-		}else if(repeatWay == RepeatWay.LEGAL_AND_OFF_DAY){
-			return legalAndOffDayRepeat.isExecute(this, currentTime);
-		}else if(repeatWay == RepeatWay.EVERY_OTHER_DAY){
-			return everyOtherDayRepeat.isExecute(this, currentTime);
-		}else if(repeatWay == RepeatWay.EVERY_OTHER_HOUR){
-			return everyOtherHourRepeat.isExecute(this, currentTime);
-		}else if(repeatWay == RepeatWay.EVERY_OTHER_MINUTE){
-			return everyOtherMinuteRepeat.isExecute(this, currentTime);
-		}else{
+		//如果已经过期了就直接返货false，否则就比较下次执行时间和当前时间看是否相等
+		if(isExpiry(currentTime)){
 			return false;
+		}else{
+			return TimeUtils.compare(nextExecuteTime, currentTime) == 0;
 		}
 	}
 
 	@Override
 	public void onExecute(Context context, Time currentTime) {
-		lastExecuteTime = currentTime;
+		lastExecuteTime = currentTime;//记录上次执行时间
+		updateNextExecuteTime();//更新下次执行时间
 	}
 
 	public RepeatWay getRepeatWay() {
@@ -142,53 +155,53 @@ public class Repeat extends BaseTaskOption{
 		this.triggerTime = triggerTime;
 	}
 	
-	public OnlyOneTimeRepeat getOnlyOneTimeRepeat() {
+	public OnlyOneTimeRepeatWay getOnlyOneTimeRepeat() {
 		return onlyOneTimeRepeat;
 	}
 
-	public void setOnlyOneTimeRepeat(OnlyOneTimeRepeat onlyOneTimeRepeat) {
+	public void setOnlyOneTimeRepeat(OnlyOneTimeRepeatWay onlyOneTimeRepeat) {
 		this.onlyOneTimeRepeat = onlyOneTimeRepeat;
 	}
 
-	public StatutoryWorkingDaysRepeat getStatutoryWorkingDaysRepeat() {
+	public StatutoryWorkingDaysRepeatWay getStatutoryWorkingDaysRepeat() {
 		return statutoryWorkingDaysRepeat;
 	}
 
 	public void setStatutoryWorkingDaysRepeat(
-			StatutoryWorkingDaysRepeat statutoryWorkingDaysRepeat) {
+			StatutoryWorkingDaysRepeatWay statutoryWorkingDaysRepeat) {
 		this.statutoryWorkingDaysRepeat = statutoryWorkingDaysRepeat;
 	}
 
-	public LegalAndOffDayRepeat getLegalAndOffDayRepeat() {
+	public LegalAndOffDayRepeatWay getLegalAndOffDayRepeat() {
 		return legalAndOffDayRepeat;
 	}
 
-	public void setLegalAndOffDayRepeat(LegalAndOffDayRepeat legalAndOffDayRepeat) {
+	public void setLegalAndOffDayRepeat(LegalAndOffDayRepeatWay legalAndOffDayRepeat) {
 		this.legalAndOffDayRepeat = legalAndOffDayRepeat;
 	}
 
-	public EveryOtherMinuteRepeat getEveryOtherMinuteRepeat() {
+	public EveryOtherMinuteRepeatWay getEveryOtherMinuteRepeat() {
 		return everyOtherMinuteRepeat;
 	}
 
 	public void setEveryOtherMinuteRepeat(
-			EveryOtherMinuteRepeat everyOtherMinuteRepeat) {
+			EveryOtherMinuteRepeatWay everyOtherMinuteRepeat) {
 		this.everyOtherMinuteRepeat = everyOtherMinuteRepeat;
 	}
 
-	public EveryOtherHourRepeat getEveryOtherHourRepeat() {
+	public EveryOtherHourRepeatWay getEveryOtherHourRepeat() {
 		return everyOtherHourRepeat;
 	}
 
-	public void setEveryOtherHourRepeat(EveryOtherHourRepeat everyOtherHourRepeat) {
+	public void setEveryOtherHourRepeat(EveryOtherHourRepeatWay everyOtherHourRepeat) {
 		this.everyOtherHourRepeat = everyOtherHourRepeat;
 	}
 
-	public EveryOtherDayRepeat getEveryOtherDayRepeat() {
+	public EveryOtherDayRepeatWay getEveryOtherDayRepeat() {
 		return everyOtherDayRepeat;
 	}
 
-	public void setEveryOtherDayRepeat(EveryOtherDayRepeat everyOtherDayRepeat) {
+	public void setEveryOtherDayRepeat(EveryOtherDayRepeatWay everyOtherDayRepeat) {
 		this.everyOtherDayRepeat = everyOtherDayRepeat;
 	}
 

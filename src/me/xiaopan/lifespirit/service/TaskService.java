@@ -50,9 +50,7 @@ public class TaskService extends Service {
 			calendar.add(Calendar.MINUTE, 1);//将时间向后推一分钟
 			calendar.set(Calendar.SECOND, 0);
 			calendar.set(Calendar.MILLISECOND, 0);
-			Logger.i(LOG_TAG, new Time(calendar.getTimeInMillis()).toStringBy24Hour());
-//			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
-			alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60*1000, startServiceIntent);//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
 		}else{
 			Logger.i(LOG_TAG, "创建 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务
@@ -78,6 +76,9 @@ public class TaskService extends Service {
 					for(BaseTask task : myApplication.getRunningTaskManager().getRunningTaskList()){
 						if(task.isExecute(currentTime)){//如果需要执行
 							task.execute(getBaseContext(), currentTime);
+							if(!task.isEnable()){
+								myApplication.getRunningTaskManager().getRunningTaskList().remove(task);
+							}
 						}else if(task.isRemind()){//如果需要提醒
 							
 						}

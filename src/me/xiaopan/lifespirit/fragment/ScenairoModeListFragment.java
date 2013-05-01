@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.fragment;
 
 import java.util.List;
 
+import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.ScenarioModeActivity;
 import me.xiaopan.lifespirit.adapter.ScenarioModeAdapter;
 import me.xiaopan.lifespirit.task.ScenarioMode;
@@ -19,7 +20,7 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 
-public class ScenairoModeListFragment extends BaseFragment{
+public class ScenairoModeListFragment extends BaseFragment implements ScenarioModeAdapter.OnCheckedChanageListener{
 	private static final int REQUEST_CODE_UPDATE_SCENARIO_MODE = 101;
 	private String pagerTitle;
 	private ListView listView;
@@ -56,7 +57,7 @@ public class ScenairoModeListFragment extends BaseFragment{
 			protected void onPostExecute(List<ScenarioMode> result) {
 				if(result != null){
 					scenarioModeList = result;
-					scenarioModeAdapter = new ScenarioModeAdapter(getActivity().getBaseContext(), scenarioModeList);
+					scenarioModeAdapter = new ScenarioModeAdapter(getActivity().getBaseContext(), scenarioModeList, ScenairoModeListFragment.this);
 					listView.setAdapter(scenarioModeAdapter);
 				}
 			}
@@ -79,5 +80,14 @@ public class ScenairoModeListFragment extends BaseFragment{
 					break;
 			}
 		}
+	}
+
+	@Override
+	public void onCheckedChanage(int position, boolean isChecked) {
+		ScenarioMode scenarioMode = scenarioModeList.get(position);
+		scenarioMode.setEnable(isChecked);
+		scenarioMode.saveToLocal(getActivity());
+		scenarioModeAdapter.notifyDataSetChanged();
+		((MyApplication) getActivity().getApplication()).getRunningTaskManager().updateTask(scenarioMode);
 	}
 }

@@ -1,6 +1,7 @@
-package me.xiaopan.lifespirit.task.repeat;
+package me.xiaopan.lifespirit.task.repeatway;
 
-import me.xiaopan.javalibrary.util.Time;
+import java.util.Calendar;
+
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -8,19 +9,14 @@ import android.content.Context;
 /**
  * 每隔多少天重复一次
  */
-public class EveryOtherDayRepeat extends BaseEveryOtherRepeat{
+public class EveryOtherDayRepeatWay extends BaseEveryOtherRepeatWay{
 	@Override
 	public String getIntro(Context context, Repeat repeat) {
 		return context.getString(R.string.repeat_everyOtherDay, getSpace());
 	}
 
 	@Override
-	public Time getNextExecuteTime(Repeat repeat) {
-		return null;
-	}
-
-	@Override
-	public boolean isExecute(Repeat repeat, Time currentTime) {
-		return false;
+	public int getUpdateField() {
+		return Calendar.DAY_OF_MONTH;
 	}
 }

@@ -6,7 +6,7 @@ import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit.task.Repeat.RepeatWay;
-import me.xiaopan.lifespirit.task.repeat.BaseEveryOtherRepeat;
+import me.xiaopan.lifespirit.task.repeatway.BaseEveryOtherRepeatWay;
 import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
 import me.xiaopan.lifespirit.widget.Preference;
@@ -183,7 +183,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 	/**
 	 * 设置间隔
 	 */
-	private void setSpace(final Preference preference, final BaseEveryOtherRepeat everyOtherRepeat){
+	private void setSpace(final Preference preference, final BaseEveryOtherRepeatWay everyOtherRepeat){
 		//创建对话框并设置标题
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

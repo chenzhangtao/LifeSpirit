@@ -56,7 +56,7 @@ public class TaskIndexAdapter extends BaseAdapter {
 		}
 		
 		task = taskList.get(position);
-		viewHolder.triggerTimeText.setText(TimeUtils.getTimeString(task.getRepeat().getTriggerTime()));
+		viewHolder.triggerTimeText.setText(TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime()));
 		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(task.getName().getName())?(context.getString(R.string.listItem_name, task.getName().getName())):null);
 		viewHolder.repeatText.setText(task.getRepeat().getIntro(context));
 		viewHolder.timeRemainingText.setText(null);

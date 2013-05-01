@@ -1,14 +1,15 @@
-package me.xiaopan.lifespirit.task.repeat;
+package me.xiaopan.lifespirit.task.repeatway;
 
 import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.Repeat;
+import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
 /**
  * 只执行一次
  */
-public class OnlyOneTimeRepeat extends BaseRepeatWay{
+public class OnlyOneTimeRepeatWay extends RepeatWayInterface{
 	@Override
 	public String getIntro(Context context, Repeat repeat) {
 		return context.getString(
@@ -23,17 +24,11 @@ public class OnlyOneTimeRepeat extends BaseRepeatWay{
 
 	@Override
 	public Time getNextExecuteTime(Repeat repeat) {
-		return null;
-	}
-
-	@Override
-	public boolean isExecute(Repeat repeat, Time currentTime) {
-		return 
-				repeat.getTriggerTime().getYear() == currentTime.getYear() && 
-				repeat.getTriggerTime().getMonth() == currentTime.getMonth() && 
-				repeat.getTriggerTime().getDayOfMonth() == currentTime.getDayOfMonth() && 
-				repeat.getTriggerTime().getHourOfDay() == currentTime.getHourOfDay() && 
-				repeat.getTriggerTime().getMinute() == currentTime.getMinute()
-				;
+		//如果当前任务尚未过期
+		if(TimeUtils.compare(repeat.getTriggerTime(), new Time()) > 0){
+			return repeat.getTriggerTime();
+		}else{
+			return null;
+		}
 	}
 }

@@ -2,6 +2,7 @@ package me.xiaopan.lifespirit.adapter;
 
 import java.util.List;
 
+import me.xiaopan.androidlibrary.widget.BaseSlidingToggleButton;
 import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.util.TimeUtils;
@@ -19,11 +20,13 @@ public class ScenarioModeAdapter extends BaseAdapter {
 	private List<ScenarioMode> scenarioModeList;
 	private LayoutInflater layoutInflater;
 	private ScenarioMode scenarioMode;
+	private OnCheckedChanageListener onCheckedChanageListener;
 	
-	public ScenarioModeAdapter(Context context, List<ScenarioMode> scenarioModeList){
+	public ScenarioModeAdapter(Context context, List<ScenarioMode> scenarioModeList, OnCheckedChanageListener onCheckedChanageListener){
 		this.context = context;
 		layoutInflater = LayoutInflater.from(context);
 		this.scenarioModeList = scenarioModeList;
+		this.onCheckedChanageListener = onCheckedChanageListener;
 	}
 	
 	@Override
@@ -52,17 +55,28 @@ public class ScenarioModeAdapter extends BaseAdapter {
 			viewHolder.repeatText = (TextView) convertView.findViewById(R.id.text_scenairoModeItem_repeat);
 			viewHolder.timeRemainingText = (TextView) convertView.findViewById(R.id.text_scenairoModeItem_timeRemaining);
 			viewHolder.slidingToggleButton = (SlidingToggleButton) convertView.findViewById(R.id.slidingToggle_scenairoModeItem);
+			viewHolder.slidingToggleButton.setOnCheckedChanageListener(new SlidingToggleButton.OnCheckedChanageListener() {
+				@Override
+				public void onCheckedChanage(BaseSlidingToggleButton slidingToggleButton, boolean isChecked) {
+					if(onCheckedChanageListener != null && slidingToggleButton.getTag() != null){
+						onCheckedChanageListener.onCheckedChanage((Integer) slidingToggleButton.getTag(), isChecked);
+					}
+				}
+			});
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
 		scenarioMode = scenarioModeList.get(position);
-		viewHolder.triggerTimeText.setText(TimeUtils.getTimeString(scenarioMode.getRepeat().getTriggerTime()));
+		viewHolder.triggerTimeText.setText(TimeUtils.getDigitalClockString(scenarioMode.getRepeat().getTriggerTime()));
 		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(scenarioMode.getName().getName())?(" - "+scenarioMode.getName().getName()):"");
 		viewHolder.repeatText.setText(scenarioMode.getRepeat().getIntro(context));
 		viewHolder.timeRemainingText.setText(null);
+		
+		viewHolder.slidingToggleButton.setTag(null);
 		viewHolder.slidingToggleButton.setChecked(scenarioMode.isEnable());
+		viewHolder.slidingToggleButton.setTag(position);
 		
 		return convertView;
 	}
@@ -73,5 +87,9 @@ public class ScenarioModeAdapter extends BaseAdapter {
 		private TextView repeatText;
 		private TextView timeRemainingText;
 		private SlidingToggleButton slidingToggleButton;
+	}
+	
+	public interface OnCheckedChanageListener{
+		public void onCheckedChanage(int position, boolean isChecked);
 	}
 }

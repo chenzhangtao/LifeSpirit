@@ -1,4 +1,4 @@
-package me.xiaopan.lifespirit.task.repeat;
+package me.xiaopan.lifespirit.task.repeatway;
 
 import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.task.Repeat;
@@ -7,7 +7,7 @@ import android.content.Context;
 /**
  * 重复
  */
-public abstract class BaseRepeatWay{
+public abstract class RepeatWayInterface{
 	/**
 	 * 获取简介
 	 * @param context 上下文
@@ -22,12 +22,4 @@ public abstract class BaseRepeatWay{
 	 * @return
 	 */
 	public abstract Time getNextExecuteTime(Repeat repeat);
-	
-	/**
-	 * 判断是否需要执行
-	 * @param repeat
-	 * @param currentTime 当前时间
-	 * @return
-	 */
-	public abstract boolean isExecute(Repeat repeat, Time currentTime);
 }
