@@ -2,12 +2,12 @@ package me.xiaopan.lifespirit.task;
 
 import me.xiaopan.lifespirit.task.scenariomode.AirplaneMode;
 import me.xiaopan.lifespirit.task.scenariomode.Bluetooth;
+import me.xiaopan.lifespirit.task.scenariomode.Brightness;
+import me.xiaopan.lifespirit.task.scenariomode.Dormant;
 import me.xiaopan.lifespirit.task.scenariomode.MobileNetwork;
 import me.xiaopan.lifespirit.task.scenariomode.NotificationRingtone;
 import me.xiaopan.lifespirit.task.scenariomode.PhoneRingtone;
 import me.xiaopan.lifespirit.task.scenariomode.RingtoneMode;
-import me.xiaopan.lifespirit.task.scenariomode.Brightness;
-import me.xiaopan.lifespirit.task.scenariomode.Dormant;
 import me.xiaopan.lifespirit.task.scenariomode.SmsRingtone;
 import me.xiaopan.lifespirit.task.scenariomode.Volume;
 import me.xiaopan.lifespirit.task.scenariomode.WIFI;

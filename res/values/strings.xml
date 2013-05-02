@@ -106,4 +106,6 @@
 	<string name="activityTitle_taskList">任务列表</string>
 	
 	<string name="scenarioMode_title">情景模式</string>
+	
+	<string name="dialogTitle_selectRepeatWay">请选择重复方式</string>
 </resources>
