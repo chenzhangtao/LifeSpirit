@@ -6,18 +6,18 @@ import android.content.Context;
  * 短信铃声
  */
 public class SmsRingtone extends ScenarioOption{
+	private static final long serialVersionUID = 1L;
 
-	public SmsRingtone(Context context) {
-		super(context);
+	public SmsRingtone() {
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		
 	}
 
 	@Override
-	public String onGetIntro() {
+	public String onGetIntro(Context context) {
 		return null;
 	}
 }

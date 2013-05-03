@@ -3,14 +3,11 @@ package me.xiaopan.lifespirit.task;
 import android.content.Context;
 
 public class Name extends TaskOption{
+	private static final long serialVersionUID = 1L;
 	private String name;
 
-	public Name(Context context) {
-		super(context);
-	}
-
 	@Override
-	public String onGetIntro() {
+	public String onGetIntro(Context context) {
 		return name;
 	}
 

@@ -8,30 +8,30 @@ import android.content.Context;
  * 亮度
  */
 public class Brightness extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private int brightness;//亮度
 	private boolean autoAdjustmen;//自动调节
 	
 	public Brightness(Context context) {
-		super(context);
-		setAutoAdjustmen(SystemUtils.isScreenBrightnessModeAuto(getContext()));
-		setBrightness(SystemUtils.getScreenBrightness(getContext()));
+		setAutoAdjustmen(SystemUtils.isScreenBrightnessModeAuto(context));
+		setBrightness(SystemUtils.getScreenBrightness(context));
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
 			//先设置模式
-			SystemUtils.setScreenBrightnessMode(getContext(), isAutoAdjustmen());
+			SystemUtils.setScreenBrightnessMode(context, isAutoAdjustmen());
 			//如果不是自动的就设置亮度
 			if(!isAutoAdjustmen()){
-				SystemUtils.setScreenBrightness(getContext(), getBrightness());
+				SystemUtils.setScreenBrightness(context, getBrightness());
 			}
 		}
 	}
 
 	@Override
-	public String onGetIntro() {
-		return isAutoAdjustmen()?getContext().getString(R.string.base_automatic):(""+getBrightness());
+	public String onGetIntro(Context context) {
+		return isAutoAdjustmen()?context.getString(R.string.base_automatic):(""+getBrightness());
 	}
 
 	public boolean isAutoAdjustmen() {

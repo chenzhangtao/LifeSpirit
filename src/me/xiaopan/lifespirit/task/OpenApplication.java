@@ -9,19 +9,15 @@ public class OpenApplication extends BaseTask{
 	private String applicationName;
 	private String applicationPackageName;
 	
-	public OpenApplication(Context context) {
-		super(context);
-	}
-	
 	@Override
-	public String getIntro() {
+	public String onGetIntro(Context context) {
 		return null;
 	}
 
 	@Override
-	public void execute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
-			getContext().startActivity(getContext().getPackageManager().getLaunchIntentForPackage(applicationPackageName));
+			context.startActivity(context.getPackageManager().getLaunchIntentForPackage(applicationPackageName));
 		}
 	}
 

@@ -91,7 +91,7 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 			for(Entry<Preference, TaskOption> entry : map.entrySet()){
 				preference = entry.getKey();
 				taskOption = entry.getValue();
-				preference.setSubtitle(taskOption.onGetIntro());
+				preference.setSubtitle(taskOption.onGetIntro(getBaseContext()));
 				if(taskOption instanceof ScenarioOption){
 					preference.setEnablePreference(((ScenarioOption) taskOption).isEnable());
 				}

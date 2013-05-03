@@ -8,11 +8,11 @@ import android.media.AudioManager;
  * 铃声模式
  */
 public class RingtoneMode extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private RingnoteModeEnum ringnoteMode;
 
 	public RingtoneMode(Context context) {
-		super(context);
-		AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		int ringnoteMode = audioManager.getRingerMode();
 		int vibrateMode = audioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);
 		switch(ringnoteMode){
@@ -41,9 +41,9 @@ public class RingtoneMode extends ScenarioOption {
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
-			AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+			AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 			if(getRingnoteMode() == RingnoteModeEnum.RINGDOWN_AND_VRIBATE){
 				audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 				audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
@@ -65,8 +65,8 @@ public class RingtoneMode extends ScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro() {
-		return getContext().getResources().getStringArray(R.array.taskItem_ringnoteMode_itemNames)[getRingnoteMode().getIndex()];
+	public String onGetIntro(Context context) {
+		return context.getResources().getStringArray(R.array.taskItem_ringnoteMode_itemNames)[getRingnoteMode().getIndex()];
 	}
 
 	public RingnoteModeEnum getRingnoteMode() {

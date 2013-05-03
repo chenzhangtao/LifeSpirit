@@ -14,18 +14,17 @@ public class SendMessage extends BaseTask{
 	private List<Contacts> contactsList;
 	private String messageContent;
 	
-	public SendMessage(Context context) {
-		super(context);
+	public SendMessage() {
 		setContactsList(new ArrayList<Contacts>());
 	}
 
 	@Override
-	public String getIntro() {
+	public String onGetIntro(Context context) {
 		return null;
 	}
 
 	@Override
-	public void execute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
 			SmsManager smsManager = SmsManager.getDefault();
 			List<String> contentList = smsManager.divideMessage(messageContent);

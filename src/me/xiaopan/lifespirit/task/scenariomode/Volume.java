@@ -8,6 +8,7 @@ import android.media.AudioManager;
  * 音量
  */
 public class Volume extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private int mediaVolume = -5;
 	private int alarmVolume = -5;
 	private int ringtoneVolume = -5;
@@ -16,8 +17,7 @@ public class Volume extends ScenarioOption {
 	private int systemVolume = -5;
 	
 	public Volume(Context context) {
-		super(context);
-		AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		setMediaVolume(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 		setAlarmVolume(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
 		setRingtoneVolume(audioManager.getStreamVolume(AudioManager.STREAM_RING));
@@ -27,9 +27,9 @@ public class Volume extends ScenarioOption {
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
-			AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+			AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 			audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, getMediaVolume(), 0);
 			audioManager.setStreamVolume(AudioManager.STREAM_ALARM, getAlarmVolume(), 0);
 			audioManager.setStreamVolume(AudioManager.STREAM_RING, getRingtoneVolume(), 0);
@@ -40,13 +40,13 @@ public class Volume extends ScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro() {
-		String result = getContext().getResources().getString(R.string.taskItem_volume_media)+getMediaVolume()+", ";
-		result += getContext().getResources().getString(R.string.taskItem_volume_alarm)+getAlarmVolume()+", ";
-		result += getContext().getResources().getString(R.string.taskItem_volume_ringtone)+getRingtoneVolume()+", ";
-		result += getContext().getResources().getString(R.string.taskItem_volume_notification)+getNotificationVolme()+", ";
-		result += getContext().getResources().getString(R.string.taskItem_volume_voiceCall)+getVoiceCallVolme()+", ";
-		result += getContext().getResources().getString(R.string.taskItem_volume_system)+getSystemVolume();
+	public String onGetIntro(Context context) {
+		String result = context.getString(R.string.taskItem_volume_media)+getMediaVolume()+", ";
+		result += context.getString(R.string.taskItem_volume_alarm)+getAlarmVolume()+", ";
+		result += context.getString(R.string.taskItem_volume_ringtone)+getRingtoneVolume()+", ";
+		result += context.getString(R.string.taskItem_volume_notification)+getNotificationVolme()+", ";
+		result += context.getString(R.string.taskItem_volume_voiceCall)+getVoiceCallVolme()+", ";
+		result += context.getString(R.string.taskItem_volume_system)+getSystemVolume();
 		return result;
 	}
 

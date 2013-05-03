@@ -120,7 +120,9 @@ public class BaseTaskActivity extends MyBaseActivity {
 //					}
 //				});
 //				builderAlertDialog(builder.create(), null).show();
-				startActivity(RepeatActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable(RepeatActivity.PARAM_OPTIONAL_REPEAT, baseTask.getRepeat());
+				startActivity(RepeatActivity.class, bundle);
 			}
 		});
 	}
@@ -130,8 +132,8 @@ public class BaseTaskActivity extends MyBaseActivity {
 		timePicker.setIs24HourView(true);
 		ViewUtils.setTimePickerTextColor(timePicker, Colors.BLACK);
 		
-		namePreference.setSubtitle(baseTask.getName().onGetIntro());
-		repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro());
+		namePreference.setSubtitle(baseTask.getName().onGetIntro(getBaseContext()));
+		repeatPreference.setSubtitle(baseTask.getRepeat().onGetIntro(getBaseContext()));
 	}
 	
 	/**

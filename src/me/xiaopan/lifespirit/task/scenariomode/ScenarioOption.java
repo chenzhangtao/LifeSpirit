@@ -1,23 +1,21 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.lifespirit.task.TaskOption;
 import android.content.Context;
+import me.xiaopan.lifespirit.task.TaskOption;
 
 /**
  * 情景模式选项
  */
 public abstract class ScenarioOption extends TaskOption{
+	private static final long serialVersionUID = 1L;
 	private boolean enable = true;//是否启用此选项
 	private boolean support = true;//是否支持此功能
 	
-	public ScenarioOption(Context context){
-		super(context);
-	}
-	
 	/**
 	 * 执行
+	 * @param context 上下文
 	 */
-	public abstract void onExecute();
+	public abstract void onExecute(Context context);
 	
 	/**
 	 * 是否启用此选项

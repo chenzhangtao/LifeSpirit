@@ -9,12 +9,12 @@ import android.content.Context;
  * WIFI
  */
 public class WIFI extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public WIFI(Context context) {
-		super(context);
 		try {
-			setOpen(!NetworkUtils.isWifiOpen(getContext()));
+			setOpen(!NetworkUtils.isWifiOpen(context));
 		} catch (DeviceNotFoundException e) {
 			e.printStackTrace();
 			setSupport(false);
@@ -23,10 +23,10 @@ public class WIFI extends ScenarioOption {
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
 			try {
-				NetworkUtils.setWifi(getContext(), isOpen());
+				NetworkUtils.setWifi(context, isOpen());
 			} catch (DeviceNotFoundException e) {
 				e.printStackTrace();
 				setSupport(false);
@@ -36,8 +36,8 @@ public class WIFI extends ScenarioOption {
 	}
 
 	@Override
-	public String onGetIntro() {
-		return isOpen()?getContext().getResources().getString(R.string.base_open):getContext().getResources().getString(R.string.base_close);
+	public String onGetIntro(Context context) {
+		return isOpen()?context.getString(R.string.base_open):context.getString(R.string.base_close);
 	}
 	
 	public boolean isOpen() {

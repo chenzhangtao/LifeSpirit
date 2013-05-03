@@ -8,23 +8,23 @@ import android.content.Context;
  * 飞行模式
  */
 public class AirplaneMode extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public AirplaneMode(Context context) {
-		super(context);
-		setOpen(!SystemUtils.isAirplaneModeOpen(getContext()));
+		setOpen(!SystemUtils.isAirplaneModeOpen(context));
 	}
 	
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if (isEnable()) {
-			SystemUtils.setAirplaneMode(getContext(), isOpen());
+			SystemUtils.setAirplaneMode(context, isOpen());
 		}
 	}
 
 	@Override
-	public String onGetIntro() {
-		return isOpen()?getContext().getResources().getString(R.string.base_open):getContext().getResources().getString(R.string.base_close);
+	public String onGetIntro(Context context) {
+		return isOpen()?context.getString(R.string.base_open):context.getString(R.string.base_close);
 	}
 	
 	public boolean isOpen() {

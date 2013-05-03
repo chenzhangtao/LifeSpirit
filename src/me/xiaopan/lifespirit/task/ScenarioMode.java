@@ -36,8 +36,7 @@ public class ScenarioMode extends BaseTask{
 	 * @param context 上下文
 	 */
 	public ScenarioMode(Context context){
-		super(context);
-		setBluetooth(new Bluetooth(context));
+		setBluetooth(new Bluetooth());
 		setAirplaneMode(new AirplaneMode(context));
 		setMobileNetwork(new MobileNetwork(context));
 		setBrightness(new Brightness(context));
@@ -45,34 +44,27 @@ public class ScenarioMode extends BaseTask{
 		setWifi(new WIFI(context));
 		setVolume(new Volume(context));
 		setRingtoneMode(new RingtoneMode(context));
-		setPhoneRingtone(new PhoneRingtone(getContext()));
-		setSmsRingtone(new SmsRingtone(getContext()));
-		setNotificationRingtone(new NotificationRingtone(getContext()));
+		setPhoneRingtone(new PhoneRingtone());
+		setSmsRingtone(new SmsRingtone());
+		setNotificationRingtone(new NotificationRingtone());
 	}
 	
-	/**
-	 * 获取任务信息
-	 * @return 任务信息
-	 */
 	@Override
-	public String getIntro(){
+	public String onGetIntro(Context context){
 		return "";
 	}
 	
-	/**
-	 * 执行
-	 */
 	@Override
-	public void execute(){
+	public void onExecute(Context context){
 		if(isEnable()){
-			getBluetooth().onExecute();
-			getMobileNetwork().onExecute();
-			getWifi().onExecute();
-			getBrightness().onExecute();
-			getDormant().onExecute();
-			getVolume().onExecute();
-			getRingtoneMode().onExecute();
-			getAirplaneMode().onExecute();
+			getBluetooth().onExecute(context);
+			getMobileNetwork().onExecute(context);
+			getWifi().onExecute(context);
+			getBrightness().onExecute(context);
+			getDormant().onExecute(context);
+			getVolume().onExecute(context);
+			getRingtoneMode().onExecute(context);
+			getAirplaneMode().onExecute(context);
 		}
 	}
 

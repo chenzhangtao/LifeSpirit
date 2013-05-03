@@ -8,23 +8,23 @@ import android.content.Context;
  * 移动网络
  */
 public class MobileNetwork extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private boolean open;
 	
 	public MobileNetwork(Context context) {
-		super(context);
-		setOpen(!NetworkUtils.isMobileNetworkOpen(getContext()));
+		setOpen(!NetworkUtils.isMobileNetworkOpen(context));
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
-			NetworkUtils.setMobileNetwork(getContext(), isOpen());
+			NetworkUtils.setMobileNetwork(context, isOpen());
 		}
 	}
 
 	@Override
-	public String onGetIntro() {
-		return isOpen()?getContext().getResources().getString(R.string.base_open):getContext().getResources().getString(R.string.base_close);
+	public String onGetIntro(Context context) {
+		return isOpen()?context.getString(R.string.base_open):context.getString(R.string.base_close);
 	}
 	
 	public boolean isOpen() {

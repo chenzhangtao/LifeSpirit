@@ -1,52 +1,46 @@
 package me.xiaopan.lifespirit.task;
 
+import me.xiaopan.lifespirit.task.repeat.BaseRepeatWay;
+import me.xiaopan.lifespirit.task.repeat.OnlyOneTimeRepeat;
 import android.content.Context;
+
 
 /**
  * 任务基类
  */
 public abstract class BaseTask {
-	private Context context;
 	private boolean enable;
 	private CreateTime createTime;
 	private NextExecuteTime nextExecuteTime;
 	private TriggerTime triggerTime;
 	private Name name;
-	private Repeat repeat;
+	private BaseRepeatWay repeat;
 	
 	/**
 	 * 创建一个任务
-	 * @param context 上下文
 	 */
-	public BaseTask(Context context){
-		setContext(context);
+	public BaseTask(){
 		setEnable(true);
 		setCreateTime(new CreateTime());
 		setTriggerTime(new TriggerTime());
 		setNextExecuteTime(new NextExecuteTime());
-		setName(new Name(getContext()));
-		setRepeat(new Repeat(getContext(), getTriggerTime()));
+		setName(new Name());
+		setRepeat(new OnlyOneTimeRepeat());
 	}
 	
 	/**
 	 * 获取简介
+	 * @param context 上下文
 	 * @return 信息
 	 */
-	public abstract String getIntro();
+	public abstract String onGetIntro(Context context);
 	
 	/**
 	 * 执行
+	 * @param context 上下文
 	 */
-	public abstract void execute();
+	public abstract void onExecute(Context context);
 	
-	public Context getContext() {
-		return context;
-	}
-
-	public void setContext(Context context) {
-		this.context = context;
-	}
-
 	public boolean isEnable() {
 		return enable;
 	}
@@ -79,11 +73,11 @@ public abstract class BaseTask {
 		this.triggerTime = triggerTime;
 	}
 
-	public Repeat getRepeat() {
+	public BaseRepeatWay getRepeat() {
 		return repeat;
 	}
 
-	public void setRepeat(Repeat repeat) {
+	public void setRepeat(BaseRepeatWay repeat) {
 		this.repeat = repeat;
 	}
 

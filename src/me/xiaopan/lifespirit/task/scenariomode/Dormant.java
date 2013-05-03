@@ -9,23 +9,23 @@ import android.content.Context;
  * 休眠
  */
 public class Dormant extends ScenarioOption {
+	private static final long serialVersionUID = 1L;
 	private int dormantTimeInMillis;
 	
 	public Dormant(Context context) {
-		super(context);
-		setDormantTimeInMillis(SystemUtils.getScreenDormantTime(getContext()));
+		setDormantTimeInMillis(SystemUtils.getScreenDormantTime(context));
 	}
 
 	@Override
-	public void onExecute() {
+	public void onExecute(Context context) {
 		if(isEnable()){
-			SystemUtils.setScreenDormantTime(getContext(), getDormantTimeInMillis());
+			SystemUtils.setScreenDormantTime(context, getDormantTimeInMillis());
 		}
 	}
 
 	@Override
-	public String onGetIntro() {
-		return DateTimeUtils.milliSecondToIncompleteHourMinuteSecond(getDormantTimeInMillis(), "", getContext().getResources().getString(R.string.base_hours), getContext().getResources().getString(R.string.base_minutes), getContext().getResources().getString(R.string.base_second), "", false, false,false);
+	public String onGetIntro(Context context) {
+		return DateTimeUtils.milliSecondToIncompleteHourMinuteSecond(getDormantTimeInMillis(), "", context.getString(R.string.base_hours), context.getString(R.string.base_minutes), context.getString(R.string.base_second), "", false, false,false);
 	}
 
 	public int getDormantTimeInMillis() {
