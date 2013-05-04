@@ -3,8 +3,11 @@ package me.xiaopan.lifespirit.util;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.javalibrary.util.IntegerUtils;
 import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.lifespirit2.R;
+import android.content.Context;
 
 public class TimeUtils {
 	/**
@@ -38,15 +41,36 @@ public class TimeUtils {
 		}
 	}
 	
+	/**
+	 * 获取当前分钟剩余的秒数
+	 * @return 当前分钟剩余的秒数，单位（秒）
+	 */
 	public static final int getCurrentMinuteRemainingSecond(){
 		return 60 - new Time().getSecond();
 	}
 	
+	/**
+	 * 获取下一分钟的毫秒值
+	 * @return 下一分钟的毫秒值
+	 */
 	public static final long getNextMinuteTimeInMillis(){
 		Calendar calendar = new GregorianCalendar();
 		calendar.add(Calendar.MINUTE, 1);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		return calendar.getTimeInMillis();
+	}
+	
+	public static final String getTimeRemaining(Context context, Time currentTime, Time targetTime){
+		return DateTimeUtils.milliSecondToIncompleteHourMinuteSecond(
+				targetTime.getTimeInMillis() - currentTime.getTimeInMillis(), 
+				context.getString(R.string.base_day), 
+				context.getString(R.string.base_hours), 
+				context.getString(R.string.base_minutes), 
+				context.getString(R.string.base_second), 
+				context.getString(R.string.base_millisecond), 
+				false, 
+				true, 
+				false);
 	}
 }
