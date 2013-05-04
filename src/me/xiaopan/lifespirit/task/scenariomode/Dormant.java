@@ -25,7 +25,7 @@ public class Dormant extends BaseScenarioOption {
 
 	@Override
 	public String getIntro(Context context) {
-		return DateTimeUtils.milliSecondToIncompleteHourMinuteSecond(getDormantTimeInMillis(), "", context.getString(R.string.base_hours), context.getString(R.string.base_minutes), context.getString(R.string.base_second), "", false, false,false);
+		return DateTimeUtils.milliSecondToDayHourMinuteSecond(getDormantTimeInMillis(), null, context.getString(R.string.base_hours), context.getString(R.string.base_minutes), context.getString(R.string.base_second), null, false, false);
 	}
 
 	public int getDormantTimeInMillis() {

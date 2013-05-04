@@ -128,16 +128,16 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 				if(TimeUtils.compare(scenarioMode.getRepeat().getTriggerTime(), new Time()) > 0){
 					/* 更新创建时间、上次执行时间以及下次执行时间 */
 					if(add){
-						scenarioMode.setCreateTime(new Time());
+						scenarioMode.setId(System.currentTimeMillis());
 					}
 					scenarioMode.getRepeat().updateNextExecuteTime();
 					
 					/* 将任务保存到本地 */
 					if(scenarioMode.saveToLocal(getBaseContext())){
 						if(add){
-							toastL("新建情景模式成功！");
+							toastS(R.string.hint_createSuccess_scearioMode);
 						}else{
-							toastL("修改情景模式成功！");
+							toastS(R.string.hint_updateSuccess_scearioMode);
 						}
 						getMyApplication().getRunningTaskManager().updateTask(scenarioMode);
 						getIntent().putExtra(RETURN_REQUIRED_STRING_SCENARIO_MODE, new Gson().toJson(scenarioMode));
@@ -145,13 +145,13 @@ public class ScenarioModeActivity extends BaseTaskActivity {
 						finishActivity();
 					}else{
 						if(add){
-							toastL("新建情景模式失败！");
+							toastS(R.string.hint_createFail_scearioMode);
 						}else{
-							toastL("修改情景模式失败！");
+							toastS(R.string.hint_updateFail_scearioMode);
 						}
 					}
 				}else{
-					toastL("由于当前任务是一次性任务，所以触发时间必须大于当前时间！");
+					toastL(R.string.hint_lessThanCurrnTime);
 					AnimationUtils.shake(timePicker);
 				}
 				break;

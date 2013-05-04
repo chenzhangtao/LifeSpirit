@@ -64,8 +64,7 @@
 	<string name="hint_noSlectedTask">请至少选择一个计划！</string>
 	<string name="hint_noOperation">亲，除去重复之外您还必须至少开启一个计划项哦！偷偷告诉你，可以点击右边的复选框来开启计划项哦！</string>
 	<string name="hint_timeConflict">亲，当前计划的时、分与其他计划有冲突哦！请换一下吧！</string>
-	<string name="hint_lessThanCurrnTime">糟糕！由于当前计划没有开启重复，所以计划的时间必须大于当前系统的时间！</string>
-	<string name="hint_taskPastDue">糟糕！当前计划已经过期，请修改其时间再开启！</string>
+	<string name="hint_lessThanCurrnTime">由于当前任务是一次性任务，所以触发时间必须大于当前时间！</string>
 	<string name="hint_phoneNumberNull">电话号码不能为空哦！</string>
 	<string name="hint_messageContentNull">短信内容不能为空哦！</string>
 	<string name="hint_notContacts">您必须添加至少一个电话号码！</string>
@@ -77,6 +76,11 @@
 	<string name="hint_applicationNoHave">您必须选择一个应用程序哦！</string>
 	<string name="hint_messageNull">您还没有输入您要发送的短信的内容！</string>
 	<string name="hint_contactsNull">您的短信联系人还是空的哦！</string>
+	<string name="hint_taskHasBeenOverdue">当前任务已经过期，请先修改其触发时间再开启！</string>
+	<string name="hint_createSuccess_scearioMode">新建情景模式成功！</string>
+	<string name="hint_updateSuccess_scearioMode">修改情景模式成功！</string>
+	<string name="hint_createFail_scearioMode">新建情景模式失败！</string>
+	<string name="hint_updateFail_scearioMode">修改情景模式失败！</string>
 	
 	<string name="messageEdit_title">编辑短信</string>
 	<string name="messageEdit_phoneNumber_hint">请输入号码</string>
@@ -103,10 +107,6 @@
 	<string name="menu_sort">排序</string>
 	<string name="menu_sort_title">选择排序方式</string>
 	
-	<string name="activityTitle_task">添加任务</string>
-	<string name="activityTitle_taskList">任务列表</string>
-	
-	<string name="scenarioMode_title">情景模式</string>
 	<string name="scenarioMode_preference_bluetooth">蓝牙</string>
 	<string name="scenarioMode_preference_wifi">WIFI</string>
 	<string name="scenarioMode_preference_mobileNetwork">2G/3G</string>
@@ -119,10 +119,6 @@
 	<string name="scenarioMode_preference_brightness">屏幕亮度</string>
 	<string name="scenarioMode_preference_dormant">屏幕休眠</string>
 	
-	<string name="dialogTitle_selectRepeatWay">请选择重复方式</string>
-	
-	
-	<string name="repeat_title">重复</string>
 	<string name="repeat_onlyOneTime">只在%s执行一次</string>
 	<string name="repeat_statutoryWorkingDays">法定工作日（智能跳过节假日）</string>
 	<string name="repeat_legalAndOffDay">法定休息日（周末和法定节假日）</string>
@@ -132,8 +128,14 @@
 	<string name="repeat_spaceInputHint">请输入间隔时间</string>
 	<string name="repeat_spaceInputErrorHint">不能为空并且不能为0哦！</string>
 
-	<string name="taskList_title">任务列表</string>
-	<string name="alarmClock_title">闹钟</string>
+	<string name="activityTitle_repeat">重复</string>
+	<string name="activityTitle_task">添加任务</string>
+	<string name="activityTitle_taskList">任务列表</string>
+	<string name="activityTitle_scenarioMode">情景模式</string>
+	<string name="activityTitle_alarmClock">闹钟</string>
 	
-	<string name="listItem_name">| %s</string>
+	<string name="dialogTitle_selectRepeatWay">请选择重复方式</string>
+
+	<string name="listItem_task_name">| %s</string>
+	<string name="listItem_task_timeRemaining">%s后执行</string>
 </resources>

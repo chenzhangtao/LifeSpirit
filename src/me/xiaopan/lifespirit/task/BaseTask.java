@@ -16,7 +16,7 @@ public abstract class BaseTask{
 	public static final String STATE_ENABLE = "ENABLE";
 	public static final String STATE_DISABLE = "DISABLE";
 	private boolean enable;
-	private Time createTime;
+	private long id;
 	private Name name;
 	private Repeat repeat;
 	
@@ -38,14 +38,14 @@ public abstract class BaseTask{
 		boolean saveSuccess = true;
 		
 		//先删除旧文件
-		File oldSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+getType()+"_"+(enable?STATE_DISABLE:STATE_ENABLE));
+		File oldSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getId()+"."+getType()+"_"+(enable?STATE_DISABLE:STATE_ENABLE));
 		if(oldSaveFile.exists()){
 			oldSaveFile.delete();
 		}
 		
 		//再创建新文件
 		try {
-			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getCreateTime().getTimeInMillis()+"."+getType()+"_"+(enable?STATE_ENABLE:STATE_DISABLE));
+			File newSaveFile = new File(context.getFilesDir().getPath()+File.separator+TASK_DIR+File.separator+getId()+"."+getType()+"_"+(enable?STATE_ENABLE:STATE_DISABLE));
 			if(!newSaveFile.exists()){
 				//先确保父目录的存在，如果不存在就创建
 				File parentFile= newSaveFile.getParentFile();
@@ -111,12 +111,12 @@ public abstract class BaseTask{
 		this.enable = enable;
 	}
 
-	public Time getCreateTime() {
-		return createTime;
+	public long getId() {
+		return id;
 	}
 
-	public void setCreateTime(Time createTime) {
-		this.createTime = createTime;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Repeat getRepeat() {

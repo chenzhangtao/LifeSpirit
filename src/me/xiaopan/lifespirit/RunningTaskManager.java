@@ -16,7 +16,7 @@ import android.content.Intent;
 import com.google.gson.Gson;
 
 /**
- * 任务管理器
+ * 运行中任务管理器
  */
 public class RunningTaskManager {
 	private Context context;
@@ -84,7 +84,7 @@ public class RunningTaskManager {
 				runningTaskList.add(task);
 			}
 		}
-		onUpdateRunningTaskList();
+		updateTaskService();
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class RunningTaskManager {
 	public int findTask(BaseTask task){
 		int position = -1;
 		for(int w = 0, size = runningTaskList.size(); w < size; w++){
-			if(runningTaskList.get(w).getCreateTime().getTimeInMillis() == task.getCreateTime().getTimeInMillis()){
+			if(runningTaskList.get(w).getId() == task.getId()){
 				position = w;
 				break;
 			}
@@ -111,11 +111,18 @@ public class RunningTaskManager {
 		return runningTaskList == null || runningTaskList.size() == 0;
 	}
 	
-	public void onUpdateRunningTaskList(){
+	/**
+	 * 更新服务
+	 */
+	public void updateTaskService(){
 		if(isEmpty()){
 			context.stopService(new Intent(context, TaskService.class));
 		}else{
 			context.startService(new Intent(context, TaskService.class));
 		}
 	}
+	
+//	public long getNextTime(){
+//		
+//	}
 }

@@ -17,7 +17,6 @@ public class TaskListActivity extends MyBaseFragmentActivity {
 	private ViewPager viewPager;
 	private PagerTabStrip pagerTabStrip;
 	private List<Fragment> fragmentList;
-	private FragmentAdapter taskListAdapter;
 	
 	@Override
 	protected void onInitLayout(Bundle savedInstanceState) {
@@ -35,10 +34,10 @@ public class TaskListActivity extends MyBaseFragmentActivity {
 		pagerTabStrip.setTextColor(getColor(R.color.comm_theme));
 		pagerTabStrip.setTabIndicatorColorResource(R.color.comm_theme);
 		
-		fragmentList = new ArrayList<Fragment>(1);
-		fragmentList.add(new ScenairoModeListFragment(getString(R.string.scenarioMode_title)));
-		fragmentList.add(new AlarmClockListFragment(getString(R.string.alarmClock_title)));
-		taskListAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
-		viewPager.setAdapter(taskListAdapter);
+		fragmentList = new ArrayList<Fragment>(2);
+		fragmentList.add(new ScenairoModeListFragment(getString(R.string.activityTitle_scenarioMode)));
+		fragmentList.add(new AlarmClockListFragment(getString(R.string.activityTitle_alarmClock)));
+		
+		viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), fragmentList));
 	}
 }

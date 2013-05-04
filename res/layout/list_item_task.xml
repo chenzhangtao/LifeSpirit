@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 列表项 - 任务 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/comm_layout_listItem" android:orientation="vertical">
     <LinearLayout style="@style/base_layout_match_wrap">
+	    <!-- 触发时间 -->
 	    <TextView 
+	        android:id="@+id/text_taskItem_triggerTime" 
 	        style="@style/comm_text" 
-	        android:id="@+id/text_taskIndexItem_triggerTime" 
 	        android:textSize="26sp" 
 	        android:textColor="@color/base_white"
-	        android:textStyle="bold"/>
+	        android:textStyle="bold"
+	        android:text=""
+	        />
+	    <!-- 任务名称 -->
 	    <TextView 
+	        android:id="@+id/text_taskItem_name"
 	        style="@style/comm_text" 
-	        android:id="@+id/text_taskIndexItem_name"
 	        android:textColor="@color/base_white"
+	        android:text=""
 	        />
     </LinearLayout>
+    
+    <!-- 重复方式 -->
     <TextView 
+        android:id="@+id/text_taskItem_repeat"
         style="@style/comm_text_match" 
-        android:id="@+id/text_taskIndexItem_repeat"
-        android:textColor="@color/base_white" />
+        android:textColor="@color/base_white"
+        android:text=""
+        />
+    
+    <!-- 剩余时间 -->
     <TextView 
+        android:id="@+id/text_taskItem_timeRemaining"
         style="@style/comm_text_match" 
-        android:id="@+id/text_taskIndexItem_timeRemaining"
-        android:textColor="@color/base_white" />
+        android:textColor="@color/base_white"
+        android:text=""
+        />
 </LinearLayout>

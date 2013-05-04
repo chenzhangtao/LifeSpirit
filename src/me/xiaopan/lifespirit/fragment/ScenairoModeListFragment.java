@@ -93,7 +93,7 @@ public class ScenairoModeListFragment extends BaseFragment implements ScenarioMo
 			scenarioModeAdapter.notifyDataSetChanged();
 			((MyApplication) getActivity().getApplication()).getRunningTaskManager().updateTask(scenarioMode);
 		}else{
-			AndroidUtils.toastL(getActivity(), "当前任务已经过期，请先修改其触发时间再开启！");
+			AndroidUtils.toastL(getActivity(), getString(R.string.hint_taskHasBeenOverdue));
 			scenarioModeAdapter.notifyDataSetChanged();
 		}
 	}

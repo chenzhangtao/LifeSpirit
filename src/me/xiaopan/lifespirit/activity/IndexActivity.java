@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.activity;
 import me.xiaopan.androidlibrary.util.Logger;
 import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyBaseActivity;
-import me.xiaopan.lifespirit.adapter.TaskIndexAdapter;
+import me.xiaopan.lifespirit.adapter.TaskAdapter;
 import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.util.TimeUtils;
@@ -28,7 +28,7 @@ public class IndexActivity extends MyBaseActivity {
 	private Button addTaskButton;
 	private Button taskListButton;
 	private ListView list;
-	private TaskIndexAdapter taskAdapter;
+	private TaskAdapter taskAdapter;
 	private int updateTaskPosition;
 	private RefreshRunnable refreshRunnable;
 	
@@ -72,7 +72,7 @@ public class IndexActivity extends MyBaseActivity {
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		list.setAdapter(taskAdapter = new TaskIndexAdapter(getBaseContext(), getMyApplication().getRunningTaskManager().getRunningTaskList()));
+		list.setAdapter(taskAdapter = new TaskAdapter(getBaseContext(), getMyApplication().getRunningTaskManager().getRunningTaskList()));
 		refreshRunnable = new RefreshRunnable();
 	}
 	

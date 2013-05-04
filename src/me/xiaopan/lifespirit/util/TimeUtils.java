@@ -62,15 +62,14 @@ public class TimeUtils {
 	}
 	
 	public static final String getTimeRemaining(Context context, Time currentTime, Time targetTime){
-		return DateTimeUtils.milliSecondToIncompleteHourMinuteSecond(
+		return DateTimeUtils.milliSecondToDayHourMinuteSecond(
 				targetTime.getTimeInMillis() - currentTime.getTimeInMillis(), 
-				context.getString(R.string.base_day), 
+				context.getString(R.string.base_tian), 
 				context.getString(R.string.base_hours), 
 				context.getString(R.string.base_minutes), 
-				context.getString(R.string.base_second), 
-				context.getString(R.string.base_millisecond), 
+				null, 
+				null, 
 				false, 
-				true, 
 				false);
 	}
 }

@@ -14,6 +14,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -39,6 +40,7 @@ public class TaskService extends Service {
 		//如果有可执行任务就继续否则就停止
 		if(!myApplication.getRunningTaskManager().isEmpty()){
 			Logger.i(LOG_TAG, "创建 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			//设置从下一分钟开始每隔一分钟启动一次服务
 			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, TimeUtils.getNextMinuteTimeInMillis(), 60*1000, startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), TaskService.class), 0));//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
 		}else{

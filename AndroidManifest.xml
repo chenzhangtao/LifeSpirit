@@ -33,9 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="me.xiaopan.lifespirit.activity.TaskListActivity" android:label="@string/taskList_title"/>
-        <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/scenarioMode_title"/>
-        <activity android:name="me.xiaopan.lifespirit.activity.RepeatActivity" android:label="@string/repeat_title"/>
+        <activity android:name="me.xiaopan.lifespirit.activity.TaskListActivity" android:label="@string/activityTitle_taskList"/>
+        <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/activityTitle_scenarioMode"/>
+        <activity android:name="me.xiaopan.lifespirit.activity.RepeatActivity" android:label="@string/activityTitle_repeat"/>
         <service android:name="me.xiaopan.lifespirit.service.TaskService"/>
     </application>
 </manifest>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="option_item_complete">
+    <style name="preference_complete">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">55dp</item>
         <item name="android:paddingLeft">30dp</item>
@@ -9,15 +9,15 @@
         <item name="android:clickable">true</item>
     </style>
     
-    <style name="preference_header" parent="@style/option_item_complete">
+    <style name="preference_header" parent="@style/preference_complete">
         <item name="android:background">@drawable/selector_preference_header</item>
     </style>
     
-    <style name="preference_center" parent="@style/option_item_complete">
+    <style name="preference_center" parent="@style/preference_complete">
         <item name="android:background">@drawable/selector_preference_center</item>
     </style>
     
-    <style name="preference_footer" parent="@style/option_item_complete">
+    <style name="preference_footer" parent="@style/preference_complete">
         <item name="android:background">@drawable/selector_preference_footer</item>
     </style>
 </resources>
