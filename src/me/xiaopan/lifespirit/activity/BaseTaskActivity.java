@@ -4,8 +4,8 @@ import me.xiaopan.androidlibrary.util.AnimationUtils;
 import me.xiaopan.androidlibrary.util.Colors;
 import me.xiaopan.androidlibrary.util.DialogUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
-import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.Repeat;
+import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
 import me.xiaopan.lifespirit.util.ViewUtils;
@@ -32,7 +32,7 @@ import com.google.gson.Gson;
 public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegister{
 	private static final int REQUEST_CODE_REPEAT = 101;
 	protected TimePicker timePicker;
-	protected BaseTask baseTask;
+	protected Task baseTask;
 	private Preference namePreference;
 	private Preference repeatPreference;
 	private AlertDialog tempAlertDialog;
@@ -58,8 +58,8 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 				builder.setItems(taskNames, new DialogInterface.OnClickListener() { 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						baseTask.getName().setName(taskNames[which]);
-						namePreference.setSubtitle(baseTask.getName().getName());
+						baseTask.setName(taskNames[which]);
+						namePreference.setSubtitle(baseTask.getName());
 					}
 				});
 
@@ -70,8 +70,8 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 				builder.setNeutralButton(R.string.base_none, new DialogInterface.OnClickListener() { 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						baseTask.getName().setName(null);
-						namePreference.setSubtitle(baseTask.getName().getName());
+						baseTask.setName(null);
+						namePreference.setSubtitle(baseTask.getName());
 					}
 				});
 
@@ -104,7 +104,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		timePicker.setCurrentHour(baseTask.getRepeat().getTriggerTime().getHourOfDay());
 		timePicker.setCurrentMinute(baseTask.getRepeat().getTriggerTime().getMinute());
 		
-		namePreference.setSubtitle(baseTask.getName().getIntro(getBaseContext()));
+		namePreference.setSubtitle(baseTask.getName());
 		repeatPreference.setSubtitle(baseTask.getRepeat().getIntro(getBaseContext()));
 		
 		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
@@ -145,7 +145,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		//设置要显示的视图并初始化编辑框的默认值
 		final EditText nameEdit = new EditText(getBaseContext());
 		nameEdit.setHint(R.string.taskEditCustomName_edit_name_hint);
-		nameEdit.setText(baseTask.getName().getName());
+		nameEdit.setText(baseTask.getName());
 		nameEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 		LinearLayout linearLayout = me.xiaopan.androidlibrary.util.ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		linearLayout.setPadding(30, 50, 30, 50);
@@ -164,8 +164,8 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		builder.setPositiveButton(R.string.base_confirm, new DialogInterface.OnClickListener() { public void onClick(DialogInterface dialog, int which) {
 			String name = nameEdit.getEditableText().toString();
 			if(!"".equals(name)){
-				baseTask.getName().setName(name);
-				namePreference.setSubtitle(baseTask.getName().getName());
+				baseTask.setName(name);
+				namePreference.setSubtitle(baseTask.getName());
 				DialogUtils.setDialogClickClose(tempAlertDialog, true);
 			}else{
 				toastL(R.string.hint_taskNameNull);

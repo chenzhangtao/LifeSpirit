@@ -11,21 +11,20 @@ import com.google.gson.Gson;
 /**
  * 任务基类
  */
-public abstract class BaseTask{
+public abstract class Task{
 	public static final String TASK_DIR = "TASK";
 	public static final String STATE_ENABLE = "ENABLE";
 	public static final String STATE_DISABLE = "DISABLE";
 	private boolean enable;
 	private long id;
-	private Name name;
+	private String name;
 	private Repeat repeat;
 	
 	/**
 	 * 创建一个任务
 	 */
-	public BaseTask(){
+	public Task(){
 		setEnable(true);
-		setName(new Name());
 		setRepeat(new Repeat());
 	}
 	
@@ -83,7 +82,6 @@ public abstract class BaseTask{
 	 * @param currentTime 当前时间
 	 */
 	public void execute(Context context, Time currentTime){
-		name.onExecute(context, currentTime);
 		repeat.onExecute(context, currentTime);
 		setEnable(!repeat.isExpiry(currentTime));
 		saveToLocal(context);
@@ -127,11 +125,11 @@ public abstract class BaseTask{
 		this.repeat = repeat;
 	}
 
-	public Name getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(Name name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 }

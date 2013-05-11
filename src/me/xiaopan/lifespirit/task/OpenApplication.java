@@ -8,7 +8,7 @@ import android.content.Context;
 /**
  * 打开应用程序
  */
-public class OpenApplication extends BaseTask{
+public class OpenApplication extends Task{
 	private String applicationName;
 	private String applicationPackageName;
 	

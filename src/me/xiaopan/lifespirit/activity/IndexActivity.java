@@ -1,11 +1,10 @@
 package me.xiaopan.lifespirit.activity;
 
 import me.xiaopan.androidlibrary.util.Logger;
-import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.adapter.TaskAdapter;
-import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
+import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
@@ -60,7 +59,7 @@ public class IndexActivity extends MyBaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				updateTaskPosition = position - list.getHeaderViewsCount();
-				BaseTask task = getMyApplication().getRunningTaskManager().getRunningTaskList().get(updateTaskPosition);
+				Task task = getMyApplication().getRunningTaskManager().getRunningTaskList().get(updateTaskPosition);
 				if(task instanceof ScenarioMode){
 					Bundle bundle = new Bundle();
 					bundle.putString(ScenarioModeActivity.PARAM_OPTIONAL_STRING_SCENARIO_MODE, new Gson().toJson(task));

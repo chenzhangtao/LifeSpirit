@@ -70,7 +70,7 @@ public class ScenarioModeAdapter extends BaseAdapter {
 		
 		scenarioMode = scenarioModeList.get(position);
 		viewHolder.triggerTimeText.setText(TimeUtils.getDigitalClockString(scenarioMode.getRepeat().getTriggerTime()));
-		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(scenarioMode.getName().getName())?(" - "+scenarioMode.getName().getName()):"");
+		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(scenarioMode.getName())?(" - "+scenarioMode.getName()):"");
 		viewHolder.repeatText.setText(scenarioMode.getRepeat().getIntro(context));
 		viewHolder.timeRemainingText.setText(null);
 		

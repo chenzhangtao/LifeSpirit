@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 /**
  * 情景模式
  */
-public class ScenarioMode extends BaseTask{
+public class ScenarioMode extends Task{
 	public static final String TYPE = "SCENARIO_MODE";
 	private Bluetooth bluetooth;
 	private AirplaneMode airplaneMode;

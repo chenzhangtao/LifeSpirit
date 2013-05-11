@@ -11,7 +11,7 @@ import android.telephony.SmsManager;
 /**
  * 发送短信
  */
-public class SendMessage extends BaseTask{
+public class SendMessage extends Task{
 	private List<Contacts> contactsList;
 	private String messageContent;
 	

@@ -6,7 +6,7 @@ import me.xiaopan.javalibrary.util.DateTimeUtils;
 import me.xiaopan.javalibrary.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.IndexActivity;
-import me.xiaopan.lifespirit.task.BaseTask;
+import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlarmManager;
@@ -14,7 +14,6 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -65,7 +64,7 @@ public class TaskService extends Service {
 				public void run() {
 					/* 遍历所有正在运行的任务，该执行的执行该提醒的提醒 */
 					Time currentTime = new Time();
-					for(BaseTask task : myApplication.getRunningTaskManager().getRunningTaskList()){
+					for(Task task : myApplication.getRunningTaskManager().getRunningTaskList()){
 						if(task.getRepeat().isExecute(currentTime)){//如果需要执行
 							Logger.w(LOG_TAG, "启动 - 执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 							task.execute(getBaseContext(), currentTime);

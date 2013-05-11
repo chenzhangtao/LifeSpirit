@@ -8,8 +8,8 @@ import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
 import me.xiaopan.lifespirit.service.TaskService;
-import me.xiaopan.lifespirit.task.BaseTask;
 import me.xiaopan.lifespirit.task.ScenarioMode;
+import me.xiaopan.lifespirit.task.Task;
 import android.content.Context;
 import android.content.Intent;
 
@@ -20,20 +20,20 @@ import com.google.gson.Gson;
  */
 public class RunningTaskManager {
 	private Context context;
-	private List<BaseTask> runningTaskList;//运行中的任务列表
+	private List<Task> runningTaskList;//运行中的任务列表
 	
 	public RunningTaskManager(Context context){
 		this.context = context;
 		
 		//读取所有状态为开启的任务
-		FileScanner fileScanner = new FileScanner(new File(context.getFilesDir().getPath()+File.separator+BaseTask.TASK_DIR));
+		FileScanner fileScanner = new FileScanner(new File(context.getFilesDir().getPath()+File.separator+Task.TASK_DIR));
 		fileScanner.setFileTypeFilterWay(StringCheckUpWayEnum.ENDS_WITH_KEYWORDS);
-		fileScanner.addFileTypeKeyWords(BaseTask.STATE_ENABLE);
+		fileScanner.addFileTypeKeyWords(Task.STATE_ENABLE);
 		List<File> files = fileScanner.scan();
 		if(files != null && files.size() > 0){
-			runningTaskList = new ArrayList<BaseTask>(files.size());
+			runningTaskList = new ArrayList<Task>(files.size());
 			Gson gson = new Gson();
-			Class<? extends BaseTask> clas = null;
+			Class<? extends Task> clas = null;
 			for(File file : files){
 				try {
 					clas = null;
@@ -49,7 +49,7 @@ public class RunningTaskManager {
 				}
 			}
 		}else{
-			runningTaskList = new ArrayList<BaseTask>(0);
+			runningTaskList = new ArrayList<Task>(0);
 		}
 		if(!isEmpty()){
 			context.startService(new Intent(context, TaskService.class));
@@ -60,7 +60,7 @@ public class RunningTaskManager {
 	 * 获取运行中的任务列表
 	 * @return
 	 */
-	public List<BaseTask> getRunningTaskList() {
+	public List<Task> getRunningTaskList() {
 		return runningTaskList;
 	}
 	
@@ -68,7 +68,7 @@ public class RunningTaskManager {
 	 * 更新任务
 	 * @param task
 	 */
-	public void updateTask(BaseTask task){
+	public void updateTask(Task task){
 		int location = findTask(task);
 		//如果当前运行任务列表中存在此任务
 		if(location != -1){
@@ -92,7 +92,7 @@ public class RunningTaskManager {
 	 * @param task
 	 * @return
 	 */
-	public int findTask(BaseTask task){
+	public int findTask(Task task){
 		int position = -1;
 		for(int w = 0, size = runningTaskList.size(); w < size; w++){
 			if(runningTaskList.get(w).getId() == task.getId()){
@@ -122,7 +122,9 @@ public class RunningTaskManager {
 		}
 	}
 	
-//	public long getNextTime(){
+//	public List<Task>
+	
+//	public long getNextExecuteTime(){
 //		
 //	}
 }

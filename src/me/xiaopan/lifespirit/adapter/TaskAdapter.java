@@ -4,7 +4,7 @@ import java.util.List;
 
 import me.xiaopan.javalibrary.util.StringUtils;
 import me.xiaopan.javalibrary.util.Time;
-import me.xiaopan.lifespirit.task.BaseTask;
+import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
@@ -19,10 +19,10 @@ import android.widget.TextView;
  */
 public class TaskAdapter extends BaseAdapter {
 	private Context context;
-	private List<BaseTask> taskList;
-	private BaseTask task;
+	private List<Task> taskList;
+	private Task task;
 	
-	public TaskAdapter(Context context, List<BaseTask> taskList){
+	public TaskAdapter(Context context, List<Task> taskList){
 		this.context = context;
 		this.taskList = taskList;
 	}
@@ -59,7 +59,7 @@ public class TaskAdapter extends BaseAdapter {
 		
 		task = taskList.get(position);
 		viewHolder.triggerTimeText.setText(TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime()));
-		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(task.getName().getName())?(context.getString(R.string.listItem_task_name, task.getName().getName())):null);
+		viewHolder.nameText.setText(StringUtils.isNotNullAndEmpty(task.getName())?(context.getString(R.string.listItem_task_name, task.getName())):null);
 		viewHolder.repeatText.setText(task.getRepeat().getIntro(context));
 		viewHolder.timeRemainingText.setText(context.getString(R.string.listItem_task_timeRemaining, TimeUtils.getTimeRemaining(context, new Time(), task.getRepeat().getNextExecuteTime())));
 		
