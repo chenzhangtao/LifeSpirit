@@ -2,14 +2,19 @@ package me.xiaopan.lifespirit;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import me.xiaopan.javalibrary.io.FileScanner;
 import me.xiaopan.javalibrary.util.FileUtils;
 import me.xiaopan.javalibrary.util.StringUtils.StringCheckUpWayEnum;
-import me.xiaopan.lifespirit.service.TaskService;
+import me.xiaopan.lifespirit.service.ExecuteService;
+import me.xiaopan.lifespirit.service.CountdownService;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.task.Task;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
@@ -19,13 +24,23 @@ import com.google.gson.Gson;
  * 运行中任务管理器
  */
 public class RunningTaskManager {
+	/**
+	 * 请求码 - 执行任务
+	 */
+	private static final int REQUEST_CODE_EXECUTE_TASK = 26713821;
 	private Context context;
 	private List<Task> runningTaskList;//运行中的任务列表
+	private List<Task> sortTaskList;
+	private ExecuteTimeComparator executeTimeComparator;
+	private AlarmManager alarmManager;
+	private PendingIntent startExecuteTaskServicePendingIntent;
 	
 	public RunningTaskManager(Context context){
 		this.context = context;
+		alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		executeTimeComparator = new ExecuteTimeComparator();
 		
-		//读取所有状态为开启的任务
+		/* 初始化运行中任务列表 */
 		FileScanner fileScanner = new FileScanner(new File(context.getFilesDir().getPath()+File.separator+Task.TASK_DIR));
 		fileScanner.setFileTypeFilterWay(StringCheckUpWayEnum.ENDS_WITH_KEYWORDS);
 		fileScanner.addFileTypeKeyWords(Task.STATE_ENABLE);
@@ -51,17 +66,50 @@ public class RunningTaskManager {
 		}else{
 			runningTaskList = new ArrayList<Task>(0);
 		}
-		if(!isEmpty()){
-			context.startService(new Intent(context, TaskService.class));
-		}
+		
+		updateSortTaskList();//更新排序任务列表
+		updateAlarm();//更新定时器
+		updateCountdownService();//更新倒计时服务
 	}
-
+	
 	/**
-	 * 获取运行中的任务列表
-	 * @return
+	 * 更新排序列表的内容，并按下一次执行时间排序，最靠近当前时间的在最前面
 	 */
-	public List<Task> getRunningTaskList() {
-		return runningTaskList;
+	public void updateSortTaskList(){
+		if(sortTaskList == null){
+			sortTaskList = new ArrayList<Task>(runningTaskList.size());
+		}else{
+			sortTaskList.clear();
+		}
+		for(Task task : runningTaskList){
+			sortTaskList.add(task);
+		}
+		
+		//按下一次执行时间排序
+		Collections.sort(sortTaskList, executeTimeComparator);
+	}
+	
+	/**
+	 * 更新定时器
+	 */
+	private void updateAlarm(){
+		if(startExecuteTaskServicePendingIntent != null){
+			alarmManager.cancel(startExecuteTaskServicePendingIntent);
+		}
+		Intent executeTaskIntent = new Intent(context, ExecuteService.class);
+		startExecuteTaskServicePendingIntent = PendingIntent.getService(context, REQUEST_CODE_EXECUTE_TASK, executeTaskIntent, 0);
+		alarmManager.set(AlarmManager.RTC_WAKEUP, getNextExcuteTime(), startExecuteTaskServicePendingIntent);
+	}
+	
+	/**
+	 * 更新倒计时服务
+	 */
+	public void updateCountdownService(){
+		if(isEmpty()){
+			context.stopService(new Intent(context, CountdownService.class));
+		}else{
+			context.startService(new Intent(context, CountdownService.class));
+		}
 	}
 	
 	/**
@@ -84,7 +132,11 @@ public class RunningTaskManager {
 				runningTaskList.add(task);
 			}
 		}
-		updateTaskService();
+		
+		//更新排序任务列表
+		updateSortTaskList();
+		
+		updateCountdownService();
 	}
 	
 	/**
@@ -112,19 +164,57 @@ public class RunningTaskManager {
 	}
 	
 	/**
-	 * 更新服务
+	 * 获取下一个要执行的任务
+	 * @return 任务可能有多个
 	 */
-	public void updateTaskService(){
-		if(isEmpty()){
-			context.stopService(new Intent(context, TaskService.class));
+	public List<Task> getNextTask(){
+		if(sortTaskList.size() > 0){
+			if(sortTaskList.size() == 1){
+				List<Task> nextTasks = new ArrayList<Task>(1);
+				nextTasks.add(sortTaskList.get(0));
+				return nextTasks;
+			}else{
+				int yes = 0;
+				long duibiTime = sortTaskList.get(0).getRepeat().getNextExecuteTime().getTimeInMillis();
+				for(int w = 1, size = sortTaskList.size(); w < size; w++){
+					if(sortTaskList.get(w).getRepeat().getNextExecuteTime().getTimeInMillis() == duibiTime){
+						yes++;
+					}else{
+						break;
+					}
+				}
+				
+				List<Task> nextTasks = new ArrayList<Task>(yes+1);
+				for(int w = 0; w <=yes; w++){
+					nextTasks.add(sortTaskList.get(w));
+				}
+				return nextTasks;
+			}
 		}else{
-			context.startService(new Intent(context, TaskService.class));
+			return null;
 		}
 	}
 	
-//	public List<Task>
+	public long getNextExcuteTime(){
+		if(sortTaskList.size() > 0){
+			return sortTaskList.get(0).getRepeat().getNextExecuteTime().getTimeInMillis();
+		}else{
+			return -1;
+		}
+	}
+
+	/**
+	 * 获取运行中的任务列表
+	 * @return
+	 */
+	public List<Task> getRunningTaskList() {
+		return runningTaskList;
+	}
 	
-//	public long getNextExecuteTime(){
-//		
-//	}
+	private class ExecuteTimeComparator implements Comparator<Task>{
+		@Override
+		public int compare(Task lhs, Task rhs) {
+			return (int) (lhs.getRepeat().getNextExecuteTime().getTimeInMillis() - rhs.getRepeat().getNextExecuteTime().getTimeInMillis());
+		}
+	}
 }

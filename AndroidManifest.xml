@@ -31,11 +31,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <data />
             </intent-filter>
+            <meta-data/>
         </activity>
         <activity android:name="me.xiaopan.lifespirit.activity.TaskListActivity" android:label="@string/activityTitle_taskList"/>
         <activity android:name="me.xiaopan.lifespirit.activity.ScenarioModeActivity" android:label="@string/activityTitle_scenarioMode"/>
         <activity android:name="me.xiaopan.lifespirit.activity.RepeatActivity" android:label="@string/activityTitle_repeat"/>
-        <service android:name="me.xiaopan.lifespirit.service.TaskService"/>
+        <service android:name="me.xiaopan.lifespirit.service.CountdownService"/>
+        <service android:name="me.xiaopan.lifespirit.service.ExecuteService"/>
     </application>
 </manifest>

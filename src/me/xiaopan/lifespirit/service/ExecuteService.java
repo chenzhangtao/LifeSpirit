@@ -17,7 +17,14 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
 
-public class TaskService extends Service {
+/**
+ * 执行任务的服务
+ */
+public class ExecuteService extends Service {
+	/**
+	 * 参数 - 必须的 - 字符串数组 - 要执行的任务的ID
+	 */
+	public static final String PARAM_REQUIRED_STRINGS_TASK_IDS = "PARAM_REQUIRED_STRINGS_TASK_IDS";
 	private static final String LOG_TAG = "TaskService";
 	private static final int NOTIFICATION_ID = 1002;//通知ID
 	private static final int STOP_TYPE_NOT_EXECUTE_TESK = -5;//任务停止类型 - 由于没有可执行任务而停止
@@ -41,7 +48,7 @@ public class TaskService extends Service {
 			Logger.i(LOG_TAG, "创建 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			//设置从下一分钟开始每隔一分钟启动一次服务
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, TimeUtils.getNextMinuteTimeInMillis(), 60*1000, startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), TaskService.class), 0));//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, TimeUtils.getNextMinuteTimeInMillis(), 60*1000, startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), CountdownService.class), 0));//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
 		}else{
 			Logger.i(LOG_TAG, "创建 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务
