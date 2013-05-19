@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit;
 
-import me.xiaopan.androidlibrary.app.BaseFragmentActivity;
+import me.xiaopan.easyandroid.app.BaseFragmentActivity;
 import me.xiaopan.lifespirit2.R;
 import android.os.Bundle;
 import android.view.MenuItem;

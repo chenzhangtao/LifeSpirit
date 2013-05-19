@@ -2,8 +2,8 @@ package me.xiaopan.lifespirit.adapter;
 
 import java.util.List;
 
-import me.xiaopan.androidlibrary.widget.BaseSlidingToggleButton;
-import me.xiaopan.javalibrary.util.StringUtils;
+import me.xiaopan.easyandroid.widget.BaseSlidingToggleButton;
+import me.xiaopan.easyjava.util.StringUtils;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit.widget.SlidingToggleButton;

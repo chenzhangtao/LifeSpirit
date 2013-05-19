@@ -2,8 +2,8 @@ package me.xiaopan.lifespirit.fragment;
 
 import java.util.List;
 
-import me.xiaopan.androidlibrary.util.AndroidUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyandroid.util.AndroidUtils;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.ScenarioModeActivity;
 import me.xiaopan.lifespirit.adapter.ScenarioModeAdapter;

@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.widget;
 
-import me.xiaopan.androidlibrary.widget.BaseSlidingToggleButton;
+import me.xiaopan.easyandroid.widget.BaseSlidingToggleButton;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 import android.graphics.Bitmap;

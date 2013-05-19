@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.task.repeatway.EveryOtherDayRepeatWay;
 import me.xiaopan.lifespirit.task.repeatway.EveryOtherHourRepeatWay;
 import me.xiaopan.lifespirit.task.repeatway.EveryOtherMinuteRepeatWay;

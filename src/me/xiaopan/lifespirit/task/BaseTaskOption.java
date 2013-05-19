@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task;
 
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.Time;
 import android.content.Context;
 
 /**

@@ -3,9 +3,9 @@ package me.xiaopan.lifespirit.util;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import me.xiaopan.javalibrary.util.DateTimeUtils;
-import me.xiaopan.javalibrary.util.IntegerUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.DateTimeUtils;
+import me.xiaopan.easyjava.util.IntegerUtils;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 

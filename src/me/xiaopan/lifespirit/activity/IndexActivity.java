@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.activity;
 
-import me.xiaopan.androidlibrary.util.Logger;
+import me.xiaopan.easyandroid.util.AndroidLogger;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.adapter.TaskAdapter;
 import me.xiaopan.lifespirit.task.ScenarioMode;
@@ -96,7 +96,7 @@ public class IndexActivity extends MyBaseActivity {
 	private class RefreshRunnable implements Runnable{
 		@Override
 		public void run() {
-			Logger.i("刷新");
+			AndroidLogger.i("刷新");
 			taskAdapter.notifyDataSetChanged();
 			getMessageHanlder().postDelayed(refreshRunnable, 60*1000);
 		}

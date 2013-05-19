@@ -1,14 +1,14 @@
 package me.xiaopan.lifespirit.activity;
 
-import me.xiaopan.androidlibrary.util.AnimationUtils;
-import me.xiaopan.androidlibrary.util.Colors;
-import me.xiaopan.androidlibrary.util.DialogUtils;
+import me.xiaopan.easyandroid.util.AnimationUtils;
+import me.xiaopan.easyandroid.util.Colors;
+import me.xiaopan.easyandroid.util.DialogUtils;
+import me.xiaopan.easyandroid.util.ViewUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit.task.Task;
-import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
-import me.xiaopan.lifespirit.util.ViewUtils;
+import me.xiaopan.lifespirit.util.Utils.TemporaryRegister;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlertDialog;
@@ -99,7 +99,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 
 	@Override
 	protected void onInitData(Bundle savedInstanceState) {
-		ViewUtils.setTimePickerTextColor(timePicker, Colors.BLACK);
+		Utils.setTimePickerTextColor(timePicker, Colors.BLACK);
 		timePicker.setIs24HourView(true);
 		timePicker.setCurrentHour(baseTask.getRepeat().getTriggerTime().getHourOfDay());
 		timePicker.setCurrentMinute(baseTask.getRepeat().getTriggerTime().getMinute());
@@ -147,7 +147,7 @@ public class BaseTaskActivity extends MyBaseActivity implements TemporaryRegiste
 		nameEdit.setHint(R.string.taskEditCustomName_edit_name_hint);
 		nameEdit.setText(baseTask.getName());
 		nameEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
-		LinearLayout linearLayout = me.xiaopan.androidlibrary.util.ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout linearLayout = ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		linearLayout.setPadding(30, 50, 30, 50);
 		linearLayout.addView(nameEdit, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		builder.setView(linearLayout);

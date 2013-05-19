@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.domain.Contacts;
 import android.content.Context;
 import android.telephony.SmsManager;

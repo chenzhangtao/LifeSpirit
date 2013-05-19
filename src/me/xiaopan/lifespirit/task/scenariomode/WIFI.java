@@ -1,8 +1,8 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.androidlibrary.util.NetworkUtils;
-import me.xiaopan.androidlibrary.util.SystemUtils.DeviceNotFoundException;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyandroid.util.NetworkUtils;
+import me.xiaopan.easyandroid.util.SystemUtils.DeviceNotFoundException;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 

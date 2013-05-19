@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.task.repeatway;
 
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;

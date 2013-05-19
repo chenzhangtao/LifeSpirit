@@ -1,6 +1,6 @@
 package me.xiaopan.lifespirit.fragment;
 
-import me.xiaopan.androidlibrary.widget.ReboundListView;
+import me.xiaopan.easyandroid.widget.ReboundListView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

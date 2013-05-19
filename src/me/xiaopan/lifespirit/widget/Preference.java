@@ -1,9 +1,9 @@
 package me.xiaopan.lifespirit.widget;
 
-import me.xiaopan.androidlibrary.util.Colors;
-import me.xiaopan.androidlibrary.widget.BaseSlidingToggleButton;
-import me.xiaopan.androidlibrary.widget.BaseSlidingToggleButton.OnCheckedChanageListener;
-import me.xiaopan.javalibrary.util.StringUtils;
+import me.xiaopan.easyandroid.util.Colors;
+import me.xiaopan.easyandroid.widget.BaseSlidingToggleButton;
+import me.xiaopan.easyandroid.widget.BaseSlidingToggleButton.OnCheckedChanageListener;
+import me.xiaopan.easyjava.util.StringUtils;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 import android.content.res.TypedArray;

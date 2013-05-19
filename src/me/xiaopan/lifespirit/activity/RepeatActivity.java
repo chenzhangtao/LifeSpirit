@@ -1,14 +1,15 @@
 package me.xiaopan.lifespirit.activity;
 
-import me.xiaopan.androidlibrary.util.AndroidUtils;
-import me.xiaopan.androidlibrary.util.AnimationUtils;
-import me.xiaopan.androidlibrary.util.DialogUtils;
+import me.xiaopan.easyandroid.util.AndroidUtils;
+import me.xiaopan.easyandroid.util.AnimationUtils;
+import me.xiaopan.easyandroid.util.DialogUtils;
+import me.xiaopan.easyandroid.util.ViewUtils;
 import me.xiaopan.lifespirit.MyBaseActivity;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit.task.Repeat.RepeatWay;
 import me.xiaopan.lifespirit.task.repeatway.BaseEveryOtherRepeatWay;
-import me.xiaopan.lifespirit.util.TemporaryRegister;
 import me.xiaopan.lifespirit.util.Utils;
+import me.xiaopan.lifespirit.util.Utils.TemporaryRegister;
 import me.xiaopan.lifespirit.widget.Preference;
 import me.xiaopan.lifespirit2.R;
 import android.app.AlertDialog;
@@ -193,7 +194,7 @@ public class RepeatActivity extends MyBaseActivity implements TemporaryRegister{
 		spaceEdit.setText(""+everyOtherRepeat.getSpace());
 		spaceEdit.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
 		spaceEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
-		LinearLayout linearLayout = me.xiaopan.androidlibrary.util.ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout linearLayout = ViewUtils.createLinearLayout(getBaseContext(), LinearLayout.HORIZONTAL, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		linearLayout.setPadding(30, 50, 30, 50);
 		linearLayout.addView(spaceEdit, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		builder.setView(linearLayout);

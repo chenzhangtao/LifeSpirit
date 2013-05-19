@@ -1,9 +1,9 @@
 package me.xiaopan.lifespirit.service;
 
-import me.xiaopan.androidlibrary.util.BroadcastUtils;
-import me.xiaopan.androidlibrary.util.Logger;
-import me.xiaopan.javalibrary.util.DateTimeUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyandroid.util.AndroidLogger;
+import me.xiaopan.easyandroid.util.BroadcastUtils;
+import me.xiaopan.easyjava.util.DateTimeUtils;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.MyApplication;
 import me.xiaopan.lifespirit.activity.IndexActivity;
 import me.xiaopan.lifespirit.task.Task;
@@ -41,12 +41,12 @@ public class CountdownService extends Service {
 		
 		//如果有可执行任务就继续否则就停止
 		if(!myApplication.getRunningTaskManager().isEmpty()){
-			Logger.i(LOG_TAG, "创建 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			AndroidLogger.i(LOG_TAG, "创建 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			//设置从下一分钟开始每隔一分钟启动一次服务
 			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, TimeUtils.getNextMinuteTimeInMillis(), 60*1000, startServiceIntent = PendingIntent.getService(getBaseContext(), 101, new Intent(getBaseContext(), CountdownService.class), 0));//将启动服务的Intent添加到报警管理器中并设置为每隔一分钟启动一次
 		}else{
-			Logger.i(LOG_TAG, "创建 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			AndroidLogger.i(LOG_TAG, "创建 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务
 			stopSevice();
 		}
@@ -61,7 +61,7 @@ public class CountdownService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		//如果有可执行任务就继续否则就停止服务
 		if(!myApplication.getRunningTaskManager().isEmpty()){
-			Logger.i(LOG_TAG, "启动 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			AndroidLogger.i(LOG_TAG, "启动 - 继续 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -69,16 +69,16 @@ public class CountdownService extends Service {
 					Time currentTime = new Time();
 					for(Task task : myApplication.getRunningTaskManager().getRunningTaskList()){
 						if(task.getRepeat().isExecute(currentTime)){//如果需要执行
-							Logger.w(LOG_TAG, "启动 - 执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+							AndroidLogger.w(LOG_TAG, "启动 - 执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 							task.execute(getBaseContext(), currentTime);
 							if(!task.isEnable()){
 								myApplication.getRunningTaskManager().getRunningTaskList().remove(task);
 							}
 						}else if(task.isRemind()){//如果需要提醒
-							Logger.w(LOG_TAG, "启动 - 提醒 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+							AndroidLogger.w(LOG_TAG, "启动 - 提醒 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 							
 						}else{
-							Logger.w(LOG_TAG, "启动 - 不执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+							AndroidLogger.w(LOG_TAG, "启动 - 不执行 "+TimeUtils.getDigitalClockString(task.getRepeat().getTriggerTime())+", "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 						}
 					}
 					
@@ -93,7 +93,7 @@ public class CountdownService extends Service {
 				}
 			}).start();
 		}else{
-			Logger.i(LOG_TAG, "启动 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+			AndroidLogger.i(LOG_TAG, "启动 - 停止 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 			//停止服务
 			stopSevice();
 		}
@@ -102,7 +102,7 @@ public class CountdownService extends Service {
 
 	@Override
 	public void onDestroy() {
-		Logger.i(LOG_TAG, "销毁 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
+		AndroidLogger.i(LOG_TAG, "销毁 "+DateTimeUtils.getCurrentDateTimeByDefultCustomFormat());
 		super.onDestroy();
 
 		//从报警管理器中移除启动服务的Intent

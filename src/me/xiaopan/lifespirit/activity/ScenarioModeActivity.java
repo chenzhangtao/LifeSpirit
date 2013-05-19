@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import me.xiaopan.androidlibrary.util.AnimationUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyandroid.util.AnimationUtils;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.task.BaseTaskOption;
 import me.xiaopan.lifespirit.task.ScenarioMode;
 import me.xiaopan.lifespirit.util.TimeUtils;

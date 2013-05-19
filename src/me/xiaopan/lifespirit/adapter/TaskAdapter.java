@@ -2,8 +2,8 @@ package me.xiaopan.lifespirit.adapter;
 
 import java.util.List;
 
-import me.xiaopan.javalibrary.util.StringUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.StringUtils;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.task.Task;
 import me.xiaopan.lifespirit.util.TimeUtils;
 import me.xiaopan.lifespirit2.R;

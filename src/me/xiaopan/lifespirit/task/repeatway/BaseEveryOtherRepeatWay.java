@@ -3,7 +3,7 @@ package me.xiaopan.lifespirit.task.repeatway;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit.task.Repeat;
 import me.xiaopan.lifespirit.util.TimeUtils;
 

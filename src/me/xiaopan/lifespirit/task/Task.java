@@ -2,8 +2,8 @@ package me.xiaopan.lifespirit.task;
 
 import java.io.File;
 
-import me.xiaopan.javalibrary.util.FileUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyjava.util.FileUtils;
+import me.xiaopan.easyjava.util.Time;
 import android.content.Context;
 
 import com.google.gson.Gson;

@@ -1,8 +1,8 @@
 package me.xiaopan.lifespirit.task.scenariomode;
 
-import me.xiaopan.androidlibrary.util.SystemUtils;
-import me.xiaopan.javalibrary.util.DateTimeUtils;
-import me.xiaopan.javalibrary.util.Time;
+import me.xiaopan.easyandroid.util.SystemUtils;
+import me.xiaopan.easyjava.util.DateTimeUtils;
+import me.xiaopan.easyjava.util.Time;
 import me.xiaopan.lifespirit2.R;
 import android.content.Context;
 
