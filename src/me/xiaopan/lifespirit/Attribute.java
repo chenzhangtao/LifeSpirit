@@ -37,4 +37,5 @@ public class Attribute {
 	public String string8;
 	public String string9;
 	public String string10;
+	public String string11;
 }
